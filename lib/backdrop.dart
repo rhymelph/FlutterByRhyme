@@ -185,6 +185,7 @@ class Backdrop extends StatefulWidget {
     this.frontLayer,
     this.backTitle,
     this.backLayer,
+    this.valueChanged,
   });
 
   final Widget frontAction;
@@ -193,7 +194,7 @@ class Backdrop extends StatefulWidget {
   final Widget frontHeading;
   final Widget backTitle;
   final Widget backLayer;
-
+  final ValueChanged<double> valueChanged;
   @override
   _BackdropState createState() => new _BackdropState();
 }
@@ -211,7 +212,11 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
       value: 1.0,
       vsync: this,
     );
-
+    _controller.addListener(
+        (){
+          widget.valueChanged(_controller.value);
+        }
+    );
     _frontOpacity =
       new Tween<double>(begin: 0.2, end: 1.0).animate(
         new CurvedAnimation(

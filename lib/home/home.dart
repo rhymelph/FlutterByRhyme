@@ -6,7 +6,6 @@ import 'dart:developer';
 import 'dart:async';
 import 'dart:math' as math;
 
-
 const Color _kBlue = const Color(0xFF002D75);
 const _kSwitchDuration = const Duration(milliseconds: 300);
 
@@ -48,6 +47,8 @@ class _HomePageState extends State<HomePage>
 
   int _position = 0;
 
+  double bottomOpcity = 1.0;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -86,27 +87,32 @@ class _HomePageState extends State<HomePage>
 
     Widget home = Scaffold(
       key: _scaffoldKey,
-      bottomNavigationBar: category == null
-          ? BottomNavigationBar(
-              currentIndex: _position,
-              type: BottomNavigationBarType.shifting,
-              onTap: _bottomBarTap,
-              items: kAllBottomItem.map<BottomNavigationBarItem>((item) {
-                return BottomNavigationBarItem(
-                  icon: item.icon,
-                  title: Text(item.title),
-                  backgroundColor: item.color,
-                );
-              }).toList(),
-            )
-          : null,
+      bottomNavigationBar: FractionalTranslation (
+        translation: Offset(0.0, (1-bottomOpcity)*36),
+        child: BottomNavigationBar(
+          currentIndex: _position,
+          type: BottomNavigationBarType.shifting,
+          onTap: _bottomBarTap,
+          items: kAllBottomItem.map<BottomNavigationBarItem>((item) {
+            return BottomNavigationBarItem(
+              icon: item.icon,
+              title: Text(item.title),
+              backgroundColor: item.color,
+            );
+          }).toList(),
+        ),
+      ),
       backgroundColor: isDark ? _kBlue : theme.primaryColor,
       body: SafeArea(
           bottom: false,
           child: WillPopScope(
-
               ///注册回调
               child: Backdrop(
+                valueChanged: (index) {
+                  setState(() {
+                    bottomOpcity = index;
+                  });
+                },
                 backTitle: const Text('设置'),
                 backLayer: widget.optionPage,
                 frontAction: AnimatedSwitcher(
@@ -122,7 +128,9 @@ class _HomePageState extends State<HomePage>
                         ),
                 ),
                 frontTitle: AnimatedSwitcher(
+                  switchInCurve: switchInCurve,
                   duration: _kSwitchDuration,
+                  switchOutCurve: switchOutCurve,
                   child: category == null
                       ? const Text('Flutter 教程')
                       : Text(category.title),
@@ -270,12 +278,12 @@ class _CategoryItem extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isDark = theme.brightness == Brightness.dark;
     return RepaintBoundary(
-      child: RawMaterialButton(
-        onPressed: onTap,
-        padding: EdgeInsets.zero,
-        splashColor: theme.primaryColor.withOpacity(0.12),
-        highlightColor: Colors.transparent,
-        child: Card(
+      child: Card(
+        child: RawMaterialButton(
+          onPressed: onTap,
+          padding: EdgeInsets.zero,
+          splashColor: theme.primaryColor.withOpacity(0.12),
+          highlightColor: Colors.transparent,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4.0),
             child: Column(
@@ -349,19 +357,21 @@ class PageItem extends StatelessWidget {
             size: 20.0,
           ));
     }
-    return RawMaterialButton(
-      padding: EdgeInsets.zero,
-      splashColor: data.primaryColor.withOpacity(0.12),
-      highlightColor: Colors.transparent,
-      onPressed: () {
-        _launchPage(context);
-      },
-      child: Container(
-        constraints: BoxConstraints(minHeight: _kPageItemHeight * textScale),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: children,
+    return Card(
+      child: RawMaterialButton(
+        padding: EdgeInsets.zero,
+        splashColor: data.primaryColor.withOpacity(0.12),
+        highlightColor: Colors.transparent,
+        onPressed: () {
+          _launchPage(context);
+        },
+        child: Container(
+          constraints: BoxConstraints(minHeight: _kPageItemHeight * textScale),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: children,
+          ),
         ),
       ),
     );
