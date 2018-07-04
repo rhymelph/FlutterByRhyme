@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutterbyrhyme/widgets/basics/abasicesShow.dart';
+import 'package:flutterbyrhyme/widgets/material/amaterialShow.dart';
 import 'package:flutter/foundation.dart';
 
 class BottomItem {
@@ -229,6 +230,27 @@ List<Page> _buildPage() {
         routeName: ImageDemo.routeName,
         buildRoute: (BuildContext context) => ImageDemo()),
     Page(
+        title: 'Text',
+        subhead: '单一格式的文本。',
+        icon: null,
+        category: _kBasics,
+        routeName: TextDemo.routeName,
+        buildRoute: (BuildContext context) => TextDemo()),
+    Page(
+        title: 'Icon',
+        subhead: '一个Material Design图标。',
+        icon: null,
+        category: _kBasics,
+        routeName: IconDemo.routeName,
+        buildRoute: (BuildContext context) => IconDemo()),
+    Page(
+        title: 'RaisedButton',
+        subhead: '一个凸起的材质矩形按钮。',
+        icon: null,
+        category: _kBasics,
+        routeName: RaisedButtonDemo.routeName,
+        buildRoute: (BuildContext context) => RaisedButtonDemo()),
+    Page(
         title: 'Scaffold',
         subhead:
             'Material Design布局结构的基本实现。此类提供了用于显示drawer、snackbar和底部sheet的API。',
@@ -284,7 +306,264 @@ List<Page> _buildPage() {
         category: _kMDComponents,
         routeName: AppBarDemo.routeName,
         buildRoute: (BuildContext context) => AppBarDemo()),
+    Page(
+        title: 'TabBar',
+        subhead:
+        '一个显示水平选项卡的Material Design 组件。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: AppBarDemo.routeName,
+        buildRoute: (BuildContext context) => TabBarDemo()),
+    Page(
+        title: 'TabBarView',
+        subhead:
+        '显示与当前选中的选项卡相对应的页面视图。通常和TabBar一起使用。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: TabBarViewDemo.routeName,
+        buildRoute: (BuildContext context) => TabBarViewDemo()),
+    Page(
+        title: 'MaterialApp',
+        subhead:
+        '它封装了应用程序实现Material Design所需要的一些组件。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: MaterialAppDemo.routeName,
+        buildRoute: (BuildContext context) => MaterialAppDemo()),
+    Page(
+        title: 'WidgetsApp',
+        subhead:
+        '它封装了应用程序通常需要的一些组件。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: WidgetsAppDemo.routeName,
+        buildRoute: (BuildContext context) => WidgetsAppDemo()),
+    Page(
+        title: 'Drawer',
+        subhead:
+        '从Scaffold边缘水平滑动以显示应用程序中导航链接的Material Design面板。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: DrawerDemo.routeName,
+        buildRoute: (BuildContext context) => DrawerDemo()),
+    Page(
+        title: 'RaisedButton',
+        subhead:
+        '一个凸起的材质矩形按钮。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: RaisedButtonDemo.routeName,
+        buildRoute: (BuildContext context) => RaisedButtonDemo()),
+    Page(
+        title: 'FloatingActionButton',
+        subhead:
+        '一个圆形图标按钮，它悬停在内容之上，以展示应用程序中的主要动作。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: FloatingActionButtonDemo.routeName,
+        buildRoute: (BuildContext context) => FloatingActionButtonDemo()),
+    Page(
+        title: 'FlatButton',
+        subhead:
+        '一个扁平的Material按钮。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: FlatButtonDemo.routeName,
+        buildRoute: (BuildContext context) => FlatButtonDemo()),
+    Page(
+        title: 'IconButton',
+        subhead:
+        '一个Material图标按钮，点击时会有水波动画。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: IconButtonDemo.routeName,
+        buildRoute: (BuildContext context) => IconButtonDemo()),
+    Page(
+        title: 'PopupMenuButton',
+        subhead:
+        '当菜单隐藏时，点击或调用onSelected时显示一个弹出式菜单列表。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: PopupMenuButtonDemo.routeName,
+        buildRoute: (BuildContext context) => PopupMenuButtonDemo()),
+    Page(
+        title: 'ButtonBar',
+        subhead:
+        '水平排列的按钮组。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: ButtonBarDemo.routeName,
+        buildRoute: (BuildContext context) => ButtonBarDemo()),
+    Page(
+        title: 'TextField',
+        subhead:
+        '文本输入框。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: TextFieldDemo.routeName,
+        buildRoute: (BuildContext context) => TextFieldDemo()),
+    Page(
+        title: 'Checkbox',
+        subhead:
+        '复选框，允许用户从一组中选择多个选项。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: CheckBoxDemo.routeName,
+        buildRoute: (BuildContext context) => CheckBoxDemo()),
+    Page(
+        title: 'Radio',
+        subhead:
+        '单选框，允许用户从一组中选择一个选项。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: RadioDemo.routeName,
+        buildRoute: (BuildContext context) => RadioDemo()),
+    Page(
+        title: 'Switch',
+        subhead:
+        'On/off 用于切换一个单一状态。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: SwitchDemo.routeName,
+        buildRoute: (BuildContext context) => SwitchDemo()),
+    Page(
+        title: 'Slider',
+        subhead:
+        '滑块，允许用户通过滑动滑块来从一系列值中选择。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: SliderDemo.routeName,
+        buildRoute: (BuildContext context) => SliderDemo()),
+    Page(
+        title: 'Date&Time Pickers',
+        subhead:
+        '日期&时间选择器。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: DateTimePickersDemo.routeName,
+        buildRoute: (BuildContext context) => DateTimePickersDemo()),
+    Page(
+        title: 'SimpleDialog',
+        subhead:
+        '简单对话框可以显示附加的提示或操作。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: SimpleDialogDemo.routeName,
+        buildRoute: (BuildContext context) => SimpleDialogDemo()),
+    Page(
+        title: 'AlertDialog',
+        subhead:
+        '一个会中断用户操作的对话框，需要用户确认。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: AlertDialogDemo.routeName,
+        buildRoute: (BuildContext context) => AlertDialogDemo()),
+    Page(
+        title: 'BottomSheet',
+        subhead:
+        '一个从屏幕底部滑起的列表（以显示更多的内容）。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: BottomSheetDemo.routeName,
+        buildRoute: (BuildContext context) => BottomSheetDemo()),
+    Page(
+        title: 'ExpansionPanel',
+        subhead:
+        '一个会扩展的面板组件。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: ExpansionPanelDemo.routeName,
+        buildRoute: (BuildContext context) => ExpansionPanelDemo()),
+    Page(
+        title: 'SnackBar',
+        subhead:
+        '一个在屏幕的底部显示的具有可选操作的轻量级消息提示。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: SnackBarDemo.routeName,
+        buildRoute: (BuildContext context) => SnackBarDemo()),
+    Page(
+        title: 'Image',
+        subhead:
+        '一个显示图片的组件。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: ImageDemo.routeName,
+        buildRoute: (BuildContext context) => ImageDemo()),
+    Page(
+        title: 'Icon',
+        subhead:
+        '一个Material Design图标。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: IconDemo.routeName,
+        buildRoute: (BuildContext context) => IconDemo()),
+    Page(
+        title: 'Chip',
+        subhead:
+        '一个Material widget标签。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: ChipDemo.routeName,
+        buildRoute: (BuildContext context) => ChipDemo()),
+    Page(
+        title: 'Tooltip',
+        subhead:
+        '一个文本提示工具，通常长按下显示。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: TooltipDemo.routeName,
+        buildRoute: (BuildContext context) => TooltipDemo()),
+    Page(
+        title: 'DataTable',
+        subhead:
+        '一个数据表，通常用于桌面产品。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: DataTableDemo.routeName,
+        buildRoute: (BuildContext context) => DataTableDemo()),
+    Page(
+        title: 'Card',
+        subhead:
+        '一个 Material Design 卡片。拥有一个圆角和阴影。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: CardDemo.routeName,
+        buildRoute: (BuildContext context) => CardDemo()),
+    Page(
+        title: 'LinearProgressIndicator',
+        subhead:
+        '一个线性进度条。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: LinearProgressIndicatorDemo.routeName,
+        buildRoute: (BuildContext context) => LinearProgressIndicatorDemo()),
+    Page(
+        title: 'ListTile',
+        subhead:
+        '一个固定高度的行。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: ListTileDemo.routeName,
+        buildRoute: (BuildContext context) => ListTileDemo()),
+    Page(
+        title: 'Stepper',
+        subhead:
+        '一个Material Design步骤指示器。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: StepperDemo.routeName,
+        buildRoute: (BuildContext context) => StepperDemo()),
+    Page(
+        title: 'Divider',
+        subhead:
+        '一个1像素厚的水平分割线。',
+        icon: null,
+        category: _kMDComponents,
+        routeName: DividerDemo.routeName,
+        buildRoute: (BuildContext context) => DividerDemo()),
 
+    ///network
     Page(
         title: '网络',
         subhead: '待添加',

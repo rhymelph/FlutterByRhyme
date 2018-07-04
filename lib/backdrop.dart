@@ -363,3 +363,11 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
     return new LayoutBuilder(builder: _buildStack);
   }
 }
+class Test extends StatelessWidget {
+  Test(Key key):super(key:key);
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+

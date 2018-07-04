@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage>
       _position = index;
     });
   }
-
+  double bottomSize;
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -87,21 +87,19 @@ class _HomePageState extends State<HomePage>
 
     Widget home = Scaffold(
       key: _scaffoldKey,
-      bottomNavigationBar: FractionalTranslation (
-        translation: Offset(0.0, (1-bottomOpcity)*36),
-        child: BottomNavigationBar(
-          currentIndex: _position,
-          type: BottomNavigationBarType.shifting,
-          onTap: _bottomBarTap,
-          items: kAllBottomItem.map<BottomNavigationBarItem>((item) {
-            return BottomNavigationBarItem(
-              icon: item.icon,
-              title: Text(item.title),
-              backgroundColor: item.color,
-            );
-          }).toList(),
-        ),
-      ),
+      resizeToAvoidBottomPadding: false,
+      bottomNavigationBar: bottomOpcity==1? BottomNavigationBar(
+        currentIndex: _position,
+        type: BottomNavigationBarType.shifting,
+        onTap: _bottomBarTap,
+        items: kAllBottomItem.map<BottomNavigationBarItem>((item) {
+          return BottomNavigationBarItem(
+            icon: item.icon,
+            title: Text(item.title),
+            backgroundColor: item.color,
+          );
+        }).toList(),
+      ):null,
       backgroundColor: isDark ? _kBlue : theme.primaryColor,
       body: SafeArea(
           bottom: false,
