@@ -68,6 +68,9 @@ class _HomePageState extends State<HomePage>
 
   _bottomBarTap(int index) {
     setState(() {
+      if(category!=null){
+        category=null;
+      }
       _position = index;
     });
   }
@@ -143,7 +146,7 @@ class _HomePageState extends State<HomePage>
                   layoutBuilder:
                       centerHome ? _centerHomeLayout : _topHomeLayout,
                   child: category == null
-                      ? PageCategoryList(
+                      ? _CategoryList(
                           pageCategoryList: kAllBottomItemToCategory[
                               kAllBottomItem.toList()[_position]],
                           onCategoryTap: (PageCategory category) {
@@ -152,7 +155,7 @@ class _HomePageState extends State<HomePage>
                             });
                           },
                         )
-                      : PageList(category),
+                      : _PageList(category),
                 ),
               ),
               onWillPop: () {
@@ -169,8 +172,8 @@ class _HomePageState extends State<HomePage>
   }
 }
 
-class PageCategoryList extends StatelessWidget {
-  PageCategoryList({Key key, this.pageCategoryList, this.onCategoryTap})
+class _CategoryList extends StatelessWidget {
+  _CategoryList({Key key, this.pageCategoryList, this.onCategoryTap})
       : super(key: key);
   List<PageCategory> pageCategoryList;
   final ValueChanged<PageCategory> onCategoryTap;
@@ -228,43 +231,6 @@ class PageCategoryList extends StatelessWidget {
     );
   }
 }
-
-class PageList extends StatelessWidget {
-  const PageList(this.pageCategory);
-
-  //根据标签查找对应的page
-  final PageCategory pageCategory;
-
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> pageList =
-        kAllCategorysToPages[pageCategory].map<Widget>((Page page) {
-      return PageItem(
-        page: page,
-      );
-    }).toList();
-
-    return new KeyedSubtree(
-        key: const ValueKey('PageDemoList'),
-        child: Semantics(
-          scopesRoute: true,
-          namesRoute: true,
-          label: pageCategory.title,
-          explicitChildNodes: true,
-          child: GridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: 6.0,
-            mainAxisSpacing: 6.0,
-            key: PageStorageKey<String>(pageCategory.title),
-            padding: const EdgeInsets.only(top: 8.0),
-            children: pageList,
-          ),
-        ));
-  }
-}
-
-const double _kPageItemHeight = 64.0;
-
 class _CategoryItem extends StatelessWidget {
   final PageCategory pageCategory;
   final VoidCallback onTap;
@@ -291,8 +257,8 @@ class _CategoryItem extends StatelessWidget {
                 Text(
                   pageCategory.title,
                   style: Theme.of(context).textTheme.title.copyWith(
-                        color: isDark ? Colors.white : const Color(0xFF202124),
-                      ),
+                    color: isDark ? Colors.white : const Color(0xFF202124),
+                  ),
                 ),
                 Text(
                   pageCategory.subhead,
@@ -310,9 +276,46 @@ class _CategoryItem extends StatelessWidget {
     );
   }
 }
+class _PageList extends StatelessWidget {
+  const _PageList(this.pageCategory);
 
-class PageItem extends StatelessWidget {
-  const PageItem({Key key, this.page}) : super(key: key);
+  //根据标签查找对应的page
+  final PageCategory pageCategory;
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> pageList =
+        kAllCategorysToPages[pageCategory].map<Widget>((Page page) {
+      return _PageItem(
+        page: page,
+      );
+    }).toList();
+
+    return new KeyedSubtree(
+        key: const ValueKey('PageDemoList'),
+        child: Semantics(
+          scopesRoute: true,
+          namesRoute: true,
+          label: pageCategory.title,
+          explicitChildNodes: true,
+          child: GridView.count(
+            crossAxisCount: 2,
+            crossAxisSpacing: 6.0,
+            mainAxisSpacing: 6.0,
+            key: PageStorageKey<String>(pageCategory.title),
+            padding: const EdgeInsets.only(top: 8.0),
+            children: pageList,
+          ),
+        ));
+  }
+}
+
+const double _kPageItemHeight = 64.0;
+
+
+
+class _PageItem extends StatelessWidget {
+  const _PageItem({Key key, this.page}) : super(key: key);
   final Page page;
 
   //点击后跳转到对应的demo

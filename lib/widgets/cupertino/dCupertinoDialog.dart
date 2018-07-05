@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TabBarDemo extends StatelessWidget {
-  static const String routeName='widgets/material/TabBar';
+class CupertinoDialogDemo extends StatelessWidget {
+  static const String routeName='widgets/cupertino/CupertinoDialog';
 
   @override
   Widget build(BuildContext context) {

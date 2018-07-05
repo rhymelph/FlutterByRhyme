@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutterbyrhyme/widgets/basics/abasicesShow.dart';
-import 'package:flutterbyrhyme/widgets/material/amaterialShow.dart';
+import 'package:flutterbyrhyme/widgets/basics/aBasicesShow.dart';
+import 'package:flutterbyrhyme/widgets/material/aMaterialShow.dart';
+import 'package:flutterbyrhyme/widgets/cupertino/aaCupertinoShow.dart';
 import 'package:flutter/foundation.dart';
 
 class BottomItem {
@@ -86,13 +87,13 @@ const PageCategory _kCupertino = const PageCategory._(
   bottomItem: widgetDemo,
 );
 
-const PageCategory _kText = const PageCategory._(
-  title: 'IOS风格组件',
-  subhead: '用于当前iOS设计语言的美丽和高保真组件。',
+const PageCategory _kLayout = const PageCategory._(
+  title: '布局',
+  subhead: '文本显示和样式。',
   bottomItem: widgetDemo,
 );
 
-const PageCategory _kLayout = const PageCategory._(
+const PageCategory _kText = const PageCategory._(
   title: '文本',
   subhead: '文本显示和样式。',
   bottomItem: widgetDemo,
@@ -281,6 +282,7 @@ List<Page> _buildPage() {
         category: _kBasics,
         routeName: FlutterLogoDemo.routeName,
         buildRoute: (BuildContext context) => FlutterLogoDemo()),
+
     ///Material ComPonents
     Page(
         title: 'Scaffold',
@@ -562,6 +564,8 @@ List<Page> _buildPage() {
         category: _kMDComponents,
         routeName: DividerDemo.routeName,
         buildRoute: (BuildContext context) => DividerDemo()),
+
+    ///Cupertino
 
     ///network
     Page(
