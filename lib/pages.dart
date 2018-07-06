@@ -3,6 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/widgets/basics/aBasicesShow.dart';
 import 'package:flutterbyrhyme/widgets/material/aMaterialShow.dart';
 import 'package:flutterbyrhyme/widgets/cupertino/aaCupertinoShow.dart';
+import 'package:flutterbyrhyme/widgets/layout/aLayoutShow.dart';
+import 'package:flutterbyrhyme/widgets/text/aaTextShow.dart';
+import 'package:flutterbyrhyme/widgets/assets/aAssetsShow.dart';
+import 'package:flutterbyrhyme/widgets/input/aaInputShow.dart';
+import 'package:flutterbyrhyme/widgets/animated/aaAnimatedShow.dart';
+import 'package:flutterbyrhyme/widgets/interaction/aInteractionShow.dart';
+import 'package:flutterbyrhyme/widgets/styling/aStylingShow.dart';
+import 'package:flutterbyrhyme/widgets/painting/aaPaintingShow.dart';
 import 'package:flutter/foundation.dart';
 
 class BottomItem {
@@ -29,7 +37,7 @@ class BottomItem {
 }
 
 const BottomItem widgetDemo = const BottomItem._(
-    title: '组件',
+    title: '部件',
     icon: const Icon(Icons.widgets),
     color: Colors.blue);
 
@@ -70,20 +78,20 @@ class PageCategory {
 }
 
 const PageCategory _kBasics = const PageCategory._(
-  title: '基础组件',
-  subhead: '如果你想构建第一个Flutter应用，您绝对需要了解这些组件。',
+  title: '基础部件',
+  subhead: '如果你想构建第一个Flutter应用，您绝对需要了解这些部件。',
   bottomItem: widgetDemo,
 );
 
 const PageCategory _kMDComponents = const PageCategory._(
-  title: 'MD组件',
-  subhead: '实现了Material Design 指南的视觉、效果的组件。',
+  title: 'MD部件',
+  subhead: '实现了Material Design 指南的视觉、效果的部件。',
   bottomItem: widgetDemo,
 );
 
 const PageCategory _kCupertino = const PageCategory._(
-  title: 'IOS风格组件',
-  subhead: '用于当前iOS设计语言的美丽和高保真组件。',
+  title: 'IOS风格部件',
+  subhead: '用于当前iOS设计语言的美丽和高保真部件。',
   bottomItem: widgetDemo,
 );
 
@@ -107,7 +115,7 @@ const PageCategory _kAssertII = const PageCategory._(
 
 const PageCategory _kInput = const PageCategory._(
   title: '用户输入',
-  subhead: 'MD组件和IOS风格组件中获取用户输入的组件。',
+  subhead: 'MD部件和IOS风格部件中获取用户输入的部件。',
   bottomItem: widgetDemo,
 );
 
@@ -131,7 +139,7 @@ const PageCategory _kStyling = const PageCategory._(
 
 const PageCategory _kPainting = const PageCategory._(
   title: '绘制和视觉效果',
-  subhead: '控件将视觉效果应用到其子组件，而不改变它们的布局、大小和位置。',
+  subhead: '控件将视觉效果应用到其子部件，而不改变它们的布局、大小和位置。',
   bottomItem: widgetDemo,
 );
 
@@ -143,7 +151,7 @@ const PageCategory _kAsync = const PageCategory._(
 
 const PageCategory _kScrolling = const PageCategory._(
   title: '滚动',
-  subhead: '滚动一个拥有多个子组件的父组件。',
+  subhead: '滚动一个拥有多个子部件的父部件。',
   bottomItem: widgetDemo,
 );
 
@@ -204,28 +212,28 @@ List<Page> _buildPage() {
     ///basices
     Page(
         title: 'Container',
-        subhead: '一个拥有绘制、定位、调整大小的组件。',
+        subhead: '一个拥有绘制、定位、调整大小的部件。',
         icon: null,
         category: _kBasics,
         routeName: ContainerDemo.routeName,
         buildRoute: (BuildContext context) => ContainerDemo()),
     Page(
         title: 'Row',
-        subhead: '在水平方向上排列子组件的列表。',
+        subhead: '在水平方向上排列子部件的列表。',
         icon: null,
         category: _kBasics,
         routeName: RowDemo.routeName,
         buildRoute: (BuildContext context) => RowDemo()),
     Page(
         title: 'Column',
-        subhead: '在垂直方向上排列子组件的列表。',
+        subhead: '在垂直方向上排列子部件的列表。',
         icon: null,
         category: _kBasics,
         routeName: RowDemo.routeName,
         buildRoute: (BuildContext context) => ColumnDemo()),
     Page(
         title: 'Image',
-        subhead: '一个显示图片的组件。',
+        subhead: '一个显示图片的部件。',
         icon: null,
         category: _kBasics,
         routeName: ImageDemo.routeName,
@@ -262,7 +270,7 @@ List<Page> _buildPage() {
     Page(
         title: 'AppBar',
         subhead:
-            '一个Material Design应用程序栏，由工具栏和其他可能的组件（如TabBar和FlexibleSpaceBar）组成。',
+            '一个Material Design应用程序栏，由工具栏和其他可能的部件（如TabBar和FlexibleSpaceBar）组成。',
         icon: null,
         category: _kBasics,
         routeName: AppBarDemo.routeName,
@@ -270,14 +278,14 @@ List<Page> _buildPage() {
     Page(
         title: 'FlutterLogo',
         subhead:
-            '一个Material Design应用程序栏，由工具栏和其他可能的组件（如TabBar和FlexibleSpaceBar）组成。',
+            '一个Material Design应用程序栏，由工具栏和其他可能的部件（如TabBar和FlexibleSpaceBar）组成。',
         icon: null,
         category: _kBasics,
         routeName: FlutterLogoDemo.routeName,
         buildRoute: (BuildContext context) => FlutterLogoDemo()),
     Page(
         title: 'PlaceHolder',
-        subhead: '一个空白的盒子，代表以后有组件加入。',
+        subhead: '一个空白的盒子，代表以后有部件加入。',
         icon: null,
         category: _kBasics,
         routeName: FlutterLogoDemo.routeName,
@@ -295,7 +303,7 @@ List<Page> _buildPage() {
     Page(
         title: 'AppBar',
         subhead:
-        '一个Material Design应用程序栏，由工具栏和其他可能的组件（如TabBar和FlexibleSpaceBar）组成。',
+        '一个Material Design应用程序栏，由工具栏和其他可能的部件（如TabBar和FlexibleSpaceBar）组成。',
         icon: null,
         category: _kMDComponents,
         routeName: AppBarDemo.routeName,
@@ -311,7 +319,7 @@ List<Page> _buildPage() {
     Page(
         title: 'TabBar',
         subhead:
-        '一个显示水平选项卡的Material Design 组件。',
+        '一个显示水平选项卡的Material Design 部件。',
         icon: null,
         category: _kMDComponents,
         routeName: AppBarDemo.routeName,
@@ -327,7 +335,7 @@ List<Page> _buildPage() {
     Page(
         title: 'MaterialApp',
         subhead:
-        '它封装了应用程序实现Material Design所需要的一些组件。',
+        '它封装了应用程序实现Material Design所需要的一些部件。',
         icon: null,
         category: _kMDComponents,
         routeName: MaterialAppDemo.routeName,
@@ -335,7 +343,7 @@ List<Page> _buildPage() {
     Page(
         title: 'WidgetsApp',
         subhead:
-        '它封装了应用程序通常需要的一些组件。',
+        '它封装了应用程序通常需要的一些部件。',
         icon: null,
         category: _kMDComponents,
         routeName: WidgetsAppDemo.routeName,
@@ -471,7 +479,7 @@ List<Page> _buildPage() {
     Page(
         title: 'ExpansionPanel',
         subhead:
-        '一个会扩展的面板组件。',
+        '一个会扩展的面板部件。',
         icon: null,
         category: _kMDComponents,
         routeName: ExpansionPanelDemo.routeName,
@@ -487,7 +495,7 @@ List<Page> _buildPage() {
     Page(
         title: 'Image',
         subhead:
-        '一个显示图片的组件。',
+        '一个显示图片的部件。',
         icon: null,
         category: _kMDComponents,
         routeName: ImageDemo.routeName,
@@ -566,6 +574,774 @@ List<Page> _buildPage() {
         buildRoute: (BuildContext context) => DividerDemo()),
 
     ///Cupertino
+    Page(
+        title: 'CupertinoActivityIndicator',
+        subhead:
+        '一个iOS风格的加载指示器。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoActivityIndicatorDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoActivityIndicatorDemo()),
+    Page(
+        title: 'CupertinoAlertDialog',
+        subhead:
+        '一个iOS风格的会中断用户操作的对话框。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoAlertDialogDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoAlertDialogDemo()),
+    Page(
+        title: 'CupertinoButton',
+        subhead:
+        '一个iOS风格的按钮。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoButtonDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoButtonDemo()),
+    Page(
+        title: 'CupertinoDialog',
+        subhead:
+        '一个iOS风格的对话框。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoDialogDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoDialogDemo()),
+    Page(
+        title: 'CupertinoDialogAction',
+        subhead:
+        '用于CupertinoAlertDialog的一个按钮。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoDialogActionDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoDialogActionDemo()),
+    Page(
+        title: 'CupertinoSlider',
+        subhead:
+        '一个IOS风格的滑块。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoSliderDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoSliderDemo()),
+    Page(
+        title: 'CupertinoSlider',
+        subhead:
+        '一个IOS风格的滑块。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoSliderDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoSliderDemo()),
+    Page(
+        title: 'CupertinoSwitch',
+        subhead:
+        '一个IOS风格的开关，单一状态的开关。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoSwitchDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoSwitchDemo()),
+    Page(
+        title: 'CupertinoPageTransition',
+        subhead:
+        '一个iOS风格的页面过度动画。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoPageTransitionDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoPageTransitionDemo()),
+    Page(
+        title: 'CupertinoFullscreenDialogTransition',
+        subhead:
+        '一个iOS风格的过渡，用于调用全屏对话框。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoFullscreenDialogTransitionDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoFullscreenDialogTransitionDemo()),
+    Page(
+        title: 'CupertinoNavigationBar',
+        subhead:
+        '一个iOS风格的导航栏。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoNavigationBarDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoNavigationBarDemo()),
+    Page(
+        title: 'CupertinoTabBar',
+        subhead:
+        '一个iOS风格的底部选项卡。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoTabBarDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoTabBarDemo()),
+    Page(
+        title: 'CupertinoPageScaffold',
+        subhead:
+        '一个iOS风格的页面的基本布局结构。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoPageScaffoldDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoPageScaffoldDemo()),
+    Page(
+        title: 'CupertinoTabScaffold',
+        subhead:
+        '一个标签式iOS应用程序的结构。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoTabScaffoldDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoTabScaffoldDemo()),
+    Page(
+        title: 'CupertinoTabView',
+        subhead:
+        '支持选项卡间并行导航项卡的根内容。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoTabViewDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoTabViewDemo()),
+
+    ///Layout
+    Page(
+        title: 'Container',
+        subhead:
+        '一个拥有绘制、定位、调整大小的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: ContainerDemo.routeName,
+        buildRoute: (BuildContext context) => ContainerDemo()),
+    Page(
+        title: 'Padding',
+        subhead:
+        '一个会给其子部件添加指定填充的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: PaddingDemo.routeName,
+        buildRoute: (BuildContext context) => PaddingDemo()),
+    Page(
+        title: 'Center',
+        subhead:
+        '一个将其子部件居中显示在自身内部的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: CenterDemo.routeName,
+        buildRoute: (BuildContext context) => CenterDemo()),
+    Page(
+        title: 'Align',
+        subhead:
+        '一个可以将其子部件对齐，并可以根据子部件的大小自动调整大小的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: AlignDemo.routeName,
+        buildRoute: (BuildContext context) => AlignDemo()),
+    Page(
+        title: 'FittedBox',
+        subhead:
+        '按自己的大小调整其子部件的大小和位置。',
+        icon: null,
+        category: _kLayout,
+        routeName: FittedBoxDemo.routeName,
+        buildRoute: (BuildContext context) => FittedBoxDemo()),
+    Page(
+        title: 'AspectRatio',
+        subhead:
+        '一个试图将子widget的大小指定为某个特定长宽比的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: AspectRatioDemo.routeName,
+        buildRoute: (BuildContext context) => AspectRatioDemo()),
+    Page(
+        title: 'ConstrainedBox',
+        subhead:
+        '对其子项施加附加约束的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: ConstrainedBoxDemo.routeName,
+        buildRoute: (BuildContext context) => ConstrainedBoxDemo()),
+    Page(
+        title: 'Baseline',
+        subhead:
+        '根据子项的基线对它们的位置进行定位的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: BaselineDemo.routeName,
+        buildRoute: (BuildContext context) => BaselineDemo()),
+    Page(
+        title: 'FractionallySizedBox',
+        subhead:
+        '一个把它自己的子项放在可用空间的一小部分的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: FractionallySizedBoxDemo.routeName,
+        buildRoute: (BuildContext context) => FractionallySizedBoxDemo()),
+    Page(
+        title: 'IntrinsicHeight',
+        subhead:
+        '一个将它自己的子部件的高度调整其本身实际高度的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: IntrinsicHeightDemo.routeName,
+        buildRoute: (BuildContext context) => IntrinsicHeightDemo()),
+    Page(
+        title: 'IntrinsicWidth',
+        subhead:
+        '一个将它自己的子部件的宽度调整其本身实际宽度的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: IntrinsicWidthDemo.routeName,
+        buildRoute: (BuildContext context) => IntrinsicWidthDemo()),
+    Page(
+        title: 'LimitedBox',
+        subhead:
+        '一个当其自身不受约束时才限制其大小的盒子',
+        icon: null,
+        category: _kLayout,
+        routeName: LimitedBoxDemo.routeName,
+        buildRoute: (BuildContext context) => LimitedBoxDemo()),
+    Page(
+        title: 'Offstage',
+        subhead:
+        '一个可以控制其子widget的显示和隐藏的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: OffstageDemo.routeName,
+        buildRoute: (BuildContext context) => OffstageDemo()),
+    Page(
+        title: 'OverflowBox',
+        subhead:
+        '对其子项施加不同约束的部件，它可能允许子项溢出父级。',
+        icon: null,
+        category: _kLayout,
+        routeName: OverflowBoxDemo.routeName,
+        buildRoute: (BuildContext context) => OverflowBoxDemo()),
+    Page(
+        title: 'SizedBox',
+        subhead:
+        '一个特定大小的盒子。如宽高为NULL，则此盒子大小匹配到子部件的大小。',
+        icon: null,
+        category: _kLayout,
+        routeName: SizedBoxDemo.routeName,
+        buildRoute: (BuildContext context) => SizedBoxDemo()),
+    Page(
+        title: 'SizedOverflowBox',
+        subhead:
+        'SizedBox跟OverflowBox结合体。',
+        icon: null,
+        category: _kLayout,
+        routeName: SizedOverflowBoxDemo.routeName,
+        buildRoute: (BuildContext context) => SizedOverflowBoxDemo()),
+    Page(
+        title: 'Transform',
+        subhead:
+        '在绘制子部件之前应用转换的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: TransformDemo.routeName,
+        buildRoute: (BuildContext context) => TransformDemo()),
+    Page(
+        title: 'CustomSingleChildLayout',
+        subhead:
+        '一个自定义的拥有单个子部件的布局部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: CustomSingleChildLayoutDemo.routeName,
+        buildRoute: (BuildContext context) => CustomSingleChildLayoutDemo()),
+    Page(
+        title: 'Row',
+        subhead:
+        '在水平方向上排列子部件的列表。',
+        icon: null,
+        category: _kLayout,
+        routeName: RowDemo.routeName,
+        buildRoute: (BuildContext context) => RowDemo()),
+    Page(
+        title: 'Column',
+        subhead:
+        '在垂直方向上排列子部件的列表。',
+        icon: null,
+        category: _kLayout,
+        routeName: ColumnDemo.routeName,
+        buildRoute: (BuildContext context) => ColumnDemo()),
+    Page(
+        title: 'Stack',
+        subhead:
+        '可以允许其子部件简单的堆叠在一起。',
+        icon: null,
+        category: _kLayout,
+        routeName: StackDemo.routeName,
+        buildRoute: (BuildContext context) => StackDemo()),
+    Page(
+        title: 'IndexedStack',
+        subhead:
+        '从一个子部件列表中显示单个孩子的Stack。',
+        icon: null,
+        category: _kLayout,
+        routeName: IndexedStackDemo.routeName,
+        buildRoute: (BuildContext context) => IndexedStackDemo()),
+    Page(
+        title: 'Container',
+        subhead:
+        '一个拥有绘制、定位、调整大小的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: ContainerDemo.routeName,
+        buildRoute: (BuildContext context) => ContainerDemo()),
+    Page(
+        title: 'Flow',
+        subhead:
+        '一个实现流式布局算法的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: FlowDemo.routeName,
+        buildRoute: (BuildContext context) => FlowDemo()),
+    Page(
+        title: 'Table',
+        subhead:
+        '一个实现表格布局算法的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: TableDemo.routeName,
+        buildRoute: (BuildContext context) => TableDemo()),
+    Page(
+        title: 'Wrap',
+        subhead:
+        '可以在水平或垂直方向多行显示其子部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: WrapDemo.routeName,
+        buildRoute: (BuildContext context) => WrapDemo()),
+    Page(
+        title: 'ListBody',
+        subhead:
+        '一个沿着一个给定的轴，顺序排列子元素的部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: ListBodyDemo.routeName,
+        buildRoute: (BuildContext context) => ListBodyDemo()),
+    Page(
+        title: 'ListView',
+        subhead:
+        '可滚动的列表部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: ListViewDemo.routeName,
+        buildRoute: (BuildContext context) => ListViewDemo()),
+    Page(
+        title: 'CustomMultiChildLayout',
+        subhead:
+        '使用一个委托来对多个孩子进行设置大小和定位的小部件。',
+        icon: null,
+        category: _kLayout,
+        routeName: CustomMultiChildLayoutDemo.routeName,
+        buildRoute: (BuildContext context) => CustomMultiChildLayoutDemo()),
+    Page(
+        title: 'LayoutBuilder',
+        subhead:
+        '构建一个可以依赖父窗口大小的部件树。',
+        icon: null,
+        category: _kLayout,
+        routeName: LayoutBuilderDemo.routeName,
+        buildRoute: (BuildContext context) => LayoutBuilderDemo()),
+
+    ///Text
+    Page(
+        title: 'Text',
+        subhead:
+        '单一格式的文本。',
+        icon: null,
+        category: _kText,
+        routeName: TextDemo.routeName,
+        buildRoute: (BuildContext context) => TextDemo()),
+    Page(
+        title: 'RichText',
+        subhead:
+        '一个富文本Text，可以显示多种样式的text。',
+        icon: null,
+        category: _kText,
+        routeName: RichTextDemo.routeName,
+        buildRoute: (BuildContext context) => RichTextDemo()),
+    Page(
+        title: 'DefaultTextStyle',
+        subhead:
+        '文字样式，用于指定Text部件的文字样式。',
+        icon: null,
+        category: _kText,
+        routeName: DefaultTextStyleDemo.routeName,
+        buildRoute: (BuildContext context) => DefaultTextStyleDemo()),
+
+    ///assets
+    Page(
+        title: 'RawImage',
+        subhead:
+        '一个直接显示dart:ui.Image的部件。',
+        icon: null,
+        category: _kAssertII,
+        routeName: RawImageDemo.routeName,
+        buildRoute: (BuildContext context) => RawImageDemo()),
+    Page(
+        title: 'AssetBundle',
+        subhead:
+        '应用程序使用的资源集合。',
+        icon: null,
+        category: _kAssertII,
+        routeName: AssetBundleDemo.routeName,
+        buildRoute: (BuildContext context) => AssetBundleDemo()),
+
+    ///input
+    Page(
+        title: 'Form',
+        subhead:
+        '一个可选的、用于给多个TextField分组的部件。',
+        icon: null,
+        category: _kInput,
+        routeName: FormDemo.routeName,
+        buildRoute: (BuildContext context) => FormDemo()),
+    Page(
+        title: 'FormField',
+        subhead:
+        '一个单独的表单字段。',
+        icon: null,
+        category: _kInput,
+        routeName: FormFieldDemo.routeName,
+        buildRoute: (BuildContext context) => FormFieldDemo()),
+    Page(
+        title: 'RawKeyboardListener',
+        subhead:
+        '用户按下或释放键盘上的键时调用回调的部件。',
+        icon: null,
+        category: _kInput,
+        routeName: RawKeyboardListenerDemo.routeName,
+        buildRoute: (BuildContext context) => RawKeyboardListenerDemo()),
+
+    ///Animated
+    Page(
+        title: 'AnimatedContainer',
+        subhead:
+        '在一段时间内逐渐改变其值的容器。',
+        icon: null,
+        category: _kAnimation,
+        routeName: AnimatedContainerDemo.routeName,
+        buildRoute: (BuildContext context) => AnimatedContainerDemo()),
+    Page(
+        title: 'AnimatedCrossFade',
+        subhead:
+        '在两个子部件之间交叉淡入，并同时调整他们的尺寸。',
+        icon: null,
+        category: _kAnimation,
+        routeName: AnimatedCrossFadeDemo.routeName,
+        buildRoute: (BuildContext context) => AnimatedCrossFadeDemo()),
+    Page(
+        title: 'Hero',
+        subhead:
+        '将其子项标记为hero动画候选的部件。',
+        icon: null,
+        category: _kAnimation,
+        routeName: HeroDemo.routeName,
+        buildRoute: (BuildContext context) => HeroDemo()),
+    Page(
+        title: 'AnimatedBuilder',
+        subhead:
+        '用于构建动画的通用小部件',
+        icon: null,
+        category: _kAnimation,
+        routeName: AnimatedBuilderDemo.routeName,
+        buildRoute: (BuildContext context) => AnimatedBuilderDemo()),
+    Page(
+        title: 'DecoratedBoxTransition',
+        subhead:
+        '可以给它的Decoration不同属性使用动画。',
+        icon: null,
+        category: _kAnimation,
+        routeName: DecoratedBoxTransitionDemo.routeName,
+        buildRoute: (BuildContext context) => DecoratedBoxTransitionDemo()),
+    Page(
+        title: 'FadeTransition',
+        subhead:
+        '对子项使用透明度动画。',
+        icon: null,
+        category: _kAnimation,
+        routeName: FadeTransitionDemo.routeName,
+        buildRoute: (BuildContext context) => FadeTransitionDemo()),
+    Page(
+        title: 'PositionedTransition',
+        subhead:
+        '可以给它的Positioned不同属性使用动画，需要起始位置和结束位置。',
+        icon: null,
+        category: _kAnimation,
+        routeName: PositionedTransitionDemo.routeName,
+        buildRoute: (BuildContext context) => PositionedTransitionDemo()),
+    Page(
+        title: 'RotationTransition',
+        subhead:
+        '对子项使用旋转动画。',
+        icon: null,
+        category: _kAnimation,
+        routeName: RotationTransitionDemo.routeName,
+        buildRoute: (BuildContext context) => RotationTransitionDemo()),
+    Page(
+        title: 'ScaleTransition',
+        subhead:
+        '对子项使用缩放动画。',
+        icon: null,
+        category: _kAnimation,
+        routeName: ScaleTransitionDemo.routeName,
+        buildRoute: (BuildContext context) => ScaleTransitionDemo()),
+    Page(
+        title: 'SizeTransition',
+        subhead:
+        '动画自己的大小和剪辑，并对齐子项。',
+        icon: null,
+        category: _kAnimation,
+        routeName: SizeTransitionDemo.routeName,
+        buildRoute: (BuildContext context) => SizeTransitionDemo()),
+    Page(
+        title: 'SlideTransition',
+        subhead:
+        '对相对于其正常位置的某个位置之间使用动画。',
+        icon: null,
+        category: _kAnimation,
+        routeName: SlideTransitionDemo.routeName,
+        buildRoute: (BuildContext context) => SlideTransitionDemo()),
+    Page(
+        title: 'AnimatedDefaultTextStyle',
+        subhead:
+        '在文本样式切换时使用动画。',
+        icon: null,
+        category: _kAnimation,
+        routeName: AnimatedDefaultTextStyleDemo.routeName,
+        buildRoute: (BuildContext context) => AnimatedDefaultTextStyleDemo()),
+    Page(
+        title: 'AnimatedListState',
+        subhead:
+        '动画列表的state。',
+        icon: null,
+        category: _kAnimation,
+        routeName: AnimatedListStateDemo.routeName,
+        buildRoute: (BuildContext context) => AnimatedListStateDemo()),
+    Page(
+        title: 'AnimatedModalBarrier',
+        subhead:
+        '一个阻止用户与widget交互的部件。',
+        icon: null,
+        category: _kAnimation,
+        routeName: AnimatedModalBarrierDemo.routeName,
+        buildRoute: (BuildContext context) => AnimatedModalBarrierDemo()),
+    Page(
+        title: 'AnimatedOpacity',
+        subhead:
+        '对子项使用透明度动画。',
+        icon: null,
+        category: _kAnimation,
+        routeName: AnimatedOpacityDemo.routeName,
+        buildRoute: (BuildContext context) => AnimatedOpacityDemo()),
+    Page(
+        title: 'AnimatedPhysicalModel',
+        subhead:
+        'PhysicalModel的动画版本.',
+        icon: null,
+        category: _kAnimation,
+        routeName: AnimatedPhysicalModelDemo.routeName,
+        buildRoute: (BuildContext context) => AnimatedPhysicalModelDemo()),
+    Page(
+        title: 'AnimatedPositioned',
+        subhead:
+        '当给定位置的变化，自动在给定的时间内转换孩子位置的部件。',
+        icon: null,
+        category: _kAnimation,
+        routeName: AnimatedPositionedDemo.routeName,
+        buildRoute: (BuildContext context) => AnimatedPositionedDemo()),
+    Page(
+        title: 'AnimatedSize',
+        subhead:
+        '当给定的孩子的大小变化时，它自动地在给定时间内转换它大小的部件。',
+        icon: null,
+        category: _kAnimation,
+        routeName: AnimatedSizeDemo.routeName,
+        buildRoute: (BuildContext context) => AnimatedSizeDemo()),
+    Page(
+        title: 'AnimatedWidget',
+        subhead:
+        '当给定的Listenable改变值时，会重新构建该widget。',
+        icon: null,
+        category: _kAnimation,
+        routeName: AnimatedWidgetDemo.routeName,
+        buildRoute: (BuildContext context) => AnimatedWidgetDemo()),
+    Page(
+        title: 'AnimatedWidgetBaseState',
+        subhead:
+        '具有隐式动画的部件的基类。',
+        icon: null,
+        category: _kAnimation,
+        routeName: AnimatedWidgetBaseStateDemo.routeName,
+        buildRoute: (BuildContext context) => AnimatedWidgetBaseStateDemo()),
+
+    ///interaction
+    Page(
+        title: 'LongPressDraggable',
+        subhead:
+        '可以使其子部件在长按时可拖动。',
+        icon: null,
+        category: _kInteraction,
+        routeName: LongPressDraggableDemo.routeName,
+        buildRoute: (BuildContext context) => LongPressDraggableDemo()),
+    Page(
+        title: 'GestureDetector',
+        subhead:
+        '一个检测手势的部件。',
+        icon: null,
+        category: _kInteraction,
+        routeName: GestureDetectorDemo.routeName,
+        buildRoute: (BuildContext context) => GestureDetectorDemo()),
+    Page(
+        title: 'DragTarget',
+        subhead:
+        '一个拖动的目标部件，在完成拖动时它可以接收数据。',
+        icon: null,
+        category: _kInteraction,
+        routeName: DragTargetDemo.routeName,
+        buildRoute: (BuildContext context) => DragTargetDemo()),
+    Page(
+        title: 'Dismissible',
+        subhead:
+        '可以在拖动时隐藏的部件。',
+        icon: null,
+        category: _kInteraction,
+        routeName: DismissibleDemo.routeName,
+        buildRoute: (BuildContext context) => DismissibleDemo()),
+    Page(
+        title: 'IgnorePointer',
+        subhead:
+        '在hit test不可见，当ignore为true，此部件不响应事件。',
+        icon: null,
+        category: _kInteraction,
+        routeName: IgnorePointerDemo.routeName,
+        buildRoute: (BuildContext context) => IgnorePointerDemo()),
+    Page(
+        title: 'AbsorbPointer',
+        subhead:
+        '在hit test拦截事件，当absorbing为true时，此小部件阻止其子树通过终止命中测试来接收指针事件。。',
+        icon: null,
+        category: _kInteraction,
+        routeName: AbsorbPointerDemo.routeName,
+        buildRoute: (BuildContext context) => AbsorbPointerDemo()),
+    Page(
+        title: 'Navigator',
+        subhead:
+        '导航器，可以在多个页面(路由)栈之间跳转。',
+        icon: null,
+        category: _kInteraction,
+        routeName: NavigatorDemo.routeName,
+        buildRoute: (BuildContext context) => NavigatorDemo()),
+    Page(
+        title: 'Scrollable',
+        subhead:
+        '实现了可滚动widget的交互模型，但不包含UI显示相关的逻辑。',
+        icon: null,
+        category: _kInteraction,
+        routeName: ScrollableDemo.routeName,
+        buildRoute: (BuildContext context) => ScrollableDemo()),
+
+    ///Styling
+    Page(
+        title: 'Padding',
+        subhead:
+        '一个会给其子部件添加指定填充的部件。',
+        icon: null,
+        category: _kStyling,
+        routeName: PaddingDemo.routeName,
+        buildRoute: (BuildContext context) => PaddingDemo()),
+    Page(
+        title: 'Theme',
+        subhead:
+        '将主题应用于子部件。主题描述了应用选择的颜色和字体。',
+        icon: null,
+        category: _kStyling,
+        routeName: ThemeDemo.routeName,
+        buildRoute: (BuildContext context) => ThemeDemo()),
+    Page(
+        title: 'MediaQuery',
+        subhead:
+        '建立一个子树，在树中媒体查询解析不同的给定数据。',
+        icon: null,
+        category: _kStyling,
+        routeName: MediaQueryDemo.routeName,
+        buildRoute: (BuildContext context) => MediaQueryDemo()),
+
+    ///painting
+    Page(
+        title: 'Opacity',
+        subhead:
+        '使其子widget透明的部件。',
+        icon: null,
+        category: _kPainting,
+        routeName: OpacityDemo.routeName,
+        buildRoute: (BuildContext context) => OpacityDemo()),
+    Page(
+        title: 'Transform',
+        subhead:
+        '在绘制子部件之前应用转换的部件。',
+        icon: null,
+        category: _kPainting,
+        routeName: TransformDemo.routeName,
+        buildRoute: (BuildContext context) => TransformDemo()),
+    Page(
+        title: 'DecoratedBox',
+        subhead:
+        '在孩子绘制之前或之后绘制装饰的部件。',
+        icon: null,
+        category: _kPainting,
+        routeName: DecoratedBoxDemo.routeName,
+        buildRoute: (BuildContext context) => DecoratedBoxDemo()),
+    Page(
+        title: 'FractionalTranslation',
+        subhead:
+        '绘制盒子之前给其添加一个偏移转换。',
+        icon: null,
+        category: _kPainting,
+        routeName: FractionalTranslationDemo.routeName,
+        buildRoute: (BuildContext context) => FractionalTranslationDemo()),
+    Page(
+        title: 'RotatedBox',
+        subhead:
+        '可以延顺时针以90度的倍数旋转其子部件。',
+        icon: null,
+        category: _kPainting,
+        routeName: RotatedBoxDemo.routeName,
+        buildRoute: (BuildContext context) => RotatedBoxDemo()),
+    Page(
+        title: 'ClipOval',
+        subhead:
+        '用椭圆剪辑其子项的部件。',
+        icon: null,
+        category: _kPainting,
+        routeName: ClipOvalDemo.routeName,
+        buildRoute: (BuildContext context) => ClipOvalDemo()),
+    Page(
+        title: 'ClipPath',
+        subhead:
+        '用path剪辑其子项的部件。',
+        icon: null,
+        category: _kPainting,
+        routeName: ClipPathDemo.routeName,
+        buildRoute: (BuildContext context) => ClipPathDemo()),
+    Page(
+        title: 'ClipRect',
+        subhead:
+        '用矩形剪辑其子项的部件。',
+        icon: null,
+        category: _kPainting,
+        routeName: ClipRectDemo.routeName,
+        buildRoute: (BuildContext context) => ClipRectDemo()),
+    Page(
+        title: 'ClipPath',
+        subhead:
+        '用path剪辑其子项的部件。',
+        icon: null,
+        category: _kPainting,
+        routeName: ClipPathDemo.routeName,
+        buildRoute: (BuildContext context) => ClipPathDemo()),
+    Page(
+        title: 'ClipPath',
+        subhead:
+        '用path剪辑其子项的部件。',
+        icon: null,
+        category: _kPainting,
+        routeName: ClipPathDemo.routeName,
+        buildRoute: (BuildContext context) => ClipPathDemo()),
 
     ///network
     Page(

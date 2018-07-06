@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage>
   //动画控制器
   AnimationController _controller;
 
-  PageCategory category;
+  Map<int,PageCategory> categoryMap;
 
   int _position = 0;
 
@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage>
   void initState() {
     // TODO: implement initState
     super.initState();
+    categoryMap=Map();
     _controller = AnimationController(
       duration: const Duration(milliseconds: 600),
       debugLabel: 'preview banner',
@@ -68,9 +69,6 @@ class _HomePageState extends State<HomePage>
 
   _bottomBarTap(int index) {
     setState(() {
-      if(category!=null){
-        category=null;
-      }
       _position = index;
     });
   }
@@ -91,7 +89,7 @@ class _HomePageState extends State<HomePage>
     Widget home = Scaffold(
       key: _scaffoldKey,
       resizeToAvoidBottomPadding: false,
-      bottomNavigationBar: bottomOpcity==1? BottomNavigationBar(
+      bottomNavigationBar: bottomOpcity==1.0? BottomNavigationBar(
         currentIndex: _position,
         type: BottomNavigationBarType.shifting,
         onTap: _bottomBarTap,
@@ -120,21 +118,21 @@ class _HomePageState extends State<HomePage>
                   duration: _kSwitchDuration,
                   switchInCurve: switchInCurve,
                   switchOutCurve: switchOutCurve,
-                  child: category == null
+                  child: categoryMap[_position] == null||bottomOpcity==0.0
                       ? const FlutterLogo()
                       : IconButton(
                           icon: const BackButtonIcon(),
                           tooltip: '返回',
-                          onPressed: () => setState(() => category = null),
+                          onPressed: () => setState(() => categoryMap[_position] = null),
                         ),
                 ),
                 frontTitle: AnimatedSwitcher(
                   switchInCurve: switchInCurve,
                   duration: _kSwitchDuration,
                   switchOutCurve: switchOutCurve,
-                  child: category == null
+                  child: categoryMap[_position] == null
                       ? const Text('Flutter 教程')
-                      : Text(category.title),
+                      : Text(categoryMap[_position].title),
                 ),
                 frontHeading: Container(
                   height: 24.0,
@@ -145,23 +143,23 @@ class _HomePageState extends State<HomePage>
                   switchInCurve: switchInCurve,
                   layoutBuilder:
                       centerHome ? _centerHomeLayout : _topHomeLayout,
-                  child: category == null
+                  child: categoryMap[_position] == null
                       ? _CategoryList(
                           pageCategoryList: kAllBottomItemToCategory[
                               kAllBottomItem.toList()[_position]],
                           onCategoryTap: (PageCategory category) {
                             setState(() {
-                              this.category = category;
+                              categoryMap[_position] = category;
                             });
                           },
                         )
-                      : _PageList(category),
+                      : _PageList(categoryMap[_position]),
                 ),
               ),
               onWillPop: () {
-                if (category != null) {
+                if (categoryMap[_position] != null) {
                   setState(() {
-                    category = null;
+                    categoryMap[_position] = null;
                   });
                   return Future<bool>.value(false);
                 }
