@@ -49,6 +49,8 @@ class _HomePageState extends State<HomePage>
 
   double bottomOpcity = 1.0;
 
+  bool haveMore=true;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -70,6 +72,14 @@ class _HomePageState extends State<HomePage>
   _bottomBarTap(int index) {
     setState(() {
       _position = index;
+      List<PageCategory> categorys=kAllBottomItemToCategory[
+      kAllBottomItem.toList()[_position]];
+      if(categorys.length==1){
+        haveMore=false;
+        categoryMap[_position]=categorys[0];
+      }else{
+        haveMore=true;
+      }
     });
   }
   double bottomSize;
@@ -118,7 +128,7 @@ class _HomePageState extends State<HomePage>
                   duration: _kSwitchDuration,
                   switchInCurve: switchInCurve,
                   switchOutCurve: switchOutCurve,
-                  child: categoryMap[_position] == null||bottomOpcity==0.0
+                  child: categoryMap[_position] == null||bottomOpcity==0.0 || !haveMore
                       ? const FlutterLogo()
                       : IconButton(
                           icon: const BackButtonIcon(),
@@ -130,7 +140,7 @@ class _HomePageState extends State<HomePage>
                   switchInCurve: switchInCurve,
                   duration: _kSwitchDuration,
                   switchOutCurve: switchOutCurve,
-                  child: categoryMap[_position] == null
+                  child: categoryMap[_position] == null|| !haveMore
                       ? const Text('Flutter 教程')
                       : Text(categoryMap[_position].title),
                 ),
@@ -143,7 +153,7 @@ class _HomePageState extends State<HomePage>
                   switchInCurve: switchInCurve,
                   layoutBuilder:
                       centerHome ? _centerHomeLayout : _topHomeLayout,
-                  child: categoryMap[_position] == null
+                  child: categoryMap[_position] == null && haveMore
                       ? _CategoryList(
                           pageCategoryList: kAllBottomItemToCategory[
                               kAllBottomItem.toList()[_position]],
