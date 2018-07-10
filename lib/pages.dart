@@ -11,7 +11,13 @@ import 'package:flutterbyrhyme/widgets/animated/aaAnimatedShow.dart';
 import 'package:flutterbyrhyme/widgets/interaction/aInteractionShow.dart';
 import 'package:flutterbyrhyme/widgets/styling/aStylingShow.dart';
 import 'package:flutterbyrhyme/widgets/painting/aaPaintingShow.dart';
+import 'package:flutterbyrhyme/widgets/async/aAsyncShow.dart';
+import 'package:flutterbyrhyme/widgets/scrolling/aScrollingShow.dart';
+import 'package:flutterbyrhyme/widgets/access/aAccessShow.dart';
+import 'package:flutterbyrhyme/network/temp.dart';
+
 import 'package:flutter/foundation.dart';
+
 
 class BottomItem {
   final String title;
@@ -166,6 +172,17 @@ const PageCategory _kNetWork =const PageCategory._(
   subhead: '待添加',
   bottomItem: networkDemo,
 );
+const PageCategory _kdesign =const PageCategory._(
+  title: '设计',
+  subhead: '待添加',
+  bottomItem: designDemo,
+);
+const PageCategory _kdevice =const PageCategory._(
+  title: '设备',
+  subhead: '待添加',
+  bottomItem: deviceDemo,
+);
+
 
 class Page {
   final String title;
@@ -1327,21 +1344,147 @@ List<Page> _buildPage() {
         routeName: ClipRectDemo.routeName,
         buildRoute: (BuildContext context) => ClipRectDemo()),
     Page(
-        title: 'ClipPath',
+        title: 'CustomPaint',
         subhead:
-        '用path剪辑其子项的部件。',
+        '提供画布，用于绘制自定义的图形。',
         icon: null,
         category: _kPainting,
-        routeName: ClipPathDemo.routeName,
-        buildRoute: (BuildContext context) => ClipPathDemo()),
+        routeName: CustomPaintDemo.routeName,
+        buildRoute: (BuildContext context) => CustomPaintDemo()),
     Page(
-        title: 'ClipPath',
+        title: 'BackdropFilter',
         subhead:
-        '用path剪辑其子项的部件。',
+        '过滤应用现有的绘图内容，然后绘制子项。',
         icon: null,
         category: _kPainting,
-        routeName: ClipPathDemo.routeName,
-        buildRoute: (BuildContext context) => ClipPathDemo()),
+        routeName: BackdropFilterDemo.routeName,
+        buildRoute: (BuildContext context) => BackdropFilterDemo()),
+
+    ///async
+    Page(
+        title: 'FutureBuilder',
+        subhead:
+        '基于交互来构建自身的部件。',
+        icon: null,
+        category: _kAsync,
+        routeName: FutureBuilderDemo.routeName,
+        buildRoute: (BuildContext context) => FutureBuilderDemo()),
+    Page(
+        title: 'StreamBuilder',
+        subhead:
+        '基于数据流交互来构建自身的部件。',
+        icon: null,
+        category: _kAsync,
+        routeName: StreamBuilderDemo.routeName,
+        buildRoute: (BuildContext context) => StreamBuilderDemo()),
+
+    ///scrolling
+    Page(
+        title: 'ListView',
+        subhead:
+        '一个可滚动的列表。',
+        icon: null,
+        category: _kScrolling,
+        routeName: ListViewDemo.routeName,
+        buildRoute: (BuildContext context) => ListViewDemo()),
+    Page(
+        title: 'NestedScrollView',
+        subhead:
+        '一个可以嵌套其它可滚动部件的部件。',
+        icon: null,
+        category: _kScrolling,
+        routeName: NestedScrollViewDemo.routeName,
+        buildRoute: (BuildContext context) => NestedScrollViewDemo()),
+    Page(
+        title: 'GridView',
+        subhead:
+        '一个可滚动的二维空间数组。',
+        icon: null,
+        category: _kScrolling,
+        routeName: GridViewDemo.routeName,
+        buildRoute: (BuildContext context) => GridViewDemo()),
+    Page(
+        title: 'SingleChildScrollView',
+        subhead:
+        '只能有一个子项的可滚动的部件，子项内容超过父容器时可以滚动。',
+        icon: null,
+        category: _kScrolling,
+        routeName: ListViewDemo.routeName,
+        buildRoute: (BuildContext context) => ListViewDemo()),
+    Page(
+        title: 'Scrollable',
+        subhead:
+        '实现了可滚动部件的交互模型，但不包含UI显示相关的逻辑。',
+        icon: null,
+        category: _kScrolling,
+        routeName: ScrollableDemo.routeName,
+        buildRoute: (BuildContext context) => ScrollableDemo()),
+    Page(
+        title: 'Scrollbar',
+        subhead:
+        '一个Material Design滚动条，表示当前滚动到了什么位置。',
+        icon: null,
+        category: _kScrolling,
+        routeName: ScrollbarDemo.routeName,
+        buildRoute: (BuildContext context) => ScrollbarDemo()),
+    Page(
+        title: 'CustomScrollView',
+        subhead:
+        '一个使用slivers创建自定义的滚动效果的ScrollView。',
+        icon: null,
+        category: _kScrolling,
+        routeName: CustomScrollViewDemo.routeName,
+        buildRoute: (BuildContext context) => CustomScrollViewDemo()),
+    Page(
+        title: 'NotificationListener',
+        subhead:
+        '一个用来监听树上冒泡通知的子项。',
+        icon: null,
+        category: _kScrolling,
+        routeName: NotificationListenerDemo.routeName,
+        buildRoute: (BuildContext context) => NotificationListenerDemo()),
+    Page(
+        title: 'ScrollConfiguration',
+        subhead:
+        '控制可滚动组件在子树中的表现行为。',
+        icon: null,
+        category: _kScrolling,
+        routeName: ScrollConfigurationDemo.routeName,
+        buildRoute: (BuildContext context) => ScrollConfigurationDemo()),
+    Page(
+        title: 'RefreshIndicator',
+        subhead:
+        'Material Design下拉刷新指示器，包装一个可滚动部件。',
+        icon: null,
+        category: _kScrolling,
+        routeName: RefreshIndicatorDemo.routeName,
+        buildRoute: (BuildContext context) => RefreshIndicatorDemo()),
+
+    ///access
+    Page(
+        title: 'Semantics',
+        subhead:
+        '用于描述部件树的具体语义。使用辅助工具、搜索引擎和其他语义分析软件来确定应用程序的含义。',
+        icon: null,
+        category: _kAccess,
+        routeName: SemanticsDemo.routeName,
+        buildRoute: (BuildContext context) => SemanticsDemo()),
+    Page(
+        title: 'MergeSemantics',
+        subhead:
+        '合并其后代语义。',
+        icon: null,
+        category: _kAccess,
+        routeName: MergeSemanticsDemo.routeName,
+        buildRoute: (BuildContext context) => MergeSemanticsDemo()),
+    Page(
+        title: 'ExcludeSemantics',
+        subhead:
+        '删除其后代所有语义。',
+        icon: null,
+        category: _kAccess,
+        routeName: ExcludeSemanticsDemo.routeName,
+        buildRoute: (BuildContext context) => ExcludeSemanticsDemo()),
 
     ///network
     Page(
@@ -1349,9 +1492,26 @@ List<Page> _buildPage() {
         subhead: '待添加',
         icon: null,
         category: _kNetWork,
-        routeName: FlutterLogoDemo.routeName,
-        buildRoute: (BuildContext context) => FlutterLogoDemo()),
+        routeName: Temp.routeName,
+        buildRoute: (BuildContext context) => Temp()),
 
+    ///design
+    Page(
+        title: '设计',
+        subhead: '待添加',
+        icon: null,
+        category: _kdesign,
+        routeName: Temp.routeName,
+        buildRoute: (BuildContext context) => Temp()),
+
+    ///design
+    Page(
+        title: '设备',
+        subhead: '待添加',
+        icon: null,
+        category: _kdevice,
+        routeName: Temp.routeName,
+        buildRoute: (BuildContext context) => Temp()),
   ];
 
   return _pageList;

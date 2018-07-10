@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Basics extends StatelessWidget {
-  static const routeName = '/widgets/baseics';
-
+class Temp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child:
-          Text('你好'),
+        child: Text('暂无'),
       ),
     );
   }
 }
-

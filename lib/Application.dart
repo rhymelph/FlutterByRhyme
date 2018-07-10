@@ -3,7 +3,6 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'dart:async';
 
-import 'package:flutterbyrhyme/widgets/aShow.dart';
 import 'package:flutterbyrhyme/home/home.dart';
 
 import 'package:flutterbyrhyme/options/options.dart';
