@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage>
           return BottomNavigationBarItem(
             icon: item.icon,
             title: Text(item.title),
-            backgroundColor: item.color,
+            backgroundColor: isDark?item.darkColor:item.lightColor,
           );
         }).toList(),
       ):null,

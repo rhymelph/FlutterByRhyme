@@ -227,7 +227,7 @@ class _BooleanItem extends StatelessWidget {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: const Color(0xFF39CEFD),
+            activeColor: Colors.blue,
             activeTrackColor: isDark ? Colors.white24 : Colors.black26,
           )
         ],
