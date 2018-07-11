@@ -6,7 +6,7 @@ class Value<T> {
   final String label;
   final T value;
 
-  const Value(this.name, this.value, this.label);
+  const Value({this.name, this.value, this.label});
 
   @override
   bool operator ==(other) {
@@ -33,10 +33,7 @@ class ValueTitleWidget extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
       child: Text(
         title,
-        style: Theme
-            .of(context)
-            .textTheme
-            .title,
+        style: Theme.of(context).textTheme.title,
       ),
     );
   }
@@ -64,6 +61,7 @@ class RadioWidget<T> extends StatelessWidget {
     );
   }
 }
+
 //单选控件组
 class RadioGroupWidget<T> extends StatelessWidget {
   RadioGroupWidget(this.groupValue, this.valueList, this.valueChanged);
@@ -101,22 +99,27 @@ class ColorWidget extends StatelessWidget {
     return MergeSemantics(
       child: Tooltip(
         message: value.label,
-        child: RawMaterialButton(onPressed: () {
-          onchange(value);
-        },constraints: const BoxConstraints.tightFor(
-          width: 32.0,
-          height: 32.0,
-        ),fillColor: value.value,
-        shape: CircleBorder(
-          side: BorderSide(
-            color: value==groupValue?Colors.black:const Color(0xFFD5D7DA),
-            width: 3.0
-          )
-        ),),
+        child: RawMaterialButton(
+          onPressed: () {
+            onchange(value);
+          },
+          constraints: const BoxConstraints.tightFor(
+            width: 32.0,
+            height: 32.0,
+          ),
+          fillColor: value.value,
+          shape: CircleBorder(
+              side: BorderSide(
+                  color: value == groupValue
+                      ? Colors.black
+                      : const Color(0xFFD5D7DA),
+                  width: 3.0)),
+        ),
       ),
     );
   }
 }
+
 //颜色选择单选按钮组
 class ColorGroupWidget extends StatelessWidget {
   ColorGroupWidget(this.groupValue, this.valueList, this.valueChanged);
@@ -136,6 +139,67 @@ class ColorGroupWidget extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ColorWidget(value, groupValue, valueChanged),
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
+//颜色选择单选按钮
+class DecorationWidget extends StatelessWidget {
+  DecorationWidget(this.value, this.groupValue, this.onchange);
+
+  final Value<Decoration> groupValue;
+  final Value<Decoration> value;
+  final ValueChanged<Value<Decoration>> onchange;
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return MergeSemantics(
+      child: Tooltip(
+        message: value.label,
+        child: GestureDetector(
+          onTap: (){onchange(value);},
+          child: DecoratedBox(
+            decoration: value.value,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Icon(
+                Icons.brightness_1,
+                size: 10.0,
+                color: value == groupValue
+                    ? Colors.black
+                    : Colors.transparent,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//颜色选择单选按钮组
+class DecorationGroupWidget extends StatelessWidget {
+  DecorationGroupWidget(this.groupValue, this.valueList, this.valueChanged);
+
+  final Value<Decoration> groupValue;
+  final List<Value<Decoration>> valueList;
+  final ValueChanged<Value<Decoration>> valueChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: valueList.map((value) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DecorationWidget(value, groupValue, valueChanged),
           );
         }).toList(),
       ),
