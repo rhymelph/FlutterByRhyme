@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/widgets/paramsWidget.dart';
+import 'package:flutterbyrhyme/code/example_code.dart';
 class ContainerDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/Container';
 
@@ -15,20 +15,25 @@ class _ContainerDemoState extends State<ContainerDemo> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    setting = new ContainerSetting(
-      alignment: Alignment.center,
-    );
+    setting = new ContainerSetting();
   }
 
-  Value<AlignmentGeometry> _firstAlignmentGeometry = alignmentValues[0];
-  Value<Color> _firstColor = colors[0];
-  Value<EdgeInsetsGeometry> _firstPadding=paddingValues[0];
+  GlobalKey<ScaffoldState> _scaffoldKey=new GlobalKey<ScaffoldState>();
+  Value<AlignmentGeometry> _firstAlignmentGeometry ;
+  Value<Color> _firstColor ;
+  Value<EdgeInsetsGeometry> _firstPadding ;
+  Value<Decoration> _firstDecoration ;
+  Value<Decoration> _firstForegroundDecoration ;
+  Value<EdgeInsetsGeometry> _firstMargin;
+
+  void _showSyncSelectTip(){
+    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Only can select color or decoration !\n颜色，装饰只能选中一个!')));
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Container'),
-      ),
+    return ExampleScaffold(
+      key: _scaffoldKey,
+      title: 'Container',
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,8 +47,8 @@ class _ContainerDemoState extends State<ContainerDemo> {
             foregroundDecoration: setting.foregroundDecoration,
             margin: setting.margin,
             transform: setting.transform,
-            child: Text('Container'),
-          )),
+            child: Text('Container.child')),
+          ),
           Divider(),
           Expanded(
               child: SingleChildScrollView(
@@ -56,25 +61,56 @@ class _ContainerDemoState extends State<ContainerDemo> {
                     _firstAlignmentGeometry, alignmentValues, (value) {
                   setState(() {
                     _firstAlignmentGeometry = value;
-                    setting=setting.copyWith(alignment: value.value);
+                    setting = setting.copyWith(alignment: value.value);
                   });
                 }),
                 ValueTitleWidget('Color(颜色)'),
-                ColorGroupWidget(
-                    _firstColor, colors, (value) {
-                  setState(() {
-                    _firstColor = value;
-                    setting=setting.copyWith(color: value.value);
-                  });
+                ColorGroupWidget(_firstColor, colors, (value) {
+                  if(setting.decoration!=null){
+                    _showSyncSelectTip();
+                  }else{
+                    setState(() {
+                      _firstColor = value;
+                      setting = setting.copyWith(color: value.value);
+                    });
+                  }
                 }),
                 ValueTitleWidget('Padding(内边距)'),
                 RadioGroupWidget<EdgeInsetsGeometry>(
                     _firstPadding, paddingValues, (value) {
                   setState(() {
                     _firstPadding = value;
-                    setting=setting.copyWith(padding: value.value);
+                    setting = setting.copyWith(padding: value.value);
                   });
                 }),
+                ValueTitleWidget('Decoration(装饰)'),
+                RadioGroupWidget<Decoration>(_firstDecoration, decorationValues,
+                    (value) {
+                  if(setting.color!=null){
+                    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('color , decoration and foregroundDecoration only one can select!\n颜色，装饰和前景装饰只能选中一个!')));
+                  }else{
+                    setState(() {
+                      _firstDecoration = value;
+                      setting = setting.copyWith(decoration: value.value);
+                    });
+                  }
+                }),
+                ValueTitleWidget('foregroundDecoration(前景装饰)'),
+                RadioGroupWidget<Decoration>(_firstForegroundDecoration, foregroundDecorationValues,
+                        (value) {
+                      setState(() {
+                        _firstForegroundDecoration = value;
+                        setting = setting.copyWith(foregroundDecoration: value.value);
+                      });
+                    }),
+                ValueTitleWidget('margin(外边距)'),
+                RadioGroupWidget<EdgeInsetsGeometry>(_firstMargin, marginValues,
+                        (value) {
+                      setState(() {
+                        _firstMargin = value;
+                        setting = setting.copyWith(margin: value.value);
+                      });
+                    }),
               ],
             ),
           )),
@@ -126,101 +162,176 @@ const List<Value<AlignmentGeometry>> alignmentValues = [
   const Value(
     'topLeft',
     Alignment.topLeft,
-    'align to top and left',
+    'Alignment.topLeft',
   ),
   const Value(
     'topCenter',
     Alignment.topCenter,
-    'align to top and center',
+    'Alignment.topCenter',
   ),
   const Value(
     'topRight',
     Alignment.topRight,
-    'align to top and right',
+    'Alignment.topRight',
   ),
   const Value(
     'centerLeft',
     Alignment.centerLeft,
-    'align to centre and left',
+    'Alignment.centerLeft',
   ),
   const Value(
     'center',
     Alignment.center,
-    'align to center',
+    'Alignment.center',
   ),
   const Value(
     'centerRight',
     Alignment.centerRight,
-    'align to center and right',
+    'Alignment.centerRight',
   ),
   const Value(
     'bottomLeft',
     Alignment.bottomLeft,
-    'align to bottom and left',
+    'Alignment.bottomLeft',
   ),
   const Value(
     'bottomCenter',
     Alignment.bottomCenter,
-    'align to bottom and center',
+    'Alignment.bottomCenter',
   ),
   const Value(
     'bottomRight',
     Alignment.bottomRight,
-    'align to bottom and right',
+    'Alignment.bottomRight',
   ),
 ];
+
+const List<Value<EdgeInsetsGeometry>> paddingValues = [
+  const Value(
+      'EdgeInsets.fromLTRB',
+      const EdgeInsets.fromLTRB(20.0, 30.0, 40.0, 50.0),
+      'const EdgeInsets.fromLTRB(20.0, 30.0, 40.0, 50.0)'),
+  const Value(
+      'EdgeInsets.symmetric',
+      const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
+      'const EdgeInsets.symmetric(vertical: 20.0,horizontal: 40.0)'),
+  const Value('EdgeInsets.all', const EdgeInsets.all(20.0),
+      'const EdgeInsets.all(20.0)'),
+  const Value('EdgeInsets.only', const EdgeInsets.only(top: 30.0),
+      'const EdgeInsets.only(top: 30.0)'),
+];
+
 const List<Value<Color>> colors = [
   const Value(
     'white',
     Colors.white,
-    'Color is white',
+    'Colors.white',
   ),
   const Value(
     'red',
     Colors.red,
-    'Color is red',
+    'Colors.red',
   ),
   const Value(
     'orangeAccent',
     Colors.orangeAccent,
-    'Color is orangeAccent',
+    'Colors.orangeAccent',
   ),
   const Value(
     'yellow',
     Colors.yellow,
-    'Color is yellow',
+    'Colors.yellow',
   ),
   const Value(
     'green',
     Colors.green,
-    'Color is green',
+    'Colors.green',
   ),
   const Value(
     'cyan',
     Colors.cyan,
-    'Color is cyan',
+    'Colors.cyan',
   ),
   const Value(
     'blue',
     Colors.blue,
-    'Color is blue',
+    'Colors.blue',
   ),
   const Value(
     'purple',
     Colors.purple,
-    'Color is purple',
+    'Colors.purple',
   ),
   const Value(
     'pink',
     Colors.pink,
-    'Color is pink',
+    'Colors.pink',
   ),
 ];
 
-const List<Value<EdgeInsetsGeometry>> paddingValues=[
-  const Value('EdgeInsets.fromLTRB', const EdgeInsets.fromLTRB(10.0, 8.0, 4.0, 8.0), 'from left top right bottom'),
-  const Value('EdgeInsets.symmetric', const EdgeInsets.symmetric(vertical: 10.0,horizontal: 5.0), 'symmetric vertical and horizontal'),
-  const Value('EdgeInsets.all', const EdgeInsets.all(8.0), 'all padding'),
-  const Value('EdgeInsets.only', const EdgeInsets.only(top: 8.0), 'only'),
+const List<Value<Decoration>> decorationValues = [
+  const Value('BoxDecoration.color', BoxDecoration(color: Colors.green),
+      'BoxDecoration(color: Colors.green)'),
+  const Value(
+      'BoxDecoration.borderRadius',
+      BoxDecoration(
+          color: Colors.cyan,
+          borderRadius: BorderRadius.all(Radius.circular(32.0))),
+      'BoxDecoration(color: Colors.cyan,borderRadius: BorderRadius.all(Radius.circular(32.0)))'),
+  const Value(
+      'BoxDecoration.BoxShadow',
+      BoxDecoration(boxShadow: [
+        BoxShadow(
+            color: Colors.purple,
+            offset: Offset(5.0, 10.0),
+            blurRadius: 3.0,
+            spreadRadius: 3.0),
+        BoxShadow(
+            color: Colors.red,
+            offset: Offset(10.0, 5.0),
+            blurRadius: 3.0,
+            spreadRadius: 4.0),
+      ]),
+      'BoxDecoration(boxShadow: [BoxShadow(color: Colors.purple,offset: Offset(5.0, 10.0),blurRadius: 3.0,spreadRadius: 3.0), BoxShadow(color: Colors.red,offset: Offset(10.0, 5.0),blurRadius: 3.0,spreadRadius: 4.0),])'),
 ];
 
+const List<Value<Decoration>> foregroundDecorationValues = [
+  const Value('BoxDecoration.color', BoxDecoration(color: Colors.blue),
+      'BoxDecoration(color: Colors.blue)'),
+  const Value(
+      'BoxDecoration.borderRadius',
+      BoxDecoration(
+          color: Colors.pink,
+          borderRadius: BorderRadius.all(Radius.circular(64.0))),
+      'BoxDecoration(color: Colors.pink,borderRadius: BorderRadius.all(Radius.circular(64.0)))'),
+  const Value(
+      'BoxDecoration.BoxShadow',
+      BoxDecoration(boxShadow: [
+        BoxShadow(
+            color: Colors.orangeAccent,
+            offset: Offset(5.0, 10.0),
+            blurRadius: 3.0,
+            spreadRadius: 3.0),
+        BoxShadow(
+            color: Colors.yellow,
+            offset: Offset(10.0, 5.0),
+            blurRadius: 3.0,
+            spreadRadius: 4.0),
+      ]),
+      'BoxDecoration(boxShadow: [BoxShadow(color: Colors.orangeAccent,offset: Offset(5.0, 10.0),blurRadius: 3.0,spreadRadius: 3.0), BoxShadow(color: Colors.yellow,offset: Offset(10.0, 5.0),blurRadius: 3.0,spreadRadius: 4.0),])'),
+];
+
+const List<Value<EdgeInsetsGeometry>> marginValues = [
+  const Value(
+      'EdgeInsets.fromLTRB',
+      const EdgeInsets.fromLTRB(10.0, 2.0, 30.0, 40.0),
+      'const EdgeInsets.fromLTRB(10.0, 20.0, 30.0, 40.0)'),
+  const Value(
+      'EdgeInsets.symmetric',
+      const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+      'const EdgeInsets.symmetric(vertical: 10.0,horizontal: 20.0)'),
+  const Value('EdgeInsets.all', const EdgeInsets.all(10.0),
+      'const EdgeInsets.all(10.0)'),
+  const Value('EdgeInsets.only', const EdgeInsets.only(top: 10.0),
+      'const EdgeInsets.only(top: 10.0)'),
+];

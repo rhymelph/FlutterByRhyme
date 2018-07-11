@@ -53,15 +53,18 @@ class RadioWidget<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MergeSemantics(
-      child: Row(children: [
-        Radio<Value<T>>(
-            value: value, groupValue: groupValue, onChanged: onchange),
-        Text(value.name),
-      ]),
+      child: Tooltip(
+        message: value.label,
+        child: Row(children: [
+          Radio<Value<T>>(
+              value: value, groupValue: groupValue, onChanged: onchange),
+          Text(value.name),
+        ]),
+      ),
     );
   }
 }
-
+//单选控件组
 class RadioGroupWidget<T> extends StatelessWidget {
   RadioGroupWidget(this.groupValue, this.valueList, this.valueChanged);
 
@@ -84,6 +87,7 @@ class RadioGroupWidget<T> extends StatelessWidget {
   }
 }
 
+//颜色选择单选按钮
 class ColorWidget extends StatelessWidget {
   ColorWidget(this.value, this.groupValue, this.onchange);
 
@@ -94,21 +98,26 @@ class ColorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return RawMaterialButton(onPressed: () {
-      onchange(value);
-    },constraints: const BoxConstraints.tightFor(
-      width: 32.0,
-      height: 32.0,
-    ),fillColor: value.value,
-    shape: CircleBorder(
-      side: BorderSide(
-        color: value==groupValue?Colors.black:const Color(0xFFD5D7DA),
-        width: 3.0
-      )
-    ),);
+    return MergeSemantics(
+      child: Tooltip(
+        message: value.label,
+        child: RawMaterialButton(onPressed: () {
+          onchange(value);
+        },constraints: const BoxConstraints.tightFor(
+          width: 32.0,
+          height: 32.0,
+        ),fillColor: value.value,
+        shape: CircleBorder(
+          side: BorderSide(
+            color: value==groupValue?Colors.black:const Color(0xFFD5D7DA),
+            width: 3.0
+          )
+        ),),
+      ),
+    );
   }
 }
-
+//颜色选择单选按钮组
 class ColorGroupWidget extends StatelessWidget {
   ColorGroupWidget(this.groupValue, this.valueList, this.valueChanged);
 
