@@ -1,25 +1,7 @@
 import 'package:flutter/material.dart';
-
 //属性实体类
-class Value<T> {
-  final String name;
-  final String label;
-  final T value;
-
-  const Value({this.name, this.value, this.label});
-
-  @override
-  bool operator ==(other) {
-    if (identical(this, other)) return true;
-    if (runtimeType != other.runtimeType) return false;
-    Value typeOther = other;
-    return typeOther.label == label && typeOther.name == name;
-  }
-
-  @override
-  // TODO: implement hashCode
-  int get hashCode => hashValues(name, label);
-}
+import 'params.dart';
+export 'params.dart';
 
 //标题控件
 class ValueTitleWidget extends StatelessWidget {
@@ -137,7 +119,7 @@ class ColorGroupWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: valueList.map((value) {
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             child: ColorWidget(value, groupValue, valueChanged),
           );
         }).toList(),
@@ -146,7 +128,7 @@ class ColorGroupWidget extends StatelessWidget {
   }
 }
 
-//颜色选择单选按钮
+//装饰选择单选按钮
 class DecorationWidget extends StatelessWidget {
   DecorationWidget(this.value, this.groupValue, this.onchange);
 
@@ -167,7 +149,7 @@ class DecorationWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Icon(
-                Icons.brightness_1,
+                Icons.radio_button_checked,
                 size: 10.0,
                 color: value == groupValue
                     ? Colors.black
@@ -181,7 +163,7 @@ class DecorationWidget extends StatelessWidget {
   }
 }
 
-//颜色选择单选按钮组
+//装饰选择单选按钮组
 class DecorationGroupWidget extends StatelessWidget {
   DecorationGroupWidget(this.groupValue, this.valueList, this.valueChanged);
 
@@ -198,7 +180,7 @@ class DecorationGroupWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: valueList.map((value) {
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             child: DecorationWidget(value, groupValue, valueChanged),
           );
         }).toList(),

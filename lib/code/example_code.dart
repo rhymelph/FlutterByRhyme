@@ -1,19 +1,67 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:flutterbyrhyme/code_highlighter.dart';
+import 'package:flutterbyrhyme/code/code_highlighter.dart';
+export 'package:flutterbyrhyme/widgets/paramWidgets.dart';
 
+abstract class ExampleState<T extends StatefulWidget> extends State<T> {
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  GlobalKey<ScaffoldState> get scaffoldKey=>_scaffoldKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExampleScaffold(
+      scaffoldKey: _scaffoldKey,
+      exampleCode: getExampleCode(),
+      title: getTitle(),
+      detail: getDetail(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            child:
+            // start
+            getWidget(),
+          ),
+          // end
+          Divider(),
+          Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: getSetting(),
+                ),
+              )),
+        ],
+      ),
+    );
+  }
+  @protected
+  String getTitle();
+  @protected
+  String getExampleCode();
+  @protected
+  Widget getWidget();
+  @protected
+  List<Widget> getSetting();
+  @protected
+  String getDetail();
+}
 
 class ExampleScaffold extends StatefulWidget {
   ExampleScaffold(
       {Key key,
         this.scaffoldKey,
         this.title,
+        this.detail,
         this.actions,
         this.body,
         this.exampleCode})
       : super(key: key);
   final String title;
+  final String detail;
   final String exampleCode;
   final List<Widget> actions;
   final Widget body;
@@ -32,8 +80,15 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
           actions: (widget.actions ?? <Widget>[])
             ..addAll(<Widget>[
               IconButton(
+                icon: Icon(Icons.info),
+                tooltip: 'Show the detail!\n详情',
+                onPressed: (){
+                  _showDetail(context);
+                },
+              ),
+              IconButton(
                   icon: Icon(Icons.description),
-                  tooltip: 'Show example code!\n展示示例代码',
+                  tooltip: 'Show example code!\n展示示例代码!',
                   onPressed: () {
                     _showExampleCode(context);
                   }),
@@ -53,6 +108,22 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
             builder: (BuildContext context) => FullScreenCodeDialog(
               exampleCode: widget.exampleCode,
             )));
+  }
+
+  void _showDetail(BuildContext context){
+    showModalBottomSheet(context: context, builder: (BuildContext context) {
+      return new Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: SingleChildScrollView(
+            child: new Text(widget.detail,
+                textAlign: TextAlign.center,
+                style: new TextStyle(
+                    fontSize: 18.0
+                )
+            ),
+          )
+      );
+    });
   }
 }
 
@@ -89,7 +160,7 @@ class _FullScreenCodeDialogState extends State<FullScreenCodeDialog> {
           child: RichText(
               text: TextSpan(
                   style:
-                      const TextStyle(fontFamily: 'qlYouYuan', fontSize: 18.0),
+                      const TextStyle(fontSize: 18.0),
                   children: <TextSpan>[
                 DartSyntaxHighlighter(style).format(widget.exampleCode),
               ])),

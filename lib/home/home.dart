@@ -43,19 +43,19 @@ class _HomePageState extends State<HomePage>
   //动画控制器
   AnimationController _controller;
 
-  Map<int,PageCategory> categoryMap;
+  Map<int, PageCategory> categoryMap;
 
   int _position = 0;
 
   double bottomOpcity = 1.0;
 
-  bool haveMore=true;
+  bool haveMore = true;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    categoryMap=Map();
+    categoryMap = Map();
     _controller = AnimationController(
       duration: const Duration(milliseconds: 600),
       debugLabel: 'preview banner',
@@ -72,17 +72,19 @@ class _HomePageState extends State<HomePage>
   _bottomBarTap(int index) {
     setState(() {
       _position = index;
-      List<PageCategory> categorys=kAllBottomItemToCategory[
-      kAllBottomItem.toList()[_position]];
-      if(categorys.length==1){
-        haveMore=false;
-        categoryMap[_position]=categorys[0];
-      }else{
-        haveMore=true;
+      List<PageCategory> categorys =
+          kAllBottomItemToCategory[kAllBottomItem.toList()[_position]];
+      if (categorys.length == 1) {
+        haveMore = false;
+        categoryMap[_position] = categorys[0];
+      } else {
+        haveMore = true;
       }
     });
   }
+
   double bottomSize;
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -99,22 +101,25 @@ class _HomePageState extends State<HomePage>
     Widget home = Scaffold(
       key: _scaffoldKey,
       resizeToAvoidBottomPadding: false,
-      bottomNavigationBar: bottomOpcity==1.0? BottomNavigationBar(
-        currentIndex: _position,
-        type: BottomNavigationBarType.shifting,
-        onTap: _bottomBarTap,
-        items: kAllBottomItem.map<BottomNavigationBarItem>((item) {
-          return BottomNavigationBarItem(
-            icon: item.icon,
-            title: Text(item.title),
-            backgroundColor: isDark?item.darkColor:item.lightColor,
-          );
-        }).toList(),
-      ):null,
+      bottomNavigationBar: bottomOpcity == 1.0
+          ? BottomNavigationBar(
+              currentIndex: _position,
+              type: BottomNavigationBarType.shifting,
+              onTap: _bottomBarTap,
+              items: kAllBottomItem.map<BottomNavigationBarItem>((item) {
+                return BottomNavigationBarItem(
+                  icon: item.icon,
+                  title: Text(item.title),
+                  backgroundColor: isDark ? item.darkColor : item.lightColor,
+                );
+              }).toList(),
+            )
+          : null,
       backgroundColor: isDark ? _kBlue : theme.primaryColor,
       body: SafeArea(
           bottom: false,
           child: WillPopScope(
+
               ///注册回调
               child: Backdrop(
                 valueChanged: (index) {
@@ -128,19 +133,22 @@ class _HomePageState extends State<HomePage>
                   duration: _kSwitchDuration,
                   switchInCurve: switchInCurve,
                   switchOutCurve: switchOutCurve,
-                  child: categoryMap[_position] == null||bottomOpcity==0.0 || !haveMore
+                  child: categoryMap[_position] == null ||
+                          bottomOpcity == 0.0 ||
+                          !haveMore
                       ? const FlutterLogo()
                       : IconButton(
                           icon: const BackButtonIcon(),
                           tooltip: '返回',
-                          onPressed: () => setState(() => categoryMap[_position] = null),
+                          onPressed: () =>
+                              setState(() => categoryMap[_position] = null),
                         ),
                 ),
                 frontTitle: AnimatedSwitcher(
                   switchInCurve: switchInCurve,
                   duration: _kSwitchDuration,
                   switchOutCurve: switchOutCurve,
-                  child: categoryMap[_position] == null|| !haveMore
+                  child: categoryMap[_position] == null || !haveMore
                       ? const Text('Flutter 教程')
                       : Text(categoryMap[_position].title),
                 ),
@@ -239,6 +247,7 @@ class _CategoryList extends StatelessWidget {
     );
   }
 }
+
 class _CategoryItem extends StatelessWidget {
   final PageCategory pageCategory;
   final VoidCallback onTap;
@@ -265,8 +274,8 @@ class _CategoryItem extends StatelessWidget {
                 Text(
                   pageCategory.title,
                   style: Theme.of(context).textTheme.title.copyWith(
-                    color: isDark ? Colors.white : const Color(0xFF202124),
-                  ),
+                        color: isDark ? Colors.white : const Color(0xFF202124),
+                      ),
                 ),
                 Text(
                   pageCategory.subhead,
@@ -284,6 +293,7 @@ class _CategoryItem extends StatelessWidget {
     );
   }
 }
+
 class _PageList extends StatelessWidget {
   const _PageList(this.pageCategory);
 
@@ -319,8 +329,6 @@ class _PageList extends StatelessWidget {
 }
 
 const double _kPageItemHeight = 64.0;
-
-
 
 class _PageItem extends StatelessWidget {
   const _PageItem({Key key, this.page}) : super(key: key);
@@ -366,23 +374,39 @@ class _PageItem extends StatelessWidget {
             size: 20.0,
           ));
     }
+    Widget pageHome = Container(
+      constraints: BoxConstraints(minHeight: _kPageItemHeight * textScale),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: children,
+      ),
+    );
+    if (!finishDemo.contains(page.title)) {
+      pageHome = Stack(
+        children: [
+          pageHome,
+          Positioned(
+              top: 10.0,
+              right: 10.0,
+              child: Icon(
+                Icons.lock,
+                color: isDark ? Colors.white : Colors.black,
+              ))
+        ],
+      );
+    }
     return Card(
       child: RawMaterialButton(
-        padding: EdgeInsets.zero,
-        splashColor: data.primaryColor.withOpacity(0.12),
-        highlightColor: Colors.transparent,
-        onPressed: () {
-          _launchPage(context);
-        },
-        child: Container(
-          constraints: BoxConstraints(minHeight: _kPageItemHeight * textScale),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: children,
-          ),
-        ),
-      ),
+          padding: EdgeInsets.zero,
+          splashColor: data.primaryColor.withOpacity(0.12),
+          highlightColor: Colors.transparent,
+          onPressed: () {
+            if (finishDemo.contains(page.title)) {
+              _launchPage(context);
+            }
+          },
+          child: pageHome),
     );
   }
 }

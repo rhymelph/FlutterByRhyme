@@ -45,6 +45,7 @@ class BottomItem {
     return typeOther.title == title && typeOther.lightColor == other;
   }
 }
+const String finishDemo='Container,Row,Column';
 
 const BottomItem widgetDemo = const BottomItem._(
   title: '部件',
@@ -257,7 +258,7 @@ List<Page> _buildPage() {
         subhead: '在垂直方向上排列子部件的列表。',
         icon: null,
         category: _kBasics,
-        routeName: RowDemo.routeName,
+        routeName: ColumnDemo.routeName,
         buildRoute: (BuildContext context) => ColumnDemo()),
     Page(
         title: 'Image',
