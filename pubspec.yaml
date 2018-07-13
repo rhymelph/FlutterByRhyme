@@ -27,6 +27,7 @@ flutter:
   assets:
   - images/burgers.jpg
   - images/pazzer.jpg
+  - images/chewCrispyChicken.9.jpg
 
   fonts:
     - family: qlYouYuan

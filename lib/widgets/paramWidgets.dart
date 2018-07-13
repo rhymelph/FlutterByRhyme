@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+
 //属性实体类
 import 'params.dart';
 export 'params.dart';
@@ -20,6 +22,117 @@ class ValueTitleWidget extends StatelessWidget {
     );
   }
 }
+
+//开关标题
+class SwitchValueTitleWidget extends StatelessWidget {
+  SwitchValueTitleWidget({this.title, this.value, this.onChanged});
+
+  final bool value;
+  final String title;
+  final ValueChanged<bool> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.title,
+            ),
+          ),
+          Switch(
+            value: value,
+            onChanged: onChanged,
+            activeColor: Colors.blue,
+            activeTrackColor: isDark ? Colors.white24 : Colors.black26,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+//下拉选项标题
+class DropDownValueTitleWidget<T> extends StatelessWidget {
+  DropDownValueTitleWidget(
+      {@required this.selectList,
+      @required this.title,
+      @required this.value,
+      this.onChanged});
+
+  final Value<T> value;
+  final String title;
+  final ValueChanged<Value<T>> onChanged;
+  final List<Value<T>> selectList;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.title,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: DropdownButtonHideUnderline(
+              child: Container(
+                height: 35.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  border: Border.all(
+                    color: Colors.grey,
+                  ),
+                ),
+                child: DropdownButton<Value<T>>(
+                  onChanged: onChanged,
+                  value: value,
+                  items: selectList.map((Value<T> selectValue) {
+                    return DropdownMenuItem<Value<T>>(
+                        value: selectValue,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Text(selectValue.name),
+                        ));
+                  }).toList(),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+class ExpansionPanelTitleWidget extends StatelessWidget{
+
+  ExpansionPanelHeaderBuilder get header{
+    return (BuildContext context,bool isExpanded){
+      return Row(
+        children: <Widget>[],
+      );
+    };
+  }
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      margin: EdgeInsets.all(24.0),
+      child: ExpansionPanelList(
+
+      ),
+    );
+  }
+}
+
 
 //单选控件
 class RadioWidget<T> extends StatelessWidget {
@@ -143,7 +256,9 @@ class DecorationWidget extends StatelessWidget {
       child: Tooltip(
         message: value.label,
         child: GestureDetector(
-          onTap: (){onchange(value);},
+          onTap: () {
+            onchange(value);
+          },
           child: DecoratedBox(
             decoration: value.value,
             child: Padding(
@@ -151,9 +266,7 @@ class DecorationWidget extends StatelessWidget {
               child: Icon(
                 Icons.radio_button_checked,
                 size: 10.0,
-                color: value == groupValue
-                    ? Colors.black
-                    : Colors.transparent,
+                color: value == groupValue ? Colors.black : Colors.transparent,
               ),
             ),
           ),

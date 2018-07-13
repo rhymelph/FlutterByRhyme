@@ -87,7 +87,7 @@ const List<Value<EdgeInsetsGeometry>> paddingValues = [
       label: 'const EdgeInsets.only(top: 30.0)'),
 ];
 
-const List<Value<Color>> colors = [
+const List<Value<Color>> colorValues = [
   const Value(
     name: 'white',
     value: Colors.white,
@@ -132,6 +132,11 @@ const List<Value<Color>> colors = [
     name: 'pink',
     value: Colors.pink,
     label: 'Colors.pink',
+  ),
+  const Value(
+    name: 'transparent',
+    value: Colors.transparent,
+    label: 'Colors.transparent',
   ),
 ];
 
@@ -360,40 +365,40 @@ List<Value<Matrix4>> transformValues = [
   ),
 ];
 
-const List<Value<MainAxisAlignment>> mainAxisAlignmentValues=[
-    const Value(
-      name: 'start',
-      value: MainAxisAlignment.start,
-      label: 'MainAxisAlignment.start',
-    ),
-    const Value(
-      name: 'center',
-      value: MainAxisAlignment.center,
-      label: 'MainAxisAlignment.center',
-    ),
-    const Value(
-      name: 'end',
-      value: MainAxisAlignment.end,
-      label: 'MainAxisAlignment.end',
-    ),
-    const Value(
-      name: 'spaceEvenly',
-      value: MainAxisAlignment.spaceEvenly,
-      label: 'MainAxisAlignment.spaceEvenly',
-    ),
-    const Value(
-      name: 'spaceBetween',
-      value: MainAxisAlignment.spaceBetween,
-      label: 'MainAxisAlignment.spaceBetween',
-    ),
-    const Value(
-      name: 'spaceAround',
-      value: MainAxisAlignment.spaceAround,
-      label: 'MainAxisAlignment.spaceAround',
-    ),
+const List<Value<MainAxisAlignment>> mainAxisAlignmentValues = [
+  const Value(
+    name: 'start',
+    value: MainAxisAlignment.start,
+    label: 'MainAxisAlignment.start',
+  ),
+  const Value(
+    name: 'center',
+    value: MainAxisAlignment.center,
+    label: 'MainAxisAlignment.center',
+  ),
+  const Value(
+    name: 'end',
+    value: MainAxisAlignment.end,
+    label: 'MainAxisAlignment.end',
+  ),
+  const Value(
+    name: 'spaceEvenly',
+    value: MainAxisAlignment.spaceEvenly,
+    label: 'MainAxisAlignment.spaceEvenly',
+  ),
+  const Value(
+    name: 'spaceBetween',
+    value: MainAxisAlignment.spaceBetween,
+    label: 'MainAxisAlignment.spaceBetween',
+  ),
+  const Value(
+    name: 'spaceAround',
+    value: MainAxisAlignment.spaceAround,
+    label: 'MainAxisAlignment.spaceAround',
+  ),
 ];
 
-const List<Value<MainAxisSize>> mainAxisSizeValues=[
+const List<Value<MainAxisSize>> mainAxisSizeValues = [
   Value(
     name: 'min',
     value: MainAxisSize.min,
@@ -406,7 +411,7 @@ const List<Value<MainAxisSize>> mainAxisSizeValues=[
   ),
 ];
 
-const List<Value<CrossAxisAlignment>> crossAxisAlignmentValues=[
+const List<Value<CrossAxisAlignment>> crossAxisAlignmentValues = [
   const Value(
     name: 'start',
     value: CrossAxisAlignment.start,
@@ -434,7 +439,7 @@ const List<Value<CrossAxisAlignment>> crossAxisAlignmentValues=[
   ),
 ];
 
-const List<Value<TextDirection>> textDirectionValues=[
+const List<Value<TextDirection>> textDirectionValues = [
   Value(
     name: 'rtl(right-to-left从右往左)',
     value: TextDirection.rtl,
@@ -447,7 +452,7 @@ const List<Value<TextDirection>> textDirectionValues=[
   ),
 ];
 
-const List<Value<VerticalDirection>> verticalDirectionValues=[
+const List<Value<VerticalDirection>> verticalDirectionValues = [
   Value(
     name: 'up',
     value: VerticalDirection.up,
@@ -460,7 +465,7 @@ const List<Value<VerticalDirection>> verticalDirectionValues=[
   ),
 ];
 
-const List<Value<TextBaseline>> TextBaselineValues=[
+const List<Value<TextBaseline>> TextBaselineValues = [
   Value(
     name: 'alphabetic(对齐字母字符底部)',
     value: TextBaseline.alphabetic,
@@ -472,3 +477,428 @@ const List<Value<TextBaseline>> TextBaselineValues=[
     label: 'TextBaseline.ideographic',
   ),
 ];
+
+const List<Value<ImageProvider>> imageValues = [
+  Value(
+    name: 'Assert.burgers',
+    value: AssetImage('images/burgers.jpg'),
+    label: "AssetImage('images/burgers.jpg')",
+  ),
+  Value(
+    name: 'Assert.pazzer',
+    value: AssetImage('images/pazzer.jpg'),
+    label: "AssetImage('images/pazzer.jpg')",
+  ),
+  Value(
+    name: 'Assert.chewCrispyChicken',
+    value: AssetImage('images/chewCrispyChicken.9.jpg'),
+    label: "AssetImage('images/chewCrispyChicken.9.jpg')",
+  ),
+  Value(
+    name: 'Network.image',
+    value: NetworkImage(
+        'https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg'),
+    label:
+        "NetworkImage('https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg')",
+  ),
+];
+
+const List<Value<ImageRepeat>> repeatValues = [
+  Value(
+    name: 'repeat',
+    value: ImageRepeat.repeat,
+    label: "ImageRepeat.repeat",
+  ),
+  Value(
+    name: 'noRepeat',
+    value: ImageRepeat.noRepeat,
+    label: "ImageRepeat.noRepeat",
+  ),
+  Value(
+    name: 'repeatX',
+    value: ImageRepeat.repeatX,
+    label: "ImageRepeat.repeatX",
+  ),
+  Value(
+    name: 'repeatY',
+    value: ImageRepeat.repeatY,
+    label: "ImageRepeat.repeatY",
+  ),
+];
+
+const List<Value<BlendMode>> colorBlendModeValues = [
+  Value(
+    name: 'clear',
+    value: BlendMode.clear,
+    label: "BlendMode.clear",
+  ),
+  Value(
+    name: 'src',
+    value: BlendMode.src,
+    label: "BlendMode.src",
+  ),
+  Value(
+    name: 'dst',
+    value: BlendMode.dst,
+    label: "BlendMode.dst",
+  ),
+  Value(
+    name: 'srcOver',
+    value: BlendMode.srcOver,
+    label: "BlendMode.srcOver",
+  ),
+  Value(
+    name: 'dstOver',
+    value: BlendMode.dstOver,
+    label: "BlendMode.dstOver",
+  ),
+  Value(
+    name: 'srcIn',
+    value: BlendMode.srcIn,
+    label: "BlendMode.srcIn",
+  ),
+  Value(
+    name: 'dstIn',
+    value: BlendMode.dstIn,
+    label: "BlendMode.dstIn",
+  ),
+  Value(
+    name: 'srcOut',
+    value: BlendMode.srcOut,
+    label: "BlendMode.srcOut",
+  ),
+  Value(
+    name: 'dstOut',
+    value: BlendMode.dstOut,
+    label: "BlendMode.dstOut",
+  ),
+  Value(
+    name: 'srcATop',
+    value: BlendMode.srcATop,
+    label: "BlendMode.srcATop",
+  ),
+  Value(
+    name: 'dstATop',
+    value: BlendMode.dstATop,
+    label: "BlendMode.dstATop",
+  ),
+  Value(
+    name: 'xor',
+    value: BlendMode.xor,
+    label: "BlendMode.xor",
+  ),
+  Value(
+    name: 'plus',
+    value: BlendMode.plus,
+    label: "BlendMode.plus",
+  ),
+  Value(
+    name: 'modulate',
+    value: BlendMode.modulate,
+    label: "BlendMode.modulate",
+  ),
+  Value(
+    name: 'screen',
+    value: BlendMode.screen,
+    label: "BlendMode.screen",
+  ),
+  Value(
+    name: 'overlay',
+    value: BlendMode.overlay,
+    label: "BlendMode.overlay",
+  ),
+  Value(
+    name: 'darken',
+    value: BlendMode.darken,
+    label: "BlendMode.darken",
+  ),
+  Value(
+    name: 'lighten',
+    value: BlendMode.lighten,
+    label: "BlendMode.lighten",
+  ),
+  Value(
+    name: 'colorDodge',
+    value: BlendMode.colorDodge,
+    label: "BlendMode.colorDodge",
+  ),
+  Value(
+    name: 'colorBurn',
+    value: BlendMode.colorBurn,
+    label: "BlendMode.colorBurn",
+  ),
+  Value(
+    name: 'hardLight',
+    value: BlendMode.hardLight,
+    label: "BlendMode.hardLight",
+  ),
+  Value(
+    name: 'softLight',
+    value: BlendMode.softLight,
+    label: "BlendMode.softLight",
+  ),
+  Value(
+    name: 'difference',
+    value: BlendMode.difference,
+    label: "BlendMode.difference",
+  ),
+  Value(
+    name: 'exclusion',
+    value: BlendMode.exclusion,
+    label: "BlendMode.exclusion",
+  ),
+  Value(
+    name: 'multiply',
+    value: BlendMode.multiply,
+    label: "BlendMode.multiply",
+  ),
+  Value(
+    name: 'hue',
+    value: BlendMode.hue,
+    label: "BlendMode.hue",
+  ),
+  Value(
+    name: 'saturation',
+    value: BlendMode.saturation,
+    label: "BlendMode.saturation",
+  ),
+  Value(
+    name: 'color',
+    value: BlendMode.color,
+    label: "BlendMode.color",
+  ),
+  Value(
+    name: 'luminosity',
+    value: BlendMode.luminosity,
+    label: "BlendMode.luminosity",
+  ),
+];
+
+const List<Value<BoxFit>> fitValues = [
+  Value(
+    name: 'none',
+    value: BoxFit.none,
+    label: 'BoxFit.none',
+  ),
+  Value(
+    name: 'cover',
+    value: BoxFit.cover,
+    label: 'BoxFit.cover',
+  ),
+  Value(
+    name: 'contain',
+    value: BoxFit.contain,
+    label: 'BoxFit.contain',
+  ),
+  Value(
+    name: 'scaleDown',
+    value: BoxFit.scaleDown,
+    label: 'BoxFit.scaleDown',
+  ),
+  Value(
+    name: 'fill',
+    value: BoxFit.fill,
+    label: 'BoxFit.fill',
+  ),
+  Value(
+    name: 'fitHeight',
+    value: BoxFit.fitHeight,
+    label: 'BoxFit.fitHeight',
+  ),
+  Value(
+    name: 'fitWidth',
+    value: BoxFit.fitWidth,
+    label: 'BoxFit.fitWidth',
+  ),
+];
+
+List<Value<Rect>> centerSlideValues = [
+  Value(
+    name: 'Rect.zero',
+    value: Rect.zero,
+    label: 'Rect.zero',
+  ),
+  Value(
+    name: 'Rect.fromCircle',
+    value: Rect.fromCircle(
+      center: Offset(
+        25.0,
+        25.0,
+      ),
+      radius: 16.0,
+    ),
+    label: '''Rect.fromCircle(
+      center: Offset(
+        25.0,
+        25.0,
+      ),
+      radius: 16.0,
+    )''',
+  ),
+  Value(
+    name: 'Rect.fromLTRB',
+    value: Rect.fromLTRB(
+      25.0,
+      25.0,
+      50.0,
+      50.0,
+    ),
+    label: '''Rect.fromLTRB(
+      25.0,
+      25.0,
+      50.0,
+      50.0,
+    )''',
+  ),
+  Value(
+    name: 'Rect.fromLTWH',
+    value: Rect.fromLTWH(
+      25.0,
+      25.0,
+      50.0,
+      50.0,
+    ),
+    label: '''Rect.fromLTWH(
+      25.0,
+      25.0,
+      50.0,
+      50.0,
+    )''',
+  ),
+  Value(
+    name: 'Rect.fromPoints',
+    value: Rect.fromPoints(
+        Offset(
+          25.0,
+          25.0,
+        ),
+        Offset(
+          50.0,
+          50.0,
+        )),
+    label: '''Rect.fromPoints(
+        Offset(
+          25.0,
+          25.0,
+        ),
+        Offset(
+          50.0,
+          50.0,
+        ))''',
+  ),
+  Value(
+    name: 'Rect.largest',
+    value: Rect.largest,
+    label: 'Rect.largest',
+  ),
+];
+
+const List<Value<TextAlign>> textAlignValues = [
+  const Value(
+    name: 'start',
+    value: TextAlign.start,
+    label: 'TextAlign.start',
+  ),
+  const Value(
+    name: 'center',
+    value: TextAlign.center,
+    label: 'TextAlign.center',
+  ),
+  const Value(
+    name: 'end',
+    value: TextAlign.end,
+    label: 'TextAlign.end',
+  ),
+  const Value(
+    name: 'justify',
+    value: TextAlign.justify,
+    label: 'TextAlign.justify',
+  ),
+  const Value(
+    name: 'left',
+    value: TextAlign.left,
+    label: 'TextAlign.left',
+  ),
+  const Value(
+    name: 'right',
+    value: TextAlign.right,
+    label: 'TextAlign.right',
+  ),
+];
+
+const List<Value<TextOverflow>> textOverflowValues = [
+  const Value(
+    name: 'fade',
+    value: TextOverflow.fade,
+    label: 'TextOverflow.fade',
+  ),
+  const Value(
+    name: 'ellipsis',
+    value: TextOverflow.ellipsis,
+    label: 'TextOverflow.ellipsis',
+  ),
+  const Value(
+    name: 'clip',
+    value: TextOverflow.clip,
+    label: 'TextOverflow.clip',
+  ),
+];
+
+const List<Value<Overflow>> overflowValues = [
+  const Value(
+    name: 'clip',
+    value: Overflow.clip,
+    label: 'Overflow.clip',
+  ),
+  const Value(
+    name: 'visible',
+    value: Overflow.visible,
+    label: 'Overflow.visible',
+  ),
+];
+
+const List<Value<int>> intValues = [
+  const Value(
+    name: '1',
+    value: 1,
+    label: '1',
+  ),
+  const Value(
+    name: '2',
+    value: 2,
+    label: '2',
+  ),
+  const Value(
+    name: '3',
+    value: 3,
+    label: '3',
+  ),
+  const Value(
+    name: '4',
+    value: 4,
+    label: '4',
+  ),
+];
+const List<Value<double>> doubleValues = [
+  const Value(
+    name: '1.0',
+    value: 1.0,
+    label: '1.0',
+  ),
+  const Value(
+    name: '2.0',
+    value: 2.0,
+    label: '2.0',
+  ),
+  const Value(
+    name: '3.0',
+    value: 3.0,
+    label: '3.0',
+  ),
+  const Value(
+    name: '4.0',
+    value: 4.0,
+    label: '4.0',
+  ),
+];
+

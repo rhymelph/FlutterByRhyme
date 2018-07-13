@@ -87,7 +87,7 @@ class _ContainerDemoState extends ExampleState<ContainerDemo> {
         });
       }),
       ValueTitleWidget('Color(颜色)'),
-      ColorGroupWidget(_firstColor, colors, (value) {
+      ColorGroupWidget(_firstColor, colorValues, (value) {
         if (setting.decoration != null) {
           _showSyncSelectTip();
         } else {

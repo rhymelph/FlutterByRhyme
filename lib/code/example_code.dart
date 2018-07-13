@@ -116,7 +116,7 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
           padding: const EdgeInsets.all(32.0),
           child: SingleChildScrollView(
             child: new Text(widget.detail,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.justify,
                 style: new TextStyle(
                     fontSize: 18.0
                 )

@@ -91,21 +91,21 @@ class _RowDemoState extends ExampleState<RowDemo> {
   @override
   List<Widget> getSetting() {
     return <Widget>[
-      ValueTitleWidget('mainAxisAlignment(主轴对齐)'),
+      ValueTitleWidget('MainAxisAlignment(主轴对齐)'),
       RadioGroupWidget(_firstMainAxisAlignment, mainAxisAlignmentValues, (value){
         setState(() {
           _firstMainAxisAlignment=value;
           setting=setting.copyWith(mainAxisAlignment: value.value);
         });
       }),
-      ValueTitleWidget('mainAxisSize(主轴尺寸)'),
+      ValueTitleWidget('MainAxisSize(主轴尺寸)'),
       RadioGroupWidget(_firstMainAxisSize, mainAxisSizeValues, (value){
         setState(() {
           _firstMainAxisSize=value;
           setting=setting.copyWith(mainAxisSize: value.value);
         });
       }),
-      ValueTitleWidget('crossAxisAlignment(横轴对齐)'),
+      ValueTitleWidget('CrossAxisAlignment(横轴对齐)'),
       RadioGroupWidget(_firstCrossAxisAlignment, crossAxisAlignmentValues, (value){
         if(value.value==CrossAxisAlignment.baseline&&setting.textBaseline==null){
           _showSyncSelectTip();
@@ -116,21 +116,21 @@ class _RowDemoState extends ExampleState<RowDemo> {
           });
         }
       }),
-      ValueTitleWidget('textDirection(文本方向)'),
+      ValueTitleWidget('TextDirection(文本方向)'),
       RadioGroupWidget(_firstTextDirection, textDirectionValues, (value){
         setState(() {
           _firstTextDirection=value;
           setting=setting.copyWith(textDirection: value.value);
         });
       }),
-      ValueTitleWidget('verticalDirection(垂直方向)'),
+      ValueTitleWidget('VerticalDirection(垂直方向)'),
       RadioGroupWidget(_firstVerticalDirection, verticalDirectionValues, (value){
         setState(() {
           _firstVerticalDirection=value;
           setting=setting.copyWith(verticalDirection: value.value);
         });
       }),
-      ValueTitleWidget('textBaseline(文本基线)'),
+      ValueTitleWidget('TextBaseline(文本基线)'),
       RadioGroupWidget(_firstTextBaseline, TextBaselineValues, (value){
         setState(() {
           _firstTextBaseline=value;

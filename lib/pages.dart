@@ -18,6 +18,8 @@ import 'package:flutterbyrhyme/network/temp.dart';
 
 import 'package:flutter/foundation.dart';
 
+const String finishDemo='Container,Row,Column,Image,Text';
+
 class BottomItem {
   final String title;
   final Icon icon;
@@ -45,7 +47,6 @@ class BottomItem {
     return typeOther.title == title && typeOther.lightColor == other;
   }
 }
-const String finishDemo='Container,Row,Column';
 
 const BottomItem widgetDemo = const BottomItem._(
   title: '部件',
