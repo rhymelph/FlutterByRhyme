@@ -24,21 +24,14 @@ new Ink.image, which is the preferred way to show an image in a material applica
 class _ImageDemoState extends ExampleState<ImageDemo> {
   ImageSetting setting;
 
-  Value<ImageProvider> _firstImage;
-  Value<Color> _firstColor;
-  Value<BlendMode> _firstColorBlendMode;
-  Value<BoxFit> _firstFit;
-  Value<AlignmentGeometry> _firstAlignment;
-  Value<ImageRepeat> _firstRepeat;
-  Value<Rect> _firstCenterSlice;
-  Value<bool> _firstMatchTextDirection;
-  Value<bool> _firstGaplessPlayback;
 
   @override
   void initState() {
     // TODO: implement initState
     setting = ImageSetting(
-      image: AssetImage('images/burgers.jpg'),
+      image: imageValues[0],
+      alignment: alignmentValues[0],
+      repeat: repeatValues[0],
     );
     super.initState();
   }
@@ -52,97 +45,90 @@ class _ImageDemoState extends ExampleState<ImageDemo> {
   @override
   String getExampleCode() {
     return '''Image(
-      image: ${_firstImage?.label ?? 'images/burgers.jpg'},
-      color: ${_firstColor?.label ?? ''},
-      colorBlendMode: ${_firstColorBlendMode?.label ?? ''},
-      fit: ${_firstFit?.label ?? ''},
-      alignment: ${_firstAlignment?.label ?? 'Alignment.center'},
-      repeat: ${_firstRepeat?.label ?? 'ImageRepeat.noRepeat'},
-      centerSlice: ${_firstCenterSlice?.label ?? ''},
-      matchTextDirection: ${_firstMatchTextDirection?.label ?? 'false'},
-      gaplessPlayback: ${_firstGaplessPlayback?.label ?? 'false'},
+      image: ${setting.image?.label ?? imageValues[0].label},
+      color: ${setting.color?.label ?? ''},
+      colorBlendMode: ${setting.colorBlendMode?.label ?? ''},
+      fit: ${setting.fit?.label ?? ''},
+      alignment: ${setting.alignment?.label ?? 'Alignment.center'},
+      repeat: ${setting.repeat?.label ?? 'ImageRepeat.noRepeat'},
+      centerSlice: ${setting.centerSlice?.label ?? ''},
+      matchTextDirection: ${setting.matchTextDirection?.label ?? 'false'},
+      gaplessPlayback: ${setting.gaplessPlayback?.label ?? 'false'},
     )''';
   }
 
   @override
   List<Widget> getSetting() {
     return [
-      ValueTitleWidget('Image(图片)'),
-      RadioGroupWidget<ImageProvider>(_firstImage, imageValues, (value) {
+      ValueTitleWidget(StringParams.kImage),
+      RadioGroupWidget<ImageProvider>(setting.image, imageValues, (value) {
         setState(() {
-          _firstImage = value;
-          setting = setting.copyWith(image: value.value);
+          setting = setting.copyWith(image: value);
         });
       }),
-      ValueTitleWidget('Color(颜色)'),
-      ColorGroupWidget(_firstColor, colorValues, (value) {
+      ValueTitleWidget(StringParams.kColor),
+      ColorGroupWidget(setting.color, colorValues, (value) {
         setState(() {
-          _firstColor = value;
-          setting = setting.copyWith(color: value.value);
+          setting = setting.copyWith(color: value);
         });
       }),
-      ValueTitleWidget('ColorBlendMode(颜色混合模式)'),
-      RadioGroupWidget<BlendMode>(_firstColorBlendMode, colorBlendModeValues, (value) {
+      ValueTitleWidget(StringParams.kColorBlendMode),
+      RadioGroupWidget<BlendMode>(setting.colorBlendMode, colorBlendModeValues, (value) {
         setState(() {
-          _firstColorBlendMode = value;
-          setting = setting.copyWith(colorBlendMode: value.value);
+          setting = setting.copyWith(colorBlendMode: value);
         });
       }),
-      ValueTitleWidget('Fit(适配)'),
-      RadioGroupWidget<BoxFit>(_firstFit, fitValues, (value) {
+      ValueTitleWidget(StringParams.kFit),
+      RadioGroupWidget<BoxFit>(setting.fit, fitValues, (value) {
         setState(() {
-          _firstFit = value;
-          setting = setting.copyWith(fit: value.value);
+          setting = setting.copyWith(fit: value);
         });
       }),
-      ValueTitleWidget('Alignment(对齐)'),
-      RadioGroupWidget<AlignmentGeometry>(_firstAlignment, alignmentValues, (value) {
+      ValueTitleWidget(StringParams.kAlignment),
+      RadioGroupWidget<AlignmentGeometry>(setting.alignment, alignmentValues, (value) {
         setState(() {
-          _firstAlignment = value;
-          setting = setting.copyWith(alignment: value.value);
+          setting = setting.copyWith(alignment: value);
         });
       }),
-      ValueTitleWidget('Repeat(重复)'),
-      RadioGroupWidget<ImageRepeat>(_firstRepeat, repeatValues, (value) {
+      ValueTitleWidget(StringParams.kRepeat),
+      RadioGroupWidget<ImageRepeat>(setting.repeat, repeatValues, (value) {
         setState(() {
-          _firstRepeat = value;
-          setting = setting.copyWith(repeat: value.value);
+          setting = setting.copyWith(repeat: value);
         });
       }),
-      ValueTitleWidget('CenterSlice(中心区域裁剪)'),
-      RadioGroupWidget<Rect>(_firstCenterSlice, centerSlideValues, (value) {
+      ValueTitleWidget(StringParams.kCenterSlice),
+      RadioGroupWidget<Rect>(setting.centerSlice, centerSlideValues, (value) {
         setState(() {
-          _firstCenterSlice = value;
-          setting = setting.copyWith(centerSlice: value.value);
+          setting = setting.copyWith(centerSlice: value);
         });
       }),
       SwitchValueTitleWidget(
-        title: 'MatchTextDirection(匹配文本方向)',
+        title: StringParams.kMatchTextDirection,
         onChanged: (value) {
           setState(() {
-            _firstMatchTextDirection = Value<bool>(
+             final _firstMatchTextDirection = Value<bool>(
               name: value ? 'true' : 'false',
               value: value,
               label: value ? 'true' : 'false',
             );
-            setting = setting.copyWith(matchTextDirection: value);
+            setting = setting.copyWith(matchTextDirection: _firstMatchTextDirection);
           });
         },
-        value: _firstMatchTextDirection?.value ?? false,
+        value: setting.matchTextDirection?.value ?? false,
       ),
       SwitchValueTitleWidget(
-        title: 'GaplessPlayback(图片改变使用旧图片)',
+        title: StringParams.kGaplessPlayback,
         onChanged: (value) {
           setState(() {
-            _firstGaplessPlayback = Value<bool>(
+            final _firstGaplessPlayback = Value<bool>(
               name: value ? 'true' : 'false',
               value: value,
               label: value ? 'true' : 'false',
             );
-            setting = setting.copyWith(gaplessPlayback: value);
+            setting = setting.copyWith(gaplessPlayback: _firstGaplessPlayback);
           });
         },
-        value: _firstGaplessPlayback?.value ?? false,
+        value: setting.gaplessPlayback?.value ?? false,
       ),
     ];
   }
@@ -155,52 +141,58 @@ class _ImageDemoState extends ExampleState<ImageDemo> {
   @override
   Widget getWidget() {
     return Image(
-      image: setting.image,
-      color: setting.color,
-      colorBlendMode: setting.colorBlendMode,
-      fit: setting.fit,
-      alignment: setting.alignment,
-      repeat: setting.repeat,
-      centerSlice: setting.centerSlice,
-      matchTextDirection: setting.matchTextDirection,
-      gaplessPlayback: setting.gaplessPlayback,
+      image: setting.image?.value,
+      color: setting.color?.value,
+      colorBlendMode: setting.colorBlendMode?.value,
+      fit: setting.fit?.value,
+      alignment: setting.alignment?.value,
+      repeat: setting.repeat?.value,
+      centerSlice: setting.centerSlice?.value,
+      matchTextDirection: setting.matchTextDirection?.value,
+      gaplessPlayback: setting.gaplessPlayback?.value,
     );
   }
 }
 
 class ImageSetting {
-  final ImageProvider image;
-  final Color color;
-  final BlendMode colorBlendMode;
-  final BoxFit fit;
-  final AlignmentGeometry alignment;
-  final ImageRepeat repeat;
-  final Rect centerSlice;
-  final bool matchTextDirection;
-  final bool gaplessPlayback;
-
+  Value<ImageProvider> image;
+  Value<Color> color;
+  Value<BlendMode> colorBlendMode;
+  Value<BoxFit> fit;
+  Value<AlignmentGeometry> alignment;
+  Value<ImageRepeat> repeat;
+  Value<Rect> centerSlice;
+  Value<bool> matchTextDirection;
+  Value<bool> gaplessPlayback;
   ImageSetting({
     this.image,
     this.color,
     this.colorBlendMode,
     this.fit,
-    this.alignment: Alignment.center,
-    this.repeat: ImageRepeat.noRepeat,
+    this.alignment,
+    this.repeat,
     this.centerSlice,
-    this.matchTextDirection: false,
-    this.gaplessPlayback: false,
+    this.matchTextDirection:const Value<bool>(
+      name:'false',
+      value: false,
+      label: 'false',
+    ),
+    this.gaplessPlayback: const Value<bool>(
+      name:'false',
+      value: false,
+      label: 'false',
+    ),
   });
-
   ImageSetting copyWith({
-    ImageProvider image,
-    Color color,
-    BlendMode colorBlendMode,
-    BoxFit fit,
-    Alignment alignment,
-    ImageRepeat repeat,
-    Rect centerSlice,
-    bool matchTextDirection,
-    bool gaplessPlayback,
+    Value<ImageProvider> image,
+    Value<Color> color,
+    Value<BlendMode> colorBlendMode,
+    Value<BoxFit> fit,
+    Value<AlignmentGeometry> alignment,
+    Value<ImageRepeat> repeat,
+    Value<Rect> centerSlice,
+    Value<bool> matchTextDirection,
+    Value<bool> gaplessPlayback,
   }) {
     return new ImageSetting(
       image: image ?? this.image,

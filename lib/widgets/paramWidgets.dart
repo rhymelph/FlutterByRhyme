@@ -112,27 +112,43 @@ class DropDownValueTitleWidget<T> extends StatelessWidget {
     );
   }
 }
-class ExpansionPanelTitleWidget extends StatelessWidget{
 
-  ExpansionPanelHeaderBuilder get header{
-    return (BuildContext context,bool isExpanded){
-      return Row(
-        children: <Widget>[],
-      );
+//二级选择
+class ExpansionPanelTitleWidget extends StatelessWidget {
+  ExpansionPanelTitleWidget({
+    this.titleWidget,
+    this.hintWidget,
+    this.isExpanded: false,
+    this.onChanged,
+  });
+
+  final Widget titleWidget;
+  final Widget hintWidget;
+  final bool isExpanded;
+  final ValueChanged<bool> onChanged;
+
+  ExpansionPanelHeaderBuilder get header {
+    return (BuildContext context, bool isExpanded) {
+      return titleWidget;
     };
   }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
-      margin: EdgeInsets.all(24.0),
+      margin: EdgeInsets.all(8.0),
       child: ExpansionPanelList(
-
+        expansionCallback: (int index, bool isExpanded) {
+          onChanged(!isExpanded);
+        },
+        children: [
+          ExpansionPanel(
+              isExpanded: isExpanded, headerBuilder: header, body: hintWidget),
+        ],
       ),
     );
   }
 }
-
 
 //单选控件
 class RadioWidget<T> extends StatelessWidget {

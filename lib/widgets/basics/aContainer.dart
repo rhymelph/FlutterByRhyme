@@ -14,20 +14,6 @@ Containers with no children try to be as big as possible unless the incoming con
 class _ContainerDemoState extends ExampleState<ContainerDemo> {
   ContainerSetting setting;
 
-  Value<AlignmentGeometry> _firstAlignmentGeometry;
-
-  Value<Color> _firstColor;
-
-  Value<EdgeInsetsGeometry> _firstPadding;
-
-  Value<Decoration> _firstDecoration;
-
-  Value<Decoration> _firstForegroundDecoration;
-
-  Value<EdgeInsetsGeometry> _firstMargin;
-
-  Value<Matrix4> _firstTransform;
-
   void _showSyncSelectTip() {
     scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text('Only can select color or decoration !\n颜色，装饰只能选中一个!')));
@@ -43,13 +29,13 @@ class _ContainerDemoState extends ExampleState<ContainerDemo> {
   @override
   String getExampleCode() {
     return """Container(
-    alignment: ${_firstAlignmentGeometry?.label ?? ''},
-    padding: ${_firstPadding?.label ?? ''},
-    color: ${_firstColor?.label ?? ''},
-    decoration: ${_firstDecoration?.label ?? ''},
-    foregroundDecoration: ${_firstForegroundDecoration?.label ?? ''},
-    margin: ${_firstMargin?.label ?? ''},
-    transform: ${_firstTransform?.label ?? ''},
+    alignment: ${setting.alignment?.label ?? ''},
+    padding: ${setting.padding?.label ?? ''},
+    color: ${setting.color?.label ?? ''},
+    decoration: ${setting.decoration?.label ?? ''},
+    foregroundDecoration: ${setting.foregroundDecoration?.label ?? ''},
+    margin: ${setting.margin?.label ?? ''},
+    transform: ${setting.transform?.label ?? ''},
     child: Text('Container.child')),
     )""";
   }
@@ -64,13 +50,13 @@ class _ContainerDemoState extends ExampleState<ContainerDemo> {
   Widget getWidget() {
     // TODO: implement getWidget
     return Container(
-        alignment: setting.alignment,
-        padding: setting.padding,
-        color: setting.color,
-        decoration: setting.decoration,
-        foregroundDecoration: setting.foregroundDecoration,
-        margin: setting.margin,
-        transform: setting.transform,
+        alignment: setting.alignment?.value,
+        padding: setting.padding?.value,
+        color: setting.color?.value,
+        decoration: setting.decoration?.value,
+        foregroundDecoration: setting.foregroundDecoration?.value,
+        margin: setting.margin?.value,
+        transform: setting.transform?.value,
         child: Text('Container.child'));
   }
 
@@ -78,64 +64,57 @@ class _ContainerDemoState extends ExampleState<ContainerDemo> {
   List<Widget> getSetting() {
     // TODO: implement getSetting
     return <Widget>[
-      ValueTitleWidget('Alignment(对齐)'),
+      ValueTitleWidget(StringParams.kAlignment),
       RadioGroupWidget<AlignmentGeometry>(
-          _firstAlignmentGeometry, alignmentValues, (value) {
+          setting.alignment, alignmentValues, (value) {
         setState(() {
-          _firstAlignmentGeometry = value;
-          setting = setting.copyWith(alignment: value.value);
+          setting = setting.copyWith(alignment: value);
         });
       }),
-      ValueTitleWidget('Color(颜色)'),
-      ColorGroupWidget(_firstColor, colorValues, (value) {
+      ValueTitleWidget(StringParams.kColor),
+      ColorGroupWidget(setting.color, colorValues, (value) {
         if (setting.decoration != null) {
           _showSyncSelectTip();
         } else {
           setState(() {
-            _firstColor = value;
-            setting = setting.copyWith(color: value.value);
+            setting = setting.copyWith(color: value);
           });
         }
       }),
-      ValueTitleWidget('Padding(内边距)'),
-      RadioGroupWidget<EdgeInsetsGeometry>(_firstPadding, paddingValues,
+      ValueTitleWidget(StringParams.kPadding),
+      RadioGroupWidget<EdgeInsetsGeometry>(setting.padding, paddingValues,
           (value) {
         setState(() {
-          _firstPadding = value;
-          setting = setting.copyWith(padding: value.value);
+          setting = setting.copyWith(padding: value);
         });
       }),
-      ValueTitleWidget('Decoration(装饰)'),
-      DecorationGroupWidget(_firstDecoration, decorationValues, (value) {
+      ValueTitleWidget(StringParams.kDecoration),
+      DecorationGroupWidget(setting.decoration, decorationValues, (value) {
         if (setting.color != null) {
           _showSyncSelectTip();
         } else {
           setState(() {
-            _firstDecoration = value;
-            setting = setting.copyWith(decoration: value.value);
+            setting = setting.copyWith(decoration: value);
           });
         }
       }),
-      ValueTitleWidget('foregroundDecoration(前景装饰)'),
+      ValueTitleWidget(StringParams.kForegroundDecoration),
       DecorationGroupWidget(
-          _firstForegroundDecoration, foregroundDecorationValues, (value) {
+          setting.foregroundDecoration, foregroundDecorationValues, (value) {
         setState(() {
-          _firstForegroundDecoration = value;
-          setting = setting.copyWith(foregroundDecoration: value.value);
+          setting = setting.copyWith(foregroundDecoration: value);
         });
       }),
-      ValueTitleWidget('margin(外边距)'),
-      RadioGroupWidget<EdgeInsetsGeometry>(_firstMargin, marginValues, (value) {
+      ValueTitleWidget(StringParams.kMargin),
+      RadioGroupWidget<EdgeInsetsGeometry>(setting.margin, marginValues, (value) {
         setState(() {
-          _firstMargin = value;
-          setting = setting.copyWith(margin: value.value);
+          setting = setting.copyWith(margin: value);
         });
       }),
-      ValueTitleWidget('transform(绘制之前转换)'),
-      RadioGroupWidget<Matrix4>(_firstTransform, transformValues, (value) {
+      ValueTitleWidget(StringParams.kTransform),
+      RadioGroupWidget<Matrix4>(setting.transform, transformValues, (value) {
         setState(() {
-          _firstTransform = value;
-          setting = setting.copyWith(transform: value.value);
+          setting = setting.copyWith(transform: value);
         });
       }),
     ];
@@ -147,14 +126,14 @@ class _ContainerDemoState extends ExampleState<ContainerDemo> {
 }
 
 class ContainerSetting {
-  final AlignmentGeometry alignment;
-  final EdgeInsetsGeometry padding;
-  final Color color;
-  final Decoration decoration;
-  final Decoration foregroundDecoration;
-  final EdgeInsetsGeometry margin;
-  final Matrix4 transform;
 
+  final Value<AlignmentGeometry> alignment;
+  final Value<Color> color;
+  final Value<EdgeInsetsGeometry> padding;
+  final Value<Decoration> decoration;
+  final Value<Decoration> foregroundDecoration;
+  final Value<EdgeInsetsGeometry> margin;
+  final Value<Matrix4> transform;
   ContainerSetting(
       {this.alignment,
       this.padding,
@@ -165,13 +144,13 @@ class ContainerSetting {
       this.transform});
 
   ContainerSetting copyWith(
-      {AlignmentGeometry alignment,
-      EdgeInsetsGeometry padding,
-      Color color,
-      Decoration decoration,
-      Decoration foregroundDecoration,
-      EdgeInsetsGeometry margin,
-      Matrix4 transform}) {
+      {Value<AlignmentGeometry> alignment,
+      Value<Color> color,
+      Value<EdgeInsetsGeometry> padding,
+      Value<Decoration> decoration,
+      Value<Decoration> foregroundDecoration,
+      Value<EdgeInsetsGeometry> margin,
+      Value<Matrix4> transform}) {
     return new ContainerSetting(
       alignment: alignment ?? this.alignment,
       padding: padding ?? this.padding,

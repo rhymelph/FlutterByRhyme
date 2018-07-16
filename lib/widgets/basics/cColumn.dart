@@ -17,12 +17,6 @@ If you only have one child, then consider using Align or Center to position the 
 class _ColumnDemoState extends ExampleState<ColumnDemo> {
   ColumnSetting setting;
 
-  Value<MainAxisAlignment> _firstMainAxisAlignment;
-  Value<MainAxisSize> _firstMainAxisSize;
-  Value<CrossAxisAlignment> _firstCrossAxisAlignment;
-  Value<TextDirection> _firstTextDirection;
-  Value<VerticalDirection> _firstVerticalDirection;
-  Value<TextBaseline> _firstTextBaseline;
 
   void _showSyncSelectTip() {
     scaffoldKey.currentState.showSnackBar(SnackBar(
@@ -33,7 +27,12 @@ class _ColumnDemoState extends ExampleState<ColumnDemo> {
   @override
   void initState() {
     // TODO: implement initState
-    setting = ColumnSetting();
+    setting = ColumnSetting(
+      mainAxisAlignment: mainAxisAlignmentValues[0],
+      mainAxisSize: mainAxisSizeValues[0],
+      crossAxisAlignment: crossAxisAlignmentValues[0],
+      verticalDirection: verticalDirectionValues[0],
+    );
     super.initState();
   }
 
@@ -45,12 +44,12 @@ class _ColumnDemoState extends ExampleState<ColumnDemo> {
   @override
   String getExampleCode() {
     return '''Column(
-      mainAxisAlignment: ${_firstMainAxisAlignment?.value??''},
-      mainAxisSize: ${_firstMainAxisSize?.value??''},
-      crossAxisAlignment: ${_firstCrossAxisAlignment?.value??''},
-      textDirection: ${_firstTextDirection?.value??''},
-      verticalDirection: ${_firstVerticalDirection?.value??''},
-      textBaseline: ${_firstTextBaseline?.value??''},
+      mainAxisAlignment: ${setting.mainAxisAlignment?.value??''},
+      mainAxisSize: ${setting.mainAxisSize?.value??''},
+      crossAxisAlignment: ${setting.crossAxisAlignment?.value??''},
+      textDirection: ${setting.textDirection?.value??''},
+      verticalDirection: ${setting.verticalDirection?.value??''},
+      textBaseline: ${setting.textBaseline?.value??''},
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -93,54 +92,48 @@ class _ColumnDemoState extends ExampleState<ColumnDemo> {
   @override
   List<Widget> getSetting() {
     return <Widget>[
-      ValueTitleWidget('MainAxisAlignment(主轴对齐)'),
-      RadioGroupWidget(_firstMainAxisAlignment, mainAxisAlignmentValues,
+      ValueTitleWidget(StringParams.kMainAxisAlignment),
+      RadioGroupWidget(setting.mainAxisAlignment, mainAxisAlignmentValues,
           (value) {
         setState(() {
-          _firstMainAxisAlignment = value;
-          setting = setting.copyWith(mainAxisAlignment: value.value);
+          setting = setting.copyWith(mainAxisAlignment: value);
         });
       }),
-      ValueTitleWidget('MainAxisSize(主轴尺寸)'),
-      RadioGroupWidget(_firstMainAxisSize, mainAxisSizeValues, (value) {
+      ValueTitleWidget(StringParams.kMainAxisSize),
+      RadioGroupWidget(setting.mainAxisSize, mainAxisSizeValues, (value) {
         setState(() {
-          _firstMainAxisSize = value;
-          setting = setting.copyWith(mainAxisSize: value.value);
+          setting = setting.copyWith(mainAxisSize: value);
         });
       }),
-      ValueTitleWidget('CrossAxisAlignment(横轴对齐)'),
-      RadioGroupWidget(_firstCrossAxisAlignment, crossAxisAlignmentValues,
+      ValueTitleWidget(StringParams.kCrossAxisAlignment),
+      RadioGroupWidget(setting.crossAxisAlignment, crossAxisAlignmentValues,
           (value) {
         if (value.value == CrossAxisAlignment.baseline &&
             setting.textBaseline == null) {
           _showSyncSelectTip();
         } else {
           setState(() {
-            _firstCrossAxisAlignment = value;
-            setting = setting.copyWith(crossAxisAlignment: value.value);
+            setting = setting.copyWith(crossAxisAlignment: value);
           });
         }
       }),
-      ValueTitleWidget('TextDirection(文本方向)'),
-      RadioGroupWidget(_firstTextDirection, textDirectionValues, (value) {
+      ValueTitleWidget(StringParams.kTextDirection),
+      RadioGroupWidget(setting.textDirection, textDirectionValues, (value) {
         setState(() {
-          _firstTextDirection = value;
-          setting = setting.copyWith(textDirection: value.value);
+          setting = setting.copyWith(textDirection: value);
         });
       }),
-      ValueTitleWidget('VerticalDirection(垂直方向)'),
-      RadioGroupWidget(_firstVerticalDirection, verticalDirectionValues,
+      ValueTitleWidget(StringParams.kVerticalDirection),
+      RadioGroupWidget(setting.verticalDirection, verticalDirectionValues,
           (value) {
         setState(() {
-          _firstVerticalDirection = value;
-          setting = setting.copyWith(verticalDirection: value.value);
+          setting = setting.copyWith(verticalDirection: value);
         });
       }),
-      ValueTitleWidget('TextBaseline(文本基线)'),
-      RadioGroupWidget(_firstTextBaseline, TextBaselineValues, (value) {
+      ValueTitleWidget(StringParams.kTextBaseline),
+      RadioGroupWidget(setting.textBaseline, TextBaselineValues, (value) {
         setState(() {
-          _firstTextBaseline = value;
-          setting = setting.copyWith(textBaseline: value.value);
+          setting = setting.copyWith(textBaseline: value);
         });
       }),
     ];
@@ -153,12 +146,12 @@ class _ColumnDemoState extends ExampleState<ColumnDemo> {
   @override
   Widget getWidget() {
     return Column(
-      mainAxisAlignment: setting.mainAxisAlignment,
-      mainAxisSize: setting.mainAxisSize,
-      crossAxisAlignment: setting.crossAxisAlignment,
-      textDirection: setting.textDirection,
-      verticalDirection: setting.verticalDirection,
-      textBaseline: setting.textBaseline,
+      mainAxisAlignment: setting.mainAxisAlignment?.value,
+      mainAxisSize: setting.mainAxisSize?.value,
+      crossAxisAlignment: setting.crossAxisAlignment?.value,
+      textDirection: setting.textDirection?.value,
+      verticalDirection: setting.verticalDirection?.value,
+      textBaseline: setting.textBaseline?.value,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -199,29 +192,28 @@ class _ColumnDemoState extends ExampleState<ColumnDemo> {
   }
 }
 class ColumnSetting {
-  final MainAxisAlignment mainAxisAlignment;
-  final MainAxisSize mainAxisSize;
-  final CrossAxisAlignment crossAxisAlignment;
-  final TextDirection textDirection;
-  final VerticalDirection verticalDirection;
-  final TextBaseline textBaseline;
-
+  final Value<MainAxisAlignment> mainAxisAlignment;
+  final Value<MainAxisSize> mainAxisSize;
+  final Value<CrossAxisAlignment> crossAxisAlignment;
+  final Value<TextDirection> textDirection;
+  final Value<VerticalDirection> verticalDirection;
+  final Value<TextBaseline> textBaseline;
   ColumnSetting({
-    this.mainAxisAlignment: MainAxisAlignment.center,
-    this.mainAxisSize: MainAxisSize.min,
-    this.crossAxisAlignment: CrossAxisAlignment.center,
+    this.mainAxisAlignment,
+    this.mainAxisSize,
+    this.crossAxisAlignment,
     this.textDirection,
-    this.verticalDirection: VerticalDirection.down,
+    this.verticalDirection,
     this.textBaseline,
   });
 
   ColumnSetting copyWith({
-    MainAxisAlignment mainAxisAlignment,
-    MainAxisSize mainAxisSize,
-    CrossAxisAlignment crossAxisAlignment,
-    TextDirection textDirection,
-    VerticalDirection verticalDirection,
-    TextBaseline textBaseline,
+    Value<MainAxisAlignment> mainAxisAlignment,
+    Value<MainAxisSize> mainAxisSize,
+    Value<CrossAxisAlignment> crossAxisAlignment,
+    Value<TextDirection> textDirection,
+    Value<VerticalDirection> verticalDirection,
+    Value<TextBaseline> textBaseline,
   }) {
     return new ColumnSetting(
       mainAxisAlignment: mainAxisAlignment ?? this.mainAxisAlignment,

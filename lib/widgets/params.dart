@@ -20,6 +20,52 @@ class Value<T> {
   int get hashCode => hashValues(name, label);
 }
 
+class StringParams{
+  static final String kAlignment='Alignment(对齐)';
+  static final String kColor='Color(颜色)';
+  static final String kPadding='Padding(内边距)';
+  static final String kDecoration='Decoration(装饰)';
+  static final String kForegroundDecoration='ForegroundDecoration(前景装饰)';
+  static final String kMargin='Margin(外边距)';
+  static final String kTransform='transform(绘制之前转换)';
+
+  static final String kMainAxisAlignment='MainAxisAlignment(主轴对齐)';
+  static final String kMainAxisSize='MainAxisSize(主轴尺寸)';
+  static final String kCrossAxisAlignment='CrossAxisAlignment(横轴对齐)';
+  static final String kTextDirection='TextDirection(文本方向)';
+  static final String kVerticalDirection='VerticalDirection(垂直方向)';
+  static final String kTextBaseline='TextBaseline(文本基线)';
+
+  static final String kImage='Image(图片)';
+  static final String kColorBlendMode='ColorBlendMode(颜色混合模式)';
+  static final String kFit='Fit(适配)';
+  static final String kRepeat='Repeat(重复)';
+  static final String kCenterSlice='CenterSlice(中心区域裁剪)';
+  static final String kMatchTextDirection='MatchTextDirection(匹配文本方向)';
+  static final String kGaplessPlayback='GaplessPlayback(图片改变使用旧图片)';
+
+  static final String kStyle='Style(样式)';
+  static final String kTextAlign='TextAlign(文本对齐)';
+  static final String kSoftWrap='SoftWrap(自动换行,如果超出屏幕)';
+  static final String kOverflow='Overflow(处理文本溢出)';
+  static final String kTextScaleFactor='TextScaleFactor(文本比例)';
+  static final String kMaxLines='MaxLines(最大行数)';
+  static final String kInherit='Inherit';
+  static final String kFontSize='FontSize(字体大小)';
+  static final String kFontWeight='FontWeight(字体粗细)';
+  static final String kFontStyle='FontStyle(字体样式)';
+  static final String kLetterSpacing='LetterSpacing(字母间距)';
+  static final String kWordSpacing='WordSpacing（单词间距）';
+  static final String kBackground='Background(背景)';
+  static final String kTextDecoration='Decoration(文本装饰)';
+  static final String kDecorationColor='DecorationColor(装饰颜色)';
+  static final String kDecorationStyle='DecorationStyle(文本装饰样式)';
+  static final String KSize='Size(大小)';
+
+}
+
+
+
 const List<Value<AlignmentGeometry>> alignmentValues = [
   const Value(
     name: 'topLeft',
@@ -902,3 +948,206 @@ const List<Value<double>> doubleValues = [
   ),
 ];
 
+const List<Value<double>> fontSizeValues=[
+  const Value(
+    name: 'null(默认)',
+    value: null,
+    label: 'null',
+  ),
+  const Value(
+    name: '8.0',
+    value: 8.0,
+    label: '8.0',
+  ),
+  const Value(
+    name: '12.0',
+    value: 12.0,
+    label: '12.0',
+  ),
+  const Value(
+    name: '16.0',
+    value: 16.0,
+    label: '16.0',
+  )
+];
+
+const List<Value<FontWeight>> fontWeightValues=[
+  const Value(
+    name: 'normal',
+    value: FontWeight.normal,
+    label: 'FontWeight.normal',
+  ),
+  const Value(
+    name: 'bold',
+    value: FontWeight.bold,
+    label: 'FontWeight.bold',
+  ),
+  const Value(
+    name: 'w100',
+    value: FontWeight.w100,
+    label: 'FontWeight.w100',
+  ),
+  const Value(
+    name: 'w900',
+    value: FontWeight.w900,
+    label: 'FontWeight.w900',
+  ),
+];
+
+const List<Value<FontStyle>> fontStyleValues=[
+  const Value(
+    name: 'normal',
+    value: FontStyle.normal,
+    label: 'FontStyle.normal',
+  ),
+  const Value(
+    name: 'italic',
+    value: FontStyle.italic,
+    label: 'FontStyle.italic',
+  ),
+];
+
+Paint _paintOne(){
+  Paint paint = Paint();
+  paint.style=PaintingStyle.stroke;
+  paint.color=Colors.grey;
+  paint.strokeWidth=3.0;
+  return paint;
+}
+
+Paint _paintTwo(){
+  Paint paint = Paint();
+  paint.style=PaintingStyle.stroke;
+  paint.color=Colors.blue;
+  paint.strokeWidth=1.0;
+  paint.strokeCap=StrokeCap.square;
+  paint.isAntiAlias=true;
+  return paint;
+}
+List<Value<Paint>> paintValues=[
+   Value(
+    name: 'paintOne',
+    value: _paintOne(),
+    label: 'Paint('
+        'style:stroke,'
+        'color:grey,'
+        'strokeWidth:3.0,'
+        ')',
+  ),
+   Value(
+    name: 'paintTwo',
+    value: _paintTwo(),
+    label: 'Paint(style:stroke,'
+        'color:blue,'
+        'strokeWidth:1.0,'
+        'strokeCap:square,'
+        'isAntiAlias:true,'
+        ')',
+  ),
+];
+
+List<Value<TextDecoration>> textDecorationValues=[
+  Value(
+    name: 'none',
+    value: TextDecoration.none,
+    label: 'TextDecoration.none',
+  ),
+  Value(
+    name: 'lineThrough',
+    value: TextDecoration.lineThrough,
+    label: 'TextDecoration.lineThrough',
+  ),
+  Value(
+    name: 'overline',
+    value: TextDecoration.overline,
+    label: 'TextDecoration.overline',
+  ),
+  Value(
+    name: 'underline',
+    value: TextDecoration.underline,
+    label: 'TextDecoration.underline',
+  ),
+];
+
+List<Value<TextDecorationStyle>> textDecorationStyleValues=[
+  Value(
+    name: 'dashed',
+    value: TextDecorationStyle.dashed,
+    label: 'TextDecorationStyle.dashed',
+  ),
+  Value(
+    name: 'double',
+    value: TextDecorationStyle.double,
+    label: 'TextDecorationStyle.double',
+  ),
+  Value(
+    name: 'dotted',
+    value: TextDecorationStyle.dotted,
+    label: 'TextDecorationStyle.dotted',
+  ),
+  Value(
+    name: 'solid',
+    value: TextDecorationStyle.solid,
+    label: 'TextDecorationStyle.solid',
+  ),
+  Value(
+    name: 'wavy',
+    value: TextDecorationStyle.wavy,
+    label: 'TextDecorationStyle.wavy',
+  ),
+];
+
+
+const List<Value<double>> sizeValues=[
+  const Value(
+    name: '12.0',
+    value: 12.0,
+    label: '12.0',
+  ),
+  const Value(
+    name: '24.0',
+    value: 24.0,
+    label: '24.0',
+  ),
+  const Value(
+    name: '36.0',
+    value: 36.0,
+    label: '36.0',
+  ),
+  const Value(
+    name: '48.0',
+    value: 48.0,
+    label: '48.0',
+  ),
+];
+
+const List<Value<ButtonTextTheme>> buttonTextThemeValues=[
+  const Value(
+    name: 'normal',
+    value: ButtonTextTheme.normal,
+    label:'ButtonTextTheme.normal',
+  ),
+  const Value(
+    name: 'accent',
+    value: ButtonTextTheme.accent,
+    label:'ButtonTextTheme.accent',
+  ),
+  const Value(
+    name: 'primary',
+    value: ButtonTextTheme.primary,
+    label:'ButtonTextTheme.primary',
+  ),
+];
+
+const List<Value<Brightness>> colorBrightnessValues=[
+  const Value(
+    name: 'dark',
+    value: Brightness.dark,
+    label:'Brightness.dark',
+  ),
+  const Value(
+    name: 'light',
+    value: Brightness.light,
+    label:'Brightness.light',
+  ),
+];
