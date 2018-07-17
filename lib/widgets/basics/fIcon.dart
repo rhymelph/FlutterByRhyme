@@ -50,7 +50,7 @@ class _IconDemoState extends ExampleState<IconDemo> {
     return [
       DropDownValueTitleWidget(
         selectList: sizeValues,
-        title: StringParams.KSize,
+        title: StringParams.kSize,
         value: setting.size,
         onChanged: (value) {
           setState(() {

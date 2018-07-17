@@ -191,7 +191,7 @@ class _HomePageState extends State<HomePage>
 class _CategoryList extends StatelessWidget {
   _CategoryList({Key key, this.pageCategoryList, this.onCategoryTap})
       : super(key: key);
-  List<PageCategory> pageCategoryList;
+  final List<PageCategory> pageCategoryList;
   final ValueChanged<PageCategory> onCategoryTap;
 
   @override

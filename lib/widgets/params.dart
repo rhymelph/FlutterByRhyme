@@ -60,7 +60,7 @@ class StringParams {
   static final String kTextDecoration = 'Decoration(文本装饰)';
   static final String kDecorationColor = 'DecorationColor(装饰颜色)';
   static final String kDecorationStyle = 'DecorationStyle(文本装饰样式)';
-  static final String KSize = 'Size(大小)';
+  static final String kSize = 'Size(大小)';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [

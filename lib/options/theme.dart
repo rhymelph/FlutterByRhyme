@@ -9,7 +9,6 @@ class MyTheme {
 
   @override
   bool operator ==(other) {
-    // TODO: implement ==
     if(identical(this, other)){
       return true;
     }
@@ -19,6 +18,9 @@ class MyTheme {
     MyTheme typeOther=other;
     return name==typeOther.name;
   }
+  @override
+  // TODO: implement hashCode
+  int get hashCode => hashValues(name, data);
 }
 
 final MyTheme kDarkTheme = MyTheme._('Dark', _buildDarkTheme());

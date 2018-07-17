@@ -46,6 +46,9 @@ class BottomItem {
     final BottomItem typeOther = other;
     return typeOther.title == title && typeOther.lightColor == other;
   }
+  @override
+  // TODO: implement hashCode
+  int get hashCode => hashValues(title, icon,home,lightColor,darkColor);
 }
 
 const BottomItem widgetDemo = const BottomItem._(
@@ -95,6 +98,9 @@ class PageCategory {
     final PageCategory typeOther = other;
     return typeOther.title == title && typeOther.subhead == subhead;
   }
+  @override
+  // TODO: implement hashCode
+  int get hashCode => hashValues(title, subhead,bottomItem);
 }
 
 const PageCategory _kBasics = const PageCategory._(
