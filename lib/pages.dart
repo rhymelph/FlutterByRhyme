@@ -18,7 +18,7 @@ import 'package:flutterbyrhyme/network/temp.dart';
 
 import 'package:flutter/foundation.dart';
 
-const String finishDemo='Container,Row,Column,Image,Text.Icon,RaisedButton';
+const String finishDemo='Container,Row,Column,Image,Text.Icon,RaisedButton,Scaffold';
 
 class BottomItem {
   final String title;

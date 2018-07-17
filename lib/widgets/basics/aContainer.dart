@@ -126,7 +126,6 @@ class _ContainerDemoState extends ExampleState<ContainerDemo> {
 }
 
 class ContainerSetting {
-
   final Value<AlignmentGeometry> alignment;
   final Value<Color> color;
   final Value<EdgeInsetsGeometry> padding;

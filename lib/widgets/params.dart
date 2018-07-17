@@ -20,51 +20,48 @@ class Value<T> {
   int get hashCode => hashValues(name, label);
 }
 
-class StringParams{
-  static final String kAlignment='Alignment(对齐)';
-  static final String kColor='Color(颜色)';
-  static final String kPadding='Padding(内边距)';
-  static final String kDecoration='Decoration(装饰)';
-  static final String kForegroundDecoration='ForegroundDecoration(前景装饰)';
-  static final String kMargin='Margin(外边距)';
-  static final String kTransform='transform(绘制之前转换)';
+class StringParams {
+  static final String kAlignment = 'Alignment(对齐)';
+  static final String kColor = 'Color(颜色)';
+  static final String kPadding = 'Padding(内边距)';
+  static final String kDecoration = 'Decoration(装饰)';
+  static final String kForegroundDecoration = 'ForegroundDecoration(前景装饰)';
+  static final String kMargin = 'Margin(外边距)';
+  static final String kTransform = 'transform(绘制之前转换)';
 
-  static final String kMainAxisAlignment='MainAxisAlignment(主轴对齐)';
-  static final String kMainAxisSize='MainAxisSize(主轴尺寸)';
-  static final String kCrossAxisAlignment='CrossAxisAlignment(横轴对齐)';
-  static final String kTextDirection='TextDirection(文本方向)';
-  static final String kVerticalDirection='VerticalDirection(垂直方向)';
-  static final String kTextBaseline='TextBaseline(文本基线)';
+  static final String kMainAxisAlignment = 'MainAxisAlignment(主轴对齐)';
+  static final String kMainAxisSize = 'MainAxisSize(主轴尺寸)';
+  static final String kCrossAxisAlignment = 'CrossAxisAlignment(横轴对齐)';
+  static final String kTextDirection = 'TextDirection(文本方向)';
+  static final String kVerticalDirection = 'VerticalDirection(垂直方向)';
+  static final String kTextBaseline = 'TextBaseline(文本基线)';
 
-  static final String kImage='Image(图片)';
-  static final String kColorBlendMode='ColorBlendMode(颜色混合模式)';
-  static final String kFit='Fit(适配)';
-  static final String kRepeat='Repeat(重复)';
-  static final String kCenterSlice='CenterSlice(中心区域裁剪)';
-  static final String kMatchTextDirection='MatchTextDirection(匹配文本方向)';
-  static final String kGaplessPlayback='GaplessPlayback(图片改变使用旧图片)';
+  static final String kImage = 'Image(图片)';
+  static final String kColorBlendMode = 'ColorBlendMode(颜色混合模式)';
+  static final String kFit = 'Fit(适配)';
+  static final String kRepeat = 'Repeat(重复)';
+  static final String kCenterSlice = 'CenterSlice(中心区域裁剪)';
+  static final String kMatchTextDirection = 'MatchTextDirection(匹配文本方向)';
+  static final String kGaplessPlayback = 'GaplessPlayback(图片改变使用旧图片)';
 
-  static final String kStyle='Style(样式)';
-  static final String kTextAlign='TextAlign(文本对齐)';
-  static final String kSoftWrap='SoftWrap(自动换行,如果超出屏幕)';
-  static final String kOverflow='Overflow(处理文本溢出)';
-  static final String kTextScaleFactor='TextScaleFactor(文本比例)';
-  static final String kMaxLines='MaxLines(最大行数)';
-  static final String kInherit='Inherit';
-  static final String kFontSize='FontSize(字体大小)';
-  static final String kFontWeight='FontWeight(字体粗细)';
-  static final String kFontStyle='FontStyle(字体样式)';
-  static final String kLetterSpacing='LetterSpacing(字母间距)';
-  static final String kWordSpacing='WordSpacing（单词间距）';
-  static final String kBackground='Background(背景)';
-  static final String kTextDecoration='Decoration(文本装饰)';
-  static final String kDecorationColor='DecorationColor(装饰颜色)';
-  static final String kDecorationStyle='DecorationStyle(文本装饰样式)';
-  static final String KSize='Size(大小)';
-
+  static final String kStyle = 'Style(样式)';
+  static final String kTextAlign = 'TextAlign(文本对齐)';
+  static final String kSoftWrap = 'SoftWrap(自动换行,如果超出屏幕)';
+  static final String kOverflow = 'Overflow(处理文本溢出)';
+  static final String kTextScaleFactor = 'TextScaleFactor(文本比例)';
+  static final String kMaxLines = 'MaxLines(最大行数)';
+  static final String kInherit = 'Inherit';
+  static final String kFontSize = 'FontSize(字体大小)';
+  static final String kFontWeight = 'FontWeight(字体粗细)';
+  static final String kFontStyle = 'FontStyle(字体样式)';
+  static final String kLetterSpacing = 'LetterSpacing(字母间距)';
+  static final String kWordSpacing = 'WordSpacing（单词间距）';
+  static final String kBackground = 'Background(背景)';
+  static final String kTextDecoration = 'Decoration(文本装饰)';
+  static final String kDecorationColor = 'DecorationColor(装饰颜色)';
+  static final String kDecorationStyle = 'DecorationStyle(文本装饰样式)';
+  static final String KSize = 'Size(大小)';
 }
-
-
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
   const Value(
@@ -500,14 +497,14 @@ const List<Value<TextDirection>> textDirectionValues = [
 
 const List<Value<VerticalDirection>> verticalDirectionValues = [
   Value(
-    name: 'up',
-    value: VerticalDirection.up,
-    label: 'VerticalDirection.up',
-  ),
-  Value(
     name: 'down',
     value: VerticalDirection.down,
     label: 'VerticalDirection.down',
+  ),
+  Value(
+    name: 'up',
+    value: VerticalDirection.up,
+    label: 'VerticalDirection.up',
   ),
 ];
 
@@ -545,20 +542,20 @@ const List<Value<ImageProvider>> imageValues = [
     value: NetworkImage(
         'https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg'),
     label:
-        "NetworkImage('https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg')",
+    "NetworkImage('https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg')",
   ),
 ];
 
 const List<Value<ImageRepeat>> repeatValues = [
   Value(
-    name: 'repeat',
-    value: ImageRepeat.repeat,
-    label: "ImageRepeat.repeat",
-  ),
-  Value(
     name: 'noRepeat',
     value: ImageRepeat.noRepeat,
     label: "ImageRepeat.noRepeat",
+  ),
+  Value(
+    name: 'repeat',
+    value: ImageRepeat.repeat,
+    label: "ImageRepeat.repeat",
   ),
   Value(
     name: 'repeatX',
@@ -925,7 +922,7 @@ const List<Value<int>> intValues = [
     label: '4',
   ),
 ];
-const List<Value<double>> doubleValues = [
+const List<Value<double>> doubleMiniValues = [
   const Value(
     name: '1.0',
     value: 1.0,
@@ -947,8 +944,34 @@ const List<Value<double>> doubleValues = [
     label: '4.0',
   ),
 ];
-
-const List<Value<double>> fontSizeValues=[
+const List<Value<double>> doubleLargeValues = [
+  const Value(
+    name: '0.0',
+    value: 0.0,
+    label: '0.0',
+  ),
+  const Value(
+    name: '2.0',
+    value: 2.0,
+    label: '2.0',
+  ),
+  const Value(
+    name: '8.0',
+    value: 8.0,
+    label: '8.0',
+  ),
+  const Value(
+    name: '16.0',
+    value: 16.0,
+    label: '16.0',
+  ),
+  const Value(
+    name: '32.0',
+    value: 32.0,
+    label: '32.0',
+  ),
+];
+const List<Value<double>> fontSizeValues = [
   const Value(
     name: 'null(默认)',
     value: null,
@@ -971,7 +994,7 @@ const List<Value<double>> fontSizeValues=[
   )
 ];
 
-const List<Value<FontWeight>> fontWeightValues=[
+const List<Value<FontWeight>> fontWeightValues = [
   const Value(
     name: 'normal',
     value: FontWeight.normal,
@@ -994,7 +1017,7 @@ const List<Value<FontWeight>> fontWeightValues=[
   ),
 ];
 
-const List<Value<FontStyle>> fontStyleValues=[
+const List<Value<FontStyle>> fontStyleValues = [
   const Value(
     name: 'normal',
     value: FontStyle.normal,
@@ -1007,25 +1030,26 @@ const List<Value<FontStyle>> fontStyleValues=[
   ),
 ];
 
-Paint _paintOne(){
+Paint _paintOne() {
   Paint paint = Paint();
-  paint.style=PaintingStyle.stroke;
-  paint.color=Colors.grey;
-  paint.strokeWidth=3.0;
+  paint.style = PaintingStyle.stroke;
+  paint.color = Colors.grey;
+  paint.strokeWidth = 3.0;
   return paint;
 }
 
-Paint _paintTwo(){
+Paint _paintTwo() {
   Paint paint = Paint();
-  paint.style=PaintingStyle.stroke;
-  paint.color=Colors.blue;
-  paint.strokeWidth=1.0;
-  paint.strokeCap=StrokeCap.square;
-  paint.isAntiAlias=true;
+  paint.style = PaintingStyle.stroke;
+  paint.color = Colors.blue;
+  paint.strokeWidth = 1.0;
+  paint.strokeCap = StrokeCap.square;
+  paint.isAntiAlias = true;
   return paint;
 }
-List<Value<Paint>> paintValues=[
-   Value(
+
+List<Value<Paint>> paintValues = [
+  Value(
     name: 'paintOne',
     value: _paintOne(),
     label: 'Paint('
@@ -1034,7 +1058,7 @@ List<Value<Paint>> paintValues=[
         'strokeWidth:3.0,'
         ')',
   ),
-   Value(
+  Value(
     name: 'paintTwo',
     value: _paintTwo(),
     label: 'Paint(style:stroke,'
@@ -1046,7 +1070,7 @@ List<Value<Paint>> paintValues=[
   ),
 ];
 
-List<Value<TextDecoration>> textDecorationValues=[
+List<Value<TextDecoration>> textDecorationValues = [
   Value(
     name: 'none',
     value: TextDecoration.none,
@@ -1069,7 +1093,7 @@ List<Value<TextDecoration>> textDecorationValues=[
   ),
 ];
 
-List<Value<TextDecorationStyle>> textDecorationStyleValues=[
+List<Value<TextDecorationStyle>> textDecorationStyleValues = [
   Value(
     name: 'dashed',
     value: TextDecorationStyle.dashed,
@@ -1097,8 +1121,7 @@ List<Value<TextDecorationStyle>> textDecorationStyleValues=[
   ),
 ];
 
-
-const List<Value<double>> sizeValues=[
+const List<Value<double>> sizeValues = [
   const Value(
     name: '12.0',
     value: 12.0,
@@ -1121,33 +1144,160 @@ const List<Value<double>> sizeValues=[
   ),
 ];
 
-const List<Value<ButtonTextTheme>> buttonTextThemeValues=[
+const List<Value<ButtonTextTheme>> buttonTextThemeValues = [
   const Value(
     name: 'normal',
     value: ButtonTextTheme.normal,
-    label:'ButtonTextTheme.normal',
+    label: 'ButtonTextTheme.normal',
   ),
   const Value(
     name: 'accent',
     value: ButtonTextTheme.accent,
-    label:'ButtonTextTheme.accent',
+    label: 'ButtonTextTheme.accent',
   ),
   const Value(
     name: 'primary',
     value: ButtonTextTheme.primary,
-    label:'ButtonTextTheme.primary',
+    label: 'ButtonTextTheme.primary',
   ),
 ];
 
-const List<Value<Brightness>> colorBrightnessValues=[
+const List<Value<Brightness>> colorBrightnessValues = [
   const Value(
     name: 'dark',
     value: Brightness.dark,
-    label:'Brightness.dark',
+    label: 'Brightness.dark',
   ),
   const Value(
     name: 'light',
     value: Brightness.light,
-    label:'Brightness.light',
+    label: 'Brightness.light',
   ),
 ];
+
+List<Value<ValueChanged<GlobalKey<ScaffoldState>>>> onPressValues = [
+  Value(
+    name: 'showSnack',
+    value: (key) {
+      key.currentState
+          .showSnackBar(SnackBar(content: Text('RaisedButton is be click !')));
+    },
+    label: '''(){
+    showSnackBar(SnackBar(content: Text('RaisedButton is be click !')));
+    }''',
+  ),
+  const Value(
+    name: 'disable',
+    value: null,
+    label: 'null',
+  ),
+];
+
+List<Value<ShapeBorder>> shapeValues = [
+  const Value(
+      name: 'CircleBorder',
+      value: CircleBorder(
+        side: BorderSide(
+          color: Colors.green,
+          width: 3.0,
+          style: BorderStyle.solid,
+        ),
+      ),
+      label: '''CircleBorder(
+        side: BorderSide(
+          color: Colors.green,
+          width: 3.0,
+          style: BorderStyle.solid,
+        ),
+      )'''),
+  Value(
+      name: 'RoundedRectangleBorder',
+      value: RoundedRectangleBorder(
+        side: BorderSide(
+          color: Colors.black,
+          width: 3.0,
+          style: BorderStyle.none,
+        ),
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      label:
+      '''RoundedRectangleBorder(
+        side: BorderSide(
+          color: Colors.black,
+          width: 3.0,
+          style: BorderStyle.none,
+        ),
+        borderRadius: BorderRadius.circular(12.0),
+      )'''),
+  Value(
+      name: 'StadiumBorder',
+      value: BeveledRectangleBorder(
+          side: BorderSide(
+            color: Colors.red,
+            width: 3.0,
+            style: BorderStyle.none,
+          ),
+          borderRadius: BorderRadius.circular(12.0)
+      ),
+      label:
+      '''BeveledRectangleBorder(
+        side: BorderSide(
+          color: Colors.red,
+          width: 3.0,
+          style: BorderStyle.none,
+        ),
+        borderRadius: BorderRadius.circular(12.0)
+      )'''),
+  const Value(
+      name: 'StadiumBorder',
+      value: StadiumBorder(
+        side: BorderSide(
+          color: Colors.yellow,
+          width: 3.0,
+          style: BorderStyle.solid,
+        ),
+      ),
+      label:
+      '''RoundedRectangleBorder(
+        side: StadiumBorder(
+          color: Colors.yellow,
+          width: 3.0,
+          style: BorderStyle.solid,
+        ),
+      )'''),
+];
+
+const List<Value<Duration>> durationValues=[
+  Value(
+    name: 'Duration.milliseconds',
+    value: const Duration(milliseconds: 200),
+    label: 'const Duration(milliseconds: 200)',
+  ),
+  Value(
+    name: 'Duration.microseconds',
+    value: const Duration(microseconds: 200),
+    label: 'const Duration(microseconds: 200)',
+  ),
+  Value(
+    name: 'Duration.seconds',
+    value: const Duration(seconds: 1),
+    label: 'const Duration(seconds: 1)',
+  ),
+
+  Value(
+    name: 'Duration.minutes[<-_<-]',
+    value: const Duration(minutes: 1),
+    label: 'const Duration(minutes: 1)',
+  ),
+  Value(
+    name: 'Duration.hours[<-_<-]',
+    value: const Duration(hours: 1),
+    label: 'const Duration(hours: 1)',
+  ),
+  Value(
+    name: 'Duration.days[<-_<-]',
+    value: const Duration(days: 1),
+    label: 'const Duration(days: 1)',
+  ),
+];
+

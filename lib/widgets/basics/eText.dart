@@ -7,26 +7,22 @@ class TextDemo extends StatefulWidget {
 The Text widget displays a string of text with single style. The string might break across multiple lines or might all be displayed on the same line depending on the layout constraints.
 The style argument is optional. When omitted, the text will use the style from the closest enclosing DefaultTextStyle. If the given style's TextStyle.inherit property is true, the given style will be merged with the closest enclosing DefaultTextStyle. This merging behavior is useful, for example, to make the text bold while using the default font family and size.
 Using the new TextSpan.rich constructor, the Text widget can also be created with a TextSpan to display text that use multiple styles (e.g., a paragraph with some bold words).''';
+
   @override
   _TextDemoState createState() => _TextDemoState();
 }
 
 class _TextDemoState extends ExampleState<TextDemo> {
   TextSetting setting;
-  Value<TextAlign> _firstTextAlign;
-  Value<TextDirection> _firstTextDirection;
-  Value<bool> _firstSoftWrap;
-  Value<TextOverflow> _firstOverflow;
-  Value<double> _firstTextScaleFactor;
-  Value<int> _firstMaxLines;
-  bool isExpanded=false;
 
-  GlobalKey<TextStyleDemoState> textStyleKey=new GlobalKey();
+  bool isExpanded = false;
+
+  GlobalKey<TextStyleDemoState> textStyleKey = new GlobalKey();
+
   @override
   void initState() {
-    _firstTextScaleFactor = doubleValues[0];
     setting = TextSetting(
-      textScaleFactor: _firstTextScaleFactor.value,
+      textScaleFactor: doubleMiniValues[0],
     );
     super.initState();
   }
@@ -40,13 +36,13 @@ class _TextDemoState extends ExampleState<TextDemo> {
   String getExampleCode() {
     return '''Text(
       "content",
-      style: ${textStyleKey?.currentState?.getExampleCode()?? ''},
-      textAlign: ${_firstTextAlign?.value ?? ''},
-      textDirection: ${_firstTextDirection?.value ?? ''},
-      softWrap: ${_firstSoftWrap?.value ?? 'true'},
-      overflow: ${_firstOverflow?.value ?? ''},
-      textScaleFactor: ${_firstTextScaleFactor?.value ?? ''},
-      maxLines: ${_firstMaxLines?.value ?? ''},
+      style: ${textStyleKey?.currentState?.getExampleCode() ?? ''},
+      textAlign: ${setting.textAlign?.value ?? ''},
+      textDirection: ${setting.textDirection?.value ?? ''},
+      softWrap: ${setting.softWrap?.value ?? 'true'},
+      overflow: ${setting.overflow?.value ?? ''},
+      textScaleFactor: ${setting.textScaleFactor?.value ?? ''},
+      maxLines: ${setting.maxLines?.value ?? ''},
     )''';
   }
 
@@ -55,9 +51,9 @@ class _TextDemoState extends ExampleState<TextDemo> {
     return [
       ExpansionPanelTitleWidget(
         isExpanded: isExpanded,
-        onChanged: (isExpanded){
+        onChanged: (isExpanded) {
           setState(() {
-            this.isExpanded=isExpanded;
+            this.isExpanded = isExpanded;
           });
         },
         titleWidget: ValueTitleWidget(StringParams.kStyle),
@@ -65,67 +61,68 @@ class _TextDemoState extends ExampleState<TextDemo> {
           key: textStyleKey,
           onchange: (value) {
             setState(() {
-              setting = setting.copyWith(style: value.onChange());
+              final Value<TextStyle> _firstTextStyle=Value<TextStyle>(
+                name: '',
+                value: value.onChange(),
+                label: textStyleKey.currentState.getExampleCode(),
+              );
+              setting = setting.copyWith(
+                  style: _firstTextStyle,);
             });
           },
         ),
       ),
       ValueTitleWidget(StringParams.kTextAlign),
-      RadioGroupWidget<TextAlign>(_firstTextAlign, textAlignValues, (value) {
+      RadioGroupWidget<TextAlign>(setting.textAlign, textAlignValues, (value) {
         setState(() {
-          _firstTextAlign = value;
-          setting = setting.copyWith(textAlign: value.value);
+          setting = setting.copyWith(textAlign: value);
         });
       }),
       ValueTitleWidget(StringParams.kTextDirection),
-      RadioGroupWidget<TextDirection>(_firstTextDirection, textDirectionValues,
-          (value) {
+      RadioGroupWidget<TextDirection>(
+          setting.textDirection, textDirectionValues, (value) {
         setState(() {
-          _firstTextDirection = value;
-          setting = setting.copyWith(textDirection: value.value);
+          setting = setting.copyWith(textDirection: value);
         });
       }),
       SwitchValueTitleWidget(
         title: StringParams.kSoftWrap,
         onChanged: (value) {
           setState(() {
-            _firstSoftWrap = Value<bool>(
+            final _firstSoftWrap = Value<bool>(
               name: value ? 'true' : 'false',
               value: value,
               label: value ? 'true' : 'false',
             );
-            setting = setting.copyWith(softWrap: value);
+            setting = setting.copyWith(softWrap: _firstSoftWrap);
           });
         },
-        value: _firstSoftWrap?.value ?? true,
+        value: setting.softWrap?.value ?? true,
       ),
       ValueTitleWidget(StringParams.kOverflow),
-      RadioGroupWidget<TextOverflow>(_firstOverflow, textOverflowValues,
+      RadioGroupWidget<TextOverflow>(setting.overflow, textOverflowValues,
           (value) {
         setState(() {
-          _firstOverflow = value;
-          setting = setting.copyWith(overflow: value.value);
+          setting = setting.copyWith(overflow: value);
         });
       }),
       DropDownValueTitleWidget<double>(
         title: StringParams.kTextScaleFactor,
-        selectList: doubleValues,
-        value: _firstTextScaleFactor,
+        selectList: doubleMiniValues,
+        value: setting.textScaleFactor,
         onChanged: (value) {
           setState(() {
-            _firstTextScaleFactor = value;
-            setting = setting.copyWith(textScaleFactor: value.value);
+            setting = setting.copyWith(textScaleFactor: value);
           });
         },
       ),
       DropDownValueTitleWidget<int>(
         title: StringParams.kMaxLines,
         selectList: intValues,
-        value: _firstMaxLines,
+        value: setting.maxLines,
         onChanged: (value) {
           setState(() {
-            _firstMaxLines = value;
-            setting = setting.copyWith(maxLines: value.value);
+            setting = setting.copyWith(maxLines: value);
           });
         },
       ),
@@ -144,26 +141,26 @@ class _TextDemoState extends ExampleState<TextDemo> {
       child: Text(
         '''Flutter is Google’s mobile app SDK for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source.
       Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面。 Flutter可以与现有的代码一起工作。在全世界，Flutter正在被越来越多的开发者和组织使用，并且Flutter是完全免费、开源的。''',
-        style: setting.style,
-        textAlign: setting.textAlign,
-        textDirection: setting.textDirection,
-        softWrap: setting.softWrap,
-        overflow: setting.overflow,
-        textScaleFactor: setting.textScaleFactor,
-        maxLines: setting.maxLines,
+        style: setting.style?.value,
+        textAlign: setting.textAlign?.value,
+        textDirection: setting.textDirection?.value,
+        softWrap: setting.softWrap?.value,
+        overflow: setting.overflow?.value,
+        textScaleFactor: setting.textScaleFactor?.value,
+        maxLines: setting.maxLines?.value,
       ),
     );
   }
 }
 
 class TextSetting {
-  final TextStyle style;
-  final TextAlign textAlign;
-  final TextDirection textDirection;
-  final bool softWrap;
-  final TextOverflow overflow;
-  final double textScaleFactor;
-  final int maxLines;
+  final Value<TextStyle> style;
+  final Value<TextAlign> textAlign;
+  final Value<TextDirection> textDirection;
+  final Value<bool> softWrap;
+  final Value<TextOverflow> overflow;
+  final Value<double> textScaleFactor;
+  final Value<int> maxLines;
 
   TextSetting({
     this.style,
@@ -176,13 +173,13 @@ class TextSetting {
   });
 
   TextSetting copyWith({
-    TextStyle style,
-    TextAlign textAlign,
-    TextDirection textDirection,
-    bool softWrap,
-    TextOverflow overflow,
-    double textScaleFactor,
-    int maxLines,
+    Value<TextStyle> style,
+    Value<TextAlign> textAlign,
+    Value<TextDirection> textDirection,
+    Value<bool> softWrap,
+    Value<TextOverflow> overflow,
+    Value<double> textScaleFactor,
+    Value<int> maxLines,
   }) {
     return TextSetting(
       style: style ?? this.style,
@@ -197,7 +194,7 @@ class TextSetting {
 }
 
 class TextStyleDemo extends StatefulWidget {
-  TextStyleDemo({Key key,this.onchange}):super(key:key);
+  TextStyleDemo({Key key, this.onchange}) : super(key: key);
 
   final ValueChanged<TextStyleSetting> onchange;
 
@@ -208,28 +205,6 @@ class TextStyleDemo extends StatefulWidget {
 class TextStyleDemoState extends State<TextStyleDemo> {
   TextStyleSetting setting;
 
-  Value<Color> _firstColor;
-
-  Value<double> _firstFontSize;
-
-  Value<FontWeight> _firstFontWeight;
-
-  Value<FontStyle> _firstFontStyle;
-
-  Value<double> _firstLetterSpacing;
-
-  Value<double> _firstWordSpacing;
-
-  Value<TextBaseline> _firstTextBaseline;
-
-  Value<Paint> _firstPaint;
-
-  Value<TextDecoration> _firstTextDecoration;
-
-  Value<Color> _firstDecorationColor;
-
-  Value<TextDecorationStyle> _firstTextDecorationStyle;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -237,20 +212,20 @@ class TextStyleDemoState extends State<TextStyleDemo> {
     super.initState();
   }
 
-  String getExampleCode(){
+  String getExampleCode() {
     return '''TextStyle(
-      inherit: ${setting.inherit?'true':'false'},
-      color: ${_firstColor?.label??''},
-      fontStyle: ${_firstFontStyle?.label??''},
-      fontSize: ${_firstFontSize?.label??''},
-      fontWeight: ${_firstFontWeight?.label??''},
-      letterSpacing: ${_firstLetterSpacing?.label??''},
-      wordSpacing: ${_firstWordSpacing?.label??''},
-      textBaseline: ${_firstTextBaseline?.label??''},
-      background: ${_firstPaint?.label??''},
-      decoration: ${_firstTextDecoration?.label??''},
-      decorationColor: ${_firstDecorationColor?.label??''},
-      decorationStyle: ${_firstTextDecorationStyle?.label??''},
+      inherit: ${setting.inherit?.label ?? 'false'},
+      color: ${setting.color?.label ?? ''},
+      fontStyle: ${setting.fontStyle?.label ?? ''},
+      fontSize: ${setting.fontSize?.label ?? ''},
+      fontWeight: ${setting.fontWeight?.label ?? ''},
+      letterSpacing: ${setting.letterSpacing?.label ?? ''},
+      wordSpacing: ${setting.wordSpacing?.label ?? ''},
+      textBaseline: ${setting.textBaseline?.label ?? ''},
+      background: ${setting.background?.label ?? ''},
+      decoration: ${setting.decoration?.label ?? ''},
+      decorationColor: ${setting.decorationColor?.label ?? ''},
+      decorationStyle: ${setting.decorationStyle?.label ?? ''},
     )''';
   }
 
@@ -262,22 +237,26 @@ class TextStyleDemoState extends State<TextStyleDemo> {
       children: <Widget>[
         SwitchValueTitleWidget(
           title: StringParams.kInherit,
-          value: setting.inherit ?? false,
+          value: setting.inherit?.value ?? false,
           onChanged: (value) {
             setState(() {
+              Value<bool> _firstInherit = Value(
+                name: value ? 'true' : 'false',
+                value: value,
+                label: value ? 'true' : 'false',
+              );
               setting = setting.copyWith(
-                inherit: value,
+                inherit: _firstInherit,
               );
               widget.onchange(setting);
             });
           },
         ),
         ValueTitleWidget(StringParams.kColor),
-        ColorGroupWidget(_firstColor, colorValues, (value) {
+        ColorGroupWidget(setting.color, colorValues, (value) {
           setState(() {
-            _firstColor = value;
             setting = setting.copyWith(
-              color: value.value,
+              color: value,
             );
             widget.onchange(setting);
           });
@@ -285,115 +264,106 @@ class TextStyleDemoState extends State<TextStyleDemo> {
         DropDownValueTitleWidget(
           selectList: fontSizeValues,
           title: StringParams.kFontSize,
-          value: _firstFontSize,
+          value: setting.fontSize,
           onChanged: (value) {
             setState(() {
-              _firstFontSize = value;
               setting = setting.copyWith(
-                fontSize: value.value,
+                fontSize: value,
               );
               widget.onchange(setting);
             });
           },
         ),
         ValueTitleWidget(StringParams.kFontWeight),
-        RadioGroupWidget<FontWeight>(_firstFontWeight, fontWeightValues,
+        RadioGroupWidget<FontWeight>(setting.fontWeight, fontWeightValues,
             (value) {
           setState(() {
-            _firstFontWeight = value;
             setting = setting.copyWith(
-              fontWeight: value.value,
+              fontWeight: value,
             );
             widget.onchange(setting);
           });
         }),
         ValueTitleWidget(StringParams.kFontStyle),
-        RadioGroupWidget<FontStyle>(_firstFontStyle, fontStyleValues, (value) {
+        RadioGroupWidget<FontStyle>(setting.fontStyle, fontStyleValues,
+            (value) {
           setState(() {
-            _firstFontStyle = value;
             setting = setting.copyWith(
-              fontStyle: value.value,
+              fontStyle: value,
             );
             widget.onchange(setting);
           });
         }),
         DropDownValueTitleWidget<double>(
-          selectList: doubleValues,
+          selectList: doubleMiniValues,
           title: StringParams.kLetterSpacing,
-          value: _firstLetterSpacing,
+          value: setting.letterSpacing,
           onChanged: (value) {
             setState(() {
-              _firstLetterSpacing = value;
               setting = setting.copyWith(
-                letterSpacing: value.value,
+                letterSpacing: value,
               );
               widget.onchange(setting);
             });
           },
         ),
         DropDownValueTitleWidget<double>(
-          selectList: doubleValues,
+          selectList: doubleMiniValues,
           title: StringParams.kWordSpacing,
-          value: _firstWordSpacing,
+          value: setting.wordSpacing,
           onChanged: (value) {
             setState(() {
-              _firstWordSpacing = value;
               setting = setting.copyWith(
-                wordSpacing: value.value,
+                wordSpacing: value,
               );
               widget.onchange(setting);
             });
           },
         ),
         ValueTitleWidget(StringParams.kTextBaseline),
-        RadioGroupWidget<TextBaseline>(_firstTextBaseline, TextBaselineValues,
+        RadioGroupWidget<TextBaseline>(setting.textBaseline, TextBaselineValues,
             (value) {
           setState(() {
-            _firstTextBaseline = value;
             setting = setting.copyWith(
-              textBaseline: value.value,
+              textBaseline: value,
             );
             widget.onchange(setting);
           });
         }),
         ValueTitleWidget(StringParams.kBackground),
-        RadioGroupWidget<Paint>(_firstPaint, paintValues, (value) {
+        RadioGroupWidget<Paint>(setting.background, paintValues, (value) {
           setState(() {
-            _firstPaint = value;
             setting = setting.copyWith(
-              background: value.value,
+              background: value,
             );
             widget.onchange(setting);
           });
         }),
         ValueTitleWidget(StringParams.kTextDecoration),
         RadioGroupWidget<TextDecoration>(
-            _firstTextDecoration, textDecorationValues, (value) {
+            setting.decoration, textDecorationValues, (value) {
           setState(() {
-            _firstTextDecoration = value;
             setting = setting.copyWith(
-              decoration: value.value,
+              decoration: value,
             );
             widget.onchange(setting);
           });
         }),
         ValueTitleWidget(StringParams.kDecorationColor),
-        ColorGroupWidget(_firstDecorationColor, colorValues, (value) {
+        ColorGroupWidget(setting.decorationColor, colorValues, (value) {
           setState(() {
-            _firstDecorationColor = value;
             setting = setting.copyWith(
-              decorationColor: value.value,
+              decorationColor: value,
             );
             widget.onchange(setting);
           });
         }),
         ValueTitleWidget(StringParams.kDecorationStyle),
         RadioGroupWidget<TextDecorationStyle>(
-            _firstTextDecorationStyle, textDecorationStyleValues, (value) {
+            setting.decorationStyle, textDecorationStyleValues, (value) {
           setState(() {
-            _firstTextDecorationStyle = value;
             setting = setting.copyWith(
-              decorationStyle: value.value,
+              decorationStyle: value,
             );
             widget.onchange(setting);
           });
@@ -404,24 +374,27 @@ class TextStyleDemoState extends State<TextStyleDemo> {
 }
 
 class TextStyleSetting {
-  final bool inherit;
-  final Color color;
-  final double fontSize;
-  final FontWeight fontWeight;
-  final FontStyle fontStyle;
-  final double letterSpacing;
-  final double wordSpacing;
-  final TextBaseline textBaseline;
-
 //  final double height;
 //  final Locale locale;
-  final Paint background;
-  final TextDecoration decoration;
-  final Color decorationColor;
-  final TextDecorationStyle decorationStyle;
+  final Value<bool> inherit;
+  final Value<Color> color;
+  final Value<double> fontSize;
+  final Value<FontWeight> fontWeight;
+  final Value<FontStyle> fontStyle;
+  final Value<double> letterSpacing;
+  final Value<double> wordSpacing;
+  final Value<TextBaseline> textBaseline;
+  final Value<Paint> background;
+  final Value<TextDecoration> decoration;
+  final Value<Color> decorationColor;
+  final Value<TextDecorationStyle> decorationStyle;
 
   TextStyleSetting({
-    this.inherit: true,
+    this.inherit: const Value<bool>(
+      name: 'true',
+      value: true,
+      label: 'true',
+    ),
     this.color,
     this.fontSize,
     this.fontWeight,
@@ -438,26 +411,24 @@ class TextStyleSetting {
   });
 
   TextStyleSetting copyWith({
-    bool inherit,
-    Color color,
-    double fontSize,
-    FontWeight fontWeight,
-    FontStyle fontStyle,
-    double letterSpacing,
-    double wordSpacing,
-    TextBaseline textBaseline,
-//    double height,
-//    Locale locale,
-    Paint background,
-    TextDecoration decoration,
-    Color decorationColor,
-    TextDecorationStyle decorationStyle,
+    Value<bool> inherit,
+    Value<Color> color,
+    Value<double> fontSize,
+    Value<FontWeight> fontWeight,
+    Value<FontStyle> fontStyle,
+    Value<double> letterSpacing,
+    Value<double> wordSpacing,
+    Value<TextBaseline> textBaseline,
+    Value<Paint> background,
+    Value<TextDecoration> decoration,
+    Value<Color> decorationColor,
+    Value<TextDecorationStyle> decorationStyle,
   }) {
     return TextStyleSetting(
       inherit: inherit ?? this.inherit,
       color: color ?? this.color,
       fontSize: fontSize ?? this.fontSize,
-      fontStyle: fontStyle ??this.fontStyle,
+      fontStyle: fontStyle ?? this.fontStyle,
       fontWeight: fontWeight ?? this.fontWeight,
       letterSpacing: letterSpacing ?? this.letterSpacing,
       wordSpacing: wordSpacing ?? this.wordSpacing,
@@ -473,19 +444,18 @@ class TextStyleSetting {
 
   TextStyle onChange() {
     return TextStyle(
-      inherit: inherit,
-      color: color,
-      fontSize: fontSize ,
-      fontStyle: fontStyle,
-      fontWeight: fontWeight,
-      letterSpacing: letterSpacing,
-      wordSpacing: wordSpacing,
-      textBaseline: textBaseline,
-      background: background,
-      decoration: decoration,
-      decorationColor: decorationColor,
-      decorationStyle: decorationStyle,
+      inherit: inherit?.value,
+      color: color?.value,
+      fontSize: fontSize?.value,
+      fontStyle: fontStyle?.value,
+      fontWeight: fontWeight?.value,
+      letterSpacing: letterSpacing?.value,
+      wordSpacing: wordSpacing?.value,
+      textBaseline: textBaseline?.value,
+      background: background?.value,
+      decoration: decoration?.value,
+      decorationColor: decorationColor?.value,
+      decorationStyle: decorationStyle?.value,
     );
   }
-
 }

@@ -155,16 +155,16 @@ class _ImageDemoState extends ExampleState<ImageDemo> {
 }
 
 class ImageSetting {
-  Value<ImageProvider> image;
-  Value<Color> color;
-  Value<BlendMode> colorBlendMode;
-  Value<BoxFit> fit;
-  Value<AlignmentGeometry> alignment;
-  Value<ImageRepeat> repeat;
-  Value<Rect> centerSlice;
-  Value<bool> matchTextDirection;
-  Value<bool> gaplessPlayback;
-  ImageSetting({
+  final Value<ImageProvider> image;
+  final Value<Color> color;
+  final Value<BlendMode> colorBlendMode;
+  final Value<BoxFit> fit;
+  final Value<AlignmentGeometry> alignment;
+  final Value<ImageRepeat> repeat;
+  final Value<Rect> centerSlice;
+  final Value<bool> matchTextDirection;
+  final Value<bool> gaplessPlayback;
+   ImageSetting({
     this.image,
     this.color,
     this.colorBlendMode,

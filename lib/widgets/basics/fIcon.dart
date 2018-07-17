@@ -20,12 +20,6 @@ ImageIcon, for showing icons from AssetImages or other ImageProviders.''';
 class _IconDemoState extends ExampleState<IconDemo> {
   IconSetting setting;
 
-  Value<double> _firstSize;
-
-  Value<Color> _firstColor;
-
-  Value<TextDirection> _firstTextDirection;
-
   @override
   void initState() {
     setting = IconSetting(
@@ -44,10 +38,10 @@ class _IconDemoState extends ExampleState<IconDemo> {
   String getExampleCode() {
     return '''Icon(
       Icons.android,
-      size: ${_firstSize?.label??''},
-      color: ${_firstColor?.label??''},
+      size: ${setting.size?.label??''},
+      color: ${setting.color?.label??''},
       semanticLabel: 'Icon Label',
-      textDirection: ${_firstTextDirection?.label??''},
+      textDirection: ${setting.textDirection?.label??''},
     )''';
   }
 
@@ -57,26 +51,23 @@ class _IconDemoState extends ExampleState<IconDemo> {
       DropDownValueTitleWidget(
         selectList: sizeValues,
         title: StringParams.KSize,
-        value: _firstSize,
+        value: setting.size,
         onChanged: (value) {
           setState(() {
-            _firstSize = value;
-            setting = setting.copyWith(size: value.value);
+            setting = setting.copyWith(size: value);
           });
         },
       ),
       ValueTitleWidget(StringParams.kColor),
-      ColorGroupWidget(_firstColor, colorValues, (value){
+      ColorGroupWidget(setting.color, colorValues, (value){
         setState(() {
-          _firstColor = value;
-          setting = setting.copyWith(color: value.value);
+          setting = setting.copyWith(color: value);
         });
       }),
       ValueTitleWidget(StringParams.kTextDirection),
-      RadioGroupWidget<TextDirection>(_firstTextDirection, textDirectionValues, (value){
+      RadioGroupWidget<TextDirection>(setting.textDirection, textDirectionValues, (value){
         setState(() {
-          _firstTextDirection = value;
-          setting = setting.copyWith(textDirection: value.value);
+          setting = setting.copyWith(textDirection: value);
         });
       }),
     ];
@@ -92,10 +83,10 @@ class _IconDemoState extends ExampleState<IconDemo> {
     return Center(
       child: Icon(
         setting.icon,
-        size: setting.size,
-        color: setting.color,
+        size: setting.size?.value,
+        color: setting.color?.value,
         semanticLabel: setting.semanticLabel,
-        textDirection: setting.textDirection,
+        textDirection: setting.textDirection?.value,
       ),
     );
   }
@@ -103,10 +94,10 @@ class _IconDemoState extends ExampleState<IconDemo> {
 
 class IconSetting {
   final IconData icon;
-  final double size;
-  final Color color;
   final String semanticLabel;
-  final TextDirection textDirection;
+  Value<double> size;
+  Value<Color> color;
+  Value<TextDirection> textDirection;
 
   IconSetting(
       {this.icon,
@@ -117,10 +108,10 @@ class IconSetting {
 
   IconSetting copyWith({
     IconData icon,
-    double size,
-    Color color,
+    Value<double> size,
+    Value<Color> color,
+    Value<TextDirection> textDirection,
     String semanticLabel,
-    TextDirection textDirection,
   }) {
     return IconSetting(
       icon: icon ?? this.icon,
