@@ -61,6 +61,30 @@ class StringParams {
   static final String kDecorationColor = 'DecorationColor(装饰颜色)';
   static final String kDecorationStyle = 'DecorationStyle(文本装饰样式)';
   static final String kSize = 'Size(大小)';
+
+  static final String konPressed = 'onPressed(点击)';
+  static final String kTextTheme = 'TextTheme(按钮文本主题)';
+  static final String kTextColor = 'TextColor(文本颜色)';
+  static final String kDisabledTextColor = 'DisabledTextColor(不可用文本颜色)';
+  static final String kDisabledColor = 'DisabledColor(不可用颜色)';
+  static final String kHighlightColor = 'HighlightColor(高亮颜色)';
+  static final String kSplashColor = 'SplashColor(圆形扩展颜色)';
+  static final String kColorBrightness = 'ColorBrightness(色彩亮度)';
+  static final String kElevation = 'Elevation(高度)';
+  static final String kDisabledElevation = 'DisabledElevation(不可用高度)';
+  static final String kTextHighlightElevationColor = 'HighlightElevation(高亮高度)';
+  static final String kShape = 'Shape(形状)';
+  static final String kAnimationDuration = 'AnimationDuration(动画持续时间)';
+
+  static final String kAppBar = 'AppBar(导航栏)';
+  static final String kFloatingActionButton = 'FloatingActionButton(浮动操作按钮)';
+  static final String kFloatingActionButtonLocation = 'FloatingActionButtonLocation(浮动操作按钮位置)';
+  static final String kFloatingActionButtonAnimator = 'FloatingActionButtonAnimator(浮动操作按钮动画)';
+  static final String kDrawer = 'Drawer(抽屉)';
+  static final String kEndDrawer = 'EndDrawer(右抽屉)';
+  static final String kBottomNavigationBar = 'BottomNavigationBar(底部导航栏)';
+  static final String kResizeToAvoidBottomPadding = 'ResizeToAvoidBottomPadding\n(调整大小防止底部填充)';
+  static final String kPrimary = 'Primary(_)';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -1301,3 +1325,54 @@ const List<Value<Duration>> durationValues=[
   ),
 ];
 
+List<Value<FloatingActionButtonLocation>> floatingActionButtonLocationValues=[
+  Value(
+    name: 'centerDocked',
+    value: FloatingActionButtonLocation.centerDocked,
+    label: 'FloatingActionButtonLocation.centerDocked',
+  ),
+  Value(
+    name: 'endDocked',
+    value: FloatingActionButtonLocation.endDocked,
+    label: 'FloatingActionButtonLocation.endDocked',
+  ),
+  Value(
+    name: 'centerFloat',
+    value: FloatingActionButtonLocation.centerFloat,
+    label: 'FloatingActionButtonLocation.centerFloat',
+  ),
+  Value(
+    name: 'endFloat',
+    value: FloatingActionButtonLocation.endFloat,
+    label: 'FloatingActionButtonLocation.endFloat',
+  ),
+];
+
+List<Value<FloatingActionButtonAnimator>> floatingActionButtonAnimatorValues=[
+  Value(
+    name: 'null',
+    value: null,
+    label: 'null',
+  ),
+  Value(
+    name: 'scaling',
+    value: FloatingActionButtonAnimator.scaling,
+    label: 'FloatingActionButtonAnimator.scaling',
+  ),
+
+//idea FloatingActionButtonAnimator
+//FloatingActionButtonAnimator one(){
+//  return FloatingAnimator();
+//}
+//class FloatingAnimator extends FloatingActionButtonAnimator{
+//  @override
+//  Offset getOffset({Offset begin, Offset end, double progress}) {
+//  }
+//  @override
+//  Animation<double> getRotationAnimation({Animation<double> parent}) {
+//  }
+//  @override
+//  Animation<double> getScaleAnimation({Animation<double> parent}) {
+//  }
+//}
+];

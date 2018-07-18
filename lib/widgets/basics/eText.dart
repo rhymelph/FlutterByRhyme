@@ -89,15 +89,10 @@ class _TextDemoState extends ExampleState<TextDemo> {
         title: StringParams.kSoftWrap,
         onChanged: (value) {
           setState(() {
-            final _firstSoftWrap = Value<bool>(
-              name: value ? 'true' : 'false',
-              value: value,
-              label: value ? 'true' : 'false',
-            );
-            setting = setting.copyWith(softWrap: _firstSoftWrap);
+            setting = setting.copyWith(softWrap: value);
           });
         },
-        value: setting.softWrap?.value ?? true,
+        value: setting.softWrap,
       ),
       ValueTitleWidget(StringParams.kOverflow),
       RadioGroupWidget<TextOverflow>(setting.overflow, textOverflowValues,
@@ -237,16 +232,11 @@ class TextStyleDemoState extends State<TextStyleDemo> {
       children: <Widget>[
         SwitchValueTitleWidget(
           title: StringParams.kInherit,
-          value: setting.inherit?.value ?? false,
+          value: setting.inherit,
           onChanged: (value) {
             setState(() {
-              Value<bool> _firstInherit = Value(
-                name: value ? 'true' : 'false',
-                value: value,
-                label: value ? 'true' : 'false',
-              );
               setting = setting.copyWith(
-                inherit: _firstInherit,
+                inherit: value,
               );
               widget.onchange(setting);
             });

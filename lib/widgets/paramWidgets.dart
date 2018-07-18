@@ -23,14 +23,54 @@ class ValueTitleWidget extends StatelessWidget {
   }
 }
 
+class ValueTitleButtonWidget extends StatelessWidget {
+  ValueTitleButtonWidget({this.title, this.onPressed});
+
+  final String title;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: RaisedButton(
+        onPressed: onPressed,
+        color: Colors.white,
+        shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+          side: BorderSide(
+            color: Colors.grey[300],
+            width: 1.0,
+          )
+        ),
+        splashColor: Colors.grey[200],
+        child: Center(
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.title,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 //开关标题
 class SwitchValueTitleWidget extends StatelessWidget {
   SwitchValueTitleWidget({this.title, this.value, this.onChanged});
 
-  final bool value;
+  final Value<bool> value;
   final String title;
-  final ValueChanged<bool> onChanged;
+  final ValueChanged<Value<bool>> onChanged;
 
+  void _onChanged(bool a){
+    final Value<bool> changeValue=Value(
+      name: a?'true':'false',
+      value: a,
+      label: a?'true':'false',
+    );
+    onChanged(changeValue);
+  }
   @override
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
@@ -45,8 +85,8 @@ class SwitchValueTitleWidget extends StatelessWidget {
             ),
           ),
           Switch(
-            value: value,
-            onChanged: onChanged,
+            value: value?.value??false,
+            onChanged: _onChanged,
             activeColor: Colors.blue,
             activeTrackColor: isDark ? Colors.white24 : Colors.black26,
           ),

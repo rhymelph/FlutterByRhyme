@@ -106,29 +106,19 @@ class _ImageDemoState extends ExampleState<ImageDemo> {
         title: StringParams.kMatchTextDirection,
         onChanged: (value) {
           setState(() {
-             final _firstMatchTextDirection = Value<bool>(
-              name: value ? 'true' : 'false',
-              value: value,
-              label: value ? 'true' : 'false',
-            );
-            setting = setting.copyWith(matchTextDirection: _firstMatchTextDirection);
+            setting = setting.copyWith(matchTextDirection: value);
           });
         },
-        value: setting.matchTextDirection?.value ?? false,
+        value: setting.matchTextDirection,
       ),
       SwitchValueTitleWidget(
         title: StringParams.kGaplessPlayback,
         onChanged: (value) {
           setState(() {
-            final _firstGaplessPlayback = Value<bool>(
-              name: value ? 'true' : 'false',
-              value: value,
-              label: value ? 'true' : 'false',
-            );
-            setting = setting.copyWith(gaplessPlayback: _firstGaplessPlayback);
+            setting = setting.copyWith(gaplessPlayback: value);
           });
         },
-        value: setting.gaplessPlayback?.value ?? false,
+        value: setting.gaplessPlayback,
       ),
     ];
   }

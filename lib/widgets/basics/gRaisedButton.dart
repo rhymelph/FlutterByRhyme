@@ -3,6 +3,12 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class RaisedButtonDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/RaisedButton';
+  final String detail='''A material design "raised button".
+A raised button is based on a Material widget whose Material.elevation increases when the button is pressed.
+Use raised buttons to add dimension to otherwise mostly flat layouts, e.g. in long busy lists of content, or in wide spaces. Avoid using raised buttons on already-raised content such as dialogs or cards.
+If the onPressed callback is null, then the button will be disabled and by default will resemble a flat button in the disabledColor. If you are trying to change the button's color and it is not having any effect, check that you are passing a non-null onPressed handler.
+If you want an ink-splash effect for taps, but don't want to use a button, consider using InkWell directly.
+Raised buttons have a minimum size of 88.0 by 36.0 which can be overidden with ButtonTheme.''';
 
   @override
   _RaisedButtonDemoState createState() => _RaisedButtonDemoState();
@@ -22,7 +28,7 @@ class _RaisedButtonDemoState extends ExampleState<RaisedButtonDemo> {
 
   @override
   String getDetail() {
-    return '';
+    return widget.detail;
   }
 
   @override
@@ -54,26 +60,26 @@ class _RaisedButtonDemoState extends ExampleState<RaisedButtonDemo> {
   @override
   List<Widget> getSetting() {
     return [
-      ValueTitleWidget('onPressed'),
+      ValueTitleWidget(StringParams.konPressed),
       RadioGroupWidget(setting.onPressed, onPressValues, (value) {
         setState(() {
           setting = setting.copyWith(onPress: value);
         });
       }),
-      ValueTitleWidget('TextTheme(按钮文本主题)'),
+      ValueTitleWidget(StringParams.kTextTheme),
       RadioGroupWidget<ButtonTextTheme>(
           setting.textTheme, buttonTextThemeValues, (value) {
         setState(() {
           setting = setting.copyWith(textTheme: value);
         });
       }),
-      ValueTitleWidget('TextColor(文本颜色)'),
+      ValueTitleWidget(StringParams.kTextColor),
       ColorGroupWidget(setting.textColor, colorValues, (value) {
         setState(() {
           setting = setting.copyWith(textColor: value);
         });
       }),
-      ValueTitleWidget('DisabledTextColor(不可用文本颜色)'),
+      ValueTitleWidget(StringParams.kDisabledTextColor),
       ColorGroupWidget(setting.disabledTextColor, colorValues, (value) {
         setState(() {
           setting = setting.copyWith(disabledTextColor: value);
@@ -85,25 +91,25 @@ class _RaisedButtonDemoState extends ExampleState<RaisedButtonDemo> {
           setting = setting.copyWith(color: value);
         });
       }),
-      ValueTitleWidget('disabledColor'),
+      ValueTitleWidget(StringParams.kDisabledColor),
       ColorGroupWidget(setting.disabledColor, colorValues, (value) {
         setState(() {
           setting = setting.copyWith(disabledColor: value);
         });
       }),
-      ValueTitleWidget('highlightColor(高亮颜色)'),
+      ValueTitleWidget(StringParams.kHighlightColor),
       ColorGroupWidget(setting.highlightColor, colorValues, (value) {
         setState(() {
           setting = setting.copyWith(highlightColor: value);
         });
       }),
-      ValueTitleWidget('splashColor(圆形扩展颜色)'),
+      ValueTitleWidget(StringParams.kSplashColor),
       ColorGroupWidget(setting.splashColor, colorValues, (value) {
         setState(() {
           setting = setting.copyWith(splashColor: value);
         });
       }),
-      ValueTitleWidget('colorBrightness'),
+      ValueTitleWidget(StringParams.kColorBrightness),
       RadioGroupWidget(setting.colorBrightness, colorBrightnessValues, (value) {
         setState(() {
           setting = setting.copyWith(colorBrightness: value);
@@ -111,7 +117,7 @@ class _RaisedButtonDemoState extends ExampleState<RaisedButtonDemo> {
       }),
       DropDownValueTitleWidget(
         selectList: doubleLargeValues,
-        title: 'elevation',
+        title: StringParams.kElevation,
         value: setting.elevation,
         onChanged: (value) {
           setState(() {
@@ -121,7 +127,7 @@ class _RaisedButtonDemoState extends ExampleState<RaisedButtonDemo> {
       ),
       DropDownValueTitleWidget(
         selectList: doubleLargeValues,
-        title: 'disabledElevation',
+        title: StringParams.kDisabledElevation,
         value: setting.disabledElevation,
         onChanged: (value) {
           setState(() {
@@ -131,7 +137,7 @@ class _RaisedButtonDemoState extends ExampleState<RaisedButtonDemo> {
       ),
       DropDownValueTitleWidget(
         selectList: doubleLargeValues,
-        title: 'highlightElevation',
+        title: StringParams.kHighlightColor,
         value: setting.highlightElevation,
         onChanged: (value) {
           setState(() {
@@ -145,13 +151,13 @@ class _RaisedButtonDemoState extends ExampleState<RaisedButtonDemo> {
           setting = setting.copyWith(padding: value);
         });
       }),
-      ValueTitleWidget('shape'),
+      ValueTitleWidget(StringParams.kShape),
       RadioGroupWidget<ShapeBorder>(setting.shape, shapeValues, (value) {
         setState(() {
           setting = setting.copyWith(shape: value);
         });
       }),
-      ValueTitleWidget('animationDuration'),
+      ValueTitleWidget(StringParams.kAnimationDuration),
       RadioGroupWidget<Duration>(setting.animationDuration, durationValues, (value) {
         setState(() {
           setting = setting.copyWith(animationDuration: value);
