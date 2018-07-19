@@ -64,7 +64,7 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
       ValueTitleButtonWidget(
         title: StringParams.kAppBar,
         onPressed: () async {
-          Value<PreferredSizeWidget> changeValue =await Navigator.pushNamed<Value<PreferredSizeWidget>>(context, 'widgets/basics/AppBar');
+          dynamic changeValue= await Navigator.pushNamed(context, 'widgets/basics/AppBar');
           if(changeValue!=null){
             setState(() {
               setting=setting.copyWith(appBar: changeValue);
@@ -75,7 +75,7 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
       ValueTitleButtonWidget(
         title: StringParams.kFloatingActionButton,
         onPressed: () async {
-          Value<FloatingActionButton> changeValue =await Navigator.pushNamed<Value<FloatingActionButton>>(context, 'widgets/material/FloatingActionButton');
+          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/FloatingActionButton');
           if(changeValue!=null){
             setState(() {
               setting=setting.copyWith(floatingActionButton: changeValue);
@@ -98,7 +98,7 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
       ValueTitleButtonWidget(
         title: StringParams.kDrawer,
         onPressed: () async {
-          Value<Widget> changeValue =await Navigator.pushNamed<Value<Widget>>(context, 'widgets/material/Drawer');
+          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/Drawer');
           if(changeValue!=null){
             setState(() {
               setting=setting.copyWith(drawer: changeValue);
@@ -109,7 +109,7 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
       ValueTitleButtonWidget(
         title: StringParams.kEndDrawer,
         onPressed: () async{
-          Value<Widget> changeValue =await Navigator.pushNamed<Value<Widget>>(context, 'widgets/material/Drawer');
+          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/Drawer');
           if(changeValue!=null){
             setState(() {
               setting=setting.copyWith(endDrawer: changeValue);
@@ -120,7 +120,7 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
       ValueTitleButtonWidget(
         title: StringParams.kBottomNavigationBar,
         onPressed: () async{
-          Value<Widget> changeValue =await Navigator.pushNamed<Value<Widget>>(context, 'widgets/material/BottomNavigationBar');
+          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/BottomNavigationBar');
           if(changeValue!=null){
             setState(() {
               setting=setting.copyWith(bottomNavigationBar: changeValue);

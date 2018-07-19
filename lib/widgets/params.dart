@@ -57,18 +57,20 @@ class StringParams {
   static final String kLetterSpacing = 'LetterSpacing(字母间距)';
   static final String kWordSpacing = 'WordSpacing（单词间距）';
   static final String kBackground = 'Background(背景)';
+  static final String kBackgroundColor = 'BackgroundColor(背景颜色)';
   static final String kTextDecoration = 'Decoration(文本装饰)';
   static final String kDecorationColor = 'DecorationColor(装饰颜色)';
   static final String kDecorationStyle = 'DecorationStyle(文本装饰样式)';
   static final String kSize = 'Size(大小)';
 
   static final String konPressed = 'onPressed(点击)';
-  static final String kTextTheme = 'TextTheme(按钮文本主题)';
+  static final String kTextTheme = 'TextTheme(文本主题)';
   static final String kTextColor = 'TextColor(文本颜色)';
   static final String kDisabledTextColor = 'DisabledTextColor(不可用文本颜色)';
   static final String kDisabledColor = 'DisabledColor(不可用颜色)';
   static final String kHighlightColor = 'HighlightColor(高亮颜色)';
   static final String kSplashColor = 'SplashColor(圆形扩展颜色)';
+  static final String kBrightness = 'Brightness(亮度)';
   static final String kColorBrightness = 'ColorBrightness(色彩亮度)';
   static final String kElevation = 'Elevation(高度)';
   static final String kDisabledElevation = 'DisabledElevation(不可用高度)';
@@ -78,13 +80,29 @@ class StringParams {
 
   static final String kAppBar = 'AppBar(导航栏)';
   static final String kFloatingActionButton = 'FloatingActionButton(浮动操作按钮)';
-  static final String kFloatingActionButtonLocation = 'FloatingActionButtonLocation(浮动操作按钮位置)';
-  static final String kFloatingActionButtonAnimator = 'FloatingActionButtonAnimator(浮动操作按钮动画)';
+  static final String kFloatingActionButtonLocation =
+      'FloatingActionButtonLocation(浮动操作按钮位置)';
+  static final String kFloatingActionButtonAnimator =
+      'FloatingActionButtonAnimator(浮动操作按钮动画)';
   static final String kDrawer = 'Drawer(抽屉)';
   static final String kEndDrawer = 'EndDrawer(右抽屉)';
   static final String kBottomNavigationBar = 'BottomNavigationBar(底部导航栏)';
-  static final String kResizeToAvoidBottomPadding = 'ResizeToAvoidBottomPadding\n(调整大小防止底部填充)';
+  static final String kResizeToAvoidBottomPadding =
+      'ResizeToAvoidBottomPadding\n(调整大小防止底部填充)';
   static final String kPrimary = 'Primary(_)';
+
+  static final String kLeading = 'Leading(导航栏首位)';
+  static final String kAutomaticallyImplyLeading =
+      'automaticallyImplyLeading(自动添加leading)';
+  static final String kTitle = 'title(标题)';
+  static final String kActions = 'Actions(操作)';
+  static final String kFlexibleSpace = 'FlexibleSpace(弹性空间)';
+  static final String kBottom = 'bottom(底部栏)';
+  static final String kIconTheme = 'iconTheme(图标主题)';
+  static final String kCenterTitle = 'centerTitle(中心标题)';
+  static final String kTitleSpacing = 'titleSpacing(标题间距)';
+  static final String kToolbarOpacity = 'toolbarOpacity(工具栏不透明度)';
+  static final String kBottomOpacity = 'bottomOpacity(底部栏栏不透明度)';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -566,7 +584,7 @@ const List<Value<ImageProvider>> imageValues = [
     value: NetworkImage(
         'https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg'),
     label:
-    "NetworkImage('https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg')",
+        "NetworkImage('https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg')",
   ),
 ];
 
@@ -1147,9 +1165,19 @@ List<Value<TextDecorationStyle>> textDecorationStyleValues = [
 
 const List<Value<double>> sizeValues = [
   const Value(
+    name: '4.0',
+    value: 4.0,
+    label: '4.0',
+  ),
+  const Value(
     name: '12.0',
     value: 12.0,
     label: '12.0',
+  ),
+  const Value(
+    name: '16.0',
+    value: 16.0,
+    label: '16.0',
   ),
   const Value(
     name: '24.0',
@@ -1244,8 +1272,7 @@ List<Value<ShapeBorder>> shapeValues = [
         ),
         borderRadius: BorderRadius.circular(12.0),
       ),
-      label:
-      '''RoundedRectangleBorder(
+      label: '''RoundedRectangleBorder(
         side: BorderSide(
           color: Colors.black,
           width: 3.0,
@@ -1261,10 +1288,8 @@ List<Value<ShapeBorder>> shapeValues = [
             width: 3.0,
             style: BorderStyle.none,
           ),
-          borderRadius: BorderRadius.circular(12.0)
-      ),
-      label:
-      '''BeveledRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0)),
+      label: '''BeveledRectangleBorder(
         side: BorderSide(
           color: Colors.red,
           width: 3.0,
@@ -1281,8 +1306,7 @@ List<Value<ShapeBorder>> shapeValues = [
           style: BorderStyle.solid,
         ),
       ),
-      label:
-      '''RoundedRectangleBorder(
+      label: '''RoundedRectangleBorder(
         side: StadiumBorder(
           color: Colors.yellow,
           width: 3.0,
@@ -1291,7 +1315,7 @@ List<Value<ShapeBorder>> shapeValues = [
       )'''),
 ];
 
-const List<Value<Duration>> durationValues=[
+const List<Value<Duration>> durationValues = [
   Value(
     name: 'Duration.milliseconds',
     value: const Duration(milliseconds: 200),
@@ -1307,7 +1331,6 @@ const List<Value<Duration>> durationValues=[
     value: const Duration(seconds: 1),
     label: 'const Duration(seconds: 1)',
   ),
-
   Value(
     name: 'Duration.minutes[<-_<-]',
     value: const Duration(minutes: 1),
@@ -1325,7 +1348,7 @@ const List<Value<Duration>> durationValues=[
   ),
 ];
 
-List<Value<FloatingActionButtonLocation>> floatingActionButtonLocationValues=[
+List<Value<FloatingActionButtonLocation>> floatingActionButtonLocationValues = [
   Value(
     name: 'centerDocked',
     value: FloatingActionButtonLocation.centerDocked,
@@ -1348,7 +1371,7 @@ List<Value<FloatingActionButtonLocation>> floatingActionButtonLocationValues=[
   ),
 ];
 
-List<Value<FloatingActionButtonAnimator>> floatingActionButtonAnimatorValues=[
+List<Value<FloatingActionButtonAnimator>> floatingActionButtonAnimatorValues = [
   Value(
     name: 'null',
     value: null,
@@ -1375,4 +1398,75 @@ List<Value<FloatingActionButtonAnimator>> floatingActionButtonAnimatorValues=[
 //  Animation<double> getScaleAnimation({Animation<double> parent}) {
 //  }
 //}
+];
+const List<Value<List<Widget>>> actionsValues = [
+  Value(
+    name: 'oneAction',
+    value: [
+      const Icon(Icons.add),
+    ],
+    label: '''[
+     const Icon(Icons.add),
+    ]''',
+  ),
+  Value(
+    name: 'twoActions',
+    value: [
+      const Icon(Icons.add),
+      const Icon(Icons.remove),
+    ],
+    label: '''[
+     const Icon(Icons.add),
+     const Icon(Icons.remove),
+    ]''',
+  ),
+  Value(
+    name: 'threeAction',
+    value: [
+      const Icon(Icons.add),
+      const Icon(Icons.repeat),
+      const Icon(Icons.remove),
+    ],
+    label: '''[
+     const Icon(Icons.add),
+     const Icon(Icons.repeat),
+     const Icon(Icons.remove),
+    ]''',
+  ),
+];
+
+List<Value<Widget>> flexibleSpaceValues = [
+  Value(
+    name: 'image',
+    value: FlexibleSpaceBar(
+      background: Image.asset('images/burgers.jpg'),
+    ),
+    label: '''FlexibleSpaceBar(
+      background: Image.asset('images/burgers.jpg'),
+    )''',
+  ),
+  Value(
+    name: 'image,title',
+    value: FlexibleSpaceBar(
+      title: const Text('title'),
+      background: Image.asset('images/burgers.jpg'),
+    ),
+    label: '''FlexibleSpaceBar(
+      title: const Text('title'),
+      background: Image.asset('images/burgers.jpg'),
+    )''',
+  ),
+  Value(
+    name: 'image,title,centerTitle',
+    value: FlexibleSpaceBar(
+      title: const Text('title'),
+      background: Image.asset('images/burgers.jpg'),
+      centerTitle: true,
+    ),
+    label: '''FlexibleSpaceBar(
+      title: const Text('title'),
+      background: Image.asset('images/burgers.jpg'),
+      centerTitle: true,
+    )''',
+  ),
 ];

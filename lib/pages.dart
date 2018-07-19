@@ -349,14 +349,14 @@ List<Page> _buildPage() {
         subhead: '底部导航条，可以很容易地在tap之间切换和浏览顶级视图。',
         icon: null,
         category: _kMDComponents,
-        routeName: AppBarDemo.routeName,
-        buildRoute: (BuildContext context) => AppBarDemo()),
+        routeName: BottomNavigationBarDemo.routeName,
+        buildRoute: (BuildContext context) => BottomNavigationBarDemo()),
     Page(
         title: 'TabBar',
         subhead: '一个显示水平选项卡的Material Design 部件。',
         icon: null,
         category: _kMDComponents,
-        routeName: AppBarDemo.routeName,
+        routeName: TabBarDemo.routeName,
         buildRoute: (BuildContext context) => TabBarDemo()),
     Page(
         title: 'TabBarView',

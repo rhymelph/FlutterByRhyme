@@ -31,11 +31,13 @@ class ValueTitleButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark=Theme.of(context).brightness==Brightness.dark;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
         onPressed: onPressed,
-        color: Colors.white,
+        color: isDark?Colors.black87:Colors.white,
         shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
           side: BorderSide(
@@ -357,3 +359,58 @@ class DecorationGroupWidget extends StatelessWidget {
     );
   }
 }
+
+class EditTextGroupWidget extends StatelessWidget{
+  EditTextGroupWidget(this.value,this.onChanged);
+  final Value<Widget> value;
+  final ValueChanged<Value<Widget>> onChanged;
+  @override
+  Widget build(BuildContext context) {
+    String oldText='';
+    if(value?.name!=null){
+      oldText=value.name;
+    }
+    TextEditingController controller=TextEditingController(text: oldText);
+    int selection=0;
+    if(value?.name!=null){
+      selection=value.name.length;
+    }
+    controller.selection=TextSelection(baseOffset: selection, extentOffset: selection);
+    controller.addListener((){
+      String text=controller.text;
+      onChanged(Value<Widget>(
+        name: text,
+        value: Text(text),
+        label: 'Text($text)',
+      ));
+    });
+    // TODO: implement build
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: TextField(
+        controller: controller,
+      ),
+    );
+  }
+}
+
+class SeekBarGroupWidget extends StatelessWidget{
+  SeekBarGroupWidget(this.value,this.onChanged);
+  final Value<double> value;
+  final ValueChanged<Value<double>> onChanged;
+
+  void onChangedValue(double change){
+    onChanged(Value(
+      name: '$change',
+      value: change,
+      label: '$change',
+    ));
+  }
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Slider(value: value.value, onChanged: onChangedValue);
+  }
+
+}
+
