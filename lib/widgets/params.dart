@@ -77,6 +77,7 @@ class StringParams {
   static final String kTextHighlightElevationColor = 'HighlightElevation(高亮高度)';
   static final String kShape = 'Shape(形状)';
   static final String kAnimationDuration = 'AnimationDuration(动画持续时间)';
+  static final String kDuration = 'Duration(持续时间)';
 
   static final String kAppBar = 'AppBar(导航栏)';
   static final String kFloatingActionButton = 'FloatingActionButton(浮动操作按钮)';
@@ -103,6 +104,14 @@ class StringParams {
   static final String kTitleSpacing = 'titleSpacing(标题间距)';
   static final String kToolbarOpacity = 'toolbarOpacity(工具栏不透明度)';
   static final String kBottomOpacity = 'bottomOpacity(底部栏栏不透明度)';
+  static final String kOpacity = 'Opacity(不透明度)';
+
+  static final String kColors = 'Colors(调色板)';
+  static final String kCurve = 'Curve(动画曲线)';
+
+  static final String kStrokeWidth = 'StrokeWidth(笔画宽度)';
+  static final String kFallbackWidth = 'FallbackWidth(后退宽度)';
+  static final String kFallbackHeight = 'FallbackHeight(后退高度)';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -1013,6 +1022,29 @@ const List<Value<double>> doubleLargeValues = [
     label: '32.0',
   ),
 ];
+
+const List<Value<double>> doubleHugeValues = [
+  const Value(
+    name: '100.0',
+    value: 100.0,
+    label: '100.0',
+  ),
+  const Value(
+    name: '200.0',
+    value: 200.0,
+    label: '200.0',
+  ),
+  const Value(
+    name: '400.0',
+    value: 400.0,
+    label: '400.0',
+  ),
+  const Value(
+    name: '800.0',
+    value: 800.0,
+    label: '800.0',
+  ),
+];
 const List<Value<double>> fontSizeValues = [
   const Value(
     name: 'null(默认)',
@@ -1405,8 +1437,8 @@ const List<Value<List<Widget>>> actionsValues = [
     value: [
       const Icon(Icons.add),
     ],
-    label: '''[
-     const Icon(Icons.add),
+    label: '''[ 
+        const Icon(Icons.add),
     ]''',
   ),
   Value(
@@ -1416,8 +1448,8 @@ const List<Value<List<Widget>>> actionsValues = [
       const Icon(Icons.remove),
     ],
     label: '''[
-     const Icon(Icons.add),
-     const Icon(Icons.remove),
+        const Icon(Icons.add),
+        const Icon(Icons.remove),
     ]''',
   ),
   Value(
@@ -1428,9 +1460,9 @@ const List<Value<List<Widget>>> actionsValues = [
       const Icon(Icons.remove),
     ],
     label: '''[
-     const Icon(Icons.add),
-     const Icon(Icons.repeat),
-     const Icon(Icons.remove),
+        const Icon(Icons.add),
+        const Icon(Icons.repeat),
+        const Icon(Icons.remove),
     ]''',
   ),
 ];
@@ -1442,7 +1474,7 @@ List<Value<Widget>> flexibleSpaceValues = [
       background: Image.asset('images/burgers.jpg'),
     ),
     label: '''FlexibleSpaceBar(
-      background: Image.asset('images/burgers.jpg'),
+          background: Image.asset('images/burgers.jpg'),
     )''',
   ),
   Value(
@@ -1452,8 +1484,8 @@ List<Value<Widget>> flexibleSpaceValues = [
       background: Image.asset('images/burgers.jpg'),
     ),
     label: '''FlexibleSpaceBar(
-      title: const Text('title'),
-      background: Image.asset('images/burgers.jpg'),
+          title: const Text('title'),
+          background: Image.asset('images/burgers.jpg'),
     )''',
   ),
   Value(
@@ -1464,9 +1496,175 @@ List<Value<Widget>> flexibleSpaceValues = [
       centerTitle: true,
     ),
     label: '''FlexibleSpaceBar(
-      title: const Text('title'),
-      background: Image.asset('images/burgers.jpg'),
-      centerTitle: true,
+          title: const Text('title'),
+          background: Image.asset('images/burgers.jpg'),
+          centerTitle: true,
+    )''',
+  ),
+];
+
+List<Value<IconButton>> iconButtonValues = [
+  Value(
+    name: 'close',
+    value: IconButton(
+      icon: Icon(Icons.close),
+      onPressed: null,
+    ),
+    label: '''IconButton(
+          icon: Icon(Icons.close),
+          onPressed: null,
+    )''',
+  ),
+  Value(
+    name: 'arrow_back',
+    value: IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: null,
+    ),
+    label: '''IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: null,
+    )''',
+  ),
+];
+
+List<Value<FlutterLogoStyle>> logoStyleValues = [
+  Value(
+    name: 'markOnly',
+    value: FlutterLogoStyle.markOnly,
+    label: 'FlutterLogoStyle.markOnly',
+  ),
+  Value(
+    name: 'stacked',
+    value: FlutterLogoStyle.stacked,
+    label: 'FlutterLogoStyle.stacked',
+  ),
+  Value(
+    name: 'horizontal',
+    value: FlutterLogoStyle.horizontal,
+    label: 'FlutterLogoStyle.horizontal',
+  ),
+];
+
+List<Value<Curve>> curveValues = [
+  Value(
+    name: 'ease',
+    value: Curves.ease,
+    label: 'Curves.ease',
+  ),
+  Value(
+    name: 'easeIn',
+    value: Curves.easeIn,
+    label: 'Curves.easeIn',
+  ),
+  Value(
+    name: 'easeOut',
+    value: Curves.easeOut,
+    label: 'Curves.easeOut',
+  ),
+  Value(
+    name: 'easeInOut',
+    value: Curves.easeInOut,
+    label: 'Curves.easeInOut',
+  ),
+  Value(
+    name: 'elasticIn',
+    value: Curves.elasticIn,
+    label: 'Curves.elasticIn',
+  ),
+  Value(
+    name: 'elasticOut',
+    value: Curves.elasticOut,
+    label: 'Curves.elasticOut',
+  ),
+  Value(
+    name: 'elasticInOut',
+    value: Curves.elasticInOut,
+    label: 'Curves.elasticInOut',
+  ),
+  Value(
+    name: 'bounceIn',
+    value: Curves.bounceIn,
+    label: 'Curves.bounceIn',
+  ),
+  Value(
+    name: 'bounceOut',
+    value: Curves.bounceOut,
+    label: 'Curves.bounceOut',
+  ),
+  Value(
+    name: 'bounceInOut',
+    value: Curves.bounceInOut,
+    label: 'Curves.bounceInOut',
+  ),
+  Value(
+    name: 'fastOutSlowIn',
+    value: Curves.fastOutSlowIn,
+    label: 'Curves.fastOutSlowIn',
+  ),
+  Value(
+    name: 'decelerate',
+    value: Curves.decelerate,
+    label: 'Curves.decelerate',
+  ),
+  Value(
+    name: 'linear',
+    value: Curves.linear,
+    label: 'Curves.linear',
+  ),
+];
+
+//use to FlutterLogoStyle
+List<Value<MaterialColor>> materialColorValues = [
+  Value(
+    name: 'RedPink',
+    value: MaterialColor(
+      400,
+      {
+        400: Colors.red,
+        900: Colors.pink,
+      },
+    ),
+    label: '''MaterialColor(
+      400,
+      {
+        400: Colors.red,
+        900: Colors.pink,
+      },
+    )''',
+  ),
+  Value(
+    name: 'RedPink',
+    value: MaterialColor(
+      400,
+      {
+        400: Colors.green,
+        900: Colors.greenAccent,
+      },
+    ),
+    label: '''MaterialColor(
+      400,
+      {
+        400: Colors.green,
+        900: Colors.greenAccent,
+      },
+    )''',
+  ),
+  Value(
+    name: 'BlueCyan',
+    value: MaterialColor(
+      400,
+      {
+        400: Colors.blue,
+        900: Colors.cyan,
+      },
+    ),
+    label: '''MaterialColor(
+      400,
+      {
+        400: Colors.blue,
+        900: Colors.cyan,
+      },
     )''',
   ),
 ];

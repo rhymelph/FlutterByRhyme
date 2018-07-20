@@ -299,6 +299,66 @@ class ColorGroupWidget extends StatelessWidget {
   }
 }
 
+//多种颜色组合按钮
+class ColorsWidget extends StatelessWidget {
+  ColorsWidget(this.value, this.groupValue, this.onchange);
+
+  final Value<MaterialColor> groupValue;
+  final Value<MaterialColor> value;
+  final ValueChanged<Value<MaterialColor>> onchange;
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return MergeSemantics(
+      child: Tooltip(
+        message: value.label,
+        child: RawMaterialButton(
+          onPressed: () {
+            onchange(value);
+          },
+          constraints: const BoxConstraints.tightFor(
+            width: 32.0,
+            height: 32.0,
+          ),
+          fillColor: value.value.shade400,
+          shape: CircleBorder(
+              side: BorderSide(
+                  color: value == groupValue
+                      ? value.value.shade900
+                      : const Color(0xFFD5D7DA),
+                  width: 3.0)),
+        ),
+      ),
+    );
+  }
+}
+//多种颜色组合按钮组
+class ColorsGroupWidget extends StatelessWidget {
+  ColorsGroupWidget(this.groupValue, this.valueList, this.valueChanged);
+
+  final Value<MaterialColor> groupValue;
+  final List<Value<MaterialColor>> valueList;
+  final ValueChanged<Value<MaterialColor>> valueChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: valueList.map((value) {
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ColorsWidget(value, groupValue, valueChanged),
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
 //装饰选择单选按钮
 class DecorationWidget extends StatelessWidget {
   DecorationWidget(this.value, this.groupValue, this.onchange);
@@ -360,8 +420,9 @@ class DecorationGroupWidget extends StatelessWidget {
   }
 }
 
-class EditTextGroupWidget extends StatelessWidget{
-  EditTextGroupWidget(this.value,this.onChanged);
+class EditTextTitleWidget extends StatelessWidget{
+  EditTextTitleWidget(this.title,this.value,this.onChanged);
+  final String title;
   final Value<Widget> value;
   final ValueChanged<Value<Widget>> onChanged;
   @override
@@ -381,14 +442,26 @@ class EditTextGroupWidget extends StatelessWidget{
       onChanged(Value<Widget>(
         name: text,
         value: Text(text),
-        label: 'Text($text)',
+        label: "Text('$text')",
       ));
     });
     // TODO: implement build
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: TextField(
-        controller: controller,
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children:[
+          Text(title,style: Theme.of(context).textTheme.title,),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: TextField(
+                controller: controller,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

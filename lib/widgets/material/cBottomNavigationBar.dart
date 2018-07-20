@@ -5,6 +5,13 @@ class BottomNavigationBarDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('BottomNavigationBar'),
+      ),
+      body: Center(
+        child: Text('尚未开发，敬请期待'),
+      ),
+    );
   }
 }

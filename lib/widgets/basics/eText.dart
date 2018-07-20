@@ -17,7 +17,6 @@ class _TextDemoState extends ExampleState<TextDemo> {
 
   bool isExpanded = false;
 
-  GlobalKey<TextStyleDemoState> textStyleKey = new GlobalKey();
 
   @override
   void initState() {
@@ -36,13 +35,13 @@ class _TextDemoState extends ExampleState<TextDemo> {
   String getExampleCode() {
     return '''Text(
       "content",
-      style: ${textStyleKey?.currentState?.getExampleCode() ?? ''},
-      textAlign: ${setting.textAlign?.value ?? ''},
-      textDirection: ${setting.textDirection?.value ?? ''},
-      softWrap: ${setting.softWrap?.value ?? 'true'},
-      overflow: ${setting.overflow?.value ?? ''},
-      textScaleFactor: ${setting.textScaleFactor?.value ?? ''},
-      maxLines: ${setting.maxLines?.value ?? ''},
+      style: ${setting.style?.label?? ''},
+      textAlign: ${setting.textAlign?.label ?? ''},
+      textDirection: ${setting.textDirection?.label ?? ''},
+      softWrap: ${setting.softWrap?.label ?? 'true'},
+      overflow: ${setting.overflow?.label ?? ''},
+      textScaleFactor: ${setting.textScaleFactor?.label ?? ''},
+      maxLines: ${setting.maxLines?.label ?? ''},
     )''';
   }
 
@@ -58,16 +57,10 @@ class _TextDemoState extends ExampleState<TextDemo> {
         },
         titleWidget: ValueTitleWidget(StringParams.kStyle),
         hintWidget: TextStyleDemo(
-          key: textStyleKey,
           onchange: (value) {
             setState(() {
-              final Value<TextStyle> _firstTextStyle=Value<TextStyle>(
-                name: '',
-                value: value.onChange(),
-                label: textStyleKey.currentState.getExampleCode(),
-              );
               setting = setting.copyWith(
-                  style: _firstTextStyle,);
+                  style: value,);
             });
           },
         ),
@@ -191,13 +184,13 @@ class TextSetting {
 class TextStyleDemo extends StatefulWidget {
   TextStyleDemo({Key key, this.onchange}) : super(key: key);
 
-  final ValueChanged<TextStyleSetting> onchange;
+  final ValueChanged<Value<TextStyle>> onchange;
 
   @override
-  TextStyleDemoState createState() => TextStyleDemoState();
+  _TextStyleDemoState createState() => _TextStyleDemoState();
 }
 
-class TextStyleDemoState extends State<TextStyleDemo> {
+class _TextStyleDemoState extends State<TextStyleDemo> {
   TextStyleSetting setting;
 
   @override
@@ -205,6 +198,13 @@ class TextStyleDemoState extends State<TextStyleDemo> {
     // TODO: implement initState
     setting = TextStyleSetting();
     super.initState();
+  }
+
+  void changeValue(){
+    widget.onchange(Value(
+      label: getExampleCode(),
+      value: setting.onChange(),
+    ));
   }
 
   String getExampleCode() {
@@ -238,7 +238,7 @@ class TextStyleDemoState extends State<TextStyleDemo> {
               setting = setting.copyWith(
                 inherit: value,
               );
-              widget.onchange(setting);
+              changeValue();
             });
           },
         ),
@@ -248,7 +248,8 @@ class TextStyleDemoState extends State<TextStyleDemo> {
             setting = setting.copyWith(
               color: value,
             );
-            widget.onchange(setting);
+            changeValue();
+
           });
         }),
         DropDownValueTitleWidget(
@@ -260,7 +261,8 @@ class TextStyleDemoState extends State<TextStyleDemo> {
               setting = setting.copyWith(
                 fontSize: value,
               );
-              widget.onchange(setting);
+              changeValue();
+
             });
           },
         ),
@@ -271,7 +273,8 @@ class TextStyleDemoState extends State<TextStyleDemo> {
             setting = setting.copyWith(
               fontWeight: value,
             );
-            widget.onchange(setting);
+            changeValue();
+
           });
         }),
         ValueTitleWidget(StringParams.kFontStyle),
@@ -281,7 +284,8 @@ class TextStyleDemoState extends State<TextStyleDemo> {
             setting = setting.copyWith(
               fontStyle: value,
             );
-            widget.onchange(setting);
+            changeValue();
+
           });
         }),
         DropDownValueTitleWidget<double>(
@@ -293,7 +297,8 @@ class TextStyleDemoState extends State<TextStyleDemo> {
               setting = setting.copyWith(
                 letterSpacing: value,
               );
-              widget.onchange(setting);
+              changeValue();
+
             });
           },
         ),
@@ -306,7 +311,8 @@ class TextStyleDemoState extends State<TextStyleDemo> {
               setting = setting.copyWith(
                 wordSpacing: value,
               );
-              widget.onchange(setting);
+              changeValue();
+
             });
           },
         ),
@@ -317,7 +323,8 @@ class TextStyleDemoState extends State<TextStyleDemo> {
             setting = setting.copyWith(
               textBaseline: value,
             );
-            widget.onchange(setting);
+            changeValue();
+
           });
         }),
         ValueTitleWidget(StringParams.kBackground),
@@ -326,7 +333,8 @@ class TextStyleDemoState extends State<TextStyleDemo> {
             setting = setting.copyWith(
               background: value,
             );
-            widget.onchange(setting);
+            changeValue();
+
           });
         }),
         ValueTitleWidget(StringParams.kTextDecoration),
@@ -336,7 +344,8 @@ class TextStyleDemoState extends State<TextStyleDemo> {
             setting = setting.copyWith(
               decoration: value,
             );
-            widget.onchange(setting);
+            changeValue();
+
           });
         }),
         ValueTitleWidget(StringParams.kDecorationColor),
@@ -345,7 +354,8 @@ class TextStyleDemoState extends State<TextStyleDemo> {
             setting = setting.copyWith(
               decorationColor: value,
             );
-            widget.onchange(setting);
+            changeValue();
+
           });
         }),
         ValueTitleWidget(StringParams.kDecorationStyle),
@@ -355,7 +365,7 @@ class TextStyleDemoState extends State<TextStyleDemo> {
             setting = setting.copyWith(
               decorationStyle: value,
             );
-            widget.onchange(setting);
+            changeValue();
           });
         }),
       ],

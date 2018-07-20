@@ -3,6 +3,10 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class AppBarDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/AppBar';
+  final String detail='''A material design app bar.
+An app bar consists of a toolbar and potentially other widgets, such as a TabBar and a FlexibleSpaceBar. App bars typically expose one or more common actions with IconButtons which are optionally followed by a PopupMenuButton for less common operations (sometimes called the "overflow menu").
+App bars are typically used in the Scaffold.appBar property, which places the app bar as a fixed-height widget at the top of the screen. For a scrollable app bar, see SliverAppBar, which embeds an AppBar in a sliver for use in a CustomScrollView.
+The AppBar displays the toolbar widgets, leading, title, and actions, above the bottom (if any). The bottom is usually used for a TabBar. If a flexibleSpace widget is specified then it is stacked behind the toolbar and the bottom widget. The following diagram shows where each of these slots appears in the toolbar when the writing language is left-to-right (e.g. English):''';
 
   @override
   _AppBarDemoState createState() => _AppBarDemoState();
@@ -10,6 +14,8 @@ class AppBarDemo extends StatefulWidget {
 
 class _AppBarDemoState extends ExampleState<AppBarDemo> {
   AppBarSetting setting;
+
+  bool isExpanded = false;
 
   @override
   void initState() {
@@ -19,18 +25,53 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
 
   @override
   String getDetail() {
-    return '';
+    return widget.detail;
   }
 
   @override
   String getExampleCode() {
-    return '';
+    return '''AppBar(
+        leading: ${setting.leading?.label ?? ''},
+        automaticallyImplyLeading: ${setting.automaticallyImplyLeading?.label ??
+        ''},
+        title: ${setting.title?.label ?? ''},
+        actions: ${setting.actions?.label ?? ''},
+        flexibleSpace: ${setting.flexibleSpace?.label ?? ''},
+        bottom: ${setting.bottom?.label ?? ''},
+        elevation: ${setting.elevation?.label ?? ''},
+        backgroundColor: ${setting.backgroundColor?.label ?? ''},
+        brightness: ${setting.brightness?.label ?? ''},
+        iconTheme: ${setting.iconTheme?.label ?? ''},
+        textTheme: ${setting.textTheme?.label ?? ''},
+        primary: ${setting.primary?.label ?? ''},
+        centerTitle: ${setting.centerTitle?.label ?? ''},
+        titleSpacing: ${setting.titleSpacing?.label ?? ''},
+        toolbarOpacity: ${setting.toolbarOpacity?.label ?? ''},
+        bottomOpacity: ${setting.bottomOpacity?.label ?? ''},
+      )''';
   }
 
   @override
   List<Widget> getSetting() {
     return [
+      ValueTitleButtonWidget(
+        title: 'Save(from scaffold)',
+        onPressed: () {
+          Navigator.pop(
+              context,
+              Value<PreferredSizeWidget>(
+                name: 'AppBar',
+                value: returnWidget(),
+                label: getExampleCode(),
+              ));
+        },
+      ),
       ValueTitleWidget(StringParams.kLeading),
+      RadioGroupWidget(setting.leading, iconButtonValues, (value) {
+        setState(() {
+          setting = setting.copyWith(leading: value);
+        });
+      }),
       SwitchValueTitleWidget(
         title: StringParams.kAutomaticallyImplyLeading,
         value: setting.automaticallyImplyLeading,
@@ -40,8 +81,7 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
           });
         },
       ),
-      ValueTitleWidget(StringParams.kTitle),
-      EditTextGroupWidget(setting.title, (value) {
+      EditTextTitleWidget(StringParams.kTitle, setting.title, (value) {
         setState(() {
           setting = setting.copyWith(title: value);
         });
@@ -76,9 +116,37 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
         });
       }),
       ValueTitleWidget(StringParams.kBrightness),
-      ValueTitleWidget(StringParams.kIconTheme),
+      RadioGroupWidget(setting.brightness, colorBrightnessValues, (value) {
+        setState(() {
+          setting = setting.copyWith(brightness: value);
+        });
+      }),
+      ExpansionPanelTitleWidget(
+        isExpanded: isExpanded,
+        titleWidget: ValueTitleWidget(StringParams.kIconTheme),
+        hintWidget: IconThemeDemo(
+          onchange: (value) {
+            setState(() {
+              setting = setting.copyWith(iconTheme: value);
+            });
+          },
+        ),
+        onChanged: (isExpanded) {
+          setState(() {
+            this.isExpanded = isExpanded;
+          });
+        },
+      ),
       ValueTitleWidget(StringParams.kTextTheme),
-      ValueTitleWidget(StringParams.kPrimary),
+      SwitchValueTitleWidget(
+        title: StringParams.kPrimary,
+        value: setting.primary,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(primary: value);
+          });
+        },
+      ),
       SwitchValueTitleWidget(
         title: StringParams.kCenterTitle,
         value: setting.centerTitle,
@@ -120,7 +188,6 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
 
   @override
   Widget getWidget() {
-    CircularProgressIndicator();
     return Scaffold(
       appBar: AppBar(
         leading: setting.leading?.value,
@@ -143,6 +210,27 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
       body: Center(
         child: Text('Body'),
       ),
+    );
+  }
+
+  PreferredSizeWidget returnWidget() {
+    return AppBar(
+      leading: setting.leading?.value,
+      automaticallyImplyLeading: setting.automaticallyImplyLeading?.value,
+      title: setting.title?.value,
+      actions: setting.actions?.value,
+      flexibleSpace: setting.flexibleSpace?.value,
+      bottom: setting.bottom?.value,
+      elevation: setting.elevation?.value,
+      backgroundColor: setting.backgroundColor?.value,
+      brightness: setting.brightness?.value,
+      iconTheme: setting.iconTheme?.value,
+      textTheme: setting.textTheme?.value,
+      primary: setting.primary?.value,
+      centerTitle: setting.centerTitle?.value,
+      titleSpacing: setting.titleSpacing?.value,
+      toolbarOpacity: setting.toolbarOpacity?.value,
+      bottomOpacity: setting.bottomOpacity?.value,
     );
   }
 }
@@ -251,16 +339,72 @@ class AppBarSetting {
 class IconThemeDemo extends StatefulWidget {
   IconThemeDemo({Key key, this.onchange}) : super(key: key);
 
-  final ValueChanged<IconThemeData> onchange;
+  final ValueChanged<Value<IconThemeData>> onchange;
 
   @override
   _IconThemeDemoState createState() => _IconThemeDemoState();
 }
 
 class _IconThemeDemoState extends State<IconThemeDemo> {
+  IconThemeSetting setting;
+
+  @override
+  void initState() {
+    setting = IconThemeSetting();
+    super.initState();
+  }
+
+  void changeValue() {
+    widget.onchange(
+      Value(
+        name: '',
+        value: setting.onChange(),
+        label: getExampleCode(),
+      ),
+    );
+  }
+
+  String getExampleCode() {
+    return '''IconThemeData(
+      color: ${setting.color?.label ?? ''},
+      opacity: ${setting.opacity?.label ?? ''},
+      size: ${setting.size?.label ?? ''},
+    )''';
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        ValueTitleWidget(StringParams.kColor),
+        ColorGroupWidget(setting.color, colorValues, (value) {
+          setState(() {
+            setting = setting.copyWith(color: value);
+            changeValue();
+          });
+        }),
+        ValueTitleWidget(StringParams.kOpacity),
+        SeekBarGroupWidget(setting.opacity, (value) {
+          setState(() {
+            setting = setting.copyWith(opacity: value);
+            changeValue();
+          });
+        }),
+        DropDownValueTitleWidget(
+          selectList: sizeValues,
+          title: StringParams.kSize,
+          value: setting.size,
+          onChanged: (value) {
+            setState(() {
+              setting = setting.copyWith(size: value);
+              changeValue();
+            });
+          },
+        )
+      ],
+    );
   }
 }
 
@@ -269,13 +413,17 @@ class IconThemeSetting {
   final Value<double> opacity;
   final Value<double> size;
 
-  IconThemeSetting({this.color, this.opacity, this.size});
+  IconThemeSetting({
+    this.color,
+    this.opacity: const Value(name: '1.0', value: 1.0, label: '1.0'),
+    this.size,
+  });
 
-  IconThemeSetting copyWith(
+  IconThemeSetting copyWith({
     Value<Color> color,
     Value<double> opacity,
     Value<double> size,
-  ) {
+  }) {
     return IconThemeSetting(
       color: color ?? this.color,
       opacity: opacity ?? this.opacity,

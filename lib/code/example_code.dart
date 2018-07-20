@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:async';
 import 'package:flutterbyrhyme/code/code_highlighter.dart';
 export 'package:flutterbyrhyme/widgets/paramWidgets.dart';
 
 abstract class ExampleState<T extends StatefulWidget> extends State<T> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  GlobalKey<ScaffoldState> get scaffoldKey=>_scaffoldKey;
+  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
+
+  GlobalKey<ExampleScaffoldState> _exampleKey =
+      new GlobalKey<ExampleScaffoldState>();
+
+  GlobalKey<ExampleScaffoldState> get exampleKey => _exampleKey;
 
   @override
   Widget build(BuildContext context) {
     return ExampleScaffold(
+      key: _exampleKey,
       scaffoldKey: _scaffoldKey,
       exampleCode: getExampleCode(),
       title: getTitle(),
@@ -21,31 +28,36 @@ abstract class ExampleState<T extends StatefulWidget> extends State<T> {
         children: <Widget>[
           Expanded(
             child:
-            // start
-            getWidget(),
+                // start
+                getWidget(),
           ),
           // end
           Divider(),
           Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: getSetting(),
-                ),
-              )),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: getSetting(),
+            ),
+          )),
         ],
       ),
     );
   }
+
   @protected
   String getTitle();
+
   @protected
   String getExampleCode();
+
   @protected
   Widget getWidget();
+
   @protected
   List<Widget> getSetting();
+
   @protected
   String getDetail();
 }
@@ -53,12 +65,12 @@ abstract class ExampleState<T extends StatefulWidget> extends State<T> {
 class ExampleScaffold extends StatefulWidget {
   ExampleScaffold(
       {Key key,
-        this.scaffoldKey,
-        this.title,
-        this.detail,
-        this.actions,
-        this.body,
-        this.exampleCode})
+      this.scaffoldKey,
+      this.title,
+      this.detail,
+      this.actions,
+      this.body,
+      this.exampleCode})
       : super(key: key);
   final String title;
   final String detail;
@@ -66,13 +78,38 @@ class ExampleScaffold extends StatefulWidget {
   final List<Widget> actions;
   final Widget body;
   final GlobalKey<ScaffoldState> scaffoldKey;
+
   @override
-  _ExampleScaffoldState createState() => _ExampleScaffoldState();
+  ExampleScaffoldState createState() => ExampleScaffoldState();
 }
 
-class _ExampleScaffoldState extends State<ExampleScaffold> {
+class ExampleScaffoldState extends State<ExampleScaffold> {
+  AnimationController controller;
+  String content;
+  Color nbColor=Colors.transparent;
+  Color ntColor=Colors.transparent;
+  Color vbColor;
+  Color vtColor;
+
+  void showToast(String content) {
+    setState(() {
+      this.content=content;
+      nbColor=this.vbColor;
+      ntColor=this.vtColor;
+    });
+    Future.delayed(Duration(milliseconds: 1000),(){
+      setState(() {
+        nbColor=Colors.transparent;
+        ntColor=Colors.transparent;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool isDark=Theme.of(context).brightness==Brightness.dark;
+    vbColor=isDark?Colors.grey:Colors.black87;
+    vtColor=isDark?Colors.black:Colors.white;
     return Scaffold(
         key: widget.scaffoldKey,
         appBar: AppBar(
@@ -82,7 +119,7 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
               IconButton(
                 icon: Icon(Icons.info),
                 tooltip: 'Show the detail!\n详情',
-                onPressed: (){
+                onPressed: () {
                   _showDetail(context);
                 },
               ),
@@ -97,33 +134,47 @@ class _ExampleScaffoldState extends State<ExampleScaffold> {
         body: Stack(
           children: <Widget>[
             widget.body,
+            Positioned(
+              left: 50.0,
+              right: 50.0,
+              bottom: 20.0,
+              child: AnimatedContainer(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(8.0),
+                duration: const Duration(
+                  milliseconds: 200,
+                ),
+                curve: Curves.easeIn,
+                color: nbColor,
+                child: Text(content??'hello',style: Theme.of(context).textTheme.title.copyWith(color: ntColor),),
+              ),
+            ),
           ],
         ));
   }
+
   //显示示例代码
   void _showExampleCode(BuildContext context) {
     Navigator.push(
         context,
         new MaterialPageRoute<FullScreenCodeDialog>(
             builder: (BuildContext context) => FullScreenCodeDialog(
-              exampleCode: widget.exampleCode,
-            )));
+                  exampleCode: widget.exampleCode,
+                )));
   }
 
-  void _showDetail(BuildContext context){
-    showModalBottomSheet(context: context, builder: (BuildContext context) {
-      return new Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: SingleChildScrollView(
-            child: new Text(widget.detail,
-                textAlign: TextAlign.justify,
-                style: new TextStyle(
-                    fontSize: 18.0
-                )
-            ),
-          )
-      );
-    });
+  void _showDetail(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return new Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: SingleChildScrollView(
+                child: new Text(widget.detail,
+                    textAlign: TextAlign.justify,
+                    style: new TextStyle(fontSize: 18.0)),
+              ));
+        });
   }
 }
 
@@ -159,8 +210,7 @@ class _FullScreenCodeDialogState extends State<FullScreenCodeDialog> {
           padding: const EdgeInsets.all(8.0),
           child: RichText(
               text: TextSpan(
-                  style:
-                      const TextStyle(fontSize: 18.0),
+                  style: const TextStyle(fontSize: 18.0),
                   children: <TextSpan>[
                 DartSyntaxHighlighter(style).format(widget.exampleCode),
               ])),

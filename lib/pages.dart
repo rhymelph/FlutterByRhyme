@@ -18,7 +18,7 @@ import 'package:flutterbyrhyme/network/temp.dart';
 
 import 'package:flutter/foundation.dart';
 
-const String finishDemo='Container,Row,Column,Image,Text.Icon,RaisedButton,Scaffold,AppBar';
+const String finishDemo='Container,Row,Column,Image,Text.Icon,RaisedButton,Scaffold,AppBar,FlutterLogo,PlaceHolder';
 
 class BottomItem {
   final String title;
@@ -324,8 +324,8 @@ List<Page> _buildPage() {
         subhead: '一个空白的盒子，代表以后有部件加入。',
         icon: null,
         category: _kBasics,
-        routeName: FlutterLogoDemo.routeName,
-        buildRoute: (BuildContext context) => FlutterLogoDemo()),
+        routeName: PlaceholderDemo.routeName,
+        buildRoute: (BuildContext context) => PlaceholderDemo()),
 
     ///Material ComPonents
     Page(

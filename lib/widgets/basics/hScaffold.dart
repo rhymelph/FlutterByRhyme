@@ -75,12 +75,14 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
       ValueTitleButtonWidget(
         title: StringParams.kFloatingActionButton,
         onPressed: () async {
-          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/FloatingActionButton');
-          if(changeValue!=null){
-            setState(() {
-              setting=setting.copyWith(floatingActionButton: changeValue);
-            });
-          }
+          exampleKey.currentState.showToast('FloatingActionButton尚未开发，敬请期待!');
+
+//          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/FloatingActionButton');
+//          if(changeValue!=null){
+//            setState(() {
+//              setting=setting.copyWith(floatingActionButton: changeValue);
+//            });
+//          }
         },
       ),
       ValueTitleWidget(StringParams.kFloatingActionButtonLocation),
@@ -98,34 +100,38 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
       ValueTitleButtonWidget(
         title: StringParams.kDrawer,
         onPressed: () async {
-          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/Drawer');
-          if(changeValue!=null){
-            setState(() {
-              setting=setting.copyWith(drawer: changeValue);
-            });
-          }
+          exampleKey.currentState.showToast('Drawer尚未开发，敬请期待!');
+//          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/Drawer');
+//          if(changeValue!=null){
+//            setState(() {
+//              setting=setting.copyWith(drawer: changeValue);
+//            });
+//          }
         },
       ),
       ValueTitleButtonWidget(
         title: StringParams.kEndDrawer,
         onPressed: () async{
-          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/Drawer');
-          if(changeValue!=null){
-            setState(() {
-              setting=setting.copyWith(endDrawer: changeValue);
-            });
-          }
+          exampleKey.currentState.showToast('EndDrawer尚未开发，敬请期待!');
+//          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/Drawer');
+//          if(changeValue!=null){
+//            setState(() {
+//              setting=setting.copyWith(endDrawer: changeValue);
+//            });
+//          }
         },
       ),
       ValueTitleButtonWidget(
         title: StringParams.kBottomNavigationBar,
         onPressed: () async{
-          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/BottomNavigationBar');
-          if(changeValue!=null){
-            setState(() {
-              setting=setting.copyWith(bottomNavigationBar: changeValue);
-            });
-          }
+          exampleKey.currentState.showToast('BottomNavigationBar尚未开发，敬请期待!');
+
+//          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/BottomNavigationBar');
+//          if(changeValue!=null){
+//            setState(() {
+//              setting=setting.copyWith(bottomNavigationBar: changeValue);
+//            });
+//          }
         },
       ),
       ValueTitleWidget(StringParams.kBackground),
