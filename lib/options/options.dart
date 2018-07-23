@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'theme.dart';
 import 'scales.dart';
-
+import 'package:flutterbyrhyme/about.dart';
 ///主题设置相关
 class MyOptions {
   final MyTheme theme; //主题
@@ -58,6 +58,53 @@ class MyOptions {
   }
 }
 
+///配置页面
+class OptionsPage extends StatelessWidget {
+  const OptionsPage({
+    Key key,
+    this.options,
+    this.onOptionsChanged,
+  }) : super(key: key);
+
+  final MyOptions options;
+  final ValueChanged<MyOptions> onOptionsChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return DefaultTextStyle(
+        style: theme.primaryTextTheme.subhead,
+        child: ListView(
+          padding: const EdgeInsets.only(bottom: 124.0),
+          children: <Widget>[
+            const _Header('显示'),
+            _ThemeItem(
+              options: options,
+              onOptionsChanged: onOptionsChanged,
+            ),
+            _TextScaleFactorItem(
+              options: options,
+              onOptionsChanged: onOptionsChanged,
+            ),
+            _TextDirectionItem(
+              options: options,
+              onOptionsChanged: onOptionsChanged,
+            ),
+            const Divider(),
+            const _Header('设备'),
+            _PlatformItem(
+              options: options,
+              onOptionsChanged: onOptionsChanged,
+            ),
+            const _Header('关于'),
+            _ActionItem('关于Flutter教程', (){
+              showMyAboutDialog(context);
+            }),
+          ],
+        ));
+  }
+}
+
 ///头部
 class _Header extends StatelessWidget {
   const _Header(this.title);
@@ -77,6 +124,27 @@ class _Header extends StatelessWidget {
             child: Text(title),
             header: true,
           )),
+    );
+  }
+}
+
+///主题切换选项
+class _ThemeItem extends StatelessWidget {
+  _ThemeItem({this.options, this.onOptionsChanged});
+
+  final MyOptions options;
+  final ValueChanged<MyOptions> onOptionsChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return _BooleanItem(
+      title: '夜间模式',
+      value: options.theme == kDarkTheme,
+      onChanged: (bool value) {
+        onOptionsChanged(
+          options.copyWith(theme: value ? kDarkTheme : kLightTheme),
+        );
+      },
     );
   }
 }
@@ -139,6 +207,7 @@ class _TextDirectionItem extends StatelessWidget {
   }
 }
 
+///设备切换
 class _PlatformItem extends StatelessWidget {
   const _PlatformItem({this.options, this.onOptionsChanged});
 
@@ -188,23 +257,75 @@ class _PlatformItem extends StatelessWidget {
   }
 }
 
-///主题切换选项
-class _ThemeItem extends StatelessWidget {
-  _ThemeItem({this.options, this.onOptionsChanged});
 
-  final MyOptions options;
-  final ValueChanged<MyOptions> onOptionsChanged;
+///点击选项
+class _ActionItem extends StatelessWidget {
+  const _ActionItem(this.text, this.onTap);
+
+  final String text;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return _BooleanItem(
-      title: '夜间模式',
-      value: options.theme == kDarkTheme,
-      onChanged: (bool value) {
-        onOptionsChanged(
-          options.copyWith(theme: value ? kDarkTheme : kLightTheme),
-        );
-      },
+    return _OptionsItem(
+      child: _FlatButton(
+        onPressed: onTap,
+        child: Text(text),
+      ),
+    );
+  }
+}
+
+class _FlatButton extends StatelessWidget {
+  const _FlatButton({this.onPressed, this.child});
+
+  final VoidCallback onPressed;
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return InkResponse(
+      onTap: onPressed,
+      child: new DefaultTextStyle(
+        style: Theme.of(context).primaryTextTheme.subhead,
+        child: child,
+      ),
+    );
+  }
+}
+
+
+
+
+///选项高度
+const double _kItemHeight = 48.0;
+
+///内边距
+const EdgeInsetsDirectional _kPadding =
+    const EdgeInsetsDirectional.only(start: 56.0);
+
+///配置选项
+class _OptionsItem extends StatelessWidget {
+  const _OptionsItem({Key key, this.child}) : super(key: key);
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final double textScale = MediaQuery.textScaleFactorOf(context);
+    return MergeSemantics(
+      ///合并语义的小组件
+      child: Container(
+        constraints: BoxConstraints(minHeight: _kItemHeight * textScale),
+        padding: _kPadding,
+        alignment: AlignmentDirectional.centerStart,
+        child: DefaultTextStyle(
+            style: DefaultTextStyle.of(context).style,
+            maxLines: 2,
+            overflow: TextOverflow.fade,
+            child: IconTheme(
+              data: Theme.of(context).primaryIconTheme,
+              child: child,
+            )),
+      ),
     );
   }
 }
@@ -231,84 +352,6 @@ class _BooleanItem extends StatelessWidget {
             activeTrackColor: isDark ? Colors.white24 : Colors.black26,
           )
         ],
-      ),
-    );
-  }
-}
-
-///配置页面
-class OptionsPage extends StatelessWidget {
-  const OptionsPage({
-    Key key,
-    this.options,
-    this.onOptionsChanged,
-  }) : super(key: key);
-
-  final MyOptions options;
-  final ValueChanged<MyOptions> onOptionsChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    return DefaultTextStyle(
-        style: theme.primaryTextTheme.subhead,
-        child: ListView(
-          padding: const EdgeInsets.only(bottom: 124.0),
-          children: <Widget>[
-            const _Header('显示'),
-            _ThemeItem(
-              options: options,
-              onOptionsChanged: onOptionsChanged,
-            ),
-            _TextScaleFactorItem(
-              options: options,
-              onOptionsChanged: onOptionsChanged,
-            ),
-            _TextDirectionItem(
-              options: options,
-              onOptionsChanged: onOptionsChanged,
-            ),
-            const Divider(),
-            const _Header('设备'),
-            _PlatformItem(
-              options: options,
-              onOptionsChanged: onOptionsChanged,
-            ),
-          ],
-        ));
-  }
-}
-
-const double _kItemHeight = 48.0;
-
-///选项高度
-const EdgeInsetsDirectional _kPadding =
-    const EdgeInsetsDirectional.only(start: 56.0);
-
-///内边距
-
-///配置选项
-class _OptionsItem extends StatelessWidget {
-  const _OptionsItem({Key key, this.child}) : super(key: key);
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    final double textScale = MediaQuery.textScaleFactorOf(context);
-    return MergeSemantics(
-      ///合并语义的小组件
-      child: Container(
-        constraints: BoxConstraints(minHeight: _kItemHeight * textScale),
-        padding: _kPadding,
-        alignment: AlignmentDirectional.centerStart,
-        child: DefaultTextStyle(
-            style: DefaultTextStyle.of(context).style,
-            maxLines: 2,
-            overflow: TextOverflow.fade,
-            child: IconTheme(
-              data: Theme.of(context).primaryIconTheme,
-              child: child,
-            )),
       ),
     );
   }

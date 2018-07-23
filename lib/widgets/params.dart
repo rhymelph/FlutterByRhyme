@@ -1668,3 +1668,118 @@ List<Value<MaterialColor>> materialColorValues = [
     )''',
   ),
 ];
+
+List<Value<List<BottomNavigationBarItem>>> bottomNavigationBarItemValues = [
+  Value(
+    name: 'two item',
+    value: [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        title: Text('Home'),
+        backgroundColor: Colors.blue,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.question_answer),
+        title: Text('Question'),
+        backgroundColor: Colors.yellow,
+      ),
+    ],
+    label: '''[
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      title: Text('Home'),
+      backgroundColor: Colors.blue,
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.question_answer),
+      title: Text('Question'),
+      backgroundColor: Colors.yellow,
+    ),
+  ]''',
+  ),
+  Value(
+    name: 'three item',
+    value: [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        title: Text('Home'),
+        backgroundColor: Colors.blue,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.question_answer),
+        title: Text('Question'),
+        backgroundColor: Colors.yellow,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.person),
+        title: Text('Person'),
+        backgroundColor: Colors.green,
+      ),
+    ],
+    label: '''[
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      title: Text('Home'),
+      backgroundColor: Colors.blue,
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.question_answer),
+      title: Text('Question'),
+      backgroundColor: Colors.yellow,
+    ),
+    BottomNavigationBarItem(
+        icon: Icon(Icons.person),
+        title: Text('Person'),
+        backgroundColor: Colors.green,
+      ),
+  ]''',
+  ),
+  Value(
+    name: 'four item',
+    value: [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        title: Text('Home'),
+        backgroundColor: Colors.blue,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.question_answer),
+        title: Text('Question'),
+        backgroundColor: Colors.yellow,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.map),
+        title: Text('map'),
+        backgroundColor: Colors.grey,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.person),
+        title: Text('Person'),
+        backgroundColor: Colors.green,
+      ),
+
+    ],
+    label: '''[
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      title: Text('Home'),
+      backgroundColor: Colors.blue,
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.question_answer),
+      title: Text('Question'),
+      backgroundColor: Colors.yellow,
+    ),
+    BottomNavigationBarItem(
+        icon: Icon(Icons.map),
+        title: Text('map'),
+        backgroundColor: Colors.grey,
+      ),
+    BottomNavigationBarItem(
+        icon: Icon(Icons.person),
+        title: Text('Person'),
+        backgroundColor: Colors.green,
+      ),
+  ]''',
+  ),
+];

@@ -5,6 +5,39 @@ import 'package:flutter/foundation.dart';
 import 'params.dart';
 export 'params.dart';
 
+///选项高度
+const double _kItemHeight = 48.0;
+
+///内边距
+const EdgeInsetsDirectional _kPadding =
+    const EdgeInsetsDirectional.only(start: 8.0,end: 8.0);
+
+class _ParamItem extends StatelessWidget {
+  const _ParamItem({Key key, this.child}) : super(key: key);
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final double textScale = MediaQuery.textScaleFactorOf(context);
+    return MergeSemantics(
+      ///合并语义的小组件
+      child: Container(
+        constraints: BoxConstraints(minHeight: _kItemHeight * textScale),
+        padding: _kPadding,
+        alignment: AlignmentDirectional.centerStart,
+        child: DefaultTextStyle(
+            style: DefaultTextStyle.of(context).style,
+            maxLines: 2,
+            overflow: TextOverflow.fade,
+            child: IconTheme(
+              data: Theme.of(context).primaryIconTheme,
+              child: child,
+            )),
+      ),
+    );
+  }
+}
+
 //标题控件
 class ValueTitleWidget extends StatelessWidget {
   ValueTitleWidget(this.title);
@@ -13,16 +46,23 @@ class ValueTitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.title,
+    ThemeData data = Theme.of(context);
+
+    return _ParamItem(
+      child: DefaultTextStyle(
+        style: data.textTheme.title,
+        child: Semantics(
+          header: true,
+          child: Text(
+            title,
+          ),
+        ),
       ),
     );
   }
 }
 
+//点击按钮
 class ValueTitleButtonWidget extends StatelessWidget {
   ValueTitleButtonWidget({this.title, this.onPressed});
 
@@ -31,20 +71,18 @@ class ValueTitleButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark=Theme.of(context).brightness==Brightness.dark;
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return _ParamItem(
       child: RaisedButton(
         onPressed: onPressed,
-        color: isDark?Colors.black87:Colors.white,
+        color: isDark ? Colors.black87 : Colors.white,
         shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.circular(16.0),
-          side: BorderSide(
-            color: Colors.grey[300],
-            width: 1.0,
-          )
-        ),
+            borderRadius: BorderRadius.circular(16.0),
+            side: BorderSide(
+              color: Colors.grey[300],
+              width: 1.0,
+            )),
         splashColor: Colors.grey[200],
         child: Center(
           child: Text(
@@ -65,19 +103,19 @@ class SwitchValueTitleWidget extends StatelessWidget {
   final String title;
   final ValueChanged<Value<bool>> onChanged;
 
-  void _onChanged(bool a){
-    final Value<bool> changeValue=Value(
-      name: a?'true':'false',
+  void _onChanged(bool a) {
+    final Value<bool> changeValue = Value(
+      name: a ? 'true' : 'false',
       value: a,
-      label: a?'true':'false',
+      label: a ? 'true' : 'false',
     );
     onChanged(changeValue);
   }
+
   @override
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
+    return _ParamItem(
       child: Row(
         children: <Widget>[
           Expanded(
@@ -87,7 +125,7 @@ class SwitchValueTitleWidget extends StatelessWidget {
             ),
           ),
           Switch(
-            value: value?.value??false,
+            value: value?.value ?? false,
             onChanged: _onChanged,
             activeColor: Colors.blue,
             activeTrackColor: isDark ? Colors.white24 : Colors.black26,
@@ -113,8 +151,7 @@ class DropDownValueTitleWidget<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
+    return _ParamItem(
       child: Row(
         children: <Widget>[
           Expanded(
@@ -177,8 +214,7 @@ class ExpansionPanelTitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(8.0),
+    return _ParamItem(
       child: ExpansionPanelList(
         expansionCallback: (int index, bool isExpanded) {
           onChanged(!isExpanded);
@@ -202,7 +238,7 @@ class RadioWidget<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MergeSemantics(
+    return _ParamItem(
       child: Tooltip(
         message: value.label,
         child: Row(children: [
@@ -249,7 +285,7 @@ class ColorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return MergeSemantics(
+    return _ParamItem(
       child: Tooltip(
         message: value.label,
         child: RawMaterialButton(
@@ -310,7 +346,7 @@ class ColorsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return MergeSemantics(
+    return _ParamItem(
       child: Tooltip(
         message: value.label,
         child: RawMaterialButton(
@@ -333,6 +369,7 @@ class ColorsWidget extends StatelessWidget {
     );
   }
 }
+
 //多种颜色组合按钮组
 class ColorsGroupWidget extends StatelessWidget {
   ColorsGroupWidget(this.groupValue, this.valueList, this.valueChanged);
@@ -370,7 +407,7 @@ class DecorationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return MergeSemantics(
+    return _ParamItem(
       child: Tooltip(
         message: value.label,
         child: GestureDetector(
@@ -420,25 +457,28 @@ class DecorationGroupWidget extends StatelessWidget {
   }
 }
 
-class EditTextTitleWidget extends StatelessWidget{
-  EditTextTitleWidget(this.title,this.value,this.onChanged);
+class EditTextTitleWidget extends StatelessWidget {
+  EditTextTitleWidget(this.title, this.value, this.onChanged);
+
   final String title;
   final Value<Widget> value;
   final ValueChanged<Value<Widget>> onChanged;
+
   @override
   Widget build(BuildContext context) {
-    String oldText='';
-    if(value?.name!=null){
-      oldText=value.name;
+    String oldText = '';
+    if (value?.name != null) {
+      oldText = value.name;
     }
-    TextEditingController controller=TextEditingController(text: oldText);
-    int selection=0;
-    if(value?.name!=null){
-      selection=value.name.length;
+    TextEditingController controller = TextEditingController(text: oldText);
+    int selection = 0;
+    if (value?.name != null) {
+      selection = value.name.length;
     }
-    controller.selection=TextSelection(baseOffset: selection, extentOffset: selection);
-    controller.addListener((){
-      String text=controller.text;
+    controller.selection =
+        TextSelection(baseOffset: selection, extentOffset: selection);
+    controller.addListener(() {
+      String text = controller.text;
       onChanged(Value<Widget>(
         name: text,
         value: Text(text),
@@ -446,13 +486,15 @@ class EditTextTitleWidget extends StatelessWidget{
       ));
     });
     // TODO: implement build
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+    return _ParamItem(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children:[
-          Text(title,style: Theme.of(context).textTheme.title,),
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.title,
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
@@ -467,23 +509,27 @@ class EditTextTitleWidget extends StatelessWidget{
   }
 }
 
-class SeekBarGroupWidget extends StatelessWidget{
-  SeekBarGroupWidget(this.value,this.onChanged);
+class SeekBarGroupWidget extends StatelessWidget {
+  SeekBarGroupWidget(this.value, this.onChanged);
+
   final Value<double> value;
   final ValueChanged<Value<double>> onChanged;
 
-  void onChangedValue(double change){
+  void onChangedValue(double change) {
     onChanged(Value(
       name: '$change',
       value: change,
       label: '$change',
     ));
   }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Slider(value: value.value, onChanged: onChangedValue);
+    return _ParamItem(
+        child: Slider(
+      value: value.value,
+      onChanged: onChangedValue,
+    ));
   }
-
 }
-

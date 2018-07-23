@@ -189,24 +189,7 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
   @override
   Widget getWidget() {
     return Scaffold(
-      appBar: AppBar(
-        leading: setting.leading?.value,
-        automaticallyImplyLeading: setting.automaticallyImplyLeading?.value,
-        title: setting.title?.value,
-        actions: setting.actions?.value,
-        flexibleSpace: setting.flexibleSpace?.value,
-        bottom: setting.bottom?.value,
-        elevation: setting.elevation?.value,
-        backgroundColor: setting.backgroundColor?.value,
-        brightness: setting.brightness?.value,
-        iconTheme: setting.iconTheme?.value,
-        textTheme: setting.textTheme?.value,
-        primary: setting.primary?.value,
-        centerTitle: setting.centerTitle?.value,
-        titleSpacing: setting.titleSpacing?.value,
-        toolbarOpacity: setting.toolbarOpacity?.value,
-        bottomOpacity: setting.bottomOpacity?.value,
-      ),
+      appBar: returnWidget(),
       body: Center(
         child: Text('Body'),
       ),
