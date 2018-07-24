@@ -4,7 +4,7 @@ A  Flutter course.
 
 ## ScreenShot
 
-<image src="../screenshot/screenshot.png"/>
+<image src="https://github.com/rhymelph/FlutterByRhyme/blob/master/screenshot/screenshot.png?raw=true"/>
 
 ## Downloading Apk
 
