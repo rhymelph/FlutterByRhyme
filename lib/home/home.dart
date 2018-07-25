@@ -175,7 +175,7 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               onWillPop: () {
-                if (categoryMap[_position] != null) {
+                if (categoryMap[_position] != null&&haveMore) {
                   setState(() {
                     categoryMap[_position] = null;
                   });
@@ -308,7 +308,6 @@ class _PageList extends StatelessWidget {
         page: page,
       );
     }).toList();
-
     return new KeyedSubtree(
         key: const ValueKey('PageDemoList'),
         child: Semantics(
