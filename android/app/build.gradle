@@ -15,6 +15,14 @@ apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+    signingConfigs{
+        release{
+            storeFile file(APK_KEY_FILE)
+            storePassword APK_KEY_PASSWORD
+            keyAlias APK_KEY_ALIAS
+            keyPassword APK_KEY_ALIAS_PASSWORD
+        }
+    }
     compileSdkVersion 27
 
     lintOptions {
@@ -27,14 +35,18 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
 
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.release
+        }
+        debug{
             signingConfig signingConfigs.debug
         }
     }
