@@ -18,7 +18,9 @@ import 'package:flutterbyrhyme/network/temp.dart';
 
 import 'package:flutter/foundation.dart';
 
-const String finishDemo='Container,Row,Column,Image,Text.Icon,RaisedButton,Scaffold,AppBar,FlutterLogo,PlaceHolder';
+const String finishDemo=
+    'Container,Row,Column,Image,Text.Icon,RaisedButton,Scaffold,AppBar,FlutterLogo,PlaceHolder,'
+    'BottomNavigationBar';
 
 class BottomItem {
   final String title;
@@ -314,7 +316,7 @@ List<Page> _buildPage() {
     Page(
         title: 'FlutterLogo',
         subhead:
-            '一个Material Design应用程序栏，由工具栏和其他可能的部件（如TabBar和FlexibleSpaceBar）组成。',
+            'Flutter标志, 以部件形式. 这个部件遵从IconTheme。',
         icon: null,
         category: _kBasics,
         routeName: FlutterLogoDemo.routeName,

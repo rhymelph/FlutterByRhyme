@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'theme.dart';
 import 'scales.dart';
 import 'package:flutterbyrhyme/about.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:async';
+
 ///主题设置相关
 class MyOptions {
   final MyTheme theme; //主题
@@ -16,6 +21,48 @@ class MyOptions {
     this.timeDilation: 1.0,
     this.platform,
   });
+
+  static Future<MyOptions> initOption() async{
+    SharedPreferences shareP= await _shareF;
+    String modeBl = shareP.getString(_kMode);
+    MyTheme theme = kLightTheme;
+    if (modeBl == 'true') {
+      theme = kDarkTheme;
+    }
+    String textDirectionBl = shareP.getString(_kTextDirection);
+    TextDirection textDirection = TextDirection.ltr;
+    if (textDirectionBl == 'true') {
+      textDirection = TextDirection.rtl;
+    }
+    String targetPlatformVl = shareP.getString(_kTargetPlatform);
+    TargetPlatform targetPlatform = getTargetPlatFrom(targetPlatformVl);
+
+    String textScaleVl = shareP.getString(_kMyTextValueScale);
+    MyTextValueScale textValueScale = kAllMyTextValue[0];
+    kAllMyTextValue.forEach((value) {
+      if (value.label == textScaleVl) {
+        textValueScale = value;
+      }
+    });
+    return MyOptions(
+        theme: theme,
+        textDirection: textDirection,
+        platform: targetPlatform,
+        textScale: textValueScale,
+        timeDilation: 1.0);
+  }
+
+  static TargetPlatform getTargetPlatFrom(String value) {
+    switch (value) {
+      case 'IOS':
+        return TargetPlatform.iOS;
+      case 'Android':
+        return TargetPlatform.android;
+      case 'Fuchsia':
+        return TargetPlatform.fuchsia;
+    }
+    return defaultTargetPlatform;
+  }
 
   MyOptions copyWith({
     MyTheme theme,
@@ -58,6 +105,18 @@ class MyOptions {
   }
 }
 
+const String _kMode = 'mode';
+const String _kTextDirection = 'textDirection';
+const String _kMyTextValueScale = 'myTextValueScale';
+const String _kTargetPlatform = 'TargetPlatform';
+final Future<SharedPreferences> _shareF = SharedPreferences.getInstance();
+
+void _saveValue(String key, String value) async {
+  final SharedPreferences prefs = await _shareF;
+  await prefs.setString(key, value);
+}
+
+
 ///配置页面
 class OptionsPage extends StatelessWidget {
   const OptionsPage({
@@ -97,7 +156,7 @@ class OptionsPage extends StatelessWidget {
               onOptionsChanged: onOptionsChanged,
             ),
             const _Header('关于'),
-            _ActionItem('关于Flutter教程', (){
+            _ActionItem('关于Flutter教程', () {
               showMyAboutDialog(context);
             }),
           ],
@@ -141,6 +200,8 @@ class _ThemeItem extends StatelessWidget {
       title: '夜间模式',
       value: options.theme == kDarkTheme,
       onChanged: (bool value) {
+        _saveValue(_kMode, value.toString());
+
         onOptionsChanged(
           options.copyWith(theme: value ? kDarkTheme : kLightTheme),
         );
@@ -175,6 +236,8 @@ class _TextScaleFactorItem extends StatelessWidget {
               }).toList();
             },
             onSelected: (MyTextValueScale scale) {
+              _saveValue(_kMyTextValueScale, scale.label);
+
               onOptionsChanged(options.copyWith(
                 textScale: scale,
               ));
@@ -199,6 +262,8 @@ class _TextDirectionItem extends StatelessWidget {
       title: '文字向右对齐',
       value: options.textDirection == TextDirection.rtl,
       onChanged: (bool value) {
+        _saveValue(_kTextDirection, value.toString());
+
         onOptionsChanged(options.copyWith(
           textDirection: value ? TextDirection.rtl : TextDirection.ltr,
         ));
@@ -246,6 +311,8 @@ class _PlatformItem extends StatelessWidget {
               }).toList();
             },
             onSelected: (TargetPlatform platform) {
+              _saveValue(_kTargetPlatform, _platformLabel(platform));
+
               onOptionsChanged(options.copyWith(
                 platform: platform,
               ));
@@ -256,7 +323,6 @@ class _PlatformItem extends StatelessWidget {
     );
   }
 }
-
 
 ///点击选项
 class _ActionItem extends StatelessWidget {
@@ -281,6 +347,7 @@ class _FlatButton extends StatelessWidget {
 
   final VoidCallback onPressed;
   final Widget child;
+
   @override
   Widget build(BuildContext context) {
     return InkResponse(
@@ -292,9 +359,6 @@ class _FlatButton extends StatelessWidget {
     );
   }
 }
-
-
-
 
 ///选项高度
 const double _kItemHeight = 48.0;

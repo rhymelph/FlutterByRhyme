@@ -55,7 +55,7 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
   List<Widget> getSetting() {
     return [
       ValueTitleButtonWidget(
-        title: 'Save(from scaffold)',
+        title: StringParams.kSave,
         onPressed: () {
           Navigator.pop(
               context,

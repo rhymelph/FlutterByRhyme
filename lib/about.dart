@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
 
-const String applicationVersion = '0.0.1';
+const String applicationVersion = '0.0.2';
 const String applicationLegalese = '© 2018 the rhymelph author';
 const about_platform = const MethodChannel('samples.flutter.io/about');
 const AliPay = 'DonateToMe';

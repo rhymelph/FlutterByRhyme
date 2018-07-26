@@ -38,7 +38,8 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
 
   @override
   String getExampleCode() {
-    return '''Scaffold(
+    return '''${setting.bottomNavigationBar?.label ==null? '':'int position=0;'}
+    Scaffold(
       appBar: ${setting.appBar?.label ?? ''},
       body: ${setting.body?.label ?? ''},
       floatingActionButton: ${setting.floatingActionButton?.label ?? ''},
@@ -124,14 +125,12 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
       ValueTitleButtonWidget(
         title: StringParams.kBottomNavigationBar,
         onPressed: () async{
-          exampleKey.currentState.showToast('BottomNavigationBar尚未开发，敬请期待!');
-
-//          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/BottomNavigationBar');
-//          if(changeValue!=null){
-//            setState(() {
-//              setting=setting.copyWith(bottomNavigationBar: changeValue);
-//            });
-//          }
+          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/BottomNavigationBar');
+          if(changeValue!=null){
+            setState(() {
+              setting=setting.copyWith(bottomNavigationBar: changeValue);
+            });
+          }
         },
       ),
       ValueTitleWidget(StringParams.kBackground),

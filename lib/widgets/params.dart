@@ -112,6 +112,11 @@ class StringParams {
   static final String kStrokeWidth = 'StrokeWidth(笔画宽度)';
   static final String kFallbackWidth = 'FallbackWidth(后退宽度)';
   static final String kFallbackHeight = 'FallbackHeight(后退高度)';
+
+  static final String kSave = 'Save(from scaffold)';
+  static final String kType = 'Type(类型)';
+  static final String kIconSize = 'IconSize(图标大小)';
+  static final String kItems = 'Items(子项)';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -1671,7 +1676,7 @@ List<Value<MaterialColor>> materialColorValues = [
 
 List<Value<List<BottomNavigationBarItem>>> bottomNavigationBarItemValues = [
   Value(
-    name: 'two item',
+    name: 'four item',
     value: [
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
@@ -1682,6 +1687,16 @@ List<Value<List<BottomNavigationBarItem>>> bottomNavigationBarItemValues = [
         icon: Icon(Icons.question_answer),
         title: Text('Question'),
         backgroundColor: Colors.yellow,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.map),
+        title: Text('map'),
+        backgroundColor: Colors.grey,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.person),
+        title: Text('Person'),
+        backgroundColor: Colors.green,
       ),
     ],
     label: '''[
@@ -1695,6 +1710,16 @@ List<Value<List<BottomNavigationBarItem>>> bottomNavigationBarItemValues = [
       title: Text('Question'),
       backgroundColor: Colors.yellow,
     ),
+    BottomNavigationBarItem(
+        icon: Icon(Icons.map),
+        title: Text('map'),
+        backgroundColor: Colors.grey,
+      ),
+    BottomNavigationBarItem(
+        icon: Icon(Icons.person),
+        title: Text('Person'),
+        backgroundColor: Colors.green,
+      ),
   ]''',
   ),
   Value(
@@ -1735,7 +1760,7 @@ List<Value<List<BottomNavigationBarItem>>> bottomNavigationBarItemValues = [
   ]''',
   ),
   Value(
-    name: 'four item',
+    name: 'two item',
     value: [
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
@@ -1747,17 +1772,6 @@ List<Value<List<BottomNavigationBarItem>>> bottomNavigationBarItemValues = [
         title: Text('Question'),
         backgroundColor: Colors.yellow,
       ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.map),
-        title: Text('map'),
-        backgroundColor: Colors.grey,
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.person),
-        title: Text('Person'),
-        backgroundColor: Colors.green,
-      ),
-
     ],
     label: '''[
     BottomNavigationBarItem(
@@ -1770,16 +1784,19 @@ List<Value<List<BottomNavigationBarItem>>> bottomNavigationBarItemValues = [
       title: Text('Question'),
       backgroundColor: Colors.yellow,
     ),
-    BottomNavigationBarItem(
-        icon: Icon(Icons.map),
-        title: Text('map'),
-        backgroundColor: Colors.grey,
-      ),
-    BottomNavigationBarItem(
-        icon: Icon(Icons.person),
-        title: Text('Person'),
-        backgroundColor: Colors.green,
-      ),
   ]''',
+  ),
+];
+
+List<Value<BottomNavigationBarType>> bottomNavigationBarTypeValues=[
+  Value(
+    name: 'shifting',
+    value: BottomNavigationBarType.shifting,
+    label: 'BottomNavigationBarType.shifting',
+  ),
+  Value(
+    name: 'fixed',
+    value: BottomNavigationBarType.fixed,
+    label: 'BottomNavigationBarType.fixed',
   ),
 ];

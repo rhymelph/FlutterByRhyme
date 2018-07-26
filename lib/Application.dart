@@ -30,6 +30,11 @@ class _DemoAppState extends State<DemoApp> {
       timeDilation: timeDilation,
       platform: defaultTargetPlatform,
     );
+    MyOptions.initOption().then((value) {
+      if (mounted) {
+        _handleOptionChanged(value);
+      }
+    });
   }
 
   //配置应用字体
@@ -46,7 +51,7 @@ class _DemoAppState extends State<DemoApp> {
   //主题更换
   void _handleOptionChanged(MyOptions newOptions) {
     setState(() {
-      if (_options.timeDilation != newOptions.timeDilation) {
+      if (_options?.timeDilation != newOptions.timeDilation) {
         _timeDilationTimer?.cancel();
         _timeDilationTimer = null;
 
@@ -72,17 +77,25 @@ class _DemoAppState extends State<DemoApp> {
 
   @override
   Widget build(BuildContext context) {
-    Widget optionPage=new OptionsPage(
+//    if (_options == null) {
+//      return MaterialApp(
+//        title: 'Flutter教程',
+//        home: Scaffold(body: Image.asset('images/burgers.jpg'),),
+//      );
+//    }
+    Widget optionPage = new OptionsPage(
       options: _options,
       onOptionsChanged: _handleOptionChanged,
     );
-    Widget home=new HomePage(
+    Widget home = new HomePage(
       optionPage: optionPage,
     );
     return new MaterialApp(
       title: 'Flutter教程',
       theme: _options.theme.data.copyWith(platform: _options.platform),
-      color: Colors.blue,
+      color: _options.theme.data.brightness == Brightness.light
+          ? Colors.blue
+          : const Color(0xFF002D75),
       routes: _buildRoutes(),
       builder: (BuildContext context, Widget child) {
         return Directionality(

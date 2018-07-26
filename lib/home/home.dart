@@ -103,6 +103,7 @@ class _HomePageState extends State<HomePage>
       resizeToAvoidBottomPadding: false,
       bottomNavigationBar: bottomOpcity == 1.0
           ? BottomNavigationBar(
+              key: ValueKey(isDark.toString()),
               currentIndex: _position,
               type: BottomNavigationBarType.shifting,
               onTap: _bottomBarTap,

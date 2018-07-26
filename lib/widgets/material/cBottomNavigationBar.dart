@@ -3,6 +3,7 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class BottomNavigationBarDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/BottomNavigationBar';
+  final String detail = '';
 
   @override
   _BottomNavigationBarDemoState createState() =>
@@ -24,60 +25,115 @@ class _BottomNavigationBarDemoState
       items: bottomNavigationBarItemValues[0],
       onTap: Value(
         name: 'onTap',
-        value: (value){
-          if(setting.items.value.length>value){
-            print(value);
-            setState(() {
-              setting.copyWith(currentIndex: Value(
-                name: '$value',
-                value: value,
-                label: 'position',
-              ));
-            });
+        value: (value) {
+          if(mounted){
+            if (setting.items.value.length > value) {
+              setState(() {
+                setting = setting.copyWith(
+                    currentIndex: Value(
+                      name: '$value',
+                      value: value,
+                      label: 'position',
+                    ));
+              });
+            }
           }
         },
-        label: '(value){'
-            'setState(() {'
-            'position=value;'
-            '});'
+        label: '''(value){
+                  setState(() {
+                      position=value;
+                  });
+                 }''',
       ),
-      iconSize: doubleLargeValues[0],
-
+      iconSize: doubleLargeValues[4],
     );
     super.initState();
   }
 
   @override
   String getDetail() {
-    return '''int position=0;''';
+    return widget.detail;
   }
 
   @override
   String getExampleCode() {
-    return '';
+    return '''BottomNavigationBar(
+      items: ${setting.items?.label??''},
+      onTap: ${setting.onTap?.label??''},
+      currentIndex: ${setting.currentIndex?.label??''},
+      type: ${setting.type?.label??''},
+      fixedColor: ${setting.fixedColor?.label??''},
+      iconSize: ${setting.iconSize?.label??''},
+    )''';
   }
 
   @override
   List<Widget> getSetting() {
     return [
       ValueTitleButtonWidget(
-        title: 'Save(from scaffold)',
+        title: StringParams.kSave,
         onPressed: () {
           Navigator.pop(
               context,
-              Value<PreferredSizeWidget>(
+              Value<Widget>(
                 name: 'BottomNavigationBar',
                 value: returnWidget(),
                 label: getExampleCode(),
               ));
         },
       ),
-      ValueTitleWidget('Items'),
-      RadioGroupWidget(setting.items, bottomNavigationBarItemValues, (value){
-        setState(() {
-          setting=setting.copyWith(items: value);
-        });
-      }),
+      ValueTitleWidget(StringParams.kItems),
+      RadioGroupWidget<List<BottomNavigationBarItem>>(
+        setting.items,
+        bottomNavigationBarItemValues,
+        (value) {
+          setState(() {
+            if (setting.currentIndex.value > value.value.length - 1) {
+              setting = setting.copyWith(
+                items: value,
+                currentIndex: Value(
+                  name: '0',
+                  value: 0,
+                  label: 'position',
+                ),
+              );
+            } else {
+              setting = setting.copyWith(items: value);
+            }
+          });
+        },
+      ),
+      DropDownValueTitleWidget(
+        selectList: doubleLargeValues,
+        title: StringParams.kIconSize,
+        value: setting.iconSize,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(
+              iconSize: value,
+            );
+          });
+        },
+      ),
+      ColorGroupWidget(
+        setting.fixedColor,
+        colorValues,
+        (value) {
+          setState(() {
+            setting = setting.copyWith(fixedColor: value);
+          });
+        },
+      ),
+      ValueTitleWidget(StringParams.kType),
+      RadioGroupWidget<BottomNavigationBarType>(
+        setting.type,
+        bottomNavigationBarTypeValues,
+        (value) {
+          setState(() {
+            setting = setting.copyWith(type: value);
+          });
+        },
+      ),
     ];
   }
 
