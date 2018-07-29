@@ -117,6 +117,19 @@ class StringParams {
   static final String kType = 'Type(类型)';
   static final String kIconSize = 'IconSize(图标大小)';
   static final String kItems = 'Items(子项)';
+
+  static final String kTabs = 'Tabs(标签)';
+  static final String kIsScrollable = 'IsScrollable(可滚动)';
+  static final String kIndicator = 'Indicator(指示器)';
+  static final String kIndicatorColor = 'IndicatorColor(指示器颜色)';
+  static final String kIndicatorSize = 'IndicatorSize(指示器大小)';
+  static final String kIndicatorWeight = 'IndicatorWeight(指示器权重)';
+  static final String kIndicatorPadding = 'IndicatorPadding(指示器内边距)';
+  static final String kLabelStyle = 'LabelStyle(标签样式)';
+  static final String kLabelColor= 'LabelColor(标签颜色)';
+  static final String kUnselectedLabelStyle = 'UnselectedLabelStyle(未选中标签样式)';
+  static final String kUnselectedLabelColor = 'UnselectedLabelColor(未选中标签颜色)';
+
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -1798,5 +1811,162 @@ List<Value<BottomNavigationBarType>> bottomNavigationBarTypeValues=[
     name: 'fixed',
     value: BottomNavigationBarType.fixed,
     label: 'BottomNavigationBarType.fixed',
+  ),
+];
+
+List<Value<List<Widget>>> tabValues=[
+  Value(
+      name: 'six',
+      value: [
+        Tab(
+          text: 'tab1',
+          icon: Icon(Icons.title),
+        ),
+        Tab(
+          text: 'tab2',
+          icon: Icon(Icons.brightness_1),
+        ),
+        Tab(
+          text: 'tab3',
+          icon: Icon(Icons.label),
+        ),
+        Tab(
+          text: 'tab4',
+          icon: Icon(Icons.style),
+        ),
+        Tab(
+          text: 'tab5',
+          icon: Icon(Icons.add),
+        ),
+        Tab(
+          text: 'tab6',
+          icon: Icon(Icons.print),
+        ),
+      ],
+      label: '''[
+      Tab(
+        text: 'tab1',
+        icon: Icon(Icons.title),
+      ),
+      Tab(
+        text: 'tab2',
+        icon: Icon(Icons.brightness_1),
+      ),
+      Tab(
+        text: 'tab3',
+        icon: Icon(Icons.label),
+      ),
+      Tab(
+        text: 'tab4',
+        icon: Icon(Icons.style),
+      ),
+      Tab(
+          text: 'tab5',
+          icon: Icon(Icons.add),
+      ),
+      Tab(
+          text: 'tab6',
+          icon: Icon(Icons.print),
+      ),
+    ]'''
+  ),
+  Value(
+      name: 'five',
+      value: [
+        Tab(
+          text: 'tab1',
+          icon: Icon(Icons.title),
+        ),
+        Tab(
+          text: 'tab2',
+          icon: Icon(Icons.brightness_1),
+        ),
+        Tab(
+          text: 'tab3',
+          icon: Icon(Icons.label),
+        ),
+        Tab(
+          text: 'tab4',
+          icon: Icon(Icons.style),
+        ),
+        Tab(
+          text: 'tab5',
+          icon: Icon(Icons.add),
+        ),
+      ],
+      label: '''[
+      Tab(
+        text: 'tab1',
+        icon: Icon(Icons.title),
+      ),
+      Tab(
+        text: 'tab2',
+        icon: Icon(Icons.brightness_1),
+      ),
+      Tab(
+        text: 'tab3',
+        icon: Icon(Icons.label),
+      ),
+      Tab(
+        text: 'tab4',
+        icon: Icon(Icons.style),
+      ),
+      Tab(
+          text: 'tab5',
+          icon: Icon(Icons.add),
+        ),
+    ]'''
+  ),
+  Value(
+    name: 'four',
+    value: [
+      Tab(
+        text: 'tab1',
+        icon: Icon(Icons.title),
+      ),
+      Tab(
+        text: 'tab2',
+        icon: Icon(Icons.brightness_1),
+      ),
+      Tab(
+        text: 'tab3',
+        icon: Icon(Icons.label),
+      ),
+      Tab(
+        text: 'tab4',
+        icon: Icon(Icons.style),
+      ),
+    ],
+    label: '''[
+      Tab(
+        text: 'tab1',
+        icon: Icon(Icons.title),
+      ),
+      Tab(
+        text: 'tab2',
+        icon: Icon(Icons.brightness_1),
+      ),
+      Tab(
+        text: 'tab3',
+        icon: Icon(Icons.label),
+      ),
+      Tab(
+        text: 'tab4',
+        icon: Icon(Icons.style),
+      ),
+    ]'''
+  ),
+];
+
+List<Value<TabBarIndicatorSize>> tabBarIndicatorSizeValues=[
+  Value(
+    name: 'label',
+    value: TabBarIndicatorSize.label,
+    label: 'TabBarIndicatorSize.label',
+  ),
+  Value(
+    name: 'tab',
+    value: TabBarIndicatorSize.tab,
+    label: 'TabBarIndicatorSize.tab',
   ),
 ];

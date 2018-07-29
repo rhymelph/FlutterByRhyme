@@ -20,7 +20,7 @@ import 'package:flutter/foundation.dart';
 
 const String finishDemo=
     'Container,Row,Column,Image,Text.Icon,RaisedButton,Scaffold,AppBar,FlutterLogo,PlaceHolder,'
-    'BottomNavigationBar';
+    'BottomNavigationBar,TabBar,TabBarView';
 
 class BottomItem {
   final String title;
