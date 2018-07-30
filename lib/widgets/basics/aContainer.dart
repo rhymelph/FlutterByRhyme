@@ -28,6 +28,8 @@ class _ContainerDemoState extends ExampleState<ContainerDemo> {
 
   @override
   String getExampleCode() {
+//    String alignment=setting.alignment?.label==null?
+//        '':'alignment: ${setting.alignment?.label},';
     return """Container(
     alignment: ${setting.alignment?.label ?? ''},
     padding: ${setting.padding?.label ?? ''},

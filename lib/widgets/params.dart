@@ -130,6 +130,8 @@ class StringParams {
   static final String kUnselectedLabelStyle = 'UnselectedLabelStyle(未选中标签样式)';
   static final String kUnselectedLabelColor = 'UnselectedLabelColor(未选中标签颜色)';
 
+  static final String kPhysics = 'Physics(物理响应)';
+
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -1968,5 +1970,43 @@ List<Value<TabBarIndicatorSize>> tabBarIndicatorSizeValues=[
     name: 'tab',
     value: TabBarIndicatorSize.tab,
     label: 'TabBarIndicatorSize.tab',
+  ),
+];
+
+List<Value<ScrollPhysics>> physicsValues=[
+  Value(
+    name: 'ScrollPhysics',
+    value: ScrollPhysics(),
+    label: 'ScrollPhysics()',
+  ),
+  Value(
+    name: 'BouncingScrollPhysics',
+    value: BouncingScrollPhysics(),
+    label: 'BouncingScrollPhysics()',
+  ),
+  Value(
+    name: 'ClampingScrollPhysics',
+    value: ClampingScrollPhysics(),
+    label: 'ClampingScrollPhysics()',
+  ),
+  Value(
+    name: 'FixedExtentScrollPhysics',
+    value: FixedExtentScrollPhysics(),
+    label: 'FixedExtentScrollPhysics()',
+  ),
+  Value(
+    name: 'AlwaysScrollableScrollPhysics',
+    value: AlwaysScrollableScrollPhysics(),
+    label: 'AlwaysScrollableScrollPhysics()',
+  ),
+  Value(
+    name: 'PageScrollPhysics',
+    value: PageScrollPhysics(),
+    label: 'AlwaysScrollableScrollPhysics()',
+  ),
+  Value(
+    name: 'NeverScrollableScrollPhysics',
+    value: NeverScrollableScrollPhysics(),
+    label: 'NeverScrollableScrollPhysics()',
   ),
 ];

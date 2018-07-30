@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'dart:async';
 import 'package:flutterbyrhyme/code/code_highlighter.dart';
 export 'package:flutterbyrhyme/widgets/paramWidgets.dart';
-
+export 'code_highlighter.dart';
 abstract class ExampleState<T extends StatefulWidget> extends State<T> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
