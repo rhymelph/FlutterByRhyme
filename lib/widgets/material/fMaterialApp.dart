@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterbyrhyme/code/markdown_dart_code.dart';
 class MaterialAppDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/MaterialApp';
   static const String detail='''> 22个参数
@@ -30,8 +31,8 @@ class MaterialAppDemo extends StatefulWidget {
 
 ## 1. navigatorKey
 > navigatorKey.currentState
-相当于
- Navigator.of(context)
+> 相当于
+> Navigator.of(context)
 ### 使用
 ```dart
   GlobalKey<NavigatorState> _navigatorKey=new GlobalKey();
@@ -42,7 +43,6 @@ class MaterialAppDemo extends StatefulWidget {
 ```
 ## 2. home
 > 进入程序后显示的第一个页面,传入的是一个Widget，但实际上这个Widget需要包裹一个Scaffold以显示该程序使用Material Design风格
-
 ### 使用
 ```dart
 class MyApp extends StatelessWidget {
@@ -75,9 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
 ```
 ## 3. routes
 > 声明程序中有哪个通过Navigation.of(context).pushNamed跳转的路由
-参数以键值对的形式传递 
-key:路由名字
-value:对应的Widget
+> 参数以键值对的形式传递 
+> key:路由名字
+> value:对应的Widget
 ### 使用
 ```dart
 new MaterialApp(
@@ -88,11 +88,11 @@ new MaterialApp(
       },
     );
 ```
-## 4 . initialRoute
+## 4. initialRoute
 > 初始路由，当用户进入程序时，自动打开对应的路由。
-(home还是位于一级)
-传入的是上面routes的key
-跳转的是对应的Widget（如果该Widget有Scaffold.AppBar,并不做任何修改，左上角有返回键）
+> (home还是位于一级)
+> 传入的是上面routes的key
+> 跳转的是对应的Widget（如果该Widget有Scaffold.AppBar,并不做任何修改，左上角有返回键）
 ### 使用
 ```dart
 new MaterialApp(
@@ -104,9 +104,9 @@ new MaterialApp(
       initialRoute: '/home/one',
     );
 ```
-## 5 . onGenerateRoute
+## 5. onGenerateRoute
 > 当通过Navigation.of(context).pushNamed跳转路由时，
-在routes查找不到时，会调用该方法
+> 在routes查找不到时，会调用该方法
 ### 使用
 ```dart
 new MaterialApp(
@@ -140,10 +140,10 @@ new MaterialApp(
       }
     );
 ```
-## 6 . onUnknownRoute
+## 6. onUnknownRoute
 > 效果跟onGenerateRoute一样
-调用顺序为onGenerateRoute ==> onUnknownRoute
-## 7 . navigatorObservers
+> 调用顺序为onGenerateRoute ==> onUnknownRoute
+## 7. navigatorObservers
 > 路由观察器，当调用Navigator的相关方法时，会回调相关的操作
 ### 使用
 ```dart
@@ -165,9 +165,9 @@ class MyObserver extends NavigatorObserver{
   }
 }
 ```
-## 8 .  builder
+## 8. builder
 > 当构建一个Widget前调用
-一般做字体大小，方向，主题颜色等配置
+> 一般做字体大小，方向，主题颜色等配置
 ### 使用
 ```dart
 new MaterialApp(
@@ -182,19 +182,19 @@ new MaterialApp(
       },
     );
 ```
-## 9 . title
+## 9. title
 > 该标题出现在
-Android：任务管理器的程序快照之上
-IOS: 程序切换管理器中
+> Android：任务管理器的程序快照之上
+> IOS: 程序切换管理器中
 ### 使用
 ```dart
 new MaterialApp(
       title: 'Flutter应用',
     );
 ```
-## 10 . onGenerateTitle
+## 10. onGenerateTitle
 > 跟上面的tiitle一样，但含有一个context参数
-用于做本地化
+> 用于做本地化
 ```dart
 new MaterialApp(
       onGenerateTitle: (context){
@@ -202,7 +202,7 @@ new MaterialApp(
       },
     );
 ```
-## 11 . color
+## 11. color
 > 该颜色为Android中程序切换中应用图标背景的颜色，当应用图标背景为透明时
 ### 使用
 ```dart
@@ -210,7 +210,7 @@ new MaterialApp(
       color: Colors.blue,
     )
 ```
-## 12 . theme
+## 12. theme
 > 应用程序的主题，各种的定制颜色都可以设置，用于程序主题切换
 ### 使用
 ```dart
@@ -221,14 +221,14 @@ new MaterialApp(
       ),
     );
 ```
-## 13 . locale
+## 13. locale
 > 当前区域，如果为null则使用系统区域
-一般用于语言切换
+> 一般用于语言切换
 ### 使用
 ```dart
 //传入两个参数，语言代码，国家代码
 new MaterialApp(
-      Locale('yy','zh')，
+      locale: Locale('zh','cn'),
     );
 //源码纠正，一些曾经用过的代码（注释后面的日期为不再使用的日期），源码会自动纠正
 //来看一下源码
@@ -325,7 +325,7 @@ switch (_countryCode) {
       default: return regionCode;
     }
 ```
-## 14 . localizationsDelegates
+## 14. localizationsDelegates
 > 本地化委托，用于更改Flutter Widget默认的提示语，按钮text等
 ### 使用
 ```dart
@@ -377,7 +377,7 @@ class MyLocalizations extends DefaultMaterialLocalizations{
   }
 }
 ```
-## 15 . localeResolutionCallback
+## 15. localeResolutionCallback
 > 当传入的是不支持的语种，可以根据这个回调，返回相近,并且支持的语种
 ### 使用
 ```dart
@@ -394,7 +394,7 @@ new MaterialApp(
       locale: Locale('ze','cn'),
     );
 ```
-## 16 . supportedLocales
+## 16. supportedLocales
 > 传入支持的语种数组
 ```dart
 new MaterialApp(
@@ -404,17 +404,17 @@ new MaterialApp(
       ],
     );
 ```
-##  17 . debugShowMaterialGrid
+## 17. debugShowMaterialGrid
 > debug模式下是否显示材质网格，传入bool类型，使用就不写了
-##  18 . showPerformanceOverlay
+## 18. showPerformanceOverlay
 > 当为true时应用程序顶部覆盖一层GPU和UI曲线图，可即时查看当前流畅度情况
-##  19 . checkerboardRasterCacheImages
+## 19. checkerboardRasterCacheImages
 > 当为true时，打开光栅缓存图像的棋盘格
-##  20 . checkerboardOffscreenLayers
+## 20. checkerboardOffscreenLayers
 > 当为true时，打开呈现到屏幕位图的层的棋盘格
-##  21 . showSemanticsDebugger
+## 21. showSemanticsDebugger
 > 当为true时，打开Widget边框，类似Android开发者模式中显示布局边界
-##  22 . debugShowCheckedModeBanner
+## 22. debugShowCheckedModeBanner
 > 当为true时，在debug模式下显示右上角的debug字样的横幅，false即为不显示
 ''';
   @override
@@ -428,6 +428,9 @@ class _MaterialAppDemoState extends State<MaterialAppDemo> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('MaterialApp'),
+      ),
+      body: SingleChildScrollView(
+        child: DartMarkDown(MaterialAppDemo.detail),
       ),
     );
   }
