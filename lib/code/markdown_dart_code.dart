@@ -141,6 +141,9 @@ class DartMarkDown extends StatelessWidget {
           child: RichText(text: span),
         ));
       } else if (span.style == Theme.of(context).textTheme.body2) {
+        Color normal1=isDark?Colors.black:Colors.white;
+        Color normal2=isDark?Colors.black45:Colors.grey[200];
+        Color borderColor=isDark?Colors.white30:Colors.black87;
         List<String> tableText = span.text.split(table);
         List<Widget> childs = [];
         bool isRow = false;
@@ -155,14 +158,14 @@ class DartMarkDown extends StatelessWidget {
             widgets.add(Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: j%2==0?Colors.grey[200]:Colors.white,
+                color: j%2==0?normal2:normal1,
                 border: Border(
                   bottom: BorderSide(
-                    color: Colors.black87,
+                    color: borderColor,
                     width: 1.0,
                   ),
                   top: BorderSide(
-                    color: isTableTitle?Colors.black87:Colors.transparent,
+                    color: isTableTitle?borderColor:Colors.transparent,
                     width: 1.0
                   ),
                 ),

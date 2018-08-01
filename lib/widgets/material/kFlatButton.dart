@@ -3,7 +3,12 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class FlatButtonDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/FlatButton';
-  final String detail = '';
+  final String detail = '''A material design "flat button".
+A flat button is a text label displayed on a (zero elevation) Material widget that reacts to touches by filling with color.
+Use flat buttons on toolbars, in dialogs, or inline with other content but offset from that content with padding so that the button's presence is obvious. Flat buttons intentionally do not have visible borders and must therefore rely on their position relative to other content for context. In dialogs and cards, they should be grouped together in one of the bottom corners. Avoid using flat buttons where they would blend in with other content, for example in the middle of lists.
+Material design flat buttons have an all-caps label, some internal padding, and some defined dimensions. To have a part of your application be interactive, with ink splashes, without also committing to these stylistic choices, consider using InkWell instead.
+If the onPressed callback is null, then the button will be disabled, will not react to touch, and will be colored as specified by the disabledColor property instead of the color property. If you are trying to change the button's color and it is not having any effect, check that you are passing a non-null onPressed handler.
+Flat buttons have a minimum size of 88.0 by 36.0 which can be overidden with ButtonTheme.''';
 
   @override
   _FlatButtonDemoState createState() => _FlatButtonDemoState();
