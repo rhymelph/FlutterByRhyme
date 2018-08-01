@@ -131,6 +131,14 @@ class StringParams {
   static final String kUnselectedLabelColor = 'UnselectedLabelColor(未选中标签颜色)';
 
   static final String kPhysics = 'Physics(物理响应)';
+  static final String kDrawerHeader = 'DrawerHeader(侧滑栏头部)';
+
+  static final String kMini = 'Mini(迷你)';
+  static final String kIsExtended = 'IsExtended(是否扩展)';
+  static final String kTooltip = 'Tooltip(工具提示)';
+  static final String kForegroundColor = 'ForegroundColor(前景颜色)';
+  static final String kHighlightElevation = 'HighlightElevation(高亮高度)';
+  static final String kNotchMargin = 'NotchMargin(切口边缘)';
 
 }
 

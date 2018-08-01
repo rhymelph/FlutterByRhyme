@@ -63,7 +63,7 @@ class _RaisedButtonDemoState extends ExampleState<RaisedButtonDemo> {
       ValueTitleWidget(StringParams.konPressed),
       RadioGroupWidget(setting.onPressed, onPressValues, (value) {
         setState(() {
-          setting = setting.copyWith(onPress: value);
+          setting = setting.copyWith(onPressed: value);
         });
       }),
       ValueTitleWidget(StringParams.kTextTheme),
@@ -257,7 +257,7 @@ class RaisedButtonSetting {
   });
 
   RaisedButtonSetting copyWith({
-    Value<ValueChanged<GlobalKey<ScaffoldState>>> onPress,
+    Value<ValueChanged<GlobalKey<ScaffoldState>>> onPressed,
     Value<ButtonTextTheme> textTheme,
     Value<Color> textColor,
     Value<Color> disabledTextColor,
@@ -274,7 +274,7 @@ class RaisedButtonSetting {
     Value<Duration> animationDuration,
   }) {
     return RaisedButtonSetting(
-      onPressed: onPress ?? this.onPressed,
+      onPressed: onPressed ?? this.onPressed,
       textTheme: textTheme ?? this.textTheme,
       textColor: textColor ?? this.textColor,
       disabledTextColor: disabledTextColor ?? this.disabledTextColor,

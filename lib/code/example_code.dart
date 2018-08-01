@@ -206,14 +206,18 @@ class _FullScreenCodeDialogState extends State<FullScreenCodeDialog> {
       );
     } else {
       body = SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: RichText(
-              text: TextSpan(
-                  style: const TextStyle(fontSize: 18.0),
-                  children: <TextSpan>[
-                DartSyntaxHighlighter(style).format(widget.exampleCode),
-              ])),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: RichText(
+                text: TextSpan(
+                    style: const TextStyle(fontSize: 18.0),
+                    children: <TextSpan>[
+                  DartSyntaxHighlighter(style).format(widget.exampleCode),
+                ])),
+          ),
         ),
       );
     }

@@ -152,11 +152,28 @@ class DartMarkDown extends StatelessWidget {
             childs.add(Divider(height: 10.0,color: Colors.grey,));
           } else if (text.isEmpty && childs.length != 0) {
             isRow = true;
-            widgets.add(Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: childs,
+            widgets.add(Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: j%2==0?Colors.grey[200]:Colors.white,
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.black87,
+                    width: 1.0,
+                  ),
+                  top: BorderSide(
+                    color: isTableTitle?Colors.black87:Colors.transparent,
+                    width: 1.0
+                  ),
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: childs,
+              ),
+
             ));
             childs = [];
           } else if (!text.contains('-') && isRow) {
@@ -165,6 +182,7 @@ class DartMarkDown extends StatelessWidget {
                 padding: const EdgeInsets.all(4.0),
                 child: Text(
                   text,
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.body1.copyWith(
                         fontWeight:
                             isTableTitle ? FontWeight.bold : FontWeight.normal,
@@ -186,7 +204,9 @@ class DartMarkDown extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           alignment: Alignment.centerLeft,
           color: isDark ? Colors.black45 : Colors.grey[100],
-          child: RichText(text: span),
+          child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: RichText(text: span)),
         ));
       }
     }
