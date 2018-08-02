@@ -86,7 +86,15 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
 
   @override
   TextSpan format(String src) {
-    _src = src;
+    List<String> srcs=src.split('\n');
+    List<String> srcFormat=[];
+    //格式化去掉多余的代码
+    for(String s in srcs){
+      if(!s.contains(': ,')&&!s.contains(':,')){
+        srcFormat.add(s);
+      }
+    }
+    _src = srcFormat.join('\n');
     _scanner = new StringScanner(_src);
 
     if (_generateSpans()) {

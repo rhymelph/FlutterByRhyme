@@ -4,7 +4,19 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class TextFieldDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/TextField';
-  final String detail = '';
+  final String detail = '''
+  A material design text field.
+A text field lets the user enter text, either with hardware keyboard or with an onscreen keyboard.
+The text field calls the onChanged callback whenever the user changes the text in the field. If the user indicates that they are done typing in the field (e.g., by pressing a button on the soft keyboard), the text field calls the onSubmitted callback.
+To control the text that is displayed in the text field, use the controller. For example, to set the initial value of the text field, use a controller that already contains some text. The controller can also control the selection and composing region (and to observe changes to the text, selection, and composing region).
+By default, a text field has a decoration that draws a divider below the text field. You can use the decoration property to control the decoration, for example by adding a label or an icon. If you set the decoration property to null, the decoration will be removed entirely, including the extra padding introduced by the decoration to save space for the labels.
+If decoration is non-null (which is the default), the text field requires one of its ancestors to be a Material widget. When the TextField is tapped an ink splash that paints on the material is triggered, see ThemeData.splashFactory.
+To integrate the TextField into a Form with other FormField widgets, consider using TextFormField.
+See also:
+material.google.com/components/text-fields.html
+TextFormField, which integrates with the Form widget.
+InputDecorator, which shows the labels and other visual elements that surround the actual text editing widget.
+EditableText, which is the raw text editing control at the heart of a TextField. (The EditableText widget is rarely used directly unless you are implementing an entirely different design language, such as Cupertino.)''';
 
   @override
   _TextFieldDemoState createState() => _TextFieldDemoState();
@@ -19,7 +31,7 @@ class _TextFieldDemoState extends ExampleState<TextFieldDemo> {
       controller: Value(
         name: 'controller',
         value: TextEditingController(),
-        label: 'TextEditingController()',
+        label: 'controller',
       ),
       decoration: inputDecorationValues[0],
       keyboardType: textInputTypeValues[0],
@@ -33,14 +45,32 @@ class _TextFieldDemoState extends ExampleState<TextFieldDemo> {
         name: 'focusNode',
         value: FocusNode(),
         label: 'node',
+      ),
+      onChanged: Value(
+        name: 'onChanged',
+        value: (value){
+          //todo
+        },
+        label: '''(value){
+          //todo 当输入文本改变时会触发
+        }''',
+      ),
+      onSubmitted: Value(
+        name: 'onSubmitted',
+        value: (value){
+          //todo
+        },
+        label: '''(value){
+          //todo 点击软键盘的提交按钮会触发
+        }''',
       )
     );
     //添加监听
     setting.focusNode.value.addListener((){
-      print(setting.focusNode.value.hasFocus);
+//      print(setting.focusNode.value.hasFocus);
     });
     setting.controller.value.addListener((){
-      print(setting.controller.value.text);
+//      print(setting.controller.value.text);
     });
     super.initState();
   }
@@ -58,45 +88,94 @@ class _TextFieldDemoState extends ExampleState<TextFieldDemo> {
 
   @override
   String getExampleCode() {
-    return '';
+    return '''TextEditingController controller=TextEditingController();
+    //监听输入的文本
+    controller.addListener((){
+//      print(controller.text);
+    });
+FocusNode node=FocusNode();
+    //监听输入框获取焦点
+    node.addListener((){
+//      print(node.hasFocus);
+    });
+    TextField(
+        controller: ${setting.controller?.label??''},
+        focusNode: ${setting.focusNode?.label??''},
+        decoration: ${setting.decoration?.label??''},
+        keyboardType: ${setting.keyboardType?.label??''},
+        style: ${setting.style?.label??''},
+        textAlign: ${setting.textAlign?.label??''},
+        autofocus: ${setting.autofocus?.label??''},
+        obscureText: ${setting.obscureText?.label??''},
+        autocorrect: ${setting.autocorrect?.label??''},
+        maxLines: ${setting.maxLines?.label??''},
+        maxLength: ${setting.maxLength?.label??''},
+        maxLengthEnforced: ${setting.maxLengthEnforced?.label??''},
+        onChanged: ${setting.onChanged?.label??''},
+        onSubmitted: ${setting.onSubmitted?.label??''},
+        inputFormatters: ${setting.inputFormatters?.label??''},
+        enabled: ${setting.enabled?.label??''},
+      )''';
   }
 
-  bool isExpanded=false;
+  bool isDecorationExpanded=false;
+  bool isStyleExpanded=false;
 
   @override
   List<Widget> getSetting() {
     return [
       ExpansionPanelTitleWidget(
-        isExpanded: isExpanded,
+        isExpanded: isStyleExpanded,
         onChanged: (value){
           setState(() {
-            this.isExpanded=value;
+            this.isStyleExpanded=value;
           });
         },
-        titleWidget: ValueTitleWidget('decoration'),
-        hintWidget: InputDecorationDemo(
-          onchange: (value){
+        titleWidget: ValueTitleWidget(StringParams.kStyle),
+        hintWidget: TextStyleDemo(onchange: (value){
+          setState(() {
+            setting=setting.copyWith(style: value);
+          });
+        },),
+      ),
+      ExpansionPanelTitleWidget(
+        isExpanded: isDecorationExpanded,
+        onChanged: (value){
+          setState(() {
+            this.isDecorationExpanded=value;
+          });
+        },
+        titleWidget: ValueTitleWidget(StringParams.kDecoration),
+        hintWidget: LayoutBuilder(builder: (BuildContext context,BoxConstraints constraints){
+          return InputDecorationDemo(onchange: (value){
             setState(() {
               setting=setting.copyWith(decoration: value);
             });
-          },
-        ),
+          },);
+        }),
       ),
-      ValueTitleWidget('textAlign'),
+      ValueTitleWidget(StringParams.kTextAlign),
       RadioGroupWidget(setting.textAlign, textAlignValues, (value){
         setState(() {
           setting=setting.copyWith(textAlign: value);
         });
       }),
-      ValueTitleWidget('keyboardType'),
+      ValueTitleWidget(StringParams.kKeyboardType),
       RadioGroupWidget(setting.keyboardType, textInputTypeValues, (value){
         setState(() {
           setting.controller.value.clear();
           setting=setting.copyWith(keyboardType: value);
         });
       }),
+      ValueTitleWidget(StringParams.kInputFormatters),
+      RadioGroupWidget(setting.inputFormatters, textinputFormatterValues, (value){
+        setState(() {
+          setting.controller.value.clear();
+          setting=setting.copyWith(inputFormatters: value);
+        });
+      }),
       SwitchValueTitleWidget(
-        title: 'autofocus',
+        title: StringParams.kAutoFocus,
         value: setting.autofocus,
         onChanged: (value) {
           setState(() {
@@ -105,7 +184,7 @@ class _TextFieldDemoState extends ExampleState<TextFieldDemo> {
         },
       ),
       SwitchValueTitleWidget(
-        title: 'autocorrect',
+        title: StringParams.kAutoCorrect,
         value: setting.autocorrect,
         onChanged: (value) {
           setState(() {
@@ -114,7 +193,7 @@ class _TextFieldDemoState extends ExampleState<TextFieldDemo> {
         },
       ),
       SwitchValueTitleWidget(
-        title: 'obscureText',
+        title: StringParams.kObscureText,
         value: setting.obscureText,
         onChanged: (value) {
           setState(() {
@@ -123,7 +202,7 @@ class _TextFieldDemoState extends ExampleState<TextFieldDemo> {
         },
       ),
       SwitchValueTitleWidget(
-        title: 'maxLengthEnforced',
+        title: StringParams.kMaxLengthEnforced,
         value: setting.maxLengthEnforced,
         onChanged: (value) {
           setState(() {
@@ -132,7 +211,7 @@ class _TextFieldDemoState extends ExampleState<TextFieldDemo> {
         },
       ),
       SwitchValueTitleWidget(
-        title: 'enabled',
+        title: StringParams.kEnabled,
         value: setting.enabled,
         onChanged: (value) {
           setState(() {
@@ -142,7 +221,7 @@ class _TextFieldDemoState extends ExampleState<TextFieldDemo> {
       ),
       DropDownValueTitleWidget(
         selectList: intValues,
-        title: 'maxLines',
+        title: StringParams.kMaxLines,
         value: setting.maxLines,
         onChanged: (value){
           setState(() {
@@ -152,7 +231,7 @@ class _TextFieldDemoState extends ExampleState<TextFieldDemo> {
       ),
       DropDownValueTitleWidget(
         selectList: intValues,
-        title: 'maxLength',
+        title: StringParams.kMaxLength,
         value: setting.maxLength,
         onChanged: (value){
           setState(() {

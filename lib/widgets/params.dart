@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Value<T> {
   final String name;
@@ -116,6 +117,7 @@ class StringParams {
   static final String kSave = 'Save(from scaffold)';
   static final String kType = 'Type(类型)';
   static final String kIconSize = 'IconSize(图标大小)';
+
   static final String kItems = 'Items(子项)';
 
   static final String kTabs = 'Tabs(标签)';
@@ -144,7 +146,38 @@ class StringParams {
   static final String kChildren = 'Children(孩子)';
 
   static final String kFixedColor='FixedColor(固定类型时的颜色)';
+  static final String kIcon = 'Icon(图标)';
+  static final String kContentPadding = 'ContentPadding(内容内边距)';
+  static final String kBorder = 'Border(边界)';
+  static final String kEnabled = 'Enabled(启用)';
+  static final String kIsDense = 'IsDense(是否密集)';
+  static final String kFillColor = 'FillColor(填充颜色)';
+  static final String kFilled = 'Filled(填充)';
+  static final String kHintText = 'HintText(提示文本)';
+  static final String kHintStyle = 'HintStyle(提示文本样式)';
+  static final String kLabelText = 'LabelText(标签文本)';
+  static final String kHelperText = 'HelperText(辅助文本)';
+  static final String kHelperStyle = 'HelperStyle(辅助文本样式)';
+  static final String kErrorText = 'ErrorText(错误文本)';
+  static final String kErrorStyle = 'ErrorStyle(错误文本样式)';
+  static final String kErrorMaxLines = 'ErrorMaxLines(错误文本最大行数)';
+  static final String kCounterText = 'CounterText(反文本)';
+  static final String kCounterStyle = 'CounterStyle(反文本样式)';
+  static final String kPrefixIcon = 'PrefixIcon(前缀图标)';
+  static final String kPrefixText = 'PrefixText(前缀文本)';
+  static final String kPrefixStyle = 'PrefixStyle(前缀文本样式)';
 
+  static final String kSuffixIcon = 'SuffixIcon(后缀图标)';
+  static final String kSuffixText = 'SuffixText(后缀文本)';
+  static final String kSuffixStyle = 'SuffixStyle(后缀文本样式)';
+
+  static final String kKeyboardType = 'KeyboardType(键盘类型)';
+  static final String kInputFormatters = 'InputFormatters(输入格式化)';
+  static final String kAutoFocus = 'AutoFocus(自动聚焦)';
+  static final String kAutoCorrect = 'AutoCorrect(自动校正)';
+  static final String kObscureText = 'ObscureText(模糊文本)';
+  static final String kMaxLengthEnforced = 'MaxLengthEnforced(最大长度限制)';
+  static final String kMaxLength = 'MaxLength(最大长度)';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -2234,5 +2267,35 @@ List<Value<InputBorder>> inputBorderValues=[
     name: 'Underline',
     value: UnderlineInputBorder(),
     label: 'UnderlineInputBorder()',
+  ),
+];
+
+List<Value<List<TextInputFormatter>>> textinputFormatterValues=[
+  Value(
+    name: 'Blacklisting(黑名单)',
+    value: [
+      BlacklistingTextInputFormatter('1',replacementString: '2'),
+    ],
+    label: '''[
+      BlacklistingTextInputFormatter('1',replacementString: '2'),
+    ]''',
+  ),
+  Value(
+      name: 'LengthLimiting(长度限制)',
+      value: [
+        LengthLimitingTextInputFormatter(10),
+      ],
+    label: '''[
+        LengthLimitingTextInputFormatter(10),
+      ]''',
+  ),
+  Value(
+      name: 'Whitelisting(白名单)',
+      value: [
+        WhitelistingTextInputFormatter('1'),
+      ],
+    label: '''[
+        WhitelistingTextInputFormatter('1'),
+      ]''',
   ),
 ];

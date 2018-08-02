@@ -1029,7 +1029,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        ValueTitleWidget('Icon'),
+        ValueTitleWidget(StringParams.kIcon),
         RadioGroupWidget(setting.icon, iconButtonValues, (value){
           setState(() {
             setting=setting.copyWith(icon: value);
@@ -1037,49 +1037,49 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
           });
         }),
         
-        ValueTitleWidget('contentPadding'),
+        ValueTitleWidget(StringParams.kContentPadding),
         RadioGroupWidget(setting.contentPadding, paddingValues, (value){
           setState(() {
             setting=setting.copyWith(contentPadding: value);
             changeValue();
           });
         }),
-        ValueTitleWidget('border'),
+        ValueTitleWidget(StringParams.kBorder),
         RadioGroupWidget(setting.border, inputBorderValues, (value){
           setState(() {
             setting=setting.copyWith(border: value);
             changeValue();
           });
         }),
-        SwitchValueTitleWidget(title: 'enabled',value: setting.enabled,
+        SwitchValueTitleWidget(title: StringParams.kEnabled,value: setting.enabled,
           onChanged: (value){
             setState(() {
               setting=setting.copyWith(enabled: value);
               changeValue();
             });
           },),
-        SwitchValueTitleWidget(title: 'isDense',value: setting.isDense,
+        SwitchValueTitleWidget(title: StringParams.kIsDense,value: setting.isDense,
         onChanged: (value){
           setState(() {
             setting=setting.copyWith(isDense: value);
             changeValue();
           });
         },),
-        SwitchValueTitleWidget(title: 'filled',value: setting.filled,
+        SwitchValueTitleWidget(title: StringParams.kFilled,value: setting.filled,
           onChanged: (value){
             setState(() {
               setting=setting.copyWith(filled: value);
               changeValue();
             });
           },),
-        ValueTitleWidget(''),
+        ValueTitleWidget(StringParams.kFillColor),
         ColorGroupWidget(setting.fillColor, colorValues, (value){
           setState(() {
             setting=setting.copyWith(fillColor: value);
             changeValue();
           });
         }),
-        EditTextTitleWidget('hintText', setting.hintText, (value) {
+        EditTextTitleWidget(StringParams.kHintText, setting.hintText, (value) {
           setState(() {
             setting = setting.copyWith(
               hintText: value,
@@ -1088,7 +1088,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
           });
         }),
         ExpansionPanelTitleWidget(
-          titleWidget: ValueTitleWidget('hintStyle'),
+          titleWidget: ValueTitleWidget(StringParams.kHintStyle),
           hintWidget: TextStyleDemo(
             onchange: (value) {
               setState(() {
@@ -1106,7 +1106,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
             });
           },
         ),
-        EditTextTitleWidget('labelText', setting.labelText, (value) {
+        EditTextTitleWidget(StringParams.kLabelText, setting.labelText, (value) {
           setState(() {
             setting = setting.copyWith(
               labelText: value,
@@ -1115,7 +1115,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
           });
         }),
         ExpansionPanelTitleWidget(
-          titleWidget: ValueTitleWidget('labelStyle'),
+          titleWidget: ValueTitleWidget(StringParams.kLabelStyle),
           hintWidget: TextStyleDemo(
             onchange: (value) {
               setState(() {
@@ -1133,7 +1133,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
             });
           },
         ),
-        EditTextTitleWidget('helperText', setting.helperText, (value) {
+        EditTextTitleWidget(StringParams.kHelperText, setting.helperText, (value) {
           setState(() {
             setting = setting.copyWith(
               helperText: value,
@@ -1142,7 +1142,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
           });
         }),
         ExpansionPanelTitleWidget(
-          titleWidget: ValueTitleWidget('helperStyle'),
+          titleWidget: ValueTitleWidget(StringParams.kHelperStyle),
           hintWidget: TextStyleDemo(
             onchange: (value) {
               setState(() {
@@ -1160,7 +1160,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
             });
           },
         ),
-        EditTextTitleWidget('errorText', setting.errorText, (value) {
+        EditTextTitleWidget(StringParams.kErrorText, setting.errorText, (value) {
           setState(() {
             setting = setting.copyWith(
               errorText: value,
@@ -1169,7 +1169,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
           });
         }),
         ExpansionPanelTitleWidget(
-          titleWidget: ValueTitleWidget('errorStyle'),
+          titleWidget: ValueTitleWidget(StringParams.kErrorStyle),
           hintWidget: TextStyleDemo(
             onchange: (value) {
               setState(() {
@@ -1189,7 +1189,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
         ),
         DropDownValueTitleWidget(
           selectList: intValues,
-          title: 'errorMaxLines',
+          title: StringParams.kErrorMaxLines,
           value: setting.errorMaxLines,
           onChanged: (value) {
             setState(() {
@@ -1200,7 +1200,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
             });
           },
         ),
-        EditTextTitleWidget('counterText', setting.counterText, (value) {
+        EditTextTitleWidget(StringParams.kCounterText, setting.counterText, (value) {
           setState(() {
             setting = setting.copyWith(
               counterText: value,
@@ -1209,7 +1209,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
           });
         }),
         ExpansionPanelTitleWidget(
-          titleWidget: ValueTitleWidget('counterStyle'),
+          titleWidget: ValueTitleWidget(StringParams.kCounterStyle),
           hintWidget: TextStyleDemo(
             onchange: (value) {
               setState(() {
@@ -1227,14 +1227,14 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
             });
           },
         ),
-        ValueTitleWidget('prefixIcon'),
+        ValueTitleWidget(StringParams.kPrefixIcon),
         RadioGroupWidget(setting.prefixIcon, iconButtonValues, (value){
           setState(() {
             setting=setting.copyWith(prefixIcon: value);
             changeValue();
           });
         }),
-        EditTextTitleWidget('prefixText', setting.prefixText, (value) {
+        EditTextTitleWidget(StringParams.kPrefixText, setting.prefixText, (value) {
           setState(() {
             setting = setting.copyWith(
               prefixText: value,
@@ -1243,7 +1243,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
           });
         }),
         ExpansionPanelTitleWidget(
-          titleWidget: ValueTitleWidget('prefixStyle'),
+          titleWidget: ValueTitleWidget(StringParams.kPrefixStyle),
           hintWidget: TextStyleDemo(
             onchange: (value) {
               setState(() {
@@ -1261,14 +1261,14 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
             });
           },
         ),
-        ValueTitleWidget('suffixIcon'),
+        ValueTitleWidget(StringParams.kSuffixIcon),
         RadioGroupWidget(setting.suffixIcon, iconButtonValues, (value){
           setState(() {
             setting=setting.copyWith(suffixIcon: value);
             changeValue();
           });
         }),
-        EditTextTitleWidget('suffixText', setting.suffixText, (value) {
+        EditTextTitleWidget(StringParams.kSuffixText, setting.suffixText, (value) {
           setState(() {
             setting = setting.copyWith(
               suffixText: value,
@@ -1277,7 +1277,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
           });
         }),
         ExpansionPanelTitleWidget(
-          titleWidget: ValueTitleWidget('suffixStyle'),
+          titleWidget: ValueTitleWidget(StringParams.kSuffixStyle),
           hintWidget: TextStyleDemo(
             onchange: (value) {
               setState(() {

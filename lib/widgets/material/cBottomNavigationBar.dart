@@ -60,7 +60,9 @@ class _BottomNavigationBarDemoState
 
   @override
   String getExampleCode() {
-    return '''BottomNavigationBar(
+    return '''int position=0;
+    
+    BottomNavigationBar(
       items: ${setting.items?.label??''},
       onTap: ${setting.onTap?.label??''},
       currentIndex: ${setting.currentIndex?.label??''},
