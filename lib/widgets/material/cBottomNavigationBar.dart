@@ -85,6 +85,16 @@ class _BottomNavigationBarDemoState
               ));
         },
       ),
+      ValueTitleWidget(StringParams.kType),
+      RadioGroupWidget<BottomNavigationBarType>(
+        setting.type,
+        bottomNavigationBarTypeValues,
+            (value) {
+          setState(() {
+            setting = setting.copyWith(type: value);
+          });
+        },
+      ),
       ValueTitleWidget(StringParams.kItems),
       RadioGroupWidget<List<BottomNavigationBarItem>>(
         setting.items,
@@ -106,18 +116,7 @@ class _BottomNavigationBarDemoState
           });
         },
       ),
-      DropDownValueTitleWidget(
-        selectList: doubleLargeValues,
-        title: StringParams.kIconSize,
-        value: setting.iconSize,
-        onChanged: (value) {
-          setState(() {
-            setting = setting.copyWith(
-              iconSize: value,
-            );
-          });
-        },
-      ),
+      ValueTitleWidget(StringParams.kFixedColor),
       ColorGroupWidget(
         setting.fixedColor,
         colorValues,
@@ -127,13 +126,15 @@ class _BottomNavigationBarDemoState
           });
         },
       ),
-      ValueTitleWidget(StringParams.kType),
-      RadioGroupWidget<BottomNavigationBarType>(
-        setting.type,
-        bottomNavigationBarTypeValues,
-        (value) {
+      DropDownValueTitleWidget(
+        selectList: doubleLargeValues,
+        title: StringParams.kIconSize,
+        value: setting.iconSize,
+        onChanged: (value) {
           setState(() {
-            setting = setting.copyWith(type: value);
+            setting = setting.copyWith(
+              iconSize: value,
+            );
           });
         },
       ),

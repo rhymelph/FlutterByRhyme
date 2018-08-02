@@ -102,6 +102,7 @@ class _ImageDemoState extends ExampleState<ImageDemo> {
           setting = setting.copyWith(centerSlice: value);
         });
       }),
+
       SwitchValueTitleWidget(
         title: StringParams.kMatchTextDirection,
         onChanged: (value) {

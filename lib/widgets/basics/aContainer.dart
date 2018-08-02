@@ -73,6 +73,25 @@ class _ContainerDemoState extends ExampleState<ContainerDemo> {
           setting = setting.copyWith(alignment: value);
         });
       }),
+      ValueTitleWidget(StringParams.kPadding),
+      RadioGroupWidget<EdgeInsetsGeometry>(setting.padding, paddingValues,
+              (value) {
+            setState(() {
+              setting = setting.copyWith(padding: value);
+            });
+          }),
+      ValueTitleWidget(StringParams.kMargin),
+      RadioGroupWidget<EdgeInsetsGeometry>(setting.margin, marginValues, (value) {
+        setState(() {
+          setting = setting.copyWith(margin: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kTransform),
+      RadioGroupWidget<Matrix4>(setting.transform, transformValues, (value) {
+        setState(() {
+          setting = setting.copyWith(transform: value);
+        });
+      }),
       ValueTitleWidget(StringParams.kColor),
       ColorGroupWidget(setting.color, colorValues, (value) {
         if (setting.decoration != null) {
@@ -82,13 +101,6 @@ class _ContainerDemoState extends ExampleState<ContainerDemo> {
             setting = setting.copyWith(color: value);
           });
         }
-      }),
-      ValueTitleWidget(StringParams.kPadding),
-      RadioGroupWidget<EdgeInsetsGeometry>(setting.padding, paddingValues,
-          (value) {
-        setState(() {
-          setting = setting.copyWith(padding: value);
-        });
       }),
       ValueTitleWidget(StringParams.kDecoration),
       DecorationGroupWidget(setting.decoration, decorationValues, (value) {
@@ -105,18 +117,6 @@ class _ContainerDemoState extends ExampleState<ContainerDemo> {
           setting.foregroundDecoration, foregroundDecorationValues, (value) {
         setState(() {
           setting = setting.copyWith(foregroundDecoration: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kMargin),
-      RadioGroupWidget<EdgeInsetsGeometry>(setting.margin, marginValues, (value) {
-        setState(() {
-          setting = setting.copyWith(margin: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kTransform),
-      RadioGroupWidget<Matrix4>(setting.transform, transformValues, (value) {
-        setState(() {
-          setting = setting.copyWith(transform: value);
         });
       }),
     ];

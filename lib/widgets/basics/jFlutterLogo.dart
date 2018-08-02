@@ -47,29 +47,6 @@ class _FlutterLogoDemoState extends ExampleState<FlutterLogoDemo> {
   @override
   List<Widget> getSetting() {
     return [
-      DropDownValueTitleWidget(
-        selectList: sizeValues,
-        title: StringParams.kSize,
-        value: setting.size,
-        onChanged: (value) {
-          setState(() {
-            setting = setting.copyWith(size: value);
-          });
-        },
-      ),
-      ValueTitleWidget(StringParams.kColors),
-      ColorsGroupWidget(setting.colors, materialColorValues, (value){
-        setState(() {
-          setting=setting.copyWith(colors: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kTextColor),
-      ColorGroupWidget(setting.textColor, colorValues, (value){
-        setState(() {
-          setting=setting.copyWith(textColor: value);
-        });
-      }),
-
       ValueTitleWidget(StringParams.kStyle),
       RadioGroupWidget<FlutterLogoStyle>(setting.style, logoStyleValues, (value){
         setState(() {
@@ -91,6 +68,28 @@ class _FlutterLogoDemoState extends ExampleState<FlutterLogoDemo> {
         });
       }),
 
+      ValueTitleWidget(StringParams.kColors),
+      ColorsGroupWidget(setting.colors, materialColorValues, (value){
+        setState(() {
+          setting=setting.copyWith(colors: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kTextColor),
+      ColorGroupWidget(setting.textColor, colorValues, (value){
+        setState(() {
+          setting=setting.copyWith(textColor: value);
+        });
+      }),
+      DropDownValueTitleWidget(
+        selectList: sizeValues,
+        title: StringParams.kSize,
+        value: setting.size,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(size: value);
+          });
+        },
+      ),
     ];
   }
 

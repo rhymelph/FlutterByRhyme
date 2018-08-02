@@ -48,7 +48,7 @@ class _FloatingActionButtonDemoState
   String getExampleCode() {
     return '''FloatingActionButton(
         onPressed: () {},
-        tooltip: ${setting.tooltip?.label??''},
+        tooltip: '${setting.tooltip?.label??''}',
         foregroundColor: ${setting.foregroundColor?.label??''},
         backgroundColor: ${setting.backgroundColor?.label??''},
         elevation: ${setting.elevation?.label??''},
@@ -61,15 +61,62 @@ class _FloatingActionButtonDemoState
       )''';
   }
 
+  Widget returnWidget(){
+    return FloatingActionButton(
+      onPressed: () {},
+      tooltip: setting.tooltip?.label,
+      foregroundColor: setting.foregroundColor?.value,
+      backgroundColor: setting.backgroundColor?.value,
+      elevation: setting.elevation?.value,
+      highlightElevation: setting.highlightElevation?.value,
+      mini: setting.mini?.value,
+      notchMargin: setting.notchMargin?.value,
+      shape: setting.shape?.value,
+      isExtended: setting.isExtended?.value,
+      child: Icon(Icons.check),
+    );
+  }
   @override
   List<Widget> getSetting() {
     return [
+      ValueTitleButtonWidget(
+        title: StringParams.kSave,
+        onPressed: () {
+          Navigator.pop(
+              context,
+              Value<Widget>(
+                name: 'FloatingActionButton',
+                value: returnWidget(),
+                label: getExampleCode(),
+              ));
+        },
+      ),
       ValueTitleWidget(StringParams.kShape),
       RadioGroupWidget(setting.shape, shapeValues, (value){
         setState(() {
           setting = setting.copyWith(shape: value);
         });
       }),
+      ValueTitleWidget(StringParams.kForegroundColor),
+      ColorGroupWidget(
+        setting.foregroundColor,
+        colorValues,
+            (value) {
+          setState(() {
+            setting = setting.copyWith(foregroundColor: value);
+          });
+        },
+      ),
+      ValueTitleWidget(StringParams.kBackgroundColor),
+      ColorGroupWidget(
+        setting.backgroundColor,
+        colorValues,
+            (value) {
+          setState(() {
+            setting = setting.copyWith(backgroundColor: value);
+          });
+        },
+      ),
       SwitchValueTitleWidget(
         title: StringParams.kMini,
         value: setting.mini,
@@ -94,26 +141,6 @@ class _FloatingActionButtonDemoState
         onChanged: (value) {
           setState(() {
             setting = setting.copyWith(tooltip: value);
-          });
-        },
-      ),
-      ValueTitleWidget(StringParams.kForegroundColor),
-      ColorGroupWidget(
-        setting.foregroundColor,
-        colorValues,
-        (value) {
-          setState(() {
-            setting = setting.copyWith(foregroundColor: value);
-          });
-        },
-      ),
-      ValueTitleWidget(StringParams.kBackgroundColor),
-      ColorGroupWidget(
-        setting.backgroundColor,
-        colorValues,
-        (value) {
-          setState(() {
-            setting = setting.copyWith(backgroundColor: value);
           });
         },
       ),

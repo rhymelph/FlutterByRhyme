@@ -20,6 +20,7 @@ class _IconButtonDemoState extends ExampleState<IconButtonDemo> {
   @override
   void initState() {
     setting = IconButtonSetting(
+      onPressed: onPressValues[0],
       iconSize: doubleLargeValues[4],
       padding: paddingValues[0],
       alignment: alignmentValues[0],
@@ -94,7 +95,15 @@ class _IconButtonDemoState extends ExampleState<IconButtonDemo> {
           setting = setting.copyWith(splashColor: value);
         });
       }),
-
+      SwitchValueTitleWidget(
+        title: StringParams.kTooltip,
+        value: setting.tooltip,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(tooltip: value);
+          });
+        },
+      ),
       DropDownValueTitleWidget(
         selectList: doubleLargeValues,
         title: StringParams.kIconSize,
@@ -107,15 +116,7 @@ class _IconButtonDemoState extends ExampleState<IconButtonDemo> {
           });
         },
       ),
-      SwitchValueTitleWidget(
-        title: StringParams.kTooltip,
-        value: setting.tooltip,
-        onChanged: (value) {
-          setState(() {
-            setting = setting.copyWith(tooltip: value);
-          });
-        },
-      ),
+
     ];
   }
 

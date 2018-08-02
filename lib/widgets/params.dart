@@ -126,7 +126,7 @@ class StringParams {
   static final String kIndicatorWeight = 'IndicatorWeight(指示器权重)';
   static final String kIndicatorPadding = 'IndicatorPadding(指示器内边距)';
   static final String kLabelStyle = 'LabelStyle(标签样式)';
-  static final String kLabelColor= 'LabelColor(标签颜色)';
+  static final String kLabelColor = 'LabelColor(标签颜色)';
   static final String kUnselectedLabelStyle = 'UnselectedLabelStyle(未选中标签样式)';
   static final String kUnselectedLabelColor = 'UnselectedLabelColor(未选中标签颜色)';
 
@@ -139,6 +139,11 @@ class StringParams {
   static final String kForegroundColor = 'ForegroundColor(前景颜色)';
   static final String kHighlightElevation = 'HighlightElevation(高亮高度)';
   static final String kNotchMargin = 'NotchMargin(切口边缘)';
+
+  static final String kItemBuilder = 'ItemBuilder(选项建造者)';
+  static final String kChildren = 'Children(孩子)';
+
+  static final String kFixedColor='FixedColor(固定类型时的颜色)';
 
 }
 
@@ -1811,7 +1816,7 @@ List<Value<List<BottomNavigationBarItem>>> bottomNavigationBarItemValues = [
   ),
 ];
 
-List<Value<BottomNavigationBarType>> bottomNavigationBarTypeValues=[
+List<Value<BottomNavigationBarType>> bottomNavigationBarTypeValues = [
   Value(
     name: 'shifting',
     value: BottomNavigationBarType.shifting,
@@ -1824,36 +1829,33 @@ List<Value<BottomNavigationBarType>> bottomNavigationBarTypeValues=[
   ),
 ];
 
-List<Value<List<Widget>>> tabValues=[
-  Value(
-      name: 'six',
-      value: [
-        Tab(
-          text: 'tab1',
-          icon: Icon(Icons.title),
-        ),
-        Tab(
-          text: 'tab2',
-          icon: Icon(Icons.brightness_1),
-        ),
-        Tab(
-          text: 'tab3',
-          icon: Icon(Icons.label),
-        ),
-        Tab(
-          text: 'tab4',
-          icon: Icon(Icons.style),
-        ),
-        Tab(
-          text: 'tab5',
-          icon: Icon(Icons.add),
-        ),
-        Tab(
-          text: 'tab6',
-          icon: Icon(Icons.print),
-        ),
-      ],
-      label: '''[
+List<Value<List<Widget>>> tabValues = [
+  Value(name: 'six', value: [
+    Tab(
+      text: 'tab1',
+      icon: Icon(Icons.title),
+    ),
+    Tab(
+      text: 'tab2',
+      icon: Icon(Icons.brightness_1),
+    ),
+    Tab(
+      text: 'tab3',
+      icon: Icon(Icons.label),
+    ),
+    Tab(
+      text: 'tab4',
+      icon: Icon(Icons.style),
+    ),
+    Tab(
+      text: 'tab5',
+      icon: Icon(Icons.add),
+    ),
+    Tab(
+      text: 'tab6',
+      icon: Icon(Icons.print),
+    ),
+  ], label: '''[
       Tab(
         text: 'tab1',
         icon: Icon(Icons.title),
@@ -1878,33 +1880,29 @@ List<Value<List<Widget>>> tabValues=[
           text: 'tab6',
           icon: Icon(Icons.print),
       ),
-    ]'''
-  ),
-  Value(
-      name: 'five',
-      value: [
-        Tab(
-          text: 'tab1',
-          icon: Icon(Icons.title),
-        ),
-        Tab(
-          text: 'tab2',
-          icon: Icon(Icons.brightness_1),
-        ),
-        Tab(
-          text: 'tab3',
-          icon: Icon(Icons.label),
-        ),
-        Tab(
-          text: 'tab4',
-          icon: Icon(Icons.style),
-        ),
-        Tab(
-          text: 'tab5',
-          icon: Icon(Icons.add),
-        ),
-      ],
-      label: '''[
+    ]'''),
+  Value(name: 'five', value: [
+    Tab(
+      text: 'tab1',
+      icon: Icon(Icons.title),
+    ),
+    Tab(
+      text: 'tab2',
+      icon: Icon(Icons.brightness_1),
+    ),
+    Tab(
+      text: 'tab3',
+      icon: Icon(Icons.label),
+    ),
+    Tab(
+      text: 'tab4',
+      icon: Icon(Icons.style),
+    ),
+    Tab(
+      text: 'tab5',
+      icon: Icon(Icons.add),
+    ),
+  ], label: '''[
       Tab(
         text: 'tab1',
         icon: Icon(Icons.title),
@@ -1925,11 +1923,25 @@ List<Value<List<Widget>>> tabValues=[
           text: 'tab5',
           icon: Icon(Icons.add),
         ),
-    ]'''
-  ),
-  Value(
-    name: 'four',
-    value: [
+    ]'''),
+  Value(name: 'four', value: [
+    Tab(
+      text: 'tab1',
+      icon: Icon(Icons.title),
+    ),
+    Tab(
+      text: 'tab2',
+      icon: Icon(Icons.brightness_1),
+    ),
+    Tab(
+      text: 'tab3',
+      icon: Icon(Icons.label),
+    ),
+    Tab(
+      text: 'tab4',
+      icon: Icon(Icons.style),
+    ),
+  ], label: '''[
       Tab(
         text: 'tab1',
         icon: Icon(Icons.title),
@@ -1946,29 +1958,10 @@ List<Value<List<Widget>>> tabValues=[
         text: 'tab4',
         icon: Icon(Icons.style),
       ),
-    ],
-    label: '''[
-      Tab(
-        text: 'tab1',
-        icon: Icon(Icons.title),
-      ),
-      Tab(
-        text: 'tab2',
-        icon: Icon(Icons.brightness_1),
-      ),
-      Tab(
-        text: 'tab3',
-        icon: Icon(Icons.label),
-      ),
-      Tab(
-        text: 'tab4',
-        icon: Icon(Icons.style),
-      ),
-    ]'''
-  ),
+    ]'''),
 ];
 
-List<Value<TabBarIndicatorSize>> tabBarIndicatorSizeValues=[
+List<Value<TabBarIndicatorSize>> tabBarIndicatorSizeValues = [
   Value(
     name: 'label',
     value: TabBarIndicatorSize.label,
@@ -1981,7 +1974,7 @@ List<Value<TabBarIndicatorSize>> tabBarIndicatorSizeValues=[
   ),
 ];
 
-List<Value<ScrollPhysics>> physicsValues=[
+List<Value<ScrollPhysics>> physicsValues = [
   Value(
     name: 'ScrollPhysics',
     value: ScrollPhysics(),
@@ -2016,5 +2009,230 @@ List<Value<ScrollPhysics>> physicsValues=[
     name: 'NeverScrollableScrollPhysics',
     value: NeverScrollableScrollPhysics(),
     label: 'NeverScrollableScrollPhysics()',
+  ),
+];
+
+List<Value<PopupMenuItemBuilder<String>>> popupMenuItemBuilderValues = [
+  Value(
+    name: 'threeItem',
+    value: (BuildContext context) => <PopupMenuEntry<String>>[
+          const PopupMenuItem<String>(
+            value: 'apple',
+            child: const Text('iPhone'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'HuaWei',
+            child: const Text('Honer'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'XiaoMi',
+            child: const Text('Mi'),
+          ),
+        ],
+    label: '''(BuildContext context) => <PopupMenuEntry<String>>[
+          const PopupMenuItem<String>(
+            value: 'apple',
+            child: const Text('iPhone'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'HuaWei',
+            child: const Text('Honer'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'XiaoMi',
+            child: const Text('Mi'),
+          ),
+        ]''',
+  ),
+  Value(
+    name: 'fourItem',
+    value: (BuildContext context) => <PopupMenuEntry<String>>[
+          const PopupMenuItem<String>(
+            value: 'apple',
+            child: const Text('iPhone'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'HuaWei',
+            child: const Text('Honer'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'XiaoMi',
+            child: const Text('Mi'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'Samsung',
+            child: const Text('Galaxy'),
+          ),
+        ],
+    label: '''(BuildContext context) => <PopupMenuEntry<String>>[
+          const PopupMenuItem<String>(
+            value: 'apple',
+            child: const Text('iPhone'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'HuaWei',
+            child: const Text('Honer'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'XiaoMi',
+            child: const Text('Mi'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'Samsung',
+            child: const Text('Galaxy'),
+          ),
+        ]''',
+  ),
+];
+
+List<Value<List<Widget>>> buttonValues = [
+  Value(
+    name: 'threeButtons',
+    value: [
+      RaisedButton(
+        onPressed: () {},
+        child: Text('one'),
+      ),
+      FlatButton(
+        onPressed: () {},
+        child: Text('two'),
+      ),
+      RaisedButton(
+        onPressed: () {},
+        child: Text('three'),
+      ),
+    ],
+    label: '''[
+      RaisedButton(
+        onPressed: () {},
+        child: Text('one'),
+      ),
+      FlatButton(
+        onPressed: () {},
+        child: Text('two'),
+      ),
+      RaisedButton(
+        onPressed: () {},
+        child: Text('three'),
+      ),
+    ]''',
+  ),
+  Value(
+    name: 'fourButtons',
+    value: [
+      RaisedButton(
+        onPressed: () {},
+        child: Text('one'),
+      ),
+      FlatButton(
+        onPressed: () {},
+        child: Text('two'),
+      ),
+      RaisedButton(
+        onPressed: () {},
+        child: Text('three'),
+      ),
+      FlatButton(
+        onPressed: () {},
+        child: Text('four'),
+      ),
+    ],
+    label: '''[
+      RaisedButton(
+        onPressed: () {},
+        child: Text('one'),
+      ),
+      FlatButton(
+        onPressed: () {},
+        child: Text('two'),
+      ),
+      RaisedButton(
+        onPressed: () {},
+        child: Text('three'),
+      ),
+      FlatButton(
+        onPressed: () {},
+        child: Text('four'),
+      ),
+    ]''',
+  ),
+];
+
+List<Value<InputDecoration>> inputDecorationValues=[
+  Value(
+    name: 'InputDecoration',
+    value: InputDecoration(),
+    label: 'InputDecoration()',
+  ),
+];
+
+const List<Value<bool>> boolValues=[
+  const Value(
+    name: 'false',
+    value: false,
+    label: 'false',
+  ),
+  const Value(
+    name: 'true',
+    value: true,
+    label: 'true',
+  ),
+];
+
+
+List<Value<TextInputType>> textInputTypeValues=[
+  Value(
+    name: 'text',
+    value: TextInputType.text,
+    label: 'TextInputType.text',
+
+  ),
+  Value(
+    name: 'url',
+    value: TextInputType.url,
+    label: 'TextInputType.url',
+
+  ),
+  Value(
+    name: 'datetime',
+    value: TextInputType.datetime,
+    label: 'TextInputType.datetime',
+
+  ),
+  Value(
+    name: 'emailAddress',
+    value: TextInputType.emailAddress,
+    label: 'TextInputType.emailAddress',
+
+  ),
+  Value(
+    name: 'multiline',
+    value: TextInputType.multiline,
+    label: 'TextInputType.multiline',
+
+  ),
+  Value(
+    name: 'number',
+    value: TextInputType.number,
+    label: 'TextInputType.number',
+
+  ),
+  Value(
+    name: 'phone',
+    value: TextInputType.phone,
+    label: 'TextInputType.phone',
+  ),
+];
+
+List<Value<InputBorder>> inputBorderValues=[
+  Value(
+    name: 'Outline',
+    value: OutlineInputBorder(),
+    label: 'OutlineInputBorder()',
+  ),
+  Value(
+    name: 'Underline',
+    value: UnderlineInputBorder(),
+    label: 'UnderlineInputBorder()',
   ),
 ];

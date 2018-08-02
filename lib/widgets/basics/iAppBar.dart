@@ -42,13 +42,13 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
         backgroundColor: ${setting.backgroundColor?.label ?? ''},
         brightness: ${setting.brightness?.label ?? ''},
         iconTheme: ${setting.iconTheme?.label ?? ''},
-        textTheme: ${setting.textTheme?.label ?? ''},
         primary: ${setting.primary?.label ?? ''},
         centerTitle: ${setting.centerTitle?.label ?? ''},
         titleSpacing: ${setting.titleSpacing?.label ?? ''},
         toolbarOpacity: ${setting.toolbarOpacity?.label ?? ''},
         bottomOpacity: ${setting.bottomOpacity?.label ?? ''},
       )''';
+//        textTheme: ${setting.textTheme?.label ?? ''},
   }
 
   @override
@@ -66,61 +66,12 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
               ));
         },
       ),
-      ValueTitleWidget(StringParams.kLeading),
-      RadioGroupWidget(setting.leading, iconButtonValues, (value) {
-        setState(() {
-          setting = setting.copyWith(leading: value);
-        });
-      }),
-      SwitchValueTitleWidget(
-        title: StringParams.kAutomaticallyImplyLeading,
-        value: setting.automaticallyImplyLeading,
-        onChanged: (value) {
-          setState(() {
-            setting = setting.copyWith(automaticallyImplyLeading: value);
-          });
+      ValueTitleButtonWidget(
+        title: StringParams.kBottom,
+        onPressed: () {
+          Navigator.pushNamed(context, 'widgets/material/TabBar');
         },
       ),
-      EditTextTitleWidget(StringParams.kTitle, setting.title, (value) {
-        setState(() {
-          setting = setting.copyWith(title: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kActions),
-      RadioGroupWidget(setting.actions, actionsValues, (value) {
-        setState(() {
-          setting = setting.copyWith(actions: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kFlexibleSpace),
-      RadioGroupWidget(setting.flexibleSpace, flexibleSpaceValues, (value) {
-        setState(() {
-          setting = setting.copyWith(flexibleSpace: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kBottom),
-      DropDownValueTitleWidget(
-        selectList: sizeValues,
-        title: StringParams.kElevation,
-        value: setting.elevation,
-        onChanged: (value) {
-          setState(() {
-            setting = setting.copyWith(elevation: value);
-          });
-        },
-      ),
-      ValueTitleWidget(StringParams.kBackgroundColor),
-      ColorGroupWidget(setting.backgroundColor, colorValues, (value) {
-        setState(() {
-          setting = setting.copyWith(backgroundColor: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kBrightness),
-      RadioGroupWidget(setting.brightness, colorBrightnessValues, (value) {
-        setState(() {
-          setting = setting.copyWith(brightness: value);
-        });
-      }),
       ExpansionPanelTitleWidget(
         isExpanded: isExpanded,
         titleWidget: ValueTitleWidget(StringParams.kIconTheme),
@@ -137,13 +88,70 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
           });
         },
       ),
-      ValueTitleWidget(StringParams.kTextTheme),
+//      ValueTitleWidget(StringParams.kTextTheme),
+
+      ValueTitleWidget(StringParams.kLeading),
+      RadioGroupWidget(setting.leading, iconButtonValues, (value) {
+        setState(() {
+          setting = setting.copyWith(leading: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kActions),
+      RadioGroupWidget(setting.actions, actionsValues, (value) {
+        setState(() {
+          setting = setting.copyWith(actions: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kFlexibleSpace),
+      RadioGroupWidget(setting.flexibleSpace, flexibleSpaceValues, (value) {
+        setState(() {
+          setting = setting.copyWith(flexibleSpace: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kBrightness),
+      RadioGroupWidget(setting.brightness, colorBrightnessValues, (value) {
+        setState(() {
+          setting = setting.copyWith(brightness: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kBackgroundColor),
+      ColorGroupWidget(setting.backgroundColor, colorValues, (value) {
+        setState(() {
+          setting = setting.copyWith(backgroundColor: value);
+        });
+      }),
+
+      EditTextTitleWidget(StringParams.kTitle, setting.title, (value) {
+        setState(() {
+          setting = setting.copyWith(title: value);
+        });
+      }),
+
+      DropDownValueTitleWidget(
+        selectList: sizeValues,
+        title: StringParams.kElevation,
+        value: setting.elevation,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(elevation: value);
+          });
+        },
+      ),
       SwitchValueTitleWidget(
         title: StringParams.kPrimary,
         value: setting.primary,
         onChanged: (value) {
           setState(() {
             setting = setting.copyWith(primary: value);
+          });
+        },
+      ),
+      SwitchValueTitleWidget(
+        title: StringParams.kAutomaticallyImplyLeading,
+        value: setting.automaticallyImplyLeading,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(automaticallyImplyLeading: value);
           });
         },
       ),
@@ -200,7 +208,7 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
     return AppBar(
       leading: setting.leading?.value,
       automaticallyImplyLeading: setting.automaticallyImplyLeading?.value,
-      title: setting.title?.value,
+      title: Text(setting.title?.value),
       actions: setting.actions?.value,
       flexibleSpace: setting.flexibleSpace?.value,
       bottom: setting.bottom?.value,
@@ -208,7 +216,7 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
       backgroundColor: setting.backgroundColor?.value,
       brightness: setting.brightness?.value,
       iconTheme: setting.iconTheme?.value,
-      textTheme: setting.textTheme?.value,
+//      textTheme: setting.textTheme?.value,
       primary: setting.primary?.value,
       centerTitle: setting.centerTitle?.value,
       titleSpacing: setting.titleSpacing?.value,
@@ -221,7 +229,7 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
 class AppBarSetting {
   final Value<Widget> leading;
   final Value<bool> automaticallyImplyLeading;
-  final Value<Widget> title;
+  final Value<String> title;
   final Value<List<Widget>> actions;
   final Value<Widget> flexibleSpace;
   final Value<PreferredSizeWidget> bottom;
@@ -229,7 +237,7 @@ class AppBarSetting {
   final Value<Color> backgroundColor;
   final Value<Brightness> brightness;
   final Value<IconThemeData> iconTheme;
-  final Value<TextTheme> textTheme;
+//  final Value<TextTheme> textTheme;
   final Value<bool> primary;
   final Value<bool> centerTitle;
   final Value<double> titleSpacing;
@@ -255,7 +263,7 @@ class AppBarSetting {
     this.backgroundColor,
     this.brightness,
     this.iconTheme,
-    this.textTheme,
+//    this.textTheme,
     this.primary: const Value<bool>(
       name: 'true',
       value: true,
@@ -282,7 +290,7 @@ class AppBarSetting {
   AppBarSetting copyWith({
     Value<Widget> leading,
     Value<bool> automaticallyImplyLeading,
-    Value<Widget> title,
+    Value<String> title,
     Value<List<Widget>> actions,
     Value<Widget> flexibleSpace,
     Value<PreferredSizeWidget> bottom,
@@ -309,7 +317,7 @@ class AppBarSetting {
       backgroundColor: backgroundColor ?? this.backgroundColor,
       brightness: brightness ?? this.brightness,
       iconTheme: iconTheme ?? this.iconTheme,
-      textTheme: textTheme ?? this.textTheme,
+//      textTheme: textTheme ?? this.textTheme,
       primary: primary ?? this.primary,
       centerTitle: centerTitle ?? this.centerTitle,
       titleSpacing: titleSpacing ?? this.titleSpacing,

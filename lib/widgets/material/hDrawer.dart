@@ -80,18 +80,26 @@ class _DrawerDemoState extends ExampleState<DrawerDemo> {
         child: ${setting.widget?.label??''},
       )''';
   }
-
+  Widget returnWidget(){
+    return Drawer(
+      elevation: setting.elevation?.value,
+      semanticLabel: 'Drawer',
+      child: setting.widget?.value,
+    );
+  }
   @override
   List<Widget> getSetting() {
     return [
-      DropDownValueTitleWidget(
-        selectList: doubleLargeValues,
-        title: StringParams.kElevation,
-        value: setting.elevation,
-        onChanged: (value) {
-          setState(() {
-            setting = setting.copyWith(elevation: value);
-          });
+      ValueTitleButtonWidget(
+        title: StringParams.kSave,
+        onPressed: () {
+          Navigator.pop(
+              context,
+              Value<Widget>(
+                name: 'Drawer',
+                value: returnWidget(),
+                label: getExampleCode(),
+              ));
         },
       ),
       ExpansionPanelTitleWidget(
@@ -104,6 +112,17 @@ class _DrawerDemoState extends ExampleState<DrawerDemo> {
           });
         },
       ),
+      DropDownValueTitleWidget(
+        selectList: doubleLargeValues,
+        title: StringParams.kElevation,
+        value: setting.elevation,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(elevation: value);
+          });
+        },
+      ),
+
     ];
   }
 

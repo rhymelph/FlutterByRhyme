@@ -70,6 +70,24 @@ class _FlatButtonDemoState extends ExampleState<FlatButtonDemo> {
           setting = setting.copyWith(textTheme: value);
         });
       }),
+      ValueTitleWidget(StringParams.kColorBrightness),
+      RadioGroupWidget(setting.colorBrightness, colorBrightnessValues, (value) {
+        setState(() {
+          setting = setting.copyWith(colorBrightness: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kPadding),
+      RadioGroupWidget(setting.padding, paddingValues, (value) {
+        setState(() {
+          setting = setting.copyWith(padding: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kShape),
+      RadioGroupWidget<ShapeBorder>(setting.shape, shapeValues, (value) {
+        setState(() {
+          setting = setting.copyWith(shape: value);
+        });
+      }),
       ValueTitleWidget(StringParams.kTextColor),
       ColorGroupWidget(setting.textColor, colorValues, (value) {
         setState(() {
@@ -106,24 +124,7 @@ class _FlatButtonDemoState extends ExampleState<FlatButtonDemo> {
           setting = setting.copyWith(splashColor: value);
         });
       }),
-      ValueTitleWidget(StringParams.kColorBrightness),
-      RadioGroupWidget(setting.colorBrightness, colorBrightnessValues, (value) {
-        setState(() {
-          setting = setting.copyWith(colorBrightness: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kPadding),
-      RadioGroupWidget(setting.padding, paddingValues, (value) {
-        setState(() {
-          setting = setting.copyWith(padding: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kShape),
-      RadioGroupWidget<ShapeBorder>(setting.shape, shapeValues, (value) {
-        setState(() {
-          setting = setting.copyWith(shape: value);
-        });
-      }),
+
     ];
   }
 

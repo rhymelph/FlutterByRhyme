@@ -73,6 +73,30 @@ class _RaisedButtonDemoState extends ExampleState<RaisedButtonDemo> {
           setting = setting.copyWith(textTheme: value);
         });
       }),
+      ValueTitleWidget(StringParams.kColorBrightness),
+      RadioGroupWidget(setting.colorBrightness, colorBrightnessValues, (value) {
+        setState(() {
+          setting = setting.copyWith(colorBrightness: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kPadding),
+      RadioGroupWidget(setting.padding, paddingValues, (value) {
+        setState(() {
+          setting = setting.copyWith(padding: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kShape),
+      RadioGroupWidget<ShapeBorder>(setting.shape, shapeValues, (value) {
+        setState(() {
+          setting = setting.copyWith(shape: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kAnimationDuration),
+      RadioGroupWidget<Duration>(setting.animationDuration, durationValues, (value) {
+        setState(() {
+          setting = setting.copyWith(animationDuration: value);
+        });
+      }),
       ValueTitleWidget(StringParams.kTextColor),
       ColorGroupWidget(setting.textColor, colorValues, (value) {
         setState(() {
@@ -109,12 +133,6 @@ class _RaisedButtonDemoState extends ExampleState<RaisedButtonDemo> {
           setting = setting.copyWith(splashColor: value);
         });
       }),
-      ValueTitleWidget(StringParams.kColorBrightness),
-      RadioGroupWidget(setting.colorBrightness, colorBrightnessValues, (value) {
-        setState(() {
-          setting = setting.copyWith(colorBrightness: value);
-        });
-      }),
       DropDownValueTitleWidget(
         selectList: doubleLargeValues,
         title: StringParams.kElevation,
@@ -145,24 +163,6 @@ class _RaisedButtonDemoState extends ExampleState<RaisedButtonDemo> {
           });
         },
       ),
-      ValueTitleWidget(StringParams.kPadding),
-      RadioGroupWidget(setting.padding, paddingValues, (value) {
-        setState(() {
-          setting = setting.copyWith(padding: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kShape),
-      RadioGroupWidget<ShapeBorder>(setting.shape, shapeValues, (value) {
-        setState(() {
-          setting = setting.copyWith(shape: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kAnimationDuration),
-      RadioGroupWidget<Duration>(setting.animationDuration, durationValues, (value) {
-        setState(() {
-          setting = setting.copyWith(animationDuration: value);
-        });
-      }),
     ];
   }
 

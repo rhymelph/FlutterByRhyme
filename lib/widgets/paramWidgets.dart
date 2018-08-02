@@ -10,7 +10,7 @@ const double _kItemHeight = 48.0;
 
 ///内边距
 const EdgeInsetsDirectional _kPadding =
-    const EdgeInsetsDirectional.only(start: 8.0,end: 8.0);
+    const EdgeInsetsDirectional.only(start: 8.0, end: 8.0);
 
 class _ParamItem extends StatelessWidget {
   const _ParamItem({Key key, this.child}) : super(key: key);
@@ -236,16 +236,34 @@ class RadioWidget<T> extends StatelessWidget {
   final Value<T> value;
   final ValueChanged<Value<T>> onchange;
 
+  Widget getWidget(BuildContext context) {
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    Color normalColor = isDark ? Colors.black : const Color(0xFFD5D7DA);
+    Color checkColor = isDark ? const Color(0xFFD5D7DA) : Colors.black;
+    return RawMaterialButton(
+      onPressed: () {
+        onchange(value);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Text(value.name),
+      ),
+      fillColor: null,
+      shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: value == groupValue ? checkColor : normalColor,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(8.0)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return _ParamItem(
       child: Tooltip(
         message: value.label,
-        child: Row(children: [
-          Radio<Value<T>>(
-              value: value, groupValue: groupValue, onChanged: onchange),
-          Text(value.name),
-        ]),
+        child: getWidget(context),
       ),
     );
   }
@@ -285,6 +303,9 @@ class ColorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    Color normalColor = isDark ? Colors.black : const Color(0xFFD5D7DA);
+    Color checkColor = isDark ? const Color(0xFFD5D7DA) : Colors.black;
     return _ParamItem(
       child: Tooltip(
         message: value.label,
@@ -299,9 +320,7 @@ class ColorWidget extends StatelessWidget {
           fillColor: value.value,
           shape: CircleBorder(
               side: BorderSide(
-                  color: value == groupValue
-                      ? Colors.black
-                      : const Color(0xFFD5D7DA),
+                  color: value == groupValue ? checkColor : normalColor,
                   width: 3.0)),
         ),
       ),
@@ -461,8 +480,8 @@ class EditTextTitleWidget extends StatelessWidget {
   EditTextTitleWidget(this.title, this.value, this.onChanged);
 
   final String title;
-  final Value<Widget> value;
-  final ValueChanged<Value<Widget>> onChanged;
+  final Value<String> value;
+  final ValueChanged<Value<String>> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -479,10 +498,10 @@ class EditTextTitleWidget extends StatelessWidget {
         TextSelection(baseOffset: selection, extentOffset: selection);
     controller.addListener(() {
       String text = controller.text;
-      onChanged(Value<Widget>(
+      onChanged(Value<String>(
         name: text,
-        value: Text(text),
-        label: "Text('$text')",
+        value: text,
+        label: "'$text'",
       ));
     });
     // TODO: implement build
@@ -531,5 +550,752 @@ class SeekBarGroupWidget extends StatelessWidget {
       value: value.value,
       onChanged: onChangedValue,
     ));
+  }
+}
+
+class TextStyleSetting {
+//  final double height;
+//  final Locale locale;
+  final Value<bool> inherit;
+  final Value<Color> color;
+  final Value<double> fontSize;
+  final Value<FontWeight> fontWeight;
+  final Value<FontStyle> fontStyle;
+  final Value<double> letterSpacing;
+  final Value<double> wordSpacing;
+  final Value<TextBaseline> textBaseline;
+  final Value<Paint> background;
+  final Value<TextDecoration> decoration;
+  final Value<Color> decorationColor;
+  final Value<TextDecorationStyle> decorationStyle;
+
+  TextStyleSetting({
+    this.inherit: const Value<bool>(
+      name: 'true',
+      value: true,
+      label: 'true',
+    ),
+    this.color,
+    this.fontSize,
+    this.fontWeight,
+    this.fontStyle,
+    this.letterSpacing,
+    this.wordSpacing,
+    this.textBaseline,
+//    this.height,
+//    this.locale,
+    this.background,
+    this.decoration,
+    this.decorationColor,
+    this.decorationStyle,
+  });
+
+  TextStyleSetting copyWith({
+    Value<bool> inherit,
+    Value<Color> color,
+    Value<double> fontSize,
+    Value<FontWeight> fontWeight,
+    Value<FontStyle> fontStyle,
+    Value<double> letterSpacing,
+    Value<double> wordSpacing,
+    Value<TextBaseline> textBaseline,
+    Value<Paint> background,
+    Value<TextDecoration> decoration,
+    Value<Color> decorationColor,
+    Value<TextDecorationStyle> decorationStyle,
+  }) {
+    return TextStyleSetting(
+      inherit: inherit ?? this.inherit,
+      color: color ?? this.color,
+      fontSize: fontSize ?? this.fontSize,
+      fontStyle: fontStyle ?? this.fontStyle,
+      fontWeight: fontWeight ?? this.fontWeight,
+      letterSpacing: letterSpacing ?? this.letterSpacing,
+      wordSpacing: wordSpacing ?? this.wordSpacing,
+      textBaseline: textBaseline ?? this.textBaseline,
+//      height: height ?? this.height,
+//      locale: locale ?? this.locale,
+      background: background ?? this.background,
+      decoration: decoration ?? this.decoration,
+      decorationColor: decorationColor ?? this.decorationColor,
+      decorationStyle: decorationStyle ?? this.decorationStyle,
+    );
+  }
+
+  TextStyle onChange() {
+    return TextStyle(
+      inherit: inherit?.value,
+      color: color?.value,
+      fontSize: fontSize?.value,
+      fontStyle: fontStyle?.value,
+      fontWeight: fontWeight?.value,
+      letterSpacing: letterSpacing?.value,
+      wordSpacing: wordSpacing?.value,
+      textBaseline: textBaseline?.value,
+      background: background?.value,
+      decoration: decoration?.value,
+      decorationColor: decorationColor?.value,
+      decorationStyle: decorationStyle?.value,
+    );
+  }
+}
+
+class TextStyleDemo extends StatefulWidget {
+  TextStyleDemo({Key key, this.onchange}) : super(key: key);
+
+  final ValueChanged<Value<TextStyle>> onchange;
+
+  @override
+  _TextStyleDemoState createState() => _TextStyleDemoState();
+}
+
+class _TextStyleDemoState extends State<TextStyleDemo> {
+  TextStyleSetting setting;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    setting = TextStyleSetting();
+    super.initState();
+  }
+
+  void changeValue() {
+    widget.onchange(Value(
+      label: getExampleCode(),
+      value: setting.onChange(),
+    ));
+  }
+
+  String getExampleCode() {
+    return '''TextStyle(
+      inherit: ${setting.inherit?.label ?? 'false'},
+      color: ${setting.color?.label ?? ''},
+      fontStyle: ${setting.fontStyle?.label ?? ''},
+      fontSize: ${setting.fontSize?.label ?? ''},
+      fontWeight: ${setting.fontWeight?.label ?? ''},
+      letterSpacing: ${setting.letterSpacing?.label ?? ''},
+      wordSpacing: ${setting.wordSpacing?.label ?? ''},
+      textBaseline: ${setting.textBaseline?.label ?? ''},
+      background: ${setting.background?.label ?? ''},
+      decoration: ${setting.decoration?.label ?? ''},
+      decorationColor: ${setting.decorationColor?.label ?? ''},
+      decorationStyle: ${setting.decorationStyle?.label ?? ''},
+    )''';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        ValueTitleWidget(StringParams.kFontWeight),
+        RadioGroupWidget<FontWeight>(setting.fontWeight, fontWeightValues,
+            (value) {
+          setState(() {
+            setting = setting.copyWith(
+              fontWeight: value,
+            );
+            changeValue();
+          });
+        }),
+        ValueTitleWidget(StringParams.kFontStyle),
+        RadioGroupWidget<FontStyle>(setting.fontStyle, fontStyleValues,
+            (value) {
+          setState(() {
+            setting = setting.copyWith(
+              fontStyle: value,
+            );
+            changeValue();
+          });
+        }),
+        ValueTitleWidget(StringParams.kTextBaseline),
+        RadioGroupWidget<TextBaseline>(setting.textBaseline, TextBaselineValues,
+            (value) {
+          setState(() {
+            setting = setting.copyWith(
+              textBaseline: value,
+            );
+            changeValue();
+          });
+        }),
+        ValueTitleWidget(StringParams.kBackground),
+        RadioGroupWidget<Paint>(setting.background, paintValues, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              background: value,
+            );
+            changeValue();
+          });
+        }),
+        ValueTitleWidget(StringParams.kTextDecoration),
+        RadioGroupWidget<TextDecoration>(
+            setting.decoration, textDecorationValues, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              decoration: value,
+            );
+            changeValue();
+          });
+        }),
+        ValueTitleWidget(StringParams.kDecorationStyle),
+        RadioGroupWidget<TextDecorationStyle>(
+            setting.decorationStyle, textDecorationStyleValues, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              decorationStyle: value,
+            );
+            changeValue();
+          });
+        }),
+        ValueTitleWidget(StringParams.kColor),
+        ColorGroupWidget(setting.color, colorValues, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              color: value,
+            );
+            changeValue();
+          });
+        }),
+        ValueTitleWidget(StringParams.kDecorationColor),
+        ColorGroupWidget(setting.decorationColor, colorValues, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              decorationColor: value,
+            );
+            changeValue();
+          });
+        }),
+        SwitchValueTitleWidget(
+          title: StringParams.kInherit,
+          value: setting.inherit,
+          onChanged: (value) {
+            setState(() {
+              setting = setting.copyWith(
+                inherit: value,
+              );
+              changeValue();
+            });
+          },
+        ),
+        DropDownValueTitleWidget(
+          selectList: fontSizeValues,
+          title: StringParams.kFontSize,
+          value: setting.fontSize,
+          onChanged: (value) {
+            setState(() {
+              setting = setting.copyWith(
+                fontSize: value,
+              );
+              changeValue();
+            });
+          },
+        ),
+        DropDownValueTitleWidget<double>(
+          selectList: doubleMiniValues,
+          title: StringParams.kLetterSpacing,
+          value: setting.letterSpacing,
+          onChanged: (value) {
+            setState(() {
+              setting = setting.copyWith(
+                letterSpacing: value,
+              );
+              changeValue();
+            });
+          },
+        ),
+        DropDownValueTitleWidget<double>(
+          selectList: doubleMiniValues,
+          title: StringParams.kWordSpacing,
+          value: setting.wordSpacing,
+          onChanged: (value) {
+            setState(() {
+              setting = setting.copyWith(
+                wordSpacing: value,
+              );
+              changeValue();
+            });
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class InputDecorationSetting {
+  final Value<Widget> icon;
+  final Value<String> labelText;
+  final Value<TextStyle> labelStyle;
+  final Value<String> helperText;
+  final Value<TextStyle> helperStyle;
+  final Value<String> hintText;
+  final Value<TextStyle> hintStyle;
+  final Value<String> errorText;
+  final Value<TextStyle> errorStyle;
+  final Value<int> errorMaxLines;
+  final Value<bool> isDense;
+  final Value<EdgeInsetsGeometry> contentPadding;
+  final Value<Widget> prefixIcon;
+  final Value<String> prefixText;
+  final Value<TextStyle> prefixStyle;
+  final Value<Widget> suffixIcon;
+  final Value<String> suffixText;
+  final Value<TextStyle> suffixStyle;
+  final Value<String> counterText;
+  final Value<TextStyle> counterStyle;
+  final Value<bool> filled;
+  final Value<Color> fillColor;
+  final Value<InputBorder> border;
+  final Value<bool> enabled;
+
+  InputDecorationSetting(
+      {this.icon,
+      this.labelText,
+      this.labelStyle,
+      this.helperText,
+      this.helperStyle,
+      this.hintText,
+      this.hintStyle,
+      this.errorText,
+      this.errorStyle,
+      this.errorMaxLines,
+      this.isDense,
+      this.contentPadding,
+      this.prefixIcon,
+      this.prefixText,
+      this.prefixStyle,
+      this.suffixText,
+      this.suffixIcon,
+      this.suffixStyle,
+      this.counterText,
+      this.counterStyle,
+      this.filled,
+      this.fillColor,
+      this.border,
+      this.enabled});
+
+  InputDecorationSetting copyWith({
+    Value<Widget> icon,
+    Value<String> labelText,
+    Value<TextStyle> labelStyle,
+    Value<String> helperText,
+    Value<TextStyle> helperStyle,
+    Value<String> hintText,
+    Value<TextStyle> hintStyle,
+    Value<String> errorText,
+    Value<TextStyle> errorStyle,
+    Value<int> errorMaxLines,
+    Value<bool> isDense,
+    Value<EdgeInsetsGeometry> contentPadding,
+    Value<Widget> prefixIcon,
+    Value<String> prefixText,
+    Value<TextStyle> prefixStyle,
+    Value<Widget> suffixIcon,
+    Value<String> suffixText,
+    Value<TextStyle> suffixStyle,
+    Value<String> counterText,
+    Value<TextStyle> counterStyle,
+    Value<bool> filled,
+    Value<Color> fillColor,
+    Value<InputBorder> border,
+    Value<bool> enabled,
+  }) {
+    return InputDecorationSetting(
+      icon: icon ?? this.icon,
+      labelText: labelText ?? this.labelText,
+      labelStyle: labelStyle ?? this.labelStyle,
+      helperText: helperText ?? this.helperText,
+      helperStyle: helperStyle ?? this.helperStyle,
+      hintText: hintText ?? this.hintText,
+      hintStyle: hintStyle ?? this.hintStyle,
+      errorText: errorText ?? this.errorText,
+      errorStyle: errorStyle ?? this.errorStyle,
+      errorMaxLines: errorMaxLines ?? this.errorMaxLines,
+      isDense: isDense ?? this.isDense,
+      contentPadding: contentPadding ?? this.contentPadding,
+      prefixIcon: prefixIcon ?? this.prefixIcon,
+      prefixText: prefixText ?? this.prefixText,
+      prefixStyle: prefixStyle ?? this.prefixStyle,
+      suffixIcon: suffixIcon ?? this.suffixIcon,
+      suffixText: suffixText ?? this.suffixText,
+      suffixStyle: suffixStyle ?? this.suffixStyle,
+      counterText: counterText ?? this.counterText,
+      counterStyle: counterStyle ?? this.counterStyle,
+      filled: filled ?? this.filled,
+      fillColor: fillColor ?? this.fillColor,
+      border: border ?? this.border,
+      enabled: enabled ?? this.enabled,
+    );
+  }
+
+  InputDecoration onChange() {
+    return InputDecoration(
+      icon: icon?.value,
+      labelText: labelText?.value,
+      labelStyle: labelStyle?.value,
+      helperText: helperText?.value,
+      helperStyle: helperStyle?.value,
+      hintText: hintText?.value,
+      hintStyle: hintStyle?.value,
+      errorText: errorText?.value,
+      errorStyle: errorStyle?.value,
+      errorMaxLines: errorMaxLines?.value,
+      isDense: isDense?.value,
+      contentPadding: contentPadding?.value,
+      prefixIcon: prefixIcon?.value,
+      prefixText: prefixText?.value,
+      prefixStyle: prefixStyle?.value,
+      suffixIcon: suffixIcon?.value,
+      suffixText: suffixText?.value,
+      suffixStyle: suffixStyle?.value,
+      counterText: counterText?.value,
+      counterStyle: counterStyle?.value,
+      filled: filled?.value,
+      fillColor: fillColor?.value,
+      border: border?.value,
+      enabled: enabled?.value,
+    );
+  }
+}
+
+class InputDecorationDemo extends StatefulWidget {
+  InputDecorationDemo({Key key, this.onchange}) : super(key: key);
+
+  final ValueChanged<Value<InputDecoration>> onchange;
+
+  @override
+  _InputDecorationDemoState createState() => _InputDecorationDemoState();
+}
+
+class _InputDecorationDemoState extends State<InputDecorationDemo> {
+  InputDecorationSetting setting;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    setting = InputDecorationSetting(
+      enabled: boolValues[1],
+    );
+    super.initState();
+  }
+
+  void changeValue() {
+    widget.onchange(Value(
+      label: getExampleCode(),
+      value: setting.onChange(),
+    ));
+  }
+
+  String getExampleCode() {
+    return '''InputDecoration(
+      icon: ${setting.icon?.label ?? ''},
+      labelText: ${setting.labelText?.label ?? ''},
+      labelStyle: ${setting.labelStyle?.label ?? ''},
+      helperText: ${setting.helperText?.label ?? ''},
+      helperStyle: ${setting.helperStyle?.label ?? ''},
+      hintText: ${setting.hintText?.label ?? ''},
+      hintStyle: ${setting.hintStyle?.label ?? ''},
+      errorText: ${setting.errorText?.label ?? ''},
+      errorStyle: ${setting.errorStyle?.label ?? ''},
+      errorMaxLines: ${setting.errorMaxLines?.label ?? ''},
+      isDense: ${setting.isDense?.label ?? ''},
+      contentPadding: ${setting.contentPadding?.label ?? ''},
+      prefixIcon: ${setting.prefixIcon?.label ?? ''},
+      prefixText: ${setting.prefixText?.label ?? ''},
+      prefixStyle: ${setting.prefixStyle?.label ?? ''},
+      suffixIcon: ${setting.suffixIcon?.label ?? ''},
+      suffixText: ${setting.suffixText?.label ?? ''},
+      suffixStyle: ${setting.suffixStyle?.label ?? ''},
+      counterText: ${setting.counterText?.label ?? ''},
+      counterStyle: ${setting.counterStyle?.label ?? ''},
+      filled: ${setting.filled?.label ?? ''},
+      fillColor: ${setting.fillColor?.label ?? ''},
+      border: ${setting.border?.label ?? ''},
+      enabled: ${setting.enabled?.label ?? ''},
+    )''';
+  }
+
+  bool isLabelStyle = false;
+  bool isHelperStyle = false;
+  bool isHintStyle = false;
+  bool isErrorStyle = false;
+  bool isCounterStyle=false;
+  bool isPrefixStyle=false;
+  bool isSuffixStyle=false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        ValueTitleWidget('Icon'),
+        RadioGroupWidget(setting.icon, iconButtonValues, (value){
+          setState(() {
+            setting=setting.copyWith(icon: value);
+            changeValue();
+          });
+        }),
+        
+        ValueTitleWidget('contentPadding'),
+        RadioGroupWidget(setting.contentPadding, paddingValues, (value){
+          setState(() {
+            setting=setting.copyWith(contentPadding: value);
+            changeValue();
+          });
+        }),
+        ValueTitleWidget('border'),
+        RadioGroupWidget(setting.border, inputBorderValues, (value){
+          setState(() {
+            setting=setting.copyWith(border: value);
+            changeValue();
+          });
+        }),
+        SwitchValueTitleWidget(title: 'enabled',value: setting.enabled,
+          onChanged: (value){
+            setState(() {
+              setting=setting.copyWith(enabled: value);
+              changeValue();
+            });
+          },),
+        SwitchValueTitleWidget(title: 'isDense',value: setting.isDense,
+        onChanged: (value){
+          setState(() {
+            setting=setting.copyWith(isDense: value);
+            changeValue();
+          });
+        },),
+        SwitchValueTitleWidget(title: 'filled',value: setting.filled,
+          onChanged: (value){
+            setState(() {
+              setting=setting.copyWith(filled: value);
+              changeValue();
+            });
+          },),
+        ValueTitleWidget(''),
+        ColorGroupWidget(setting.fillColor, colorValues, (value){
+          setState(() {
+            setting=setting.copyWith(fillColor: value);
+            changeValue();
+          });
+        }),
+        EditTextTitleWidget('hintText', setting.hintText, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              hintText: value,
+            );
+            changeValue();
+          });
+        }),
+        ExpansionPanelTitleWidget(
+          titleWidget: ValueTitleWidget('hintStyle'),
+          hintWidget: TextStyleDemo(
+            onchange: (value) {
+              setState(() {
+                setting = setting.copyWith(
+                  hintStyle: value,
+                );
+                changeValue();
+              });
+            },
+          ),
+          isExpanded: isHintStyle,
+          onChanged: (value) {
+            setState(() {
+              this.isHintStyle = value;
+            });
+          },
+        ),
+        EditTextTitleWidget('labelText', setting.labelText, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              labelText: value,
+            );
+            changeValue();
+          });
+        }),
+        ExpansionPanelTitleWidget(
+          titleWidget: ValueTitleWidget('labelStyle'),
+          hintWidget: TextStyleDemo(
+            onchange: (value) {
+              setState(() {
+                setting = setting.copyWith(
+                  labelStyle: value,
+                );
+                changeValue();
+              });
+            },
+          ),
+          isExpanded: isLabelStyle,
+          onChanged: (value) {
+            setState(() {
+              this.isLabelStyle = value;
+            });
+          },
+        ),
+        EditTextTitleWidget('helperText', setting.helperText, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              helperText: value,
+            );
+            changeValue();
+          });
+        }),
+        ExpansionPanelTitleWidget(
+          titleWidget: ValueTitleWidget('helperStyle'),
+          hintWidget: TextStyleDemo(
+            onchange: (value) {
+              setState(() {
+                setting = setting.copyWith(
+                  helperStyle: value,
+                );
+                changeValue();
+              });
+            },
+          ),
+          isExpanded: isHelperStyle,
+          onChanged: (value) {
+            setState(() {
+              this.isHelperStyle = value;
+            });
+          },
+        ),
+        EditTextTitleWidget('errorText', setting.errorText, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              errorText: value,
+            );
+            changeValue();
+          });
+        }),
+        ExpansionPanelTitleWidget(
+          titleWidget: ValueTitleWidget('errorStyle'),
+          hintWidget: TextStyleDemo(
+            onchange: (value) {
+              setState(() {
+                setting = setting.copyWith(
+                  errorStyle: value,
+                );
+                changeValue();
+              });
+            },
+          ),
+          isExpanded: isErrorStyle,
+          onChanged: (value) {
+            setState(() {
+              this.isErrorStyle = value;
+            });
+          },
+        ),
+        DropDownValueTitleWidget(
+          selectList: intValues,
+          title: 'errorMaxLines',
+          value: setting.errorMaxLines,
+          onChanged: (value) {
+            setState(() {
+              setting = setting.copyWith(
+                errorMaxLines: value,
+              );
+              changeValue();
+            });
+          },
+        ),
+        EditTextTitleWidget('counterText', setting.counterText, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              counterText: value,
+            );
+            changeValue();
+          });
+        }),
+        ExpansionPanelTitleWidget(
+          titleWidget: ValueTitleWidget('counterStyle'),
+          hintWidget: TextStyleDemo(
+            onchange: (value) {
+              setState(() {
+                setting = setting.copyWith(
+                  counterStyle: value,
+                );
+                changeValue();
+              });
+            },
+          ),
+          isExpanded: isCounterStyle,
+          onChanged: (value) {
+            setState(() {
+              this.isCounterStyle = value;
+            });
+          },
+        ),
+        ValueTitleWidget('prefixIcon'),
+        RadioGroupWidget(setting.prefixIcon, iconButtonValues, (value){
+          setState(() {
+            setting=setting.copyWith(prefixIcon: value);
+            changeValue();
+          });
+        }),
+        EditTextTitleWidget('prefixText', setting.prefixText, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              prefixText: value,
+            );
+            changeValue();
+          });
+        }),
+        ExpansionPanelTitleWidget(
+          titleWidget: ValueTitleWidget('prefixStyle'),
+          hintWidget: TextStyleDemo(
+            onchange: (value) {
+              setState(() {
+                setting = setting.copyWith(
+                  prefixStyle: value,
+                );
+                changeValue();
+              });
+            },
+          ),
+          isExpanded: isPrefixStyle,
+          onChanged: (value) {
+            setState(() {
+              this.isPrefixStyle = value;
+            });
+          },
+        ),
+        ValueTitleWidget('suffixIcon'),
+        RadioGroupWidget(setting.suffixIcon, iconButtonValues, (value){
+          setState(() {
+            setting=setting.copyWith(suffixIcon: value);
+            changeValue();
+          });
+        }),
+        EditTextTitleWidget('suffixText', setting.suffixText, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              suffixText: value,
+            );
+            changeValue();
+          });
+        }),
+        ExpansionPanelTitleWidget(
+          titleWidget: ValueTitleWidget('suffixStyle'),
+          hintWidget: TextStyleDemo(
+            onchange: (value) {
+              setState(() {
+                setting = setting.copyWith(
+                  suffixStyle: value,
+                );
+                changeValue();
+              });
+            },
+          ),
+          isExpanded: isSuffixStyle,
+          onChanged: (value) {
+            setState(() {
+              this.isSuffixStyle = value;
+            });
+          },
+        ),
+      ],
+    );
   }
 }

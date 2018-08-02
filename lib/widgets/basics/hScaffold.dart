@@ -76,14 +76,12 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
       ValueTitleButtonWidget(
         title: StringParams.kFloatingActionButton,
         onPressed: () async {
-          exampleKey.currentState.showToast('FloatingActionButton尚未开发，敬请期待!');
-
-//          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/FloatingActionButton');
-//          if(changeValue!=null){
-//            setState(() {
-//              setting=setting.copyWith(floatingActionButton: changeValue);
-//            });
-//          }
+          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/FloatingActionButton');
+          if(changeValue!=null){
+            setState(() {
+              setting=setting.copyWith(floatingActionButton: changeValue);
+            });
+          }
         },
       ),
       ValueTitleWidget(StringParams.kFloatingActionButtonLocation),
@@ -101,25 +99,23 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
       ValueTitleButtonWidget(
         title: StringParams.kDrawer,
         onPressed: () async {
-          exampleKey.currentState.showToast('Drawer尚未开发，敬请期待!');
-//          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/Drawer');
-//          if(changeValue!=null){
-//            setState(() {
-//              setting=setting.copyWith(drawer: changeValue);
-//            });
-//          }
+          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/Drawer');
+          if(changeValue!=null){
+            setState(() {
+              setting=setting.copyWith(drawer: changeValue);
+            });
+          }
         },
       ),
       ValueTitleButtonWidget(
         title: StringParams.kEndDrawer,
         onPressed: () async{
-          exampleKey.currentState.showToast('EndDrawer尚未开发，敬请期待!');
-//          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/Drawer');
-//          if(changeValue!=null){
-//            setState(() {
-//              setting=setting.copyWith(endDrawer: changeValue);
-//            });
-//          }
+          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/Drawer');
+          if(changeValue!=null){
+            setState(() {
+              setting=setting.copyWith(endDrawer: changeValue);
+            });
+          }
         },
       ),
       ValueTitleButtonWidget(

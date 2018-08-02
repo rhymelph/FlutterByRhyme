@@ -48,6 +48,18 @@ class _IconDemoState extends ExampleState<IconDemo> {
   @override
   List<Widget> getSetting() {
     return [
+      ValueTitleWidget(StringParams.kTextDirection),
+      RadioGroupWidget<TextDirection>(setting.textDirection, textDirectionValues, (value){
+        setState(() {
+          setting = setting.copyWith(textDirection: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kColor),
+      ColorGroupWidget(setting.color, colorValues, (value){
+        setState(() {
+          setting = setting.copyWith(color: value);
+        });
+      }),
       DropDownValueTitleWidget(
         selectList: sizeValues,
         title: StringParams.kSize,
@@ -58,18 +70,6 @@ class _IconDemoState extends ExampleState<IconDemo> {
           });
         },
       ),
-      ValueTitleWidget(StringParams.kColor),
-      ColorGroupWidget(setting.color, colorValues, (value){
-        setState(() {
-          setting = setting.copyWith(color: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kTextDirection),
-      RadioGroupWidget<TextDirection>(setting.textDirection, textDirectionValues, (value){
-        setState(() {
-          setting = setting.copyWith(textDirection: value);
-        });
-      }),
     ];
   }
 
