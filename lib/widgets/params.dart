@@ -178,6 +178,18 @@ class StringParams {
   static final String kObscureText = 'ObscureText(模糊文本)';
   static final String kMaxLengthEnforced = 'MaxLengthEnforced(最大长度限制)';
   static final String kMaxLength = 'MaxLength(最大长度)';
+  static final String kActiveColor = 'ActiveColor(激活颜色)';
+  static final String kValue = 'Value(值)';
+  static final String kGroupValue = 'GroupValue(群值)';
+
+  static final String kTristate = 'Tristate(三态true,false,null)';
+
+  static final String kActiveTrackColor = 'ActiveTrackColor(激活轨迹颜色)';
+  static final String kActiveThumbImage = 'ActiveThumbImage(激活滑块图片)';
+  static final String kInActiveThumbColor = 'InActiveThumbColor(未激活滑块颜色)';
+  static final String kInActiveTrackColor = 'InActiveTrackColor(未激活轨迹颜色)';
+  static final String kInActiveThumbImage = 'InActiveThumbImage(未激活滑块图片)';
+
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -1040,6 +1052,11 @@ const List<Value<int>> intValues = [
   ),
 ];
 const List<Value<double>> doubleMiniValues = [
+  const Value(
+    name: '0.0',
+    value: 0.0,
+    label: '0.0',
+  ),
   const Value(
     name: '1.0',
     value: 1.0,

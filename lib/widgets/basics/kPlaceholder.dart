@@ -19,7 +19,7 @@ class _PlaceholderDemoState extends ExampleState<PlaceholderDemo> {
   void initState() {
     setting = PlaceholderSetting(
       color: colorValues[1],
-      strokeWidth: doubleMiniValues[0],
+      strokeWidth: doubleMiniValues[1],
       fallbackHeight: doubleHugeValues[0],
       fallbackWidth: doubleHugeValues[0],
     );
@@ -46,7 +46,7 @@ class _PlaceholderDemoState extends ExampleState<PlaceholderDemo> {
   List<Widget> getSetting() {
     return [
       ValueTitleWidget(StringParams.kColor),
-      ColorGroupWidget(setting.color, colorValues, (value) {
+      ColorGroupWidget(setting.color,  (value) {
         setState(() {
           setting = setting.copyWith(color: value);
         });

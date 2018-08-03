@@ -30,7 +30,7 @@ class _TabBarDemoState extends ExampleState<TabBarDemo> {
         label: 'true',
       ),
       indicator: decorationValues[0],
-      indicatorWeight: doubleMiniValues[0],
+      indicatorWeight: doubleMiniValues[1],
     );
 
     super.initState();
@@ -123,19 +123,19 @@ class _TabBarDemoState extends ExampleState<TabBarDemo> {
         });
       }),
       ValueTitleWidget(StringParams.kLabelColor),
-      ColorGroupWidget(setting.labelColor, colorValues, (value) {
+      ColorGroupWidget(setting.labelColor,  (value) {
         setState(() {
           setting = setting.copyWith(labelColor: value);
         });
       }),
       ValueTitleWidget(StringParams.kIndicatorColor),
-      ColorGroupWidget(setting.indicatorColor, colorValues, (value) {
+      ColorGroupWidget(setting.indicatorColor,  (value) {
         setState(() {
           setting = setting.copyWith(indicatorColor: value);
         });
       }),
       ValueTitleWidget(StringParams.kUnselectedLabelColor),
-      ColorGroupWidget(setting.unselectedLabelColor, colorValues, (value) {
+      ColorGroupWidget(setting.unselectedLabelColor,  (value) {
         setState(() {
           setting = setting.copyWith(unselectedLabelColor: value);
         });

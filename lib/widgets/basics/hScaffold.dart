@@ -99,12 +99,14 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
       ValueTitleButtonWidget(
         title: StringParams.kDrawer,
         onPressed: () async {
-          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/Drawer');
-          if(changeValue!=null){
-            setState(() {
-              setting=setting.copyWith(drawer: changeValue);
-            });
-          }
+          exampleKey.currentState.showToast('尚未完成!');
+
+//          dynamic changeValue =await Navigator.pushNamed(context, 'widgets/material/Drawer');
+//          if(changeValue!=null){
+//            setState(() {
+//              setting=setting.copyWith(drawer: changeValue);
+//            });
+//          }
         },
       ),
       ValueTitleButtonWidget(
@@ -130,7 +132,7 @@ class _ScaffoldDemoState extends ExampleState<ScaffoldDemo> {
         },
       ),
       ValueTitleWidget(StringParams.kBackground),
-      ColorGroupWidget(setting.backgroundColor, colorValues, (value) {
+      ColorGroupWidget(setting.backgroundColor,  (value) {
         setState(() {
           setting = setting.copyWith(backgroundColor: value);
         });

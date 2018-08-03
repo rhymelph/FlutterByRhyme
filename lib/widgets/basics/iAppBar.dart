@@ -34,7 +34,7 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
         leading: ${setting.leading?.label ?? ''},
         automaticallyImplyLeading: ${setting.automaticallyImplyLeading?.label ??
         ''},
-        title: ${setting.title?.label ?? ''},
+        title: Text('${setting.title?.label ?? ''}'),
         actions: ${setting.actions?.label ?? ''},
         flexibleSpace: ${setting.flexibleSpace?.label ?? ''},
         bottom: ${setting.bottom?.label ?? ''},
@@ -115,7 +115,7 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
         });
       }),
       ValueTitleWidget(StringParams.kBackgroundColor),
-      ColorGroupWidget(setting.backgroundColor, colorValues, (value) {
+      ColorGroupWidget(setting.backgroundColor,  (value) {
         setState(() {
           setting = setting.copyWith(backgroundColor: value);
         });
@@ -208,7 +208,7 @@ class _AppBarDemoState extends ExampleState<AppBarDemo> {
     return AppBar(
       leading: setting.leading?.value,
       automaticallyImplyLeading: setting.automaticallyImplyLeading?.value,
-      title: Text(setting.title?.value),
+      title: Text(setting.title?.value??''),
       actions: setting.actions?.value,
       flexibleSpace: setting.flexibleSpace?.value,
       bottom: setting.bottom?.value,
@@ -370,7 +370,7 @@ class _IconThemeDemoState extends State<IconThemeDemo> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         ValueTitleWidget(StringParams.kColor),
-        ColorGroupWidget(setting.color, colorValues, (value) {
+        ColorGroupWidget(setting.color,  (value) {
           setState(() {
             setting = setting.copyWith(color: value);
             changeValue();

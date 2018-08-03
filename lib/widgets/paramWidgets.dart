@@ -330,10 +330,9 @@ class ColorWidget extends StatelessWidget {
 
 //颜色选择单选按钮组
 class ColorGroupWidget extends StatelessWidget {
-  ColorGroupWidget(this.groupValue, this.valueList, this.valueChanged);
+  ColorGroupWidget(this.groupValue, this.valueChanged);
 
   final Value<Color> groupValue;
-  final List<Value<Color>> valueList;
   final ValueChanged<Value<Color>> valueChanged;
 
   @override
@@ -343,7 +342,7 @@ class ColorGroupWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: valueList.map((value) {
+        children: colorValues.map((value) {
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: ColorWidget(value, groupValue, valueChanged),
@@ -391,10 +390,9 @@ class ColorsWidget extends StatelessWidget {
 
 //多种颜色组合按钮组
 class ColorsGroupWidget extends StatelessWidget {
-  ColorsGroupWidget(this.groupValue, this.valueList, this.valueChanged);
+  ColorsGroupWidget(this.groupValue, this.valueChanged);
 
   final Value<MaterialColor> groupValue;
-  final List<Value<MaterialColor>> valueList;
   final ValueChanged<Value<MaterialColor>> valueChanged;
 
   @override
@@ -404,7 +402,7 @@ class ColorsGroupWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: valueList.map((value) {
+        children: materialColorValues.map((value) {
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: ColorsWidget(value, groupValue, valueChanged),
@@ -749,7 +747,7 @@ class _TextStyleDemoState extends State<TextStyleDemo> {
           });
         }),
         ValueTitleWidget(StringParams.kColor),
-        ColorGroupWidget(setting.color, colorValues, (value) {
+        ColorGroupWidget(setting.color, (value) {
           setState(() {
             setting = setting.copyWith(
               color: value,
@@ -758,7 +756,7 @@ class _TextStyleDemoState extends State<TextStyleDemo> {
           });
         }),
         ValueTitleWidget(StringParams.kDecorationColor),
-        ColorGroupWidget(setting.decorationColor, colorValues, (value) {
+        ColorGroupWidget(setting.decorationColor, (value) {
           setState(() {
             setting = setting.copyWith(
               decorationColor: value,
@@ -1073,7 +1071,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
             });
           },),
         ValueTitleWidget(StringParams.kFillColor),
-        ColorGroupWidget(setting.fillColor, colorValues, (value){
+        ColorGroupWidget(setting.fillColor, (value){
           setState(() {
             setting=setting.copyWith(fillColor: value);
             changeValue();

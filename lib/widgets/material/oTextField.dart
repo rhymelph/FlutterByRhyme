@@ -31,7 +31,7 @@ class _TextFieldDemoState extends ExampleState<TextFieldDemo> {
       controller: Value(
         name: 'controller',
         value: TextEditingController(),
-        label: 'controller',
+        label: '_controller',
       ),
       decoration: inputDecorationValues[0],
       keyboardType: textInputTypeValues[0],
@@ -44,7 +44,7 @@ class _TextFieldDemoState extends ExampleState<TextFieldDemo> {
       focusNode: Value(
         name: 'focusNode',
         value: FocusNode(),
-        label: 'node',
+        label: '_node',
       ),
       onChanged: Value(
         name: 'onChanged',
@@ -88,14 +88,14 @@ class _TextFieldDemoState extends ExampleState<TextFieldDemo> {
 
   @override
   String getExampleCode() {
-    return '''TextEditingController controller=TextEditingController();
+    return '''TextEditingController _controller=TextEditingController();
     //监听输入的文本
-    controller.addListener((){
+    _controller.addListener((){
 //      print(controller.text);
     });
-FocusNode node=FocusNode();
+FocusNode _node=FocusNode();
     //监听输入框获取焦点
-    node.addListener((){
+    _node.addListener((){
 //      print(node.hasFocus);
     });
     TextField(

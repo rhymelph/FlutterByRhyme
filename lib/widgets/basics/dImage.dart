@@ -67,7 +67,7 @@ class _ImageDemoState extends ExampleState<ImageDemo> {
         });
       }),
       ValueTitleWidget(StringParams.kColor),
-      ColorGroupWidget(setting.color, colorValues, (value) {
+      ColorGroupWidget(setting.color,  (value) {
         setState(() {
           setting = setting.copyWith(color: value);
         });

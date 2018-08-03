@@ -21,7 +21,7 @@ class _TextDemoState extends ExampleState<TextDemo> {
   @override
   void initState() {
     setting = TextSetting(
-      textScaleFactor: doubleMiniValues[0],
+      textScaleFactor: doubleMiniValues[1],
     );
     super.initState();
   }

@@ -72,25 +72,25 @@ class _IconButtonDemoState extends ExampleState<IconButtonDemo> {
         });
       }),
       ValueTitleWidget(StringParams.kColor),
-      ColorGroupWidget(setting.color, colorValues, (value) {
+      ColorGroupWidget(setting.color,  (value) {
         setState(() {
           setting = setting.copyWith(color: value);
         });
       }),
       ValueTitleWidget(StringParams.kDisabledColor),
-      ColorGroupWidget(setting.disabledColor, colorValues, (value) {
+      ColorGroupWidget(setting.disabledColor,  (value) {
         setState(() {
           setting = setting.copyWith(disabledColor: value);
         });
       }),
       ValueTitleWidget(StringParams.kHighlightColor),
-      ColorGroupWidget(setting.highlightColor, colorValues, (value) {
+      ColorGroupWidget(setting.highlightColor,  (value) {
         setState(() {
           setting = setting.copyWith(highlightColor: value);
         });
       }),
       ValueTitleWidget(StringParams.kSplashColor),
-      ColorGroupWidget(setting.splashColor, colorValues, (value) {
+      ColorGroupWidget(setting.splashColor,  (value) {
         setState(() {
           setting = setting.copyWith(splashColor: value);
         });

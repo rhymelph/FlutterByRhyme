@@ -93,7 +93,7 @@ class _ContainerDemoState extends ExampleState<ContainerDemo> {
         });
       }),
       ValueTitleWidget(StringParams.kColor),
-      ColorGroupWidget(setting.color, colorValues, (value) {
+      ColorGroupWidget(setting.color,  (value) {
         if (setting.decoration != null) {
           _showSyncSelectTip();
         } else {

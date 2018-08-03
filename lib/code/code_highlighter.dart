@@ -33,13 +33,13 @@ class SyntaxHighlighterStyle {
   static SyntaxHighlighterStyle darkThemeStyle() {
     return new SyntaxHighlighterStyle(
         baseStyle: const TextStyle(color: const Color(0xFFFFFFFF)),
-        numberStyle: const TextStyle(color: const Color(0xFF1565C0)),
-        commentStyle: const TextStyle(color: const Color(0xFF9E9E9E)),
-        keywordStyle: const TextStyle(color: const Color(0xFF80CBC4)),
-        stringStyle: const TextStyle(color: const Color(0xFF009688)),
+        numberStyle: const TextStyle(color: const Color(0xFF6897BB)),
+        commentStyle: const TextStyle(color: const Color(0xFF808080)),
+        keywordStyle: const TextStyle(color: const Color(0xFFCC7832)),
+        stringStyle: const TextStyle(color: const Color(0xFF6A8759)),
         punctuationStyle: const TextStyle(color: const Color(0xFFFFFFFF)),
-        classStyle: const TextStyle(color: const Color(0xFF009688)),
-        constantStyle: const TextStyle(color: const Color(0xFF795548))
+        classStyle: const TextStyle(color: const Color(0xFFFFC66D)),
+        constantStyle: const TextStyle(color: const Color(0xFF9876AA))
     );
   }
 

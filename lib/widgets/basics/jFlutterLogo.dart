@@ -69,13 +69,13 @@ class _FlutterLogoDemoState extends ExampleState<FlutterLogoDemo> {
       }),
 
       ValueTitleWidget(StringParams.kColors),
-      ColorsGroupWidget(setting.colors, materialColorValues, (value){
+      ColorsGroupWidget(setting.colors,  (value){
         setState(() {
           setting=setting.copyWith(colors: value);
         });
       }),
       ValueTitleWidget(StringParams.kTextColor),
-      ColorGroupWidget(setting.textColor, colorValues, (value){
+      ColorGroupWidget(setting.textColor,  (value){
         setState(() {
           setting=setting.copyWith(textColor: value);
         });

@@ -36,7 +36,7 @@ class _BottomNavigationBarDemoState
                     currentIndex: Value(
                       name: '$value',
                       value: value,
-                      label: 'position',
+                      label: '_position',
                     ));
               });
             }
@@ -44,7 +44,7 @@ class _BottomNavigationBarDemoState
         },
         label: '''(value){
                   setState(() {
-                      position=value;
+                      _position=value;
                   });
                  }''',
       ),
@@ -60,7 +60,7 @@ class _BottomNavigationBarDemoState
 
   @override
   String getExampleCode() {
-    return '''int position=0;
+    return '''int _position=0;
     
     BottomNavigationBar(
       items: ${setting.items?.label??''},
@@ -109,7 +109,7 @@ class _BottomNavigationBarDemoState
                 currentIndex: Value(
                   name: '0',
                   value: 0,
-                  label: 'position',
+                  label: '_position',
                 ),
               );
             } else {
@@ -121,7 +121,6 @@ class _BottomNavigationBarDemoState
       ValueTitleWidget(StringParams.kFixedColor),
       ColorGroupWidget(
         setting.fixedColor,
-        colorValues,
         (value) {
           setState(() {
             setting = setting.copyWith(fixedColor: value);

@@ -100,7 +100,7 @@ class _FloatingActionButtonDemoState
       ValueTitleWidget(StringParams.kForegroundColor),
       ColorGroupWidget(
         setting.foregroundColor,
-        colorValues,
+        
             (value) {
           setState(() {
             setting = setting.copyWith(foregroundColor: value);
@@ -110,7 +110,7 @@ class _FloatingActionButtonDemoState
       ValueTitleWidget(StringParams.kBackgroundColor),
       ColorGroupWidget(
         setting.backgroundColor,
-        colorValues,
+        
             (value) {
           setState(() {
             setting = setting.copyWith(backgroundColor: value);

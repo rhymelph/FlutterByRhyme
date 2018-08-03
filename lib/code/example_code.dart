@@ -90,21 +90,49 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
   Color ntColor=Colors.transparent;
   Color vbColor;
   Color vtColor;
+  List<Widget> body;
 
   void showToast(String content) {
     setState(() {
       this.content=content;
       nbColor=this.vbColor;
       ntColor=this.vtColor;
+      if(body.length==1){
+        body.add(toastWidget());
+      }
     });
     Future.delayed(Duration(milliseconds: 1000),(){
       setState(() {
         nbColor=Colors.transparent;
         ntColor=Colors.transparent;
+        if(body.length==2){
+          body.removeLast();
+        }
       });
     });
   }
-
+  Widget toastWidget(){
+    return Positioned(
+      left: 50.0,
+      right: 50.0,
+      bottom: 20.0,
+      child: AnimatedContainer(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(8.0),
+        duration: const Duration(
+          milliseconds: 200,
+        ),
+        curve: Curves.easeIn,
+        color: nbColor,
+        child: Text(content??'hello',style: Theme.of(context).textTheme.title.copyWith(color: ntColor),),
+      ),
+    );
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     bool isDark=Theme.of(context).brightness==Brightness.dark;
@@ -132,23 +160,8 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
             ]),
         ),
         body: Stack(
-          children: <Widget>[
+          children: [
             widget.body,
-            Positioned(
-              left: 50.0,
-              right: 50.0,
-              bottom: 20.0,
-              child: AnimatedContainer(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(8.0),
-                duration: const Duration(
-                  milliseconds: 200,
-                ),
-                curve: Curves.easeIn,
-                color: nbColor,
-                child: Text(content??'hello',style: Theme.of(context).textTheme.title.copyWith(color: ntColor),),
-              ),
-            ),
           ],
         ));
   }

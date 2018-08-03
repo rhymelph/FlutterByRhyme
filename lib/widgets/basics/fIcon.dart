@@ -55,7 +55,7 @@ class _IconDemoState extends ExampleState<IconDemo> {
         });
       }),
       ValueTitleWidget(StringParams.kColor),
-      ColorGroupWidget(setting.color, colorValues, (value){
+      ColorGroupWidget(setting.color,  (value){
         setState(() {
           setting = setting.copyWith(color: value);
         });
