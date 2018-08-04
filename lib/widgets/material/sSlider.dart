@@ -18,15 +18,23 @@ class _SliderDemoState extends ExampleState<SliderDemo> {
       onChanged: Value(
         name: 'onChanged',
         value: (value) {
+          print(value);
           setState(() {
             setting = setting.copyWith(
                 value: Value(
-              name: 'value',
-              value: value,
-              label: '_value',
-            ));
+                  name: 'value',
+                  value: value,
+                  label: '_value',
+                ),
+                );
           });
         },
+        label: '''(value) {
+          setState(() {
+          // todo 当值改变时调用
+          _value=value;
+          });
+        }''',
       ),
       onChangeEnd: Value(
         name: 'onChangeEnd',
@@ -62,15 +70,55 @@ class _SliderDemoState extends ExampleState<SliderDemo> {
 
   @override
   String getExampleCode() {
-    return 'double _value=0.0;';
+    return '''double _value=0.0;
+    Slider(
+        divisions: ${setting.divisions?.label??''},
+        value: ${setting.value?.label??''},
+        onChanged: ${setting.onChanged?.label??''},
+        min: ${setting.min?.label??''},
+        max: ${setting.max?.label??''},
+        onChangeEnd: ${setting.onChangeEnd?.label??''},
+        onChangeStart: ${setting.onChangeStart?.label??''},
+        label: ${setting.label?.label??''},
+        activeColor: ${setting.activeColor?.label??''},
+        inactiveColor: ${setting.inactiveColor?.label??''},
+      ),
+    )''';
   }
 
   @override
   List<Widget> getSetting() {
     return [
+      EditTextTitleWidget(StringParams.kLabelText, setting.label, (value){
+        setState(() {
+          setting=setting.copyWith(label: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kActiveColor),
+      ColorGroupWidget(setting.activeColor, (value) {
+        setState(() {
+          setting = setting.copyWith(activeColor: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kInActiveColor),
+      ColorGroupWidget(setting.inactiveColor, (value) {
+        setState(() {
+          setting = setting.copyWith(inactiveColor: value);
+        });
+      }),
+      DropDownValueTitleWidget(
+        selectList: intLargeValues,
+        title: StringParams.kDivisions,
+        value: setting.divisions,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(divisions: value);
+          });
+        },
+      ),
       DropDownValueTitleWidget(
         selectList: doubleMiniValues,
-        title: 'min',
+        title: StringParams.kMin,
         value: setting.min,
         onChanged: (value) {
           if (setting.max.value <= value.value) {
@@ -88,25 +136,27 @@ class _SliderDemoState extends ExampleState<SliderDemo> {
       ),
       DropDownValueTitleWidget(
         selectList: doubleMiniValues,
-        title: 'min',
+        title: StringParams.kMax,
         value: setting.max,
         onChanged: (value) {
-          if(setting.min.value>=value.value){
+          if (setting.min.value >= value.value) {
             exampleKey.currentState.showToast('最大值不能小于或等于最小值');
-          }else if(value.value<setting.value.value){
+          } else if (value.value < setting.value.value) {
             setState(() {
-              setting = setting.copyWith(max: value,value: value,);
+              setting = setting.copyWith(
+                max: value,
+                value: value,
+              );
             });
-          }else{
+          } else {
             setState(() {
-              setting = setting.copyWith( max: value);
+              setting = setting.copyWith(max: value);
             });
           }
         },
       ),
     ];
   }
-
 
   @override
   String getTitle() {
@@ -117,6 +167,7 @@ class _SliderDemoState extends ExampleState<SliderDemo> {
   Widget getWidget() {
     return Center(
       child: Slider(
+        divisions: setting.divisions?.value,
         value: setting.value?.value,
         onChanged: setting.onChanged?.value,
         min: setting.min?.value,
@@ -174,6 +225,11 @@ class SliderSetting {
       max: max ?? this.max,
       min: min ?? this.min,
       onChanged: onChanged ?? this.onChanged,
+      onChangeStart: onChangeStart??this.onChangeStart,
+      onChangeEnd: onChangeEnd??this.onChangeEnd,
+      label: label??this.label,
+      activeColor: activeColor??this.activeColor,
+      inactiveColor: inactiveColor??this.inactiveColor,
     );
   }
 }

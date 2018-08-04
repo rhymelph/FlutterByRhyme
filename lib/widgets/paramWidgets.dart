@@ -1186,7 +1186,7 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
           },
         ),
         DropDownValueTitleWidget(
-          selectList: intValues,
+          selectList: intMiniValues,
           title: StringParams.kErrorMaxLines,
           value: setting.errorMaxLines,
           onChanged: (value) {

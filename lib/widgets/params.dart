@@ -179,6 +179,8 @@ class StringParams {
   static final String kMaxLengthEnforced = 'MaxLengthEnforced(最大长度限制)';
   static final String kMaxLength = 'MaxLength(最大长度)';
   static final String kActiveColor = 'ActiveColor(激活颜色)';
+  static final String kInActiveColor = 'InActiveColor(未激活颜色)';
+
   static final String kValue = 'Value(值)';
   static final String kGroupValue = 'GroupValue(群值)';
 
@@ -189,6 +191,10 @@ class StringParams {
   static final String kInActiveThumbColor = 'InActiveThumbColor(未激活滑块颜色)';
   static final String kInActiveTrackColor = 'InActiveTrackColor(未激活轨迹颜色)';
   static final String kInActiveThumbImage = 'InActiveThumbImage(未激活滑块图片)';
+
+  static final String kDivisions = 'Divisions(划分)';
+  static final String kMin = 'Min(最小值)';
+  static final String kMax = 'Max(最大值)';
 
 }
 
@@ -1029,7 +1035,7 @@ const List<Value<Overflow>> overflowValues = [
   ),
 ];
 
-const List<Value<int>> intValues = [
+const List<Value<int>> intMiniValues = [
   const Value(
     name: '1',
     value: 1,
@@ -1051,6 +1057,29 @@ const List<Value<int>> intValues = [
     label: '4',
   ),
 ];
+const List<Value<int>> intLargeValues = [
+  const Value(
+    name: '10',
+    value: 10,
+    label: '10',
+  ),
+  const Value(
+    name: '20',
+    value: 20,
+    label: '20',
+  ),
+  const Value(
+    name: '30',
+    value: 30,
+    label: '30',
+  ),
+  const Value(
+    name: '40',
+    value: 40,
+    label: '40',
+  ),
+];
+
 const List<Value<double>> doubleMiniValues = [
   const Value(
     name: '0.0',

@@ -90,6 +90,7 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
   Color ntColor=Colors.transparent;
   Color vbColor;
   Color vtColor;
+  bool isShowToast=false;
   List<Widget> body;
 
   void showToast(String content) {
@@ -97,17 +98,13 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
       this.content=content;
       nbColor=this.vbColor;
       ntColor=this.vtColor;
-      if(body.length==1){
-        body.add(toastWidget());
-      }
+      isShowToast=true;
     });
     Future.delayed(Duration(milliseconds: 1000),(){
       setState(() {
         nbColor=Colors.transparent;
         ntColor=Colors.transparent;
-        if(body.length==2){
-          body.removeLast();
-        }
+        isShowToast=false;
       });
     });
   }
@@ -138,6 +135,10 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
     bool isDark=Theme.of(context).brightness==Brightness.dark;
     vbColor=isDark?Colors.grey:Colors.black87;
     vtColor=isDark?Colors.black:Colors.white;
+    body=[widget.body];
+    if(isShowToast){
+      body.add(toastWidget());
+    }
     return Scaffold(
         key: widget.scaffoldKey,
         appBar: AppBar(
@@ -160,9 +161,7 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
             ]),
         ),
         body: Stack(
-          children: [
-            widget.body,
-          ],
+          children: body,
         ));
   }
 

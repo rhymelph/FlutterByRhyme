@@ -220,7 +220,7 @@ FocusNode _node=FocusNode();
         },
       ),
       DropDownValueTitleWidget(
-        selectList: intValues,
+        selectList: intMiniValues,
         title: StringParams.kMaxLines,
         value: setting.maxLines,
         onChanged: (value){
@@ -230,7 +230,7 @@ FocusNode _node=FocusNode();
         },
       ),
       DropDownValueTitleWidget(
-        selectList: intValues,
+        selectList: intMiniValues,
         title: StringParams.kMaxLength,
         value: setting.maxLength,
         onChanged: (value){

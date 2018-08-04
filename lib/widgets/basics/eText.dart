@@ -106,7 +106,7 @@ class _TextDemoState extends ExampleState<TextDemo> {
       ),
       DropDownValueTitleWidget<int>(
         title: StringParams.kMaxLines,
-        selectList: intValues,
+        selectList: intMiniValues,
         value: setting.maxLines,
         onChanged: (value) {
           setState(() {
