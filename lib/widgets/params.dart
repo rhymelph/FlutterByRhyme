@@ -145,7 +145,7 @@ class StringParams {
   static final String kItemBuilder = 'ItemBuilder(选项建造者)';
   static final String kChildren = 'Children(孩子)';
 
-  static final String kFixedColor='FixedColor(固定类型时的颜色)';
+  static final String kFixedColor = 'FixedColor(固定类型时的颜色)';
   static final String kIcon = 'Icon(图标)';
   static final String kContentPadding = 'ContentPadding(内容内边距)';
   static final String kBorder = 'Border(边界)';
@@ -195,6 +195,13 @@ class StringParams {
   static final String kDivisions = 'Divisions(划分)';
   static final String kMin = 'Min(最小值)';
   static final String kMax = 'Max(最大值)';
+
+  static final String kChangeToTimePickers='日期选择器/时间选择器';
+  static final String kInitialTime='InitialTime(初始时间)';
+  static final String kInitialDate='InitialDate(初始日期)';
+  static final String kFirstDate='FirstDate(起始日期)';
+  static final String kLastDate='LastDate(最后日期)';
+  static final String kInitialDatePickerMode='InitialDatePickerMode(初始日期选择器)';
 
 }
 
@@ -2237,7 +2244,7 @@ List<Value<List<Widget>>> buttonValues = [
   ),
 ];
 
-List<Value<InputDecoration>> inputDecorationValues=[
+List<Value<InputDecoration>> inputDecorationValues = [
   Value(
     name: 'InputDecoration',
     value: InputDecoration(),
@@ -2245,7 +2252,7 @@ List<Value<InputDecoration>> inputDecorationValues=[
   ),
 ];
 
-const List<Value<bool>> boolValues=[
+const List<Value<bool>> boolValues = [
   const Value(
     name: 'false',
     value: false,
@@ -2258,43 +2265,36 @@ const List<Value<bool>> boolValues=[
   ),
 ];
 
-
-List<Value<TextInputType>> textInputTypeValues=[
+List<Value<TextInputType>> textInputTypeValues = [
   Value(
     name: 'text',
     value: TextInputType.text,
     label: 'TextInputType.text',
-
   ),
   Value(
     name: 'url',
     value: TextInputType.url,
     label: 'TextInputType.url',
-
   ),
   Value(
     name: 'datetime',
     value: TextInputType.datetime,
     label: 'TextInputType.datetime',
-
   ),
   Value(
     name: 'emailAddress',
     value: TextInputType.emailAddress,
     label: 'TextInputType.emailAddress',
-
   ),
   Value(
     name: 'multiline',
     value: TextInputType.multiline,
     label: 'TextInputType.multiline',
-
   ),
   Value(
     name: 'number',
     value: TextInputType.number,
     label: 'TextInputType.number',
-
   ),
   Value(
     name: 'phone',
@@ -2303,7 +2303,7 @@ List<Value<TextInputType>> textInputTypeValues=[
   ),
 ];
 
-List<Value<InputBorder>> inputBorderValues=[
+List<Value<InputBorder>> inputBorderValues = [
   Value(
     name: 'Outline',
     value: OutlineInputBorder(),
@@ -2316,32 +2316,106 @@ List<Value<InputBorder>> inputBorderValues=[
   ),
 ];
 
-List<Value<List<TextInputFormatter>>> textinputFormatterValues=[
+List<Value<List<TextInputFormatter>>> textinputFormatterValues = [
   Value(
     name: 'Blacklisting(黑名单)',
     value: [
-      BlacklistingTextInputFormatter('1',replacementString: '2'),
+      BlacklistingTextInputFormatter('1', replacementString: '2'),
     ],
     label: '''[
       BlacklistingTextInputFormatter('1',replacementString: '2'),
     ]''',
   ),
   Value(
-      name: 'LengthLimiting(长度限制)',
-      value: [
-        LengthLimitingTextInputFormatter(10),
-      ],
+    name: 'LengthLimiting(长度限制)',
+    value: [
+      LengthLimitingTextInputFormatter(10),
+    ],
     label: '''[
         LengthLimitingTextInputFormatter(10),
       ]''',
   ),
   Value(
-      name: 'Whitelisting(白名单)',
-      value: [
-        WhitelistingTextInputFormatter('1'),
-      ],
+    name: 'Whitelisting(白名单)',
+    value: [
+      WhitelistingTextInputFormatter('1'),
+    ],
     label: '''[
         WhitelistingTextInputFormatter('1'),
       ]''',
+  ),
+];
+
+List<Value<DatePickerMode>> datePickerModeValues = [
+  Value(
+    name: 'day',
+    value: DatePickerMode.day,
+    label: 'DatePickerMode.day',
+  ),
+  Value(
+    name: 'year',
+    value: DatePickerMode.year,
+    label: 'DatePickerMode.year',
+  ),
+];
+
+List<Value<DateTime>> dateTimeValues = [
+  Value(
+    name: 'now',
+    value: DateTime.now(),
+    label: 'DateTime.now()',
+  ),
+  Value(
+    name: '1998/12/1 0:0:0 0:0',
+    value: DateTime(1998, 12, 1, 0, 0, 0, 0, 0),
+    label: 'DateTime(1998,12,1 ,0,0,0, 0,0)',
+  ),
+  Value(
+    name: 'UTC 2028/12/1 0:0:0 0:0',
+    value: DateTime.utc(2028, 12, 1, 0, 0, 0, 0, 0),
+    label: 'DateTime.utc(2008,12,1 ,0,0,0, 0,0)',
+  ),
+  Value(
+    name: 'MicroSeconds 1000000000000000',
+    value: DateTime.fromMicrosecondsSinceEpoch(
+      1000000000000000,
+      isUtc: false,
+    ),
+    label: '''DateTime.fromMicrosecondsSinceEpoch(
+      1000000000000000,
+      isUtc: false,
+    )''',
+  ),
+  Value(
+    name: 'MilliSeconds 1200000000000',
+    value: DateTime.fromMillisecondsSinceEpoch(
+      1200000000000,
+      isUtc: false,
+    ),
+    label: '''DateTime.fromMillisecondsSinceEpoch(
+      1200000000000,
+      isUtc: false,
+    )''',
+  ),
+];
+
+List<Value<TimeOfDay>> timeOfDayValues = [
+  Value(
+    name: 'now',
+    value: TimeOfDay.now(),
+    label: 'TimeOfDay.now()',
+  ),
+  Value(
+    name: 'fromDateTime',
+    value: TimeOfDay.fromDateTime(
+      DateTime.fromMillisecondsSinceEpoch(
+        1223456789123,
+      ),
+    ),
+    label: '''TimeOfDay.fromDateTime(
+      DateTime.fromMillisecondsSinceEpoch(
+        1223456789123,
+      ),
+    )''',
   ),
 ];
