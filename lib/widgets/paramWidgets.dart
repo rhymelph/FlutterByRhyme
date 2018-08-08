@@ -1297,3 +1297,129 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
     );
   }
 }
+
+
+class AnimationControllerSetting {
+  final Value<double> value;
+  final Value<Duration> duration;
+  final Value<double> lowerBound;
+  final Value<double> upperBound;
+
+  AnimationControllerSetting({this.value, this.duration, this.lowerBound, this.upperBound, });
+
+  AnimationControllerSetting copyWith({
+     Value<double> value,
+     Value<Duration> duration,
+     Value<double> lowerBound,
+     Value<double> upperBound,
+  }) {
+    return AnimationControllerSetting(
+      value: value ?? this.value,
+      duration: duration ?? this.duration,
+      lowerBound: lowerBound ?? this.lowerBound,
+      upperBound: upperBound ?? this.upperBound,
+    );
+  }
+
+}
+
+class AnimationControllerDemo extends StatefulWidget {
+  AnimationControllerDemo({Key key,this.onchange}) : super(key: key);
+
+  final ValueChanged<Value<AnimationControllerSetting>> onchange;
+
+  @override
+  _AnimationControllerDemoState createState() => _AnimationControllerDemoState();
+}
+
+class _AnimationControllerDemoState extends State<AnimationControllerDemo> {
+  AnimationControllerSetting setting;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    setting = AnimationControllerSetting(
+      value: doubleMiniValues[0],
+      duration: durationValues[0],
+      lowerBound: doubleMiniValues[0],
+      upperBound: doubleMiniValues[1],
+    );
+    super.initState();
+  }
+
+  void changeValue() {
+    widget.onchange(Value(
+      label: getExampleCode(),
+      value: setting,
+    ));
+  }
+
+  String getExampleCode() {
+    return '''AnimationController(
+      value: ${setting.value?.label??''},
+      duration: ${setting.duration?.label??''},
+      lowerBound: ${setting.lowerBound?.label??''},
+      upperBound: ${setting.upperBound?.label??''},
+      vsync: this,
+    )''';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        ValueTitleWidget(StringParams.kDuration),
+        RadioGroupWidget<Duration>(
+            setting.duration, durationValues, (value) {
+          setState(() {
+            setting = setting.copyWith(
+              duration: value,
+            );
+            changeValue();
+          });
+        }),
+        DropDownValueTitleWidget(
+          selectList: doubleMiniValues,
+          title: StringParams.kValue,
+          value: setting.value,
+          onChanged: (value) {
+            setState(() {
+              setting = setting.copyWith(
+                value: value,
+              );
+              changeValue();
+            });
+          },
+        ),
+        DropDownValueTitleWidget<double>(
+          selectList: doubleMiniValues,
+          title: StringParams.kLowerBound,
+          value: setting.lowerBound,
+          onChanged: (value) {
+            setState(() {
+              setting = setting.copyWith(
+                lowerBound: value,
+              );
+              changeValue();
+            });
+          },
+        ),
+        DropDownValueTitleWidget<double>(
+          selectList: doubleMiniValues,
+          title: StringParams.kUpperBound,
+          value: setting.upperBound,
+          onChanged: (value) {
+            setState(() {
+              setting = setting.copyWith(
+                upperBound: value,
+              );
+              changeValue();
+            });
+          },
+        ),
+      ],
+    );
+  }
+}

@@ -202,6 +202,16 @@ class StringParams {
   static final String kFirstDate='FirstDate(起始日期)';
   static final String kLastDate='LastDate(最后日期)';
   static final String kInitialDatePickerMode='InitialDatePickerMode(初始日期选择器)';
+  static final String kTitlePadding='TitlePadding(标题内边距)';
+
+  static final String kContent = 'Content(内容)';
+
+  static final  String kBarrierDismissible = 'BarrierDismissible(点外部可取消)';
+
+  static final String kLowerBound ='LowerBound(下限)';
+  static final String kUpperBound ='UpperBound(上限)';
+
+
 
 }
 
