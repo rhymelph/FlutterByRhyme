@@ -1360,7 +1360,7 @@ class _AnimationControllerDemoState extends State<AnimationControllerDemo> {
       duration: ${setting.duration?.label??''},
       lowerBound: ${setting.lowerBound?.label??''},
       upperBound: ${setting.upperBound?.label??''},
-      vsync: this,
+      vsync: this,//class _AState extends State<A> with SingleTickerProviderStateMixin
     )''';
   }
 

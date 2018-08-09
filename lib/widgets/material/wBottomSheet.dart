@@ -57,7 +57,7 @@ class _BottomSheetDemoState extends ExampleState<BottomSheetDemo>
           duration: durationValues[0].value,
         ),
         label: '''AnimationController(
-            vsync: this,
+            vsync: this,//class _AState extends State<A> with SingleTickerProviderStateMixin
             lowerBound: 0.0,
             upperBound: 1.0,
             duration: durationValues[0].value,
@@ -105,6 +105,28 @@ Widget getBottomSheet() {
   @override
   List<Widget> getSetting() {
     return [
+      ExpansionPanelTitleWidget(
+        isExpanded: isExpanded,
+        onChanged: (value) {
+          setState(() {
+            this.isExpanded = value;
+          });
+        },
+        titleWidget: ValueTitleWidget('AnimationController'),
+        hintWidget: AnimationControllerDemo(
+          onchange: (value) {
+            setState(() {
+              setting = setting.copyWith(
+                animationController: Value(
+                  name: 'controller',
+                  value: getAnimationController(value.value),
+                  label: value.label,
+                ),
+              );
+            });
+          },
+        ),
+      ),
       SwitchValueTitleWidget(
         title: 'Use Modal',
         value: setting.isShowModal,
@@ -123,31 +145,15 @@ Widget getBottomSheet() {
           });
         },
       ),
-      ExpansionPanelTitleWidget(
-        isExpanded: isExpanded,
-        onChanged: (value) {
-          setState(() {
-            this.isExpanded = value;
-          });
-        },
-        titleWidget: ValueTitleWidget('AnimationController'),
-        hintWidget: AnimationControllerDemo(
-          onchange: (value) {
-            setState(() {
-              setting = setting.copyWith(animationController: Value(
-                  name: 'controller',
-                  value: AnimationController(vsync: this,
-                    value: value.value.value.value,
-                    lowerBound: value.value.lowerBound.value,
-                    upperBound: value.value.upperBound.value,
-                    duration: value.value.duration.value,),
-                  label: value.label,
-              ),);
-            });
-          },
-        ),
-      )
+
     ];
+  }
+  AnimationController getAnimationController(
+      AnimationControllerSetting controllSetting) {
+    setting.animationController.value.repeat(min: controllSetting.lowerBound?.value,
+    max: controllSetting.upperBound?.value,period: controllSetting.duration?.value);
+    setting.animationController.value.value=controllSetting.value.value;
+    return setting.animationController.value;
   }
 
   @override
@@ -160,7 +166,7 @@ Widget getBottomSheet() {
       onClosing: setting.onClosing?.value,
       builder: setting.builder?.value,
       animationController: setting.animationController?.value,
-      enableDrag: setting.enableDrag?.value,
+//      enableDrag: setting.enableDrag?.value,
     );
   }
 
@@ -196,11 +202,12 @@ class BottomSheetSetting {
   final Value<AnimationController> animationController;
   final Value<bool> enableDrag;
 
-  BottomSheetSetting({this.onClosing,
-    this.isShowModal,
-    this.builder,
-    this.animationController,
-    this.enableDrag});
+  BottomSheetSetting(
+      {this.onClosing,
+      this.isShowModal,
+      this.builder,
+      this.animationController,
+      this.enableDrag});
 
   BottomSheetSetting copyWith({
     Value<bool> isShowModal,
