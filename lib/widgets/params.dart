@@ -211,6 +211,27 @@ class StringParams {
   static final String kLowerBound ='LowerBound(下限)';
   static final String kUpperBound ='UpperBound(上限)';
 
+  static final String kIsExpanded ='IsExpanded(是否膨胀)';
+
+  static final String  kDeleteIconColor = 'DeleteIconColor(删除图标颜色)';
+
+  static final String kMaterialTapTargetSize ='MaterialTapTargetSize(物料目标尺寸)';
+
+  static final String kDeleteIcon='DeleteIcon(删除图标)';
+
+  static final String kLabelPadding='LabelPadding(标签内边距)';
+
+  static final String kAvatar='Avatar(头像)';
+
+  static final String kDeleteButtonTooltipMessage='DeleteButtonTooltipMessage\n(删除按钮提示信息)';
+
+  static final String kHeight="Height(高度)";
+
+  static final String kVerticalOffset='VerticalOffset(垂直偏移)';
+
+  static final String kPreferBelow='PreferBelow(优先)';
+
+  static final String kExcludeFromSemantics='ExcludeFromSemantics(排除语义)';
 
 
 }
@@ -1151,7 +1172,28 @@ const List<Value<double>> doubleLargeValues = [
     label: '32.0',
   ),
 ];
-
+const List<Value<double>> doubleXlargeValues = [
+  const Value(
+    name: '10.0',
+    value: 10.0,
+    label: '10.0',
+  ),
+  const Value(
+    name: '20.0',
+    value: 20.0,
+    label: '20.0',
+  ),
+  const Value(
+    name: '40.0',
+    value: 40.0,
+    label: '40.0',
+  ),
+  const Value(
+    name: '80.0',
+    value: 80.0,
+    label: '80.0',
+  ),
+];
 const List<Value<double>> doubleHugeValues = [
   const Value(
     name: '100.0',
@@ -2427,5 +2469,79 @@ List<Value<TimeOfDay>> timeOfDayValues = [
         1223456789123,
       ),
     )''',
+  ),
+];
+
+List<Value<Widget>> iconValues=[
+  Value(
+    name: 'close',
+    value: Icon(Icons.close),
+    label: 'Icon(Icons.close)',
+  ),
+  Value(
+    name: 'check',
+    value: Icon(Icons.check),
+    label: 'Icon(Icons.check)',
+  ),
+];
+
+List<Value<Widget>> avatarValues=[
+  Value(
+    name: 'R',
+    value: CircleAvatar(
+      child: Text('R'),
+    ),
+    label: '''CircleAvatar(
+      child: Text('R'),
+    )''',
+  ),
+  Value(
+    name: 'H',
+    value: CircleAvatar(
+      child: Text('H'),
+    ),
+    label: '''CircleAvatar(
+      child: Text('H'),
+    )''',
+  ),
+  Value(
+    name: 'Y',
+    value: CircleAvatar(
+      child: Text('Y'),
+    ),
+    label: '''CircleAvatar(
+      child: Text('Y'),
+    )''',
+  ),
+  Value(
+    name: 'M',
+    value: CircleAvatar(
+      child: Text('M'),
+    ),
+    label: '''CircleAvatar(
+      child: Text('M'),
+    )''',
+  ),
+  Value(
+    name: 'E',
+    value: CircleAvatar(
+      child: Text('E'),
+    ),
+    label: '''CircleAvatar(
+      child: Text('E'),
+    )''',
+  ),
+];
+
+List<Value<MaterialTapTargetSize>> targetSizeValues=[
+  Value(
+    name: 'padded',
+    value: MaterialTapTargetSize.padded,
+    label: 'MaterialTapTargetSize.padded',
+  ),
+  Value(
+    name: 'shrinkWrap',
+    value: MaterialTapTargetSize.shrinkWrap,
+    label: 'MaterialTapTargetSize.shrinkWrap',
   ),
 ];

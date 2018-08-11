@@ -68,15 +68,6 @@ class _SwitchDemoState extends ExampleState<SwitchDemo> {
   List<Widget> getSetting() {
     // TODO: implement getSetting
     return [
-      SwitchValueTitleWidget(
-        value: setting.value,
-        title: StringParams.kValue,
-        onChanged: (value) {
-          setState(() {
-            setting = setting.copyWith(value: value);
-          });
-        },
-      ),
       ValueTitleWidget(StringParams.kActiveThumbImage),
       RadioGroupWidget(setting.activeThumbImage, imageValues, (value) {
         setState(() {
@@ -113,8 +104,15 @@ class _SwitchDemoState extends ExampleState<SwitchDemo> {
           setting = setting.copyWith(inactiveTrackColor: value);
         });
       }),
-
-
+      SwitchValueTitleWidget(
+        value: setting.value,
+        title: StringParams.kValue,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(value: value);
+          });
+        },
+      ),
     ];
   }
 

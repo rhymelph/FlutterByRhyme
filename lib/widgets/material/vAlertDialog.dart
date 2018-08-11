@@ -77,25 +77,6 @@ Widget _getDialog() {
   @override
   List<Widget> getSetting() {
     return [
-      SwitchValueTitleWidget(
-        title: StringParams.kBarrierDismissible,
-        value: setting.barrierDismissible,
-        onChanged: (value) {
-          setState(() {
-            setting = setting.copyWith(barrierDismissible: value);
-          });
-        },
-      ),
-      EditTextTitleWidget(StringParams.kTitle, setting.title, (value) {
-        setState(() {
-          setting = setting.copyWith(title: value);
-        });
-      }),
-      EditTextTitleWidget(StringParams.kContent, setting.content, (value) {
-        setState(() {
-          setting = setting.copyWith(content: value);
-        });
-      }),
       ValueTitleWidget(StringParams.kTitlePadding),
       RadioGroupWidget(setting.titlePadding, paddingValues, (value) {
         setState(() {
@@ -108,6 +89,25 @@ Widget _getDialog() {
           setting = setting.copyWith(contentPadding: value);
         });
       }),
+      EditTextTitleWidget(StringParams.kTitle, setting.title, (value) {
+        setState(() {
+          setting = setting.copyWith(title: value);
+        });
+      }),
+      EditTextTitleWidget(StringParams.kContent, setting.content, (value) {
+        setState(() {
+          setting = setting.copyWith(content: value);
+        });
+      }),
+      SwitchValueTitleWidget(
+        title: StringParams.kBarrierDismissible,
+        value: setting.barrierDismissible,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(barrierDismissible: value);
+          });
+        },
+      ),
     ];
   }
 

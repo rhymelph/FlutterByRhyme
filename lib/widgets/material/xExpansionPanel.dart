@@ -3,7 +3,12 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class ExpansionPanelDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/ExpansionPanel';
-  final String detail = '';
+  final String detail = '''A material expansion panel. It has a header and a body and can be either expanded or collapsed. The body of the panel is only visible when it is expanded.
+Expansion panels are only intended to be used as children for ExpansionPanelList.
+See also:
+ExpansionPanelList
+material.google.com/components/expansion-panels.html
+''';
 
   @override
   _ExpansionPanelDemoState createState() => _ExpansionPanelDemoState();
@@ -28,18 +33,25 @@ class _ExpansionPanelDemoState extends ExampleState<ExpansionPanelDemo> {
       headerBuilder: Value(
         name: 'headerBuilder',
         value: (BuildContext context, bool isExpanded) {
-          return Text(isExpanded?'title open':'title close');
+          return Center(child: Text(isExpanded?'title open':'title close'));
         },
-        label: '',
+        label: '''(BuildContext context, bool isExpanded) {
+          return Center(child: Text(isExpanded?'title open':'title close'));
+        }''',
       ),
       expansionCallback: Value(
         name: 'expansionCallback',
         value: (int position,bool isExpanded){
           //position is in the list
-          setting=setting.copyWith(isExpanded: boolValues[isExpanded?1:0]);
+          setState(() {
+            setting=setting.copyWith(isExpanded: boolValues[isExpanded?0:1]);
+          });
         },
         label: ''' (int position,bool isExpanded){
           //position is in the list
+          setState(() {
+            this.isExpanded=isExpanded;
+          });
         }''',
       ),
       animationDuration: durationValues[0],
@@ -54,12 +66,13 @@ class _ExpansionPanelDemoState extends ExampleState<ExpansionPanelDemo> {
 
   @override
   String getExampleCode() {
-    return '''ExpansionPanelList(
+    return '''bool isExpanded=false;
+ExpansionPanelList(
         children: [
           ExpansionPanel(
             headerBuilder: ${setting.headerBuilder.label??''},
             body: ${setting.body.label??''},
-            isExpanded: ${setting.isExpanded.label??''},
+            isExpanded: isExpanded,
           ),
         ],
         expansionCallback: ${setting.expansionCallback?.label??''},
@@ -70,7 +83,23 @@ class _ExpansionPanelDemoState extends ExampleState<ExpansionPanelDemo> {
   @override
   List<Widget> getSetting() {
     // TODO: implement getSetting
-    return [];
+    return [
+      ValueTitleWidget(StringParams.kAnimationDuration),
+      RadioGroupWidget(setting.animationDuration, durationValues, (value){
+        setState(() {
+          setting=setting.copyWith(animationDuration: value);
+        });
+      }),
+      SwitchValueTitleWidget(title: StringParams.kIsExpanded,
+      value: setting.isExpanded,
+      onChanged: (value){
+        setState(() {
+          setting=setting.copyWith(isExpanded: value);
+
+        });
+      },),
+
+    ];
   }
 
   @override
@@ -80,7 +109,7 @@ class _ExpansionPanelDemoState extends ExampleState<ExpansionPanelDemo> {
 
   @override
   Widget getWidget() {
-    return Center(
+    return SingleChildScrollView(
       child: ExpansionPanelList(
         children: [
           ExpansionPanel(

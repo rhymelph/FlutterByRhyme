@@ -78,6 +78,18 @@ Widget _getDialog() {
   @override
   List<Widget> getSetting() {
     return [
+      ValueTitleWidget(StringParams.kTitlePadding),
+      RadioGroupWidget(setting.titlePadding, paddingValues, (value) {
+        setState(() {
+          setting = setting.copyWith(titlePadding: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kContentPadding),
+      RadioGroupWidget(setting.contentPadding, paddingValues, (value) {
+        setState(() {
+          setting = setting.copyWith(contentPadding: value);
+        });
+      }),
       EditTextTitleWidget(StringParams.kTitle, setting.title, (value) {
         setState(() {
           setting = setting.copyWith(title: value);
@@ -92,18 +104,6 @@ Widget _getDialog() {
           });
         },
       ),
-      ValueTitleWidget(StringParams.kTitlePadding),
-      RadioGroupWidget(setting.titlePadding, paddingValues, (value) {
-        setState(() {
-          setting = setting.copyWith(titlePadding: value);
-        });
-      }),
-      ValueTitleWidget(StringParams.kContentPadding),
-      RadioGroupWidget(setting.contentPadding, paddingValues, (value) {
-        setState(() {
-          setting = setting.copyWith(contentPadding: value);
-        });
-      }),
     ];
   }
 

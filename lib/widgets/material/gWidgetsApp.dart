@@ -171,7 +171,7 @@ final ThemeData theme = widget.theme ?? new ThemeData.fallback();
       body: SingleChildScrollView(
         child: DartMarkDown(WidgetsAppDemo.detail),
       ),
-    );;
+    );
 
   }
 }

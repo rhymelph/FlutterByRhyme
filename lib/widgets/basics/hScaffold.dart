@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
-import 'dart:async';
 class ScaffoldDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/Scaffold';
   final String detail =
