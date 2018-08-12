@@ -205,33 +205,27 @@ class StringParams {
   static final String kTitlePadding='TitlePadding(标题内边距)';
 
   static final String kContent = 'Content(内容)';
-
   static final  String kBarrierDismissible = 'BarrierDismissible(点外部可取消)';
-
   static final String kLowerBound ='LowerBound(下限)';
   static final String kUpperBound ='UpperBound(上限)';
-
   static final String kIsExpanded ='IsExpanded(是否膨胀)';
-
   static final String  kDeleteIconColor = 'DeleteIconColor(删除图标颜色)';
-
   static final String kMaterialTapTargetSize ='MaterialTapTargetSize(物料目标尺寸)';
-
   static final String kDeleteIcon='DeleteIcon(删除图标)';
-
   static final String kLabelPadding='LabelPadding(标签内边距)';
-
   static final String kAvatar='Avatar(头像)';
-
   static final String kDeleteButtonTooltipMessage='DeleteButtonTooltipMessage\n(删除按钮提示信息)';
-
   static final String kHeight="Height(高度)";
-
   static final String kVerticalOffset='VerticalOffset(垂直偏移)';
-
-  static final String kPreferBelow='PreferBelow(优先)';
-
+  static final String kPreferBelow='PreferBelow(位于下面)';
   static final String kExcludeFromSemantics='ExcludeFromSemantics(排除语义)';
+  static final String kSemanticContainer='SemanticContainer(语义容器)';
+  static final String kDense='Dense(密集的)';
+  static final String kSelected='elected(选中的)';
+
+  static final String kIndent='Indent(缩进)';
+
+  static final String kIsThreeLine='IsThreeLine(三线)';
 
 
 }
@@ -1073,6 +1067,33 @@ const List<Value<Overflow>> overflowValues = [
   ),
 ];
 
+const List<Value<int>> intMini2Values = [
+  const Value(
+    name: '0',
+    value: 0,
+    label: '0',
+  ),
+  const Value(
+    name: '1',
+    value: 1,
+    label: '1',
+  ),
+  const Value(
+    name: '2',
+    value: 2,
+    label: '2',
+  ),
+  const Value(
+    name: '3',
+    value: 3,
+    label: '3',
+  ),
+  const Value(
+    name: '4',
+    value: 4,
+    label: '4',
+  ),
+];
 const List<Value<int>> intMiniValues = [
   const Value(
     name: '1',
@@ -1118,6 +1139,38 @@ const List<Value<int>> intLargeValues = [
   ),
 ];
 
+const List<Value<double>> doubleOneValues=[
+  const Value(
+    name: 'null',
+    value: null,
+    label: 'null',
+  ),
+  const Value(
+    name: '0.0',
+    value: 0.0,
+    label: '0.0',
+  ),
+  const Value(
+    name: '0.2',
+    value: 0.2,
+    label: '0.2',
+  ),
+  const Value(
+    name: '0.4',
+    value: 0.4,
+    label: '0.4',
+  ),
+  const Value(
+    name: '0.6',
+    value: 0.6,
+    label: '0.6',
+  ),
+  const Value(
+    name: '1.0',
+    value: 1.0,
+    label: '1.0',
+  ),
+];
 const List<Value<double>> doubleMiniValues = [
   const Value(
     name: '0.0',
@@ -2544,4 +2597,18 @@ List<Value<MaterialTapTargetSize>> targetSizeValues=[
     value: MaterialTapTargetSize.shrinkWrap,
     label: 'MaterialTapTargetSize.shrinkWrap',
   ),
+];
+
+List<Value<StepperType>> stepperTypeValue=[
+  Value(
+    name: 'vertical',
+    value: StepperType.vertical,
+    label: 'StepperType.vertical',
+  ),
+  Value(
+    name: 'horizontal',
+    value: StepperType.horizontal,
+    label: 'StepperType.horizontal',
+  ),
+
 ];

@@ -97,7 +97,7 @@ class ValueTitleButtonWidget extends StatelessWidget {
 
 //开关标题
 class SwitchValueTitleWidget extends StatelessWidget {
-  SwitchValueTitleWidget({this.title, this.value, this.onChanged});
+  SwitchValueTitleWidget({@required this.title, @required this.value,@required this.onChanged});
 
   final Value<bool> value;
   final String title;

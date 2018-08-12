@@ -3,7 +3,12 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class TooltipDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/Tooltip';
-  final String detail = '';
+  final String detail = '''A material design tooltip.
+Tooltips provide text labels that help explain the function of a button or other user interface action. Wrap the button in a Tooltip widget to show a label when the widget long pressed (or when the user takes some other appropriate action).
+Many widgets, such as IconButton, FloatingActionButton, and PopupMenuButton have a tooltip property that, when non-null, causes the widget to include a Tooltip in its build.
+Tooltips improve the accessibility of visual widgets by proving a textual representation of the widget, which, for example, can be vocalized by a screen reader.
+See also:
+material.google.com/components/tooltips.html''';
 
   @override
   _TooltipDemoState createState() => _TooltipDemoState();
@@ -26,7 +31,7 @@ class _TooltipDemoState extends ExampleState<TooltipDemo> {
         excludeFromSemantics: boolValues[0],
         child: Value(
           value: Text('long press show tooltip'),
-          label: 'long press show tooltip',
+          label: "Text('long press show tooltip')",
         ));
     super.initState();
   }
@@ -38,7 +43,16 @@ class _TooltipDemoState extends ExampleState<TooltipDemo> {
 
   @override
   String getExampleCode() {
-    return '';
+    return '''Tooltip(
+        message: ${setting.message?.label??''},
+        height: ${setting.height?.label??''},
+        padding: ${setting.padding?.label??''},
+        verticalOffset: ${setting.verticalOffset?.label??''},
+        preferBelow: ${setting.preferBelow?.label??''},
+        excludeFromSemantics: ${setting.excludeFromSemantics?.label??''},
+        child: ${setting.child?.label??''},
+      ),
+    )''';
   }
 
   @override

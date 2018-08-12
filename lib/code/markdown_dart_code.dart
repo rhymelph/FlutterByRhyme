@@ -17,6 +17,11 @@ class DartMarkDown extends StatelessWidget {
 
   final String table = '|';
 
+  final String titleStart='![';
+  final String titleEnd=']';
+  final String imageEnd=')';
+  final String imageStart='(';
+
   List<TextSpan> formatSpans(BuildContext context, String source) {
     List<TextSpan> spans = [];
     final List<String> lines = source.split('\n');
@@ -104,6 +109,8 @@ class DartMarkDown extends StatelessWidget {
               ? SyntaxHighlighterStyle.darkThemeStyle()
               : SyntaxHighlighterStyle.lightThemeStyle();
       return DartSyntaxHighlighter(style).format(source);
+    }else if(source.startsWith(titleStart)&&source.endsWith(imageEnd)){
+      style = Theme.of(context).textTheme.body2.copyWith(fontSize: 0.0);
     }
     return TextSpan(
       style: style,
@@ -202,7 +209,29 @@ class DartMarkDown extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: RichText(text: span),
         ));
-      } else {
+      } else if(span.style==Theme.of(context).textTheme.body2.copyWith(fontSize: 0.0)){
+        int tStart=span.text.indexOf(titleStart)+2;
+        int tEnd=span.text.indexOf(titleEnd);
+
+        int iStart=span.text.indexOf(imageStart)+1;
+        int iEnd=span.text.indexOf(imageEnd);
+        String title=span.text.substring(tStart,tEnd);
+        String imageAddress=span.text.substring(iStart,iEnd);
+        widgets.add(Image.network(imageAddress));
+        widgets.add(Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: isDark ? Colors.black45 : Colors.grey[200],
+            border: BorderDirectional(
+                bottom: BorderSide(
+                  color: Colors.grey,
+                  width: 2.0,
+                )),
+          ),
+          child: Text(title),
+        ));
+      }else {
         widgets.add(Container(
           padding: const EdgeInsets.all(8.0),
           alignment: Alignment.centerLeft,
