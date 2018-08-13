@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/http/httpManager.dart' as httpManager;
 import 'package:html/parser.dart';
 import 'about.dart';
+import 'package:url_launcher/url_launcher.dart';
 const String _kUpgradeAddress =
-    'https://www.coolapk.com/apk/197700';
-
+    'https://www.coolapk.com/apk/com.rhyme.flutterbyrhyme';
 class UpgradeInfo {
   final String version;
   final String upgradeInfo;
@@ -31,11 +31,14 @@ class UpgradeInfo {
     String upgradeInfo=d.getElementsByClassName('apk_left_title_info')[0].text;
     upgradeInfo=upgradeInfo.replaceAll(" ", "");
     bool haveUpgrade=false;
+    String downloadAddress=_kUpgradeAddress;
+//    var e=d.getElementsByTagName('script');
+//    String f=e[e.length-2].text.replaceAll(" ", "");
+//    downloadAddress=f.substring(f.indexOf("=")+1,f.indexOf(";")).replaceAll("\"", "");
     if(applicationVersion!=version){
       haveUpgrade=true;
     }
-
-    return UpgradeInfo(version: version,size: size,upgradeInfo: upgradeInfo,haveUpgrade: haveUpgrade);
+    return UpgradeInfo(version: version,size: size,upgradeInfo: upgradeInfo,haveUpgrade: haveUpgrade,downloadAddress: downloadAddress);
   }
 }
 
@@ -43,7 +46,6 @@ void checkUpdate(BuildContext context) {
   httpManager.get(
       url: _kUpgradeAddress,
       onSend: () {
-        print('send');
       },
       onSuccess: (result) {
         UpgradeInfo info = UpgradeInfo.formHtml(result);
@@ -71,11 +73,20 @@ Future<Null> showUpgradeDialog(BuildContext context, UpgradeInfo info) {
             FlatButton(onPressed: () {
               Navigator.pop(context);
               print('开始下载！');
+              startDownLoadAPK(info.downloadAddress);
             }, child: Text('立即更新(${info.size})')),
           ],
         );
       });
 }
-
-void startDownLoadAPK(String address){
+void startDownLoadAPK(String address) async{
+  bool isSuccess=await UpgradeByMarket();
+  if(!isSuccess){
+    if(await canLaunch(address)){
+      await launch(address,
+          forceSafariVC: true,
+          forceWebView: false,
+          statusBarBrightness: Brightness.light);
+    }
+  }
 }

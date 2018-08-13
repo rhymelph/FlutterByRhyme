@@ -5,14 +5,20 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
+import 'dart:async';
 
 const String applicationVersion = '0.0.3';
 const String applicationLegalese = '© 2018 the rhymelph author';
 const about_platform = const MethodChannel('samples.flutter.io/about');
 const AliPay = 'DonateToMe';
 const QQTalk = 'QQCallMe';
+const UpgradeApk='UpgradeApk';
 const ERCODE = 'FKX05369RYXWBANXWYFR43';
 
+Future<bool> UpgradeByMarket() async{
+  return await about_platform.invokeMethod(UpgradeApk);
+
+}
 String _defaultApplicationName(BuildContext context) {
   final Title ancestorTitle = context.ancestorWidgetOfExactType(Title);
   return ancestorTitle?.title ??

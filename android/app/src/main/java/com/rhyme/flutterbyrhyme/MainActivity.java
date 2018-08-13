@@ -18,7 +18,6 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
 
 public class MainActivity extends FlutterActivity {
     private static final String CHANNEL_SHARE = "samples.flutter.io/about";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +34,9 @@ public class MainActivity extends FlutterActivity {
                         } else if (methodCall.method.equals("QQCallMe")) {
                             ArrayList info = methodCall.arguments();
                             boolean isSuccess = QQTalk(String.valueOf(info.get(0)));
+                            result.success(isSuccess);
+                        }else if(methodCall.method.equals("UpgradeApk")){
+                            boolean isSuccess=UpgradeApk();
                             result.success(isSuccess);
                         }
                     }
@@ -69,6 +71,21 @@ public class MainActivity extends FlutterActivity {
             return true;
         } catch (Exception e) {
             // 未安装手Q或安装的版本不支持
+            return false;
+        }
+    }
+    //酷市场 -- 酷安网
+    public static final String PACKAGE_COOL_MARKET = "com.coolapk.market";
+    public boolean UpgradeApk(){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id=" + this.getPackageName()));
+        //跳转酷市场
+//        intent.setPackage(PACKAGE_COOL_MARKET);
+        try {
+            startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            // 未安装酷安
             return false;
         }
     }
