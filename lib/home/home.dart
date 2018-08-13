@@ -5,6 +5,7 @@ import 'dart:developer';
 
 import 'dart:async';
 import 'dart:math' as math;
+import 'package:flutterbyrhyme/upgrade.dart';
 
 const Color _kBlue = const Color(0xFF002D75);
 const _kSwitchDuration = const Duration(milliseconds: 300);
@@ -61,6 +62,9 @@ class _HomePageState extends State<HomePage>
       debugLabel: 'preview banner',
       vsync: this,
     )..forward();
+
+    //check to upgrade
+    checkUpdate(context);
   }
 
   @override
