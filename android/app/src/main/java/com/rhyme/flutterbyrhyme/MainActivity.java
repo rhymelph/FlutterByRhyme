@@ -80,7 +80,7 @@ public class MainActivity extends FlutterActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("market://details?id=" + this.getPackageName()));
         //跳转酷市场
-//        intent.setPackage(PACKAGE_COOL_MARKET);
+        intent.setPackage(PACKAGE_COOL_MARKET);
         try {
             startActivity(intent);
             return true;

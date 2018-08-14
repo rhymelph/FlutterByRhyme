@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage>
     )..forward();
 
     //check to upgrade
-    checkUpdate(context);
+    checkUpdate(context,false);
   }
 
   @override

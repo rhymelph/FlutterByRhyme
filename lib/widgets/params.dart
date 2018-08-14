@@ -2586,18 +2586,18 @@ List<Value<Widget>> avatarValues=[
   ),
 ];
 
-List<Value<MaterialTapTargetSize>> targetSizeValues=[
-  Value(
-    name: 'padded',
-    value: MaterialTapTargetSize.padded,
-    label: 'MaterialTapTargetSize.padded',
-  ),
-  Value(
-    name: 'shrinkWrap',
-    value: MaterialTapTargetSize.shrinkWrap,
-    label: 'MaterialTapTargetSize.shrinkWrap',
-  ),
-];
+//List<Value<MaterialTapTargetSize>> targetSizeValues=[
+//  Value(
+//    name: 'padded',
+//    value: MaterialTapTargetSize.padded,
+//    label: 'MaterialTapTargetSize.padded',
+//  ),
+//  Value(
+//    name: 'shrinkWrap',
+//    value: MaterialTapTargetSize.shrinkWrap,
+//    label: 'MaterialTapTargetSize.shrinkWrap',
+//  ),
+//];
 
 List<Value<StepperType>> stepperTypeValue=[
   Value(

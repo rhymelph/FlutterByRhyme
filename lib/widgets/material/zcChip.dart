@@ -52,9 +52,9 @@ class _ChipDemoState extends ExampleState<ChipDemo> {
         onDeleted: ${setting.onDeleted?.label??''},
         deleteIconColor: ${setting.deleteIconColor?.label??''},
         deleteButtonTooltipMessage: ${setting.deleteButtonTooltipMessage?.label??''},
-        materialTapTargetSize: ${setting.materialTapTargetSize?.label??''},
       )''';
   }
+//        materialTapTargetSize: ${setting.materialTapTargetSize?.label??''},
 
   bool isExpanded = false;
 
@@ -114,12 +114,12 @@ class _ChipDemoState extends ExampleState<ChipDemo> {
           setting = setting.copyWith(deleteIcon: value);
         });
       }),
-      ValueTitleWidget(StringParams.kMaterialTapTargetSize),
-      RadioGroupWidget(setting.materialTapTargetSize, targetSizeValues, (value) {
-        setState(() {
-          setting = setting.copyWith(materialTapTargetSize: value);
-        });
-      }),
+//      ValueTitleWidget(StringParams.kMaterialTapTargetSize),
+//      RadioGroupWidget(setting.materialTapTargetSize, targetSizeValues, (value) {
+//        setState(() {
+//          setting = setting.copyWith(materialTapTargetSize: value);
+//        });
+//      }),
       ValueTitleWidget(StringParams.kBackgroundColor),
       ColorGroupWidget(setting.backgroundColor, (value) {
         setState(() {
@@ -155,7 +155,7 @@ class _ChipDemoState extends ExampleState<ChipDemo> {
         onDeleted: setting.onDeleted?.value,
         deleteIconColor: setting.deleteIconColor?.value,
         deleteButtonTooltipMessage: setting.deleteButtonTooltipMessage?.value,
-        materialTapTargetSize: setting.materialTapTargetSize?.value,
+//        materialTapTargetSize: setting.materialTapTargetSize?.value,
       ),
     );
   }
@@ -184,7 +184,7 @@ class ChipSetting {
 
   final Value<String> deleteButtonTooltipMessage;
 
-  final Value<MaterialTapTargetSize> materialTapTargetSize;
+//  final Value<MaterialTapTargetSize> materialTapTargetSize;
 
   ChipSetting({
     this.avatar,
@@ -198,7 +198,7 @@ class ChipSetting {
     this.shape,
     this.backgroundColor,
     this.padding,
-    this.materialTapTargetSize,
+//    this.materialTapTargetSize,
   });
 
   ChipSetting copyWith({
@@ -213,7 +213,7 @@ class ChipSetting {
     Value<VoidCallback> onDeleted,
     Value<Color> deleteIconColor,
     Value<String> deleteButtonTooltipMessage,
-    Value<MaterialTapTargetSize> materialTapTargetSize,
+//    Value<MaterialTapTargetSize> materialTapTargetSize,
   }) {
     return ChipSetting(
       avatar: avatar ?? this.avatar,
@@ -228,8 +228,8 @@ class ChipSetting {
       deleteIconColor: deleteIconColor ?? this.deleteIconColor,
       deleteButtonTooltipMessage:
           deleteButtonTooltipMessage ?? this.deleteButtonTooltipMessage,
-      materialTapTargetSize:
-          materialTapTargetSize ?? this.materialTapTargetSize,
+//      materialTapTargetSize:
+//          materialTapTargetSize ?? this.materialTapTargetSize,
     );
   }
 }

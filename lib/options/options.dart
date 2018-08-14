@@ -6,7 +6,7 @@ import 'package:flutterbyrhyme/about.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
-
+import 'package:flutterbyrhyme/upgrade.dart';
 ///主题设置相关
 class MyOptions {
   final MyTheme theme; //主题
@@ -158,6 +158,9 @@ class OptionsPage extends StatelessWidget {
             const _Header('关于'),
             _ActionItem('关于Flutter教程', () {
               showMyAboutDialog(context);
+            }),
+            _ActionItem('检查更新', () {
+              checkUpdate(context,true);
             }),
           ],
         ));

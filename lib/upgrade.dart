@@ -42,21 +42,49 @@ class UpgradeInfo {
   }
 }
 
-void checkUpdate(BuildContext context) {
+void checkUpdate(BuildContext context,bool haveTip) {
   httpManager.get(
       url: _kUpgradeAddress,
       onSend: () {
       },
       onSuccess: (result) {
         UpgradeInfo info = UpgradeInfo.formHtml(result);
-        if(!info.haveUpgrade){
+        if(info.haveUpgrade){
           showUpgradeDialog(context, info);
+        }else if(haveTip){
+          showNoUpgradeDialog(context);
         }
       },
       onError: (error) {
         print(error.toString());
-
+        if(haveTip){
+          showErrorDialog(context);
+        }
       });
+}
+Future<Null> showErrorDialog(BuildContext context){
+  return showDialog(context: context,
+      builder: (BuildContext context){
+        return SimpleDialog(
+          title: Text('提示'),
+          contentPadding: const EdgeInsets.all(16.0),
+          children: <Widget>[
+            Text('无法检测更新，请检查网络...'),
+          ],
+        );
+      });
+}
+Future<Null> showNoUpgradeDialog(BuildContext context){
+  return showDialog(context: context,
+      builder: (BuildContext context){
+    return SimpleDialog(
+      title: Text('提示'),
+      contentPadding: const EdgeInsets.all(16.0),
+      children: <Widget>[
+        Text('已经是最新版本了...'),
+      ],
+    );
+  });
 }
 
 Future<Null> showUpgradeDialog(BuildContext context, UpgradeInfo info) {

@@ -109,8 +109,7 @@ void showMyAboutDialog(BuildContext context) {
                 ),
               ),
             ),
-          ],
-        );
+          ],        );
       });
 }
 

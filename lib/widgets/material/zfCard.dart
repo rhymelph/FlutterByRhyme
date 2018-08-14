@@ -94,7 +94,7 @@ class _CardDemoState extends ExampleState<CardDemo> {
         elevation: setting.elevation?.value,
         shape: setting.shape?.value,
         margin: setting.margin?.value,
-        semanticContainer: setting.semanticContainer?.value,
+//        semanticContainer: setting.semanticContainer?.value,
         child: Text('This bg is card'),
       ),
     );
