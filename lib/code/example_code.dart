@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+export 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 import 'package:flutterbyrhyme/code/code_highlighter.dart';
 export 'package:flutterbyrhyme/widgets/paramWidgets.dart';
 export 'code_highlighter.dart';
+
 abstract class ExampleState<T extends StatefulWidget> extends State<T> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -86,29 +88,30 @@ class ExampleScaffold extends StatefulWidget {
 class ExampleScaffoldState extends State<ExampleScaffold> {
   AnimationController controller;
   String content;
-  Color nbColor=Colors.transparent;
-  Color ntColor=Colors.transparent;
+  Color nbColor = Colors.transparent;
+  Color ntColor = Colors.transparent;
   Color vbColor;
   Color vtColor;
-  bool isShowToast=false;
+  bool isShowToast = false;
   List<Widget> body;
 
   void showToast(String content) {
     setState(() {
-      this.content=content;
-      nbColor=this.vbColor;
-      ntColor=this.vtColor;
-      isShowToast=true;
+      this.content = content;
+      nbColor = this.vbColor;
+      ntColor = this.vtColor;
+      isShowToast = true;
     });
-    Future.delayed(Duration(milliseconds: 1000),(){
+    Future.delayed(Duration(milliseconds: 1000), () {
       setState(() {
-        nbColor=Colors.transparent;
-        ntColor=Colors.transparent;
-        isShowToast=false;
+        nbColor = Colors.transparent;
+        ntColor = Colors.transparent;
+        isShowToast = false;
       });
     });
   }
-  Widget toastWidget(){
+
+  Widget toastWidget() {
     return Positioned(
       left: 50.0,
       right: 50.0,
@@ -121,22 +124,28 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
         ),
         curve: Curves.easeIn,
         color: nbColor,
-        child: Text(content??'hello',style: Theme.of(context).textTheme.title.copyWith(color: ntColor),),
+        child: Text(
+          content ?? 'hello',
+          style: Theme.of(context).textTheme.title.copyWith(color: ntColor),
+        ),
       ),
     );
   }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    bool isDark=Theme.of(context).brightness==Brightness.dark;
-    vbColor=isDark?Colors.grey:Colors.black87;
-    vtColor=isDark?Colors.black:Colors.white;
-    body=[widget.body];
-    if(isShowToast){
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
+
+    vbColor = isDark ? Colors.grey : Colors.black87;
+    vtColor = isDark ? Colors.black : Colors.white;
+    body = [widget.body];
+    if (isShowToast) {
       body.add(toastWidget());
     }
     return Scaffold(
@@ -162,7 +171,7 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
         ),
         body: Stack(
           children: body,
-        ));
+        ));;
   }
 
   //显示示例代码

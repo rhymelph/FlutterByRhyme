@@ -227,6 +227,10 @@ class StringParams {
 
   static final String kIsThreeLine='IsThreeLine(三线)';
 
+  static final String kRadius='Radius(半径)';
+
+  static final String kAnimating='Animating(支持动画)';
+
 
 }
 
