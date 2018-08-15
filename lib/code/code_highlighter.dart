@@ -10,6 +10,7 @@ class SyntaxHighlighterStyle {
     this.baseStyle,
     this.numberStyle,
     this.commentStyle,
+    this.commentTodoStyle,
     this.keywordStyle,
     this.stringStyle,
     this.punctuationStyle,
@@ -22,6 +23,7 @@ class SyntaxHighlighterStyle {
         baseStyle: const TextStyle(color: const Color(0xFF000000)),
         numberStyle: const TextStyle(color: const Color(0xFF1565C0)),
         commentStyle: const TextStyle(color: const Color(0xFF9E9E9E)),
+        commentTodoStyle: const TextStyle(color: const Color(0xFF0073BF),fontWeight: FontWeight.bold),
         keywordStyle: const TextStyle(color: const Color(0xFF9C27B0)),
         stringStyle: const TextStyle(color: const Color(0xFF43A047)),
         punctuationStyle: const TextStyle(color: const Color(0xFF000000)),
@@ -35,6 +37,7 @@ class SyntaxHighlighterStyle {
         baseStyle: const TextStyle(color: const Color(0xFFFFFFFF)),
         numberStyle: const TextStyle(color: const Color(0xFF6897BB)),
         commentStyle: const TextStyle(color: const Color(0xFF808080)),
+        commentTodoStyle: const TextStyle(color: const Color(0xFFA8C023),fontWeight: FontWeight.bold),
         keywordStyle: const TextStyle(color: const Color(0xFFCC7832)),
         stringStyle: const TextStyle(color: const Color(0xFF6A8759)),
         punctuationStyle: const TextStyle(color: const Color(0xFFFFFFFF)),
@@ -46,6 +49,7 @@ class SyntaxHighlighterStyle {
   final TextStyle baseStyle;
   final TextStyle numberStyle;
   final TextStyle commentStyle;
+  final TextStyle commentTodoStyle;
   final TextStyle keywordStyle;
   final TextStyle stringStyle;
   final TextStyle punctuationStyle;
@@ -138,6 +142,28 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
         continue;
       }
 
+      // Line comments to do
+      if (_scanner.scan('//todo')) {
+        final int startComment = _scanner.lastMatch.start;
+
+        bool eof = false;
+        int endComment;
+        if (_scanner.scan(new RegExp(r'.*\n'))) {
+          endComment = _scanner.lastMatch.end - 1;
+        } else {
+          eof = true;
+          endComment = _src.length;
+        }
+        _spans.add(new _HighlightSpan(
+            _HighlightType.commentToDo,
+            startComment,
+            endComment
+        ));
+
+        if (eof)
+          break;
+        continue;
+      }
       // Line comments
       if (_scanner.scan('//')) {
         final int startComment = _scanner.lastMatch.start;
@@ -150,12 +176,11 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
           eof = true;
           endComment = _src.length;
         }
-
         _spans.add(new _HighlightSpan(
-            _HighlightType.comment,
-            startComment,
-            endComment
-        ));
+              _HighlightType.comment,
+              startComment,
+              endComment
+          ));
 
         if (eof)
           break;
@@ -326,6 +351,7 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
 enum _HighlightType {
   number,
   comment,
+  commentToDo,
   keyword,
   string,
   punctuation,
@@ -348,6 +374,8 @@ class _HighlightSpan {
       return style.numberStyle;
     else if (type == _HighlightType.comment)
       return style.commentStyle;
+    else if(type == _HighlightType.commentToDo)
+      return style.commentTodoStyle;
     else if (type == _HighlightType.keyword)
       return style.keywordStyle;
     else if (type == _HighlightType.string)

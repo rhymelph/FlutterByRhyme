@@ -196,42 +196,41 @@ class StringParams {
   static final String kMin = 'Min(最小值)';
   static final String kMax = 'Max(最大值)';
 
-  static final String kChangeToTimePickers='日期选择器/时间选择器';
-  static final String kInitialTime='InitialTime(初始时间)';
-  static final String kInitialDate='InitialDate(初始日期)';
-  static final String kFirstDate='FirstDate(起始日期)';
-  static final String kLastDate='LastDate(最后日期)';
-  static final String kInitialDatePickerMode='InitialDatePickerMode(初始日期选择器)';
-  static final String kTitlePadding='TitlePadding(标题内边距)';
+  static final String kChangeToTimePickers = '日期选择器/时间选择器';
+  static final String kInitialTime = 'InitialTime(初始时间)';
+  static final String kInitialDate = 'InitialDate(初始日期)';
+  static final String kFirstDate = 'FirstDate(起始日期)';
+  static final String kLastDate = 'LastDate(最后日期)';
+  static final String kInitialDatePickerMode = 'InitialDatePickerMode(初始日期选择器)';
+  static final String kTitlePadding = 'TitlePadding(标题内边距)';
 
   static final String kContent = 'Content(内容)';
-  static final  String kBarrierDismissible = 'BarrierDismissible(点外部可取消)';
-  static final String kLowerBound ='LowerBound(下限)';
-  static final String kUpperBound ='UpperBound(上限)';
-  static final String kIsExpanded ='IsExpanded(是否膨胀)';
-  static final String  kDeleteIconColor = 'DeleteIconColor(删除图标颜色)';
-  static final String kMaterialTapTargetSize ='MaterialTapTargetSize(物料目标尺寸)';
-  static final String kDeleteIcon='DeleteIcon(删除图标)';
-  static final String kLabelPadding='LabelPadding(标签内边距)';
-  static final String kAvatar='Avatar(头像)';
-  static final String kDeleteButtonTooltipMessage='DeleteButtonTooltipMessage\n(删除按钮提示信息)';
-  static final String kHeight="Height(高度)";
-  static final String kVerticalOffset='VerticalOffset(垂直偏移)';
-  static final String kPreferBelow='PreferBelow(位于下面)';
-  static final String kExcludeFromSemantics='ExcludeFromSemantics(排除语义)';
-  static final String kSemanticContainer='SemanticContainer(语义容器)';
-  static final String kDense='Dense(密集的)';
-  static final String kSelected='elected(选中的)';
+  static final String kBarrierDismissible = 'BarrierDismissible(点外部可取消)';
+  static final String kLowerBound = 'LowerBound(下限)';
+  static final String kUpperBound = 'UpperBound(上限)';
+  static final String kIsExpanded = 'IsExpanded(是否膨胀)';
+  static final String kDeleteIconColor = 'DeleteIconColor(删除图标颜色)';
+  static final String kMaterialTapTargetSize = 'MaterialTapTargetSize(物料目标尺寸)';
+  static final String kDeleteIcon = 'DeleteIcon(删除图标)';
+  static final String kLabelPadding = 'LabelPadding(标签内边距)';
+  static final String kAvatar = 'Avatar(头像)';
+  static final String kDeleteButtonTooltipMessage =
+      'DeleteButtonTooltipMessage\n(删除按钮提示信息)';
+  static final String kHeight = "Height(高度)";
+  static final String kVerticalOffset = 'VerticalOffset(垂直偏移)';
+  static final String kPreferBelow = 'PreferBelow(位于下面)';
+  static final String kExcludeFromSemantics = 'ExcludeFromSemantics(排除语义)';
+  static final String kSemanticContainer = 'SemanticContainer(语义容器)';
+  static final String kDense = 'Dense(密集的)';
+  static final String kSelected = 'elected(选中的)';
 
-  static final String kIndent='Indent(缩进)';
+  static final String kIndent = 'Indent(缩进)';
+  static final String kIsThreeLine = 'IsThreeLine(三线)';
+  static final String kRadius = 'Radius(半径)';
+  static final String kAnimating = 'Animating(支持动画)';
+  static final String kMinSize = 'MinSize(最小尺寸)';
 
-  static final String kIsThreeLine='IsThreeLine(三线)';
-
-  static final String kRadius='Radius(半径)';
-
-  static final String kAnimating='Animating(支持动画)';
-
-
+  static final String kPressedOpacity = 'PressedOpacity（按下不透明度）';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -1143,7 +1142,7 @@ const List<Value<int>> intLargeValues = [
   ),
 ];
 
-const List<Value<double>> doubleOneValues=[
+const List<Value<double>> doubleOneValues = [
   const Value(
     name: 'null',
     value: null,
@@ -2529,7 +2528,7 @@ List<Value<TimeOfDay>> timeOfDayValues = [
   ),
 ];
 
-List<Value<Widget>> iconValues=[
+List<Value<Widget>> iconValues = [
   Value(
     name: 'close',
     value: Icon(Icons.close),
@@ -2542,7 +2541,7 @@ List<Value<Widget>> iconValues=[
   ),
 ];
 
-List<Value<Widget>> avatarValues=[
+List<Value<Widget>> avatarValues = [
   Value(
     name: 'R',
     value: CircleAvatar(
@@ -2603,7 +2602,7 @@ List<Value<Widget>> avatarValues=[
 //  ),
 //];
 
-List<Value<StepperType>> stepperTypeValue=[
+List<Value<StepperType>> stepperTypeValue = [
   Value(
     name: 'vertical',
     value: StepperType.vertical,
@@ -2614,5 +2613,50 @@ List<Value<StepperType>> stepperTypeValue=[
     value: StepperType.horizontal,
     label: 'StepperType.horizontal',
   ),
+];
 
+List<Value<BorderRadius>> borderRadiusValues = [
+  Value(
+    name: 'circular',
+    value: BorderRadius.circular(8.0),
+    label: 'BorderRadius.circular(8.0)',
+  ),
+  Value(
+    name: 'all',
+    value: BorderRadius.all(
+      Radius.elliptical(16.0, 8.0),
+    ),
+    label: '''BorderRadius.all(
+      Radius.elliptical(16.0, 8.0),
+    )''',
+  ),
+  Value(
+    name: 'only',
+    value: BorderRadius.only(
+      topLeft: Radius.circular(8.0),
+      topRight: Radius.lerp(null, Radius.circular(8.0), 8.0),
+    ),
+    label: '''BorderRadius.only(
+      topLeft: Radius.circular(8.0),
+      topRight: Radius.lerp(null, Radius.circular(8.0), 8.0),
+    )''',
+  ),
+  Value(
+    name: 'horizontal',
+    value: BorderRadius.horizontal(
+      left: Radius.circular(8.0),
+    ),
+    label: '''BorderRadius.horizontal(
+      left: Radius.circular(8.0),
+    )''',
+  ),
+  Value(
+    name: 'vertical',
+    value: BorderRadius.vertical(
+      top: Radius.circular(8.0),
+    ),
+    label: '''BorderRadius.vertical(
+      top: Radius.circular(8.0),
+    )''',
+  ),
 ];
