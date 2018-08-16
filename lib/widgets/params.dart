@@ -229,8 +229,11 @@ class StringParams {
   static final String kRadius = 'Radius(半径)';
   static final String kAnimating = 'Animating(支持动画)';
   static final String kMinSize = 'MinSize(最小尺寸)';
-
   static final String kPressedOpacity = 'PressedOpacity（按下不透明度）';
+  static final String kIsDefaultAction ='IsDefaultAction(为默认按钮)';
+  static final String kIsDestructiveAction ='IsDestructiveAction(为删除按钮)';
+
+  static final String kOnDeleted='OnDeleted(删除监听)';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -1491,10 +1494,10 @@ List<Value<ValueChanged<GlobalKey<ScaffoldState>>>> onPressValues = [
     name: 'showSnack',
     value: (key) {
       key.currentState
-          .showSnackBar(SnackBar(content: Text('RaisedButton is be click !')));
+          .showSnackBar(SnackBar(content: Text('Hello guys!')));
     },
     label: '''(){
-    showSnackBar(SnackBar(content: Text('RaisedButton is be click !')));
+    showSnackBar(SnackBar(content: Text('Hello guys!')));
     }''',
   ),
   const Value(

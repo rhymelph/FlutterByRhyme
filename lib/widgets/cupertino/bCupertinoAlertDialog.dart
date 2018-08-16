@@ -26,12 +26,12 @@ class _CupertinoAlertDialogDemoState
       title: Value(
         name: '标题',
         value: '标题',
-        label: '标题',
+        label: "'标题'",
       ),
       content: Value(
         name: '内容',
         value: '内容',
-        label: '内容',
+        label: "'内容'",
       ),
       actions: Value(value: <Widget>[
         CupertinoDialogAction(
@@ -92,8 +92,8 @@ class _CupertinoAlertDialogDemoState
       );
 Widget _getDialog(){
     return CupertinoAlertDialog(
-      title: Text('${setting.title?.label??''}'),
-      content: Text('${setting.content?.label??''}'),
+      title: Text(${setting.title?.label??''}),
+      content: Text(${setting.content?.label??''}),
       actions: ${setting.actions?.label??''},
       scrollController: ${setting.scrollController?.label??''},
       actionScrollController: ${setting.actionScrollController?.label??''},

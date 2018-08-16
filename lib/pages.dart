@@ -21,7 +21,7 @@ import 'package:flutter/foundation.dart';
 const String finishDemo=
     'Container,Row,Column,Image,Text.Icon,RaisedButton,Scaffold,AppBar,FlutterLogo,PlaceHolder,'
     'BottomNavigationBar,TabBar,TabBarView,MaterialApp,WidgetsApp,Drawer,FloatingActionButton,FlatButton,IconButton,PopupMenuButton,ButtonBar,TextField,Checkbox,Radio,Switch,Slider,Date&Time Pickers,SimpleDialog,AlertDialog,BottomSheet,ExpansionPanel,SnackBar,Chip,Tooltip,DataTable,Card,LinearProgressIndicator,ListTile,Stepper,Divider,'
-    'CupertinoActivityIndicator,CupertinoAlertDialog,CupertinoButton';
+    'CupertinoActivityIndicator,CupertinoAlertDialog,CupertinoButton,CupertinoDialog，CupertinoDialogAction,CupertinoSlider,CupertinoSwitch,CupertinoPageTransition';
 
 class BottomItem {
   final String title;

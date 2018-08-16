@@ -22,14 +22,7 @@ class _ChipDemoState extends ExampleState<ChipDemo> {
       value: Text('This is a Chip.'),
       label: "Text('This is a Chip')",
     ),
-    onDeleted: Value(
-      value: (){
-        //delete
-      },
-      label: '''(){
-        //delete 
-      }''',
-    ));
+    onDeleted: onPressValues[0],);
     super.initState();
   }
 
@@ -77,11 +70,10 @@ class _ChipDemoState extends ExampleState<ChipDemo> {
           },
         ),
       ),
-      EditTextTitleWidget(
-          StringParams.kDeleteButtonTooltipMessage, setting.deleteButtonTooltipMessage,
-          (value) {
+      ValueTitleWidget(StringParams.kOnDeleted),
+      RadioGroupWidget(setting.onDeleted, onPressValues, (value){
         setState(() {
-          setting = setting.copyWith(deleteButtonTooltipMessage: value);
+          setting=setting.copyWith(onDeleted: value);
         });
       }),
       ValueTitleWidget(StringParams.kAvatar),
@@ -132,6 +124,14 @@ class _ChipDemoState extends ExampleState<ChipDemo> {
           setting = setting.copyWith(deleteIconColor: value);
         });
       }),
+      EditTextTitleWidget(
+          StringParams.kDeleteButtonTooltipMessage, setting.deleteButtonTooltipMessage,
+          (value) {
+        setState(() {
+          setting = setting.copyWith(deleteButtonTooltipMessage: value);
+        });
+      }),
+
     ];
   }
 
@@ -152,7 +152,11 @@ class _ChipDemoState extends ExampleState<ChipDemo> {
         backgroundColor: setting.backgroundColor?.value,
         padding: setting.padding?.value,
         deleteIcon: setting.deleteIcon?.value,
-        onDeleted: setting.onDeleted?.value,
+        onDeleted:setting.onDeleted?.value == null
+            ? setting.onDeleted?.value
+            : () {
+          setting.onDeleted?.value(scaffoldKey);
+        },
         deleteIconColor: setting.deleteIconColor?.value,
         deleteButtonTooltipMessage: setting.deleteButtonTooltipMessage?.value,
 //        materialTapTargetSize: setting.materialTapTargetSize?.value,
@@ -178,7 +182,7 @@ class ChipSetting {
 
   final Value<Widget> deleteIcon;
 
-  final Value<VoidCallback> onDeleted;
+  final Value<ValueChanged<GlobalKey<ScaffoldState>>> onDeleted;
 
   final Value<Color> deleteIconColor;
 
@@ -210,7 +214,7 @@ class ChipSetting {
     Value<Color> backgroundColor,
     Value<EdgeInsetsGeometry> padding,
     Value<Widget> deleteIcon,
-    Value<VoidCallback> onDeleted,
+    Value<ValueChanged<GlobalKey<ScaffoldState>>> onDeleted,
     Value<Color> deleteIconColor,
     Value<String> deleteButtonTooltipMessage,
 //    Value<MaterialTapTargetSize> materialTapTargetSize,
