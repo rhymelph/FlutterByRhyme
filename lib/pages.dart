@@ -14,6 +14,7 @@ import 'package:flutterbyrhyme/widgets/painting/aaPaintingShow.dart';
 import 'package:flutterbyrhyme/widgets/async/aAsyncShow.dart';
 import 'package:flutterbyrhyme/widgets/scrolling/aScrollingShow.dart';
 import 'package:flutterbyrhyme/widgets/access/aAccessShow.dart';
+import 'package:flutterbyrhyme/design/aDesignShow.dart';
 import 'package:flutterbyrhyme/network/temp.dart';
 
 import 'package:flutter/foundation.dart';
@@ -21,7 +22,8 @@ import 'package:flutter/foundation.dart';
 const String finishDemo=
     'Container,Row,Column,Image,Text.Icon,RaisedButton,Scaffold,AppBar,FlutterLogo,PlaceHolder,'
     'BottomNavigationBar,TabBar,TabBarView,MaterialApp,WidgetsApp,Drawer,FloatingActionButton,FlatButton,IconButton,PopupMenuButton,ButtonBar,TextField,Checkbox,Radio,Switch,Slider,Date&Time Pickers,SimpleDialog,AlertDialog,BottomSheet,ExpansionPanel,SnackBar,Chip,Tooltip,DataTable,Card,LinearProgressIndicator,ListTile,Stepper,Divider,'
-    'CupertinoActivityIndicator,CupertinoAlertDialog,CupertinoButton,CupertinoDialog，CupertinoDialogAction,CupertinoSlider,CupertinoSwitch,CupertinoPageTransition';
+    'CupertinoActivityIndicator,CupertinoAlertDialog,CupertinoButton,CupertinoDialog，CupertinoDialogAction,CupertinoSlider,CupertinoSwitch,CupertinoPageTransition'
+    '聊天室';
 
 class BottomItem {
   final String title;
@@ -1378,12 +1380,12 @@ List<Page> _buildPage() {
 
     ///design
     Page(
-        title: '设计',
-        subhead: '待添加',
+        title: '聊天室',
+        subhead: '',
         icon: null,
         category: _kdesign,
-        routeName: Temp.routeName,
-        buildRoute: (BuildContext context) => Temp()),
+        routeName: ChatRoom.routeName,
+        buildRoute: (BuildContext context) => ChatRoom()),
 
     ///design
     Page(
