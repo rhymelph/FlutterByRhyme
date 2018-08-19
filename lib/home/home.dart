@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage>
     )..forward();
 
     //check to upgrade
-    checkUpdate(context,false);
+    checkUpdate(context, false);
   }
 
   @override
@@ -180,7 +180,7 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               onWillPop: () {
-                if (categoryMap[_position] != null&&haveMore) {
+                if (categoryMap[_position] != null && haveMore) {
                   setState(() {
                     categoryMap[_position] = null;
                   });
@@ -284,8 +284,7 @@ class _CategoryItem extends StatelessWidget {
                 ),
                 Text(
                   pageCategory.subhead,
-                  style: Theme
-                      .of(context)
+                  style: Theme.of(context)
                       .textTheme
                       .subhead
                       .copyWith(color: Colors.grey),
@@ -379,6 +378,7 @@ class _PageItem extends StatelessWidget {
           ));
     }
     Widget pageHome = Container(
+      alignment: Alignment.center,
       constraints: BoxConstraints(minHeight: _kPageItemHeight * textScale),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -396,7 +396,7 @@ class _PageItem extends StatelessWidget {
               child: Icon(
                 Icons.lock,
                 color: isDark ? Colors.white : Colors.black,
-              ))
+              )),
         ],
       );
     }

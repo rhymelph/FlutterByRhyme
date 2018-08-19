@@ -230,10 +230,20 @@ class StringParams {
   static final String kAnimating = 'Animating(支持动画)';
   static final String kMinSize = 'MinSize(最小尺寸)';
   static final String kPressedOpacity = 'PressedOpacity（按下不透明度）';
-  static final String kIsDefaultAction ='IsDefaultAction(为默认按钮)';
-  static final String kIsDestructiveAction ='IsDestructiveAction(为删除按钮)';
+  static final String kIsDefaultAction = 'IsDefaultAction(为默认按钮)';
+  static final String kIsDestructiveAction = 'IsDestructiveAction(为删除按钮)';
 
-  static final String kOnDeleted='OnDeleted(删除监听)';
+  static final String kOnDeleted = 'OnDeleted(删除监听)';
+
+  static final String kLinearTransition = 'LinearTransition(线性过渡)';
+
+  static final String kMiddle = 'Middle(中间)';
+
+  static final String kActionsForegroundColor =
+      'ActionsForegroundColor(动作前景颜色)';
+
+  static final String kNavigationBar = 'NavigationBar(导航栏)';
+
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -1493,8 +1503,7 @@ List<Value<ValueChanged<GlobalKey<ScaffoldState>>>> onPressValues = [
   Value(
     name: 'showSnack',
     value: (key) {
-      key.currentState
-          .showSnackBar(SnackBar(content: Text('Hello guys!')));
+      key.currentState.showSnackBar(SnackBar(content: Text('Hello guys!')));
     },
     label: '''(){
     showSnackBar(SnackBar(content: Text('Hello guys!')));
@@ -2660,6 +2669,50 @@ List<Value<BorderRadius>> borderRadiusValues = [
     ),
     label: '''BorderRadius.vertical(
       top: Radius.circular(8.0),
+    )''',
+  ),
+];
+
+List<Value<EdgeInsetsDirectional>> iosPaddingValues = [
+  Value(
+    name: 'fromSTEB',
+    value: const EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 0.0),
+    label: 'const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0)',
+  ),
+  Value(
+    name: 'only',
+    value: const EdgeInsetsDirectional.only(
+      top: 8.0,
+    ),
+    label: 'const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0)',
+  ),
+];
+
+List<Value<Border>> borderValues = [
+  Value(
+    name: 'all',
+    value: Border.all(
+      color: Colors.grey,
+      width: 1.0,
+    ),
+    label: '''Border.all(
+          color: Colors.grey,
+          width: 1.0,
+    )''',
+  ),
+  Value(
+    name: 'Border.bottom',
+    value: Border(
+      bottom: BorderSide(
+        color: Colors.black38,
+        width: 2.0,
+      ),
+    ),
+    label: '''Border(
+          bottom: BorderSide(
+            color: Colors.black38,
+            width: 2.0,
+      ),
     )''',
   ),
 ];

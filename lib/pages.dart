@@ -22,8 +22,8 @@ import 'package:flutter/foundation.dart';
 const String finishDemo=
     'Container,Row,Column,Image,Text.Icon,RaisedButton,Scaffold,AppBar,FlutterLogo,PlaceHolder,'
     'BottomNavigationBar,TabBar,TabBarView,MaterialApp,WidgetsApp,Drawer,FloatingActionButton,FlatButton,IconButton,PopupMenuButton,ButtonBar,TextField,Checkbox,Radio,Switch,Slider,Date&Time Pickers,SimpleDialog,AlertDialog,BottomSheet,ExpansionPanel,SnackBar,Chip,Tooltip,DataTable,Card,LinearProgressIndicator,ListTile,Stepper,Divider,'
-    'CupertinoActivityIndicator,CupertinoAlertDialog,CupertinoButton,CupertinoDialog，CupertinoDialogAction,CupertinoSlider,CupertinoSwitch,CupertinoPageTransition'
-    '聊天室';
+    'CupertinoActivityIndicator,CupertinoAlertDialog,CupertinoButton,CupertinoDialog，CupertinoDialogAction,CupertinoSlider,CupertinoSwitch,CupertinoPageTransition,CupertinoFullscreenDialogTransition,CupertinoNavigationBar,CupertinoTabBar,CupertinoPageScaffold,CupertinoTabScaffold'
+    '聊天室,登陆页面';
 
 class BottomItem {
   final String title;
@@ -1381,12 +1381,18 @@ List<Page> _buildPage() {
     ///design
     Page(
         title: '聊天室',
-        subhead: '',
+        subhead: '一个简单的聊天室，后续添加在线群聊',
         icon: null,
         category: _kdesign,
         routeName: ChatRoom.routeName,
         buildRoute: (BuildContext context) => ChatRoom()),
-
+    Page(
+        title: '登陆页面',
+        subhead: '一个简单的登陆页面，后续会以此为登陆页',
+        icon: null,
+        category: _kdesign,
+        routeName: LoginPage.routeName,
+        buildRoute: (BuildContext context) => LoginPage()),
     ///design
     Page(
         title: '设备',

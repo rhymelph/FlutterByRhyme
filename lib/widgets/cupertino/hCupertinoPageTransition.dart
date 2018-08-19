@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
 import 'dart:async';
+
 class CupertinoPageTransitionDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoPageTransition';
-  final String detail = '''''';
+  final String detail = '''Provides an iOS-style page transition animation.
+The page slides in from the right and exits in reverse. It also shifts to the left in a parallax motion when another page enters to cover it.
+Inheritance
+Object Diagnosticable DiagnosticableTree Widget StatelessWidget CupertinoPageTransition''';
 
   @override
   _CupertinoPageTransitionDemoState createState() =>
@@ -12,24 +16,23 @@ class CupertinoPageTransitionDemo extends StatefulWidget {
 
 class _CupertinoPageTransitionDemoState
     extends ExampleState<CupertinoPageTransitionDemo>
-with TickerProviderStateMixin{
+    with TickerProviderStateMixin {
   CupertinoPageTransitionSetting setting;
 
   @override
   void initState() {
-    AnimationController controller=AnimationController(vsync: this,duration: Duration(milliseconds: 1000));
-//    controller.forward(from: 1.0);
-    controller.reverse(from: 1.0);
     setting = CupertinoPageTransitionSetting(
       child: Value(
-        value: Text('This is CupertinoPageTransition'),
-        label: "Text('This is CupertinoPageTransition')",
+        value: Text('CupertinoPageTransition'),
+        label: "Text('CupertinoPageTransition')",
       ),
-      primaryRouteAnimation:Value(
-        value:  controller,
+      primaryRouteAnimation: Value(
+        value: kAlwaysCompleteAnimation,
+        label: 'kAlwaysCompleteAnimation',
       ),
       secondaryRouteAnimation: Value(
-        value:  controller,
+        value: kAlwaysCompleteAnimation,
+        label: 'kAlwaysCompleteAnimation',
       ),
       linearTransition: boolValues[0],
     );
@@ -43,12 +46,27 @@ with TickerProviderStateMixin{
 
   @override
   String getExampleCode() {
-    return '''''';
+    return '''CupertinoPageTransition(
+        primaryRouteAnimation: ${setting.primaryRouteAnimation?.label??''},
+        secondaryRouteAnimation: ${setting.secondaryRouteAnimation?.label??''},
+        child: ${setting.child?.label??''},
+        linearTransition: ${setting.linearTransition?.label??''},
+      )''';
   }
 
   @override
   List<Widget> getSetting() {
-    return [];
+    return [
+      SwitchValueTitleWidget(
+        value: setting.linearTransition,
+        title: StringParams.kLinearTransition,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(linearTransition: value);
+          });
+        },
+      ),
+    ];
   }
 
   @override
@@ -97,54 +115,4 @@ class CupertinoPageTransitionSetting {
       linearTransition: linearTransition ?? this.linearTransition,
     );
   }
-}
-
-class PrimaryAnimationController extends Animation<double>{
-  double _value=0.0;
-  AnimationStatus _status=AnimationStatus.forward;
-  @override//每当有值发生改变时会监听
-  void addListener(VoidCallback listener) {
-    print('add');
-  }
-  @override //动画状态发生改变时会监听
-  void addStatusListener(AnimationStatusListener listener) {
-    print('addStatus');
-  }
-  @override//移除值监听时会监听
-  void removeListener(VoidCallback listener) {
-    print('remove');
-  }
-  @override//移除动画状态时会监听
-  void removeStatusListener(AnimationStatusListener listener) {
-    print('removeStatus');
-  }
-  @override
-  AnimationStatus get status => _status;
-  @override
-  double get value => _value;
-}
-
-class SecondaryRouteAnimationController extends Animation<double>{
-  double _value=0.0;
-  AnimationStatus _status=AnimationStatus.forward;
-  @override//每当有值发生改变时会监听
-  void addListener(VoidCallback listener) {
-    print('add');
-  }
-  @override //动画状态发生改变时会监听
-  void addStatusListener(AnimationStatusListener listener) {
-    print('addStatus');
-  }
-  @override//移除值监听时会监听
-  void removeListener(VoidCallback listener) {
-    print('remove');
-  }
-  @override//移除动画状态时会监听
-  void removeStatusListener(AnimationStatusListener listener) {
-    print('removeStatus');
-  }
-  @override
-  AnimationStatus get status => _status;
-  @override
-  double get value => _value;
 }

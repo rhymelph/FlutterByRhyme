@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
 
 class User {
   final String userName; //用户名
@@ -69,9 +71,16 @@ class _ChatRoomState extends State<ChatRoom> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+    bool isDark=Theme.of(context).brightness==Brightness.dark;
     return Scaffold(
-      appBar: AppBar(
+      appBar: isIOS?CupertinoNavigationBar(
+        middle: Text('聊天室',style: Theme.of(context).textTheme.subhead,),
+        backgroundColor: isDark?Color(0xCC8F8F8F):Color(0xCCF8F8F8),
+          actionsForegroundColor: isDark?CupertinoColors.white:CupertinoColors.activeBlue,
+      ):AppBar(
         title: Text('聊天室'),
+        elevation: isIOS ? 0.0 : 0.4,
       ),
       body: Column(
         children: <Widget>[
@@ -83,13 +92,13 @@ class _ChatRoomState extends State<ChatRoom> with TickerProviderStateMixin {
             padding: const EdgeInsets.all(8.0),
           )),
           Divider(),
-          _buildInputBox(),
+          _buildInputBox(isIOS),
         ],
       ),
     );
   }
 
-  Widget _buildInputBox() {
+  Widget _buildInputBox(bool isIOS) {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
@@ -104,9 +113,7 @@ class _ChatRoomState extends State<ChatRoom> with TickerProviderStateMixin {
                   haveText = value.isNotEmpty;
                 });
               },
-              focusNode: FocusNode()..addListener((){
-
-              }),
+              focusNode: FocusNode()..addListener(() {}),
               controller: _controller,
               onSubmitted: _handSubmitted,
               decoration: new InputDecoration.collapsed(hintText: '要说点啥？'),
@@ -114,8 +121,15 @@ class _ChatRoomState extends State<ChatRoom> with TickerProviderStateMixin {
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 4.0),
-            child: IconButton(
-                icon: Icon(Icons.send), onPressed: haveText ? _handSend : null),
+            child: isIOS
+                ? CupertinoButton(
+                    child: Text('Send'),
+                    onPressed: haveText ? _handSend : null,
+                  )
+                : IconButton(
+                    icon: Icon(Icons.send),
+                    onPressed: haveText ? _handSend : null,
+                  ),
           )
         ],
       ),
@@ -123,6 +137,10 @@ class _ChatRoomState extends State<ChatRoom> with TickerProviderStateMixin {
   }
 
   void _handSubmitted(String value) {
+    if (value.isEmpty) {
+      return;
+    }
+
     _controller.clear();
     ChatMessage message = ChatMessage(
       user: widget.user,
@@ -167,6 +185,8 @@ class ChatMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark=Theme.of(context).brightness==Brightness.dark;
+
     Widget body = Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -201,7 +221,7 @@ class ChatMessage extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                     shape: BoxShape.rectangle,
-                    color: Colors.lightBlueAccent,
+                    color: isDark?Colors.blueGrey:Colors.lightBlueAccent,
                   ),
                   margin: const EdgeInsets.only(top: 8.0),
                   child: Text(text),
