@@ -140,7 +140,7 @@ class _CupertinoNavigationBarDemoState
       trailing: setting.trailing?.value,
       border: setting.border?.value,
       backgroundColor: setting.backgroundColor?.value,
-      padding: setting.padding?.value,
+//      padding: setting.padding?.value,
       actionsForegroundColor: setting.actionsForegroundColor?.value,
     );
   }

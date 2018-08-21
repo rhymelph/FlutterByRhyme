@@ -23,7 +23,7 @@ const String finishDemo=
     'Container,Row,Column,Image,Text.Icon,RaisedButton,Scaffold,AppBar,FlutterLogo,PlaceHolder,'
     'BottomNavigationBar,TabBar,TabBarView,MaterialApp,WidgetsApp,Drawer,FloatingActionButton,FlatButton,IconButton,PopupMenuButton,ButtonBar,TextField,Checkbox,Radio,Switch,Slider,Date&Time Pickers,SimpleDialog,AlertDialog,BottomSheet,ExpansionPanel,SnackBar,Chip,Tooltip,DataTable,Card,LinearProgressIndicator,ListTile,Stepper,Divider,'
     'CupertinoActivityIndicator,CupertinoAlertDialog,CupertinoButton,CupertinoDialog，CupertinoDialogAction,CupertinoSlider,CupertinoSwitch,CupertinoPageTransition,CupertinoFullscreenDialogTransition,CupertinoNavigationBar,CupertinoTabBar,CupertinoPageScaffold,CupertinoTabScaffold'
-    '聊天室,登陆页面';
+    '聊天室,登陆页面,商品列表';
 
 class BottomItem {
   final String title;
@@ -1393,6 +1393,13 @@ List<Page> _buildPage() {
         category: _kdesign,
         routeName: LoginPage.routeName,
         buildRoute: (BuildContext context) => LoginPage()),
+    Page(
+        title: '商品列表',
+        subhead: '一个跟淘宝类似的商品列表',
+        icon: null,
+        category: _kdesign,
+        routeName: ShopPage.routeName,
+        buildRoute: (BuildContext context) => ShopPage()),
     ///design
     Page(
         title: '设备',

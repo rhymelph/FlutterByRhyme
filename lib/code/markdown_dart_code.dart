@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/code_highlighter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DartMarkDown extends StatelessWidget {
   DartMarkDown(this.source);
@@ -18,6 +20,7 @@ class DartMarkDown extends StatelessWidget {
   final String table = '|';
 
   final String titleStart='![';
+  final String titleURlStart='[';
   final String titleEnd=']';
   final String imageEnd=')';
   final String imageStart='(';
@@ -111,6 +114,8 @@ class DartMarkDown extends StatelessWidget {
       return DartSyntaxHighlighter(style).format(source);
     }else if(source.startsWith(titleStart)&&source.endsWith(imageEnd)){
       style = Theme.of(context).textTheme.body2.copyWith(fontSize: 0.0);
+    }else if(source.startsWith(titleURlStart)&&source.endsWith(imageEnd)){
+      style=Theme.of(context).textTheme.body2.copyWith(fontSize: 1.0);
     }
     return TextSpan(
       style: style,
@@ -122,6 +127,7 @@ class DartMarkDown extends StatelessWidget {
     List<Widget> widgets = [];
     bool isDark = Theme.of(context).brightness == Brightness.dark;
     for (TextSpan span in textSpans) {
+      //返回标注
       if (span.style ==
           Theme
               .of(context)
@@ -142,12 +148,14 @@ class DartMarkDown extends StatelessWidget {
           child: RichText(text: span),
         ));
       } else if (span.style.fontWeight == FontWeight.bold) {
+        //返回标题
         widgets.add(Container(
           padding: const EdgeInsets.only(left: 8.0, top: 16.0, bottom: 16.0),
           alignment: Alignment.centerLeft,
           child: RichText(text: span),
         ));
       } else if (span.style == Theme.of(context).textTheme.body2) {
+        //返回table
         Color normal1=isDark?Colors.black:Colors.white;
         Color normal2=isDark?Colors.black45:Colors.grey[200];
         Color borderColor=isDark?Colors.white30:Colors.black87;
@@ -205,11 +213,13 @@ class DartMarkDown extends StatelessWidget {
           }
         }
       } else if (span.style == Theme.of(context).textTheme.body1) {
+        //返回普通样式
         widgets.add(Container(
           alignment: Alignment.centerLeft,
           child: RichText(text: span),
         ));
       } else if(span.style==Theme.of(context).textTheme.body2.copyWith(fontSize: 0.0)){
+        //返回图片加标题
         int tStart=span.text.indexOf(titleStart)+2;
         int tEnd=span.text.indexOf(titleEnd);
 
@@ -231,7 +241,20 @@ class DartMarkDown extends StatelessWidget {
           ),
           child: Text(title),
         ));
+      }else if(span.style==Theme.of(context).textTheme.body2.copyWith(fontSize: 1.0)){
+        //返回链接
+        int tStart=span.text.indexOf(titleURlStart)+1;
+        int tEnd=span.text.indexOf(titleEnd);
+
+        int iStart=span.text.indexOf(imageStart)+1;
+        int iEnd=span.text.indexOf(imageEnd);
+        String title=span.text.substring(tStart,tEnd);
+        String address=span.text.substring(iStart,iEnd);
+        final TextStyle linkStyle =
+        Theme.of(context).textTheme.body2.copyWith(color: Theme.of(context).accentColor);
+        widgets.add(RichText(text: _LinkTextSpan(style: linkStyle,text: title,url: address)));
       }else {
+        //返回代码块
         widgets.add(Container(
           padding: const EdgeInsets.all(8.0),
           alignment: Alignment.centerLeft,
@@ -258,4 +281,17 @@ class DartMarkDown extends StatelessWidget {
       ),
     );
   }
+}
+class _LinkTextSpan extends TextSpan {
+  _LinkTextSpan({TextStyle style, String url, String text})
+      : super(
+      style: style,
+      text: text ?? url,
+      recognizer: TapGestureRecognizer()
+        ..onTap = () async {
+          await launch(url,
+              forceSafariVC: true,
+              forceWebView: true,
+              statusBarBrightness: Brightness.light);
+        });
 }
