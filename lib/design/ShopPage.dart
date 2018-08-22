@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterbyrhyme/design/entity/shop.dart';
 
 class ShopPage extends StatefulWidget {
   static const String routeName = 'design/ShopPage';
@@ -7,17 +8,10 @@ class ShopPage extends StatefulWidget {
   _ShopPageState createState() => _ShopPageState();
 }
 
-List<_ShopItem> items=[
-  const _ShopItem(name: '1',),
-  const _ShopItem(name: '2',),
-  const _ShopItem(name: '3',),
-  const _ShopItem(name: '4',),
-  const _ShopItem(name: '5',),
-  const _ShopItem(name: '6',),
-  const _ShopItem(name: '7',),
-  const _ShopItem(name: '8',),
-];
+
 class _ShopPageState extends State<ShopPage> {
+  List<Shop> shopList=[];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,25 +22,34 @@ class _ShopPageState extends State<ShopPage> {
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints){
             double width=constraints.biggest.width/2;
-            double height=225.0;
 
+            List<Shop> list1=[];
+            List<Shop> list2=[];
+            for(int i=0; i<shopList.length;i++){
+              Shop shop =shopList[i];
+              if(i%2==0){
+                list1.add(shop);
+              }else{
+                list2.add(shop);
+              }
+            }
             return Row(
               children: <Widget>[
                 Column(
-                  children: items.map((shop){
-                    return SizedBox(
+                  children: list1.map((shop){
+                    return Container(
                       width: width,
-                      height: int.parse(shop.name)%2==0?height:height+30.0,
-                      child: shop,
+                      alignment: Alignment.center,
+                      child: _ShopItem(shop: shop,),
                     );
                   }).toList(),
                 ),
                 Column(
-                  children: items.map((shop){
-                    return SizedBox(
+                  children: list2.map((shop){
+                    return Container(
                       width: width,
-                      height: int.parse(shop.name)%5==0?height:height+30.0,
-                      child: shop,
+                      alignment: Alignment.center,
+                      child: _ShopItem(shop: shop,),
                     );
                   }).toList(),
                 ),
@@ -60,9 +63,8 @@ class _ShopPageState extends State<ShopPage> {
 }
 
 class _ShopItem extends StatelessWidget {
-  final String name;
-
-  const _ShopItem({this.name});
+  final Shop shop;
+  const _ShopItem({this.shop});
   @override
   Widget build(BuildContext context) {
     return  Card(
@@ -70,8 +72,28 @@ class _ShopItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Expanded(flex: 1,child: Image.asset('images/burgers.jpg',fit: BoxFit.cover,)),
-            Text('商品$name'),
+            Expanded(flex: 1,child: Image.asset(shop.image,fit: BoxFit.cover,)),
+            Row(
+              children: <Widget>[
+                Expanded(child: Text(shop.name)),
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              children: <Widget>[
+                Text(shop.nowPrice,style: Theme.of(context).textTheme.body2,),
+                SizedBox(
+                  width: 3.0,
+                ),
+                Text(shop.sourcePrice,style: Theme.of(context).textTheme.body1.copyWith(decoration: TextDecoration.lineThrough),),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: Text(shop.sale,style: Theme.of(context).textTheme.subhead.copyWith(fontSize: 8.0,),),
+                ),
+              ],
+            )
           ],
         ),
     );
