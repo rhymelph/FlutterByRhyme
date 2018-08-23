@@ -76,6 +76,7 @@ class Shop {
   }
 
   static List<Shop> decode(Object jsonContnet){
+
     var decode = json.decode(jsonContnet.toString());
 
     List<Shop> shops=[];

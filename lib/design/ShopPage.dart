@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/design/entity/shop.dart';
 import 'package:flutterbyrhyme/http/httpManager.dart' as httpManager;
-
-const String kAddress='http://pdr02afuu.bkt.clouddn.com/shop.json';
+import 'package:url_launcher/url_launcher.dart';
+const String kAddress='https://raw.githubusercontent.com/rhymelph/FlutterByRhyme/master/lib/design/entity/shop.json';
 
 class ShopPage extends StatefulWidget {
   static const String routeName = 'design/ShopPage';
@@ -24,16 +24,13 @@ class _ShopPageState extends State<ShopPage> {
   }
 
   initData(){
-    httpManager.get(url: kAddress,headers: {
-      'ContentType':'application/json;charset=gb2312',
-    },
+    httpManager.get(url: kAddress,
     onSend: (){
       setState(() {
         body=Center(child: CircularProgressIndicator());
       });
     },
     onSuccess: (result){
-      print(result);
 
       List<Shop> shopList=Shop.decode(result);
       setState(() {
@@ -116,33 +113,54 @@ class _ShopItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Card(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Image.network(shop.image,fit: BoxFit.cover,),
-            Row(
-              children: <Widget>[
-                Expanded(child: Text(shop.name)),
-              ],
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Row(
-              children: <Widget>[
-                Text(shop.nowPrice,style: Theme.of(context).textTheme.body2,),
-                SizedBox(
-                  width: 3.0,
+      elevation: 4.0,
+        child: RawMaterialButton(
+          onPressed: () async {
+            if (await canLaunch(shop.address)) {
+            await launch(shop.address,
+            forceSafariVC: true,
+            forceWebView: false,
+            statusBarBrightness: Brightness.light);
+            }
+          },
+          padding: EdgeInsets.zero,
+          splashColor: Theme.of(context).primaryColor.withOpacity(0.12),
+          highlightColor: Colors.transparent,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Image.network(shop.image,fit: BoxFit.cover,),
+              Row(
+                children: <Widget>[
+                  Expanded(child: Text(shop.name)),
+                ],
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Text(shop.nowPrice,style: Theme.of(context).textTheme.title,),
+                    SizedBox(
+                      width: 8.0,
+                    ),
+                    Text(shop.sourcePrice,style: Theme.of(context).textTheme.body1.copyWith(decoration: TextDecoration.lineThrough),),
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Text(shop.sale,style: Theme.of(context).textTheme.subhead.copyWith(fontSize: 12.0,),),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(shop.sourcePrice,style: Theme.of(context).textTheme.body1.copyWith(decoration: TextDecoration.lineThrough),),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: Text(shop.sale,style: Theme.of(context).textTheme.subhead.copyWith(fontSize: 8.0,),),
-                ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
     );
   }
