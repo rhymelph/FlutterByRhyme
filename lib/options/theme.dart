@@ -7,6 +7,9 @@ class MyTheme {
 
   const MyTheme._(this.name, this.data);
 
+  MyTheme copyWith({ThemeData data}){
+    return MyTheme._(name, data??this.data);
+  }
   @override
   bool operator ==(other) {
     if(identical(this, other)){
@@ -23,8 +26,8 @@ class MyTheme {
   int get hashCode => hashValues(name, data);
 }
 
-final MyTheme kDarkTheme = MyTheme._('Dark', _buildDarkTheme());
-final MyTheme kLightTheme = MyTheme._('Light', _buildLightTheme());
+MyTheme kDarkTheme = MyTheme._('Dark', _buildDarkTheme());
+MyTheme kLightTheme = MyTheme._('Light', _buildLightTheme());
 
 TextTheme _buildTextTheme(TextTheme base) {
   return base.copyWith(

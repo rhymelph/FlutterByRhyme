@@ -75,8 +75,8 @@ class Shop {
     return '[${content.substring(0,content.length-1)}]';
   }
 
-  static List<Shop> decode(String jsonContnet){
-    var decode = json.decode(jsonContnet);
+  static List<Shop> decode(Object jsonContnet){
+    var decode = json.decode(jsonContnet.toString());
 
     List<Shop> shops=[];
     for(var info in decode){

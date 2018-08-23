@@ -181,6 +181,7 @@ class _Header extends StatelessWidget {
           style: data.textTheme.body1.copyWith(
             fontFamily: 'qlYouYuan',
             color: data.accentColor,
+            fontWeight: FontWeight.bold,
           ),
           child: Semantics(
             child: Text(title),
@@ -407,7 +408,6 @@ class _BooleanItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return _OptionsItem(
       child: Row(
         children: <Widget>[
@@ -415,8 +415,8 @@ class _BooleanItem extends StatelessWidget {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: Colors.blue,
-            activeTrackColor: isDark ? Colors.white24 : Colors.black26,
+            activeColor: Theme.of(context).accentColor,
+            activeTrackColor: Theme.of(context).accentColor.withOpacity(0.5),
           )
         ],
       ),

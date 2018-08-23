@@ -7,12 +7,13 @@ typedef InterceptorsSuccessCallback(String body);
 
 get(
     {@required String url,
+      Map<String,String> headers,
       InterceptorCallback onSend,
       InterceptorsSuccessCallback onSuccess,
       InterceptorErrorCallback onError}) async {
   onSend();
   try {
-    await http.get(url).then(
+    await http.get(url,headers: headers).then(
           (http.Response response) {
         onSuccess(response.body);
       },

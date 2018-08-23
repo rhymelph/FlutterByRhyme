@@ -7,14 +7,16 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutterbyrhyme/upgrade.dart';
 
-const Color _kBlue = const Color(0xFF002D75);
+//const Color _kBlue = const Color(0xFF002D75);
 const _kSwitchDuration = const Duration(milliseconds: 300);
 
 ///主页
 class HomePage extends StatefulWidget {
   final Widget optionPage;
+  final ValueChanged<BottomItem> colorChange;
 
-  const HomePage({this.optionPage});
+  const HomePage({this.optionPage,this.colorChange});
+
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -74,6 +76,8 @@ class _HomePageState extends State<HomePage>
   }
 
   _bottomBarTap(int index) {
+    widget.colorChange(kAllBottomItem.toList()[index]);
+
     setState(() {
       _position = index;
       List<PageCategory> categorys =
@@ -120,7 +124,7 @@ class _HomePageState extends State<HomePage>
               }).toList(),
             )
           : null,
-      backgroundColor: isDark ? _kBlue : theme.primaryColor,
+      backgroundColor: theme.primaryColor,
       body: SafeArea(
           bottom: false,
           child: WillPopScope(

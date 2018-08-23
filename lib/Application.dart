@@ -89,13 +89,22 @@ class _DemoAppState extends State<DemoApp> {
     );
     Widget home = new HomePage(
       optionPage: optionPage,
+      colorChange: (item){
+        setState(() {
+          kDarkTheme=kDarkTheme.copyWith(data: kDarkTheme.data.copyWith(primaryColor: item.darkColor,buttonColor: item.darkColor,accentColor:item.lightColor));
+          kLightTheme=kLightTheme.copyWith(data: kLightTheme.data.copyWith(primaryColor: item.lightColor,buttonColor: item.lightColor,accentColor:item.darkColor));
+          if(_options.theme.name==kDarkTheme.name){
+            _handleOptionChanged(_options.copyWith(theme: kDarkTheme));
+          }else{
+            _handleOptionChanged(_options.copyWith(theme: kLightTheme));
+          }
+        });
+      },
     );
     return new MaterialApp(
       title: 'Flutter教程',
       theme: _options.theme.data.copyWith(platform: _options.platform),
-      color: _options.theme.data.brightness == Brightness.light
-          ? Colors.blue
-          : const Color(0xFF002D75),
+      color: _options.theme.data.primaryColor,
       routes: _buildRoutes(),
       builder: (BuildContext context, Widget child) {
         return Directionality(
