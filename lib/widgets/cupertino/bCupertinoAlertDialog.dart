@@ -157,6 +157,17 @@ Widget _getDialog(){
       ),
     );
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    if(setting.scrollController.value!=null){
+      setting.scrollController.value.dispose();
+    }
+    if(setting.actionScrollController.value!=null){
+      setting.actionScrollController.value.dispose();
+    }
+    super.dispose();
+  }
 }
 
 class CupertinoAlertDialogSetting {

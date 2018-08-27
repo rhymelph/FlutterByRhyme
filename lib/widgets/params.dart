@@ -36,6 +36,8 @@ class StringParams {
   static final String kTextDirection = 'TextDirection(文本方向)';
   static final String kVerticalDirection = 'VerticalDirection(垂直方向)';
   static final String kTextBaseline = 'TextBaseline(文本基线)';
+  static final String kBaseline = 'Baseline(基线)';
+  static final String kBaselineType = 'BaselineType(基线类型)';
 
   static final String kImage = 'Image(图片)';
   static final String kColorBlendMode = 'ColorBlendMode(颜色混合模式)';
@@ -244,6 +246,10 @@ class StringParams {
 
   static final String kNavigationBar = 'NavigationBar(导航栏)';
 
+  static final String kWidthFactor = 'WidthFactor(宽度比例)';
+  static final String kHeightFactor = 'HeightFactor(高度比例)';
+
+  static final String kAspectRatio = 'AspectRatio(纵横比)';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -1152,6 +1158,24 @@ const List<Value<int>> intLargeValues = [
     name: '40',
     value: 40,
     label: '40',
+  ),
+];
+
+const List<Value<double>> doubleAspectValue = [
+  Value(
+    name: '4.0/3.0',
+    value: 4.0 / 3.0,
+    label: '4.0/3.0',
+  ),
+  Value(
+    name: '5.0/5.0',
+    value: 5.0 / 5.0,
+    label: '5.0/5.0',
+  ),
+  Value(
+    name: '16.0/9.0',
+    value: 16.0 / 9.0,
+    label: '16.0/9.0',
   ),
 ];
 
@@ -2713,6 +2737,75 @@ List<Value<Border>> borderValues = [
             color: Colors.black38,
             width: 2.0,
       ),
+    )''',
+  ),
+];
+
+List<Value<BoxConstraints>> constraintValues = [
+  Value(
+    name: 'BoxConstraints',
+    value: BoxConstraints(
+      minHeight: 100.0,
+      minWidth: 120.0,
+      maxHeight: 150.0,
+      maxWidth: 180.0,
+    ),
+    label: '''BoxConstraints(
+      minHeight: 100.0,
+      minWidth: 120.0,
+      maxHeight: 150.0,
+      maxWidth: 180.0,
+    )''',
+  ),
+  Value(
+    name: 'BoxConstraints.tightFor',
+    value: BoxConstraints.tightFor(
+      width: 120.0,
+      height: 130.0,
+    ),
+    label: '''BoxConstraints.tightFor(
+      width: 120.0,
+      height: 130.0,
+    )''',
+  ),
+  Value(
+    name: 'BoxConstraints.tightForFinite',
+    value: BoxConstraints.tightForFinite(
+      width: 120.0,
+      height: 130.0,
+    ),
+    label: '''BoxConstraints.expand(
+      width: 120.0,
+      height: 130.0,
+    )''',
+  ),
+  Value(
+    name: 'BoxConstraints.expand',
+    value: BoxConstraints.expand(
+      width: 120.0,
+      height: 130.0,
+    ),
+    label: '''BoxConstraints.expand(
+      width: 120.0,
+      height: 130.0,
+    )''',
+  ),
+  Value(
+    name: 'BoxConstraints.tight',
+    value: BoxConstraints.tight(
+      Size(100.0, 100.0),
+    ),
+    label: '''BoxConstraints.tight(
+      Size(100.0, 100.0),
+    )''',
+  ),
+  Value(
+    name: 'BoxConstraints.loose',
+    value: BoxConstraints.loose(
+      Size(100.0, 100.0),
+    ),
+    label: '''BoxConstraints.loose(
+      Size(100.0, 100.0),
     )''',
   ),
 ];
