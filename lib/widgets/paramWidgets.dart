@@ -97,7 +97,8 @@ class ValueTitleButtonWidget extends StatelessWidget {
 
 //开关标题
 class SwitchValueTitleWidget extends StatelessWidget {
-  SwitchValueTitleWidget({@required this.title, @required this.value,@required this.onChanged});
+  SwitchValueTitleWidget(
+      {@required this.title, @required this.value, @required this.onChanged});
 
   final Value<bool> value;
   final String title;
@@ -527,8 +528,10 @@ class EditTextTitleWidget extends StatelessWidget {
 }
 
 class SeekBarGroupWidget extends StatelessWidget {
-  SeekBarGroupWidget(this.value, this.onChanged);
+  SeekBarGroupWidget(this.value, this.onChanged, {this.min, this.max});
 
+  final double min;
+  final double max;
   final Value<double> value;
   final ValueChanged<Value<double>> onChanged;
 
@@ -539,12 +542,13 @@ class SeekBarGroupWidget extends StatelessWidget {
       label: '$change',
     ));
   }
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return _ParamItem(
         child: Slider(
+      min: min ?? 0.0,
+      max: max ?? 1.0,
       value: value.value,
       onChanged: onChangedValue,
     ));
@@ -1017,9 +1021,9 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
   bool isHelperStyle = false;
   bool isHintStyle = false;
   bool isErrorStyle = false;
-  bool isCounterStyle=false;
-  bool isPrefixStyle=false;
-  bool isSuffixStyle=false;
+  bool isCounterStyle = false;
+  bool isPrefixStyle = false;
+  bool isSuffixStyle = false;
 
   @override
   Widget build(BuildContext context) {
@@ -1028,52 +1032,60 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         ValueTitleWidget(StringParams.kIcon),
-        RadioGroupWidget(setting.icon, iconButtonValues, (value){
+        RadioGroupWidget(setting.icon, iconButtonValues, (value) {
           setState(() {
-            setting=setting.copyWith(icon: value);
+            setting = setting.copyWith(icon: value);
             changeValue();
           });
         }),
-        
         ValueTitleWidget(StringParams.kContentPadding),
-        RadioGroupWidget(setting.contentPadding, paddingValues, (value){
+        RadioGroupWidget(setting.contentPadding, paddingValues, (value) {
           setState(() {
-            setting=setting.copyWith(contentPadding: value);
+            setting = setting.copyWith(contentPadding: value);
             changeValue();
           });
         }),
         ValueTitleWidget(StringParams.kBorder),
-        RadioGroupWidget(setting.border, inputBorderValues, (value){
+        RadioGroupWidget(setting.border, inputBorderValues, (value) {
           setState(() {
-            setting=setting.copyWith(border: value);
+            setting = setting.copyWith(border: value);
             changeValue();
           });
         }),
-        SwitchValueTitleWidget(title: StringParams.kEnabled,value: setting.enabled,
-          onChanged: (value){
+        SwitchValueTitleWidget(
+          title: StringParams.kEnabled,
+          value: setting.enabled,
+          onChanged: (value) {
             setState(() {
-              setting=setting.copyWith(enabled: value);
+              setting = setting.copyWith(enabled: value);
               changeValue();
             });
-          },),
-        SwitchValueTitleWidget(title: StringParams.kIsDense,value: setting.isDense,
-        onChanged: (value){
-          setState(() {
-            setting=setting.copyWith(isDense: value);
-            changeValue();
-          });
-        },),
-        SwitchValueTitleWidget(title: StringParams.kFilled,value: setting.filled,
-          onChanged: (value){
+          },
+        ),
+        SwitchValueTitleWidget(
+          title: StringParams.kIsDense,
+          value: setting.isDense,
+          onChanged: (value) {
             setState(() {
-              setting=setting.copyWith(filled: value);
+              setting = setting.copyWith(isDense: value);
               changeValue();
             });
-          },),
+          },
+        ),
+        SwitchValueTitleWidget(
+          title: StringParams.kFilled,
+          value: setting.filled,
+          onChanged: (value) {
+            setState(() {
+              setting = setting.copyWith(filled: value);
+              changeValue();
+            });
+          },
+        ),
         ValueTitleWidget(StringParams.kFillColor),
-        ColorGroupWidget(setting.fillColor, (value){
+        ColorGroupWidget(setting.fillColor, (value) {
           setState(() {
-            setting=setting.copyWith(fillColor: value);
+            setting = setting.copyWith(fillColor: value);
             changeValue();
           });
         }),
@@ -1104,7 +1116,8 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
             });
           },
         ),
-        EditTextTitleWidget(StringParams.kLabelText, setting.labelText, (value) {
+        EditTextTitleWidget(StringParams.kLabelText, setting.labelText,
+            (value) {
           setState(() {
             setting = setting.copyWith(
               labelText: value,
@@ -1131,7 +1144,8 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
             });
           },
         ),
-        EditTextTitleWidget(StringParams.kHelperText, setting.helperText, (value) {
+        EditTextTitleWidget(StringParams.kHelperText, setting.helperText,
+            (value) {
           setState(() {
             setting = setting.copyWith(
               helperText: value,
@@ -1158,7 +1172,8 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
             });
           },
         ),
-        EditTextTitleWidget(StringParams.kErrorText, setting.errorText, (value) {
+        EditTextTitleWidget(StringParams.kErrorText, setting.errorText,
+            (value) {
           setState(() {
             setting = setting.copyWith(
               errorText: value,
@@ -1198,7 +1213,8 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
             });
           },
         ),
-        EditTextTitleWidget(StringParams.kCounterText, setting.counterText, (value) {
+        EditTextTitleWidget(StringParams.kCounterText, setting.counterText,
+            (value) {
           setState(() {
             setting = setting.copyWith(
               counterText: value,
@@ -1226,13 +1242,14 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
           },
         ),
         ValueTitleWidget(StringParams.kPrefixIcon),
-        RadioGroupWidget(setting.prefixIcon, iconButtonValues, (value){
+        RadioGroupWidget(setting.prefixIcon, iconButtonValues, (value) {
           setState(() {
-            setting=setting.copyWith(prefixIcon: value);
+            setting = setting.copyWith(prefixIcon: value);
             changeValue();
           });
         }),
-        EditTextTitleWidget(StringParams.kPrefixText, setting.prefixText, (value) {
+        EditTextTitleWidget(StringParams.kPrefixText, setting.prefixText,
+            (value) {
           setState(() {
             setting = setting.copyWith(
               prefixText: value,
@@ -1260,13 +1277,14 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
           },
         ),
         ValueTitleWidget(StringParams.kSuffixIcon),
-        RadioGroupWidget(setting.suffixIcon, iconButtonValues, (value){
+        RadioGroupWidget(setting.suffixIcon, iconButtonValues, (value) {
           setState(() {
-            setting=setting.copyWith(suffixIcon: value);
+            setting = setting.copyWith(suffixIcon: value);
             changeValue();
           });
         }),
-        EditTextTitleWidget(StringParams.kSuffixText, setting.suffixText, (value) {
+        EditTextTitleWidget(StringParams.kSuffixText, setting.suffixText,
+            (value) {
           setState(() {
             setting = setting.copyWith(
               suffixText: value,
@@ -1298,20 +1316,24 @@ class _InputDecorationDemoState extends State<InputDecorationDemo> {
   }
 }
 
-
 class AnimationControllerSetting {
   final Value<double> value;
   final Value<Duration> duration;
   final Value<double> lowerBound;
   final Value<double> upperBound;
 
-  AnimationControllerSetting({this.value, this.duration, this.lowerBound, this.upperBound, });
+  AnimationControllerSetting({
+    this.value,
+    this.duration,
+    this.lowerBound,
+    this.upperBound,
+  });
 
   AnimationControllerSetting copyWith({
-     Value<double> value,
-     Value<Duration> duration,
-     Value<double> lowerBound,
-     Value<double> upperBound,
+    Value<double> value,
+    Value<Duration> duration,
+    Value<double> lowerBound,
+    Value<double> upperBound,
   }) {
     return AnimationControllerSetting(
       value: value ?? this.value,
@@ -1320,16 +1342,16 @@ class AnimationControllerSetting {
       upperBound: upperBound ?? this.upperBound,
     );
   }
-
 }
 
 class AnimationControllerDemo extends StatefulWidget {
-  AnimationControllerDemo({Key key,this.onchange}) : super(key: key);
+  AnimationControllerDemo({Key key, this.onchange}) : super(key: key);
 
   final ValueChanged<Value<AnimationControllerSetting>> onchange;
 
   @override
-  _AnimationControllerDemoState createState() => _AnimationControllerDemoState();
+  _AnimationControllerDemoState createState() =>
+      _AnimationControllerDemoState();
 }
 
 class _AnimationControllerDemoState extends State<AnimationControllerDemo> {
@@ -1356,10 +1378,10 @@ class _AnimationControllerDemoState extends State<AnimationControllerDemo> {
 
   String getExampleCode() {
     return '''AnimationController(
-      value: ${setting.value?.label??''},
-      duration: ${setting.duration?.label??''},
-      lowerBound: ${setting.lowerBound?.label??''},
-      upperBound: ${setting.upperBound?.label??''},
+      value: ${setting.value?.label ?? ''},
+      duration: ${setting.duration?.label ?? ''},
+      lowerBound: ${setting.lowerBound?.label ?? ''},
+      upperBound: ${setting.upperBound?.label ?? ''},
       vsync: this,//class _AState extends State<A> with SingleTickerProviderStateMixin
     )''';
   }
@@ -1371,8 +1393,7 @@ class _AnimationControllerDemoState extends State<AnimationControllerDemo> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         ValueTitleWidget(StringParams.kDuration),
-        RadioGroupWidget<Duration>(
-            setting.duration, durationValues, (value) {
+        RadioGroupWidget<Duration>(setting.duration, durationValues, (value) {
           setState(() {
             setting = setting.copyWith(
               duration: value,

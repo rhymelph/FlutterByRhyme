@@ -22,26 +22,55 @@ class _CenterDemoState extends ExampleState<CenterDemo> {
   @override
   void initState() {
     setting = CenterSetting(
-      widthFactor: doubleOneValues[0],
-      heightFactor: doubleOneValues[0],
-      child:  Value(
-        value: SizedBox(
-          width: 35.0,
-          height: 35.0,
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-          ),
-        ),
-        label: '''SizedBox(
-          width: 35.0,
-          height: 35.0,
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-          ),
-        )''',
-      ),
+      widthFactor: doubleMiniValues[0],
+      heightFactor: doubleMiniValues[0],
+      child:  _formatValue(),
     );
     super.initState();
+  }
+
+
+  Widget _formatWidget(){
+    return Center(
+      widthFactor: setting?.widthFactor?.value??null,
+      heightFactor: setting?.heightFactor?.value??null,
+      child: Container(
+        alignment: Alignment.center,
+        color: Colors.grey,
+        child: SizedBox(
+          width: 35.0,
+          height: 35.0,
+          child: DecoratedBox(
+            decoration: BoxDecoration(color: Colors.blue),
+        ),
+        ),
+      ),
+    );
+  }
+  
+  String _formatLabel(){
+    return '''Center(
+      widthFactor: ${setting?.widthFactor?.label??''},
+      heightFactor: ${setting?.heightFactor?.label??''},
+      child: Container(
+        alignment: Alignment.center,
+        color: Colors.grey,
+        child: SizedBox(
+          width: 35.0,
+          height: 35.0,
+          child: DecoratedBox(
+            decoration: BoxDecoration(color: Colors.blue),
+        ),
+        ),
+      ),
+    )''';
+  }
+
+  Value<Widget> _formatValue(){
+    return Value(
+      value: _formatWidget(),
+      label: _formatLabel(),
+    );
   }
 
   @override
@@ -51,36 +80,26 @@ class _CenterDemoState extends ExampleState<CenterDemo> {
 
   @override
   String getExampleCode() {
-    return '''Center(
-      widthFactor: ${setting.widthFactor?.label??''},
-      heightFactor: ${setting.heightFactor?.label??''},
-      child: ${setting.child?.label??''},
-    )''';
+    return setting?.child?.label;
   }
 
   @override
   List<Widget> getSetting() {
     return [
-      DropDownValueTitleWidget(
-        selectList: doubleOneValues,
-        title: StringParams.kWidthFactor,
-        value: setting.widthFactor,
-        onChanged: (value) {
-          setState(() {
-            setting = setting.copyWith(widthFactor: value);
-          });
-        },
-      ),
-      DropDownValueTitleWidget(
-        selectList: doubleOneValues,
-        title: StringParams.kHeightFactor,
-        value: setting.heightFactor,
-        onChanged: (value) {
-          setState(() {
-            setting = setting.copyWith(heightFactor: value);
-          });
-        },
-      ),
+      ValueTitleWidget(StringParams.kWidthFactor),
+      SeekBarGroupWidget(setting.widthFactor, (value){
+        setting=setting.copyWith(widthFactor: value);
+        setState(() {
+           setting=setting.copyWith(child: _formatValue());
+        });
+      },max: 2.0,min: 0.0,),
+      ValueTitleWidget(StringParams.kHeightFactor),
+      SeekBarGroupWidget(setting.heightFactor, (value){
+        setting=setting.copyWith(heightFactor: value);
+        setState(() {
+          setting=setting.copyWith(child: _formatValue());
+        });
+      },max: 2.0,min: 0.0,),
     ];
   }
 
@@ -89,13 +108,10 @@ class _CenterDemoState extends ExampleState<CenterDemo> {
     return 'Center';
   }
 
+
   @override
   Widget getWidget() {
-    return Center(
-      widthFactor: setting.widthFactor?.value,
-      heightFactor: setting.heightFactor?.value,
-      child: setting.child?.value,
-    );
+    return setting.child?.value;
   }
 }
 
@@ -113,10 +129,13 @@ class CenterSetting {
   CenterSetting copyWith({
     Value<double> widthFactor,
     Value<double> heightFactor,
+     Value<Widget> child,
+
   }) {
     return CenterSetting(
       widthFactor: widthFactor ?? this.widthFactor,
       heightFactor: heightFactor ?? this.heightFactor,
+      child: child??this.child,
     );
   }
 }

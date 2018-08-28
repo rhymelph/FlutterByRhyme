@@ -25,26 +25,49 @@ class _AlignDemoState
   void initState() {
     setting = AlignSetting(
       alignment: alignmentValues[0],
-      widthFactor: doubleOneValues[0],
-      heightFactor: doubleOneValues[0],
-      child:  Value(
-        value: SizedBox(
-          width: 35.0,
-          height: 35.0,
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-          ),
-        ),
-        label: '''SizedBox(
-          width: 35.0,
-          height: 35.0,
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-          ),
-        )''',
-      ),
+      widthFactor: doubleMiniValues[0],
+      heightFactor: doubleMiniValues[0],
+      child:  _formatValue(),
     );
     super.initState();
+  }
+
+  Widget _formatWidget(){
+    return Align(
+      alignment: setting?.alignment?.value??alignmentValues[0].value,
+      widthFactor: setting?.widthFactor?.value??null,
+      heightFactor: setting?.heightFactor?.value??null,
+      child: SizedBox(
+        width: 35.0,
+        height: 35.0,
+        child: DecoratedBox(
+          decoration: BoxDecoration(color: Colors.blue),
+        ),
+      ),
+    );
+  }
+
+  String _formatLabel(){
+    return '''Align(
+      alignment: ${setting?.alignment?.label??''},
+      widthFactor: ${setting?.widthFactor?.label??''},
+      heightFactor: ${setting?.heightFactor?.label??''},
+      child: SizedBox(
+        width: 35.0,
+        height: 35.0,
+        child: DecoratedBox(
+          decoration: BoxDecoration(color: Colors.blue),
+        ),
+      ),
+      ),
+    )''';
+  }
+
+  Value<Widget> _formatValue(){
+    return Value(
+      value: _formatWidget(),
+      label: _formatLabel(),
+    );
   }
 
   @override
@@ -54,12 +77,7 @@ class _AlignDemoState
 
   @override
   String getExampleCode() {
-    return '''Align(
-      widthFactor: ${setting.widthFactor?.label??''},
-      heightFactor: ${setting.heightFactor?.label??''},
-      alignment: ${setting.alignment?.label??''},
-      child: ${setting.child?.label??''},
-    )''';
+    return setting.child?.label;
   }
 
   @override
@@ -67,30 +85,25 @@ class _AlignDemoState
     return [
       ValueTitleWidget(StringParams.kAlignment),
       RadioGroupWidget(setting.alignment, alignmentValues, (value){
+        setting = setting.copyWith(alignment: value);
         setState(() {
-          setting = setting.copyWith(alignment: value);
+          setting=setting.copyWith(child: _formatValue());
         });
       }),
-      DropDownValueTitleWidget(
-        selectList: doubleOneValues,
-        title: StringParams.kWidthFactor,
-        value: setting.widthFactor,
-        onChanged: (value) {
-          setState(() {
-            setting = setting.copyWith(widthFactor: value);
-          });
-        },
-      ),
-      DropDownValueTitleWidget(
-        selectList: doubleOneValues,
-        title: StringParams.kHeightFactor,
-        value: setting.heightFactor,
-        onChanged: (value) {
-          setState(() {
-            setting = setting.copyWith(heightFactor: value);
-          });
-        },
-      ),
+      ValueTitleWidget(StringParams.kWidthFactor),
+      SeekBarGroupWidget(setting.widthFactor, (value){
+        setting=setting.copyWith(widthFactor: value);
+        setState(() {
+          setting=setting.copyWith(child: _formatValue());
+        });
+      },max: 2.0,min: 0.0,),
+      ValueTitleWidget(StringParams.kHeightFactor),
+      SeekBarGroupWidget(setting.heightFactor, (value){
+        setting=setting.copyWith(heightFactor: value);
+        setState(() {
+          setting=setting.copyWith(child: _formatValue());
+        });
+      },max: 2.0,min: 0.0,),
     ];
   }
 
@@ -99,15 +112,9 @@ class _AlignDemoState
     return 'Align';
   }
 
-
   @override
   Widget getWidget() {
-    return Align(
-      widthFactor: setting.widthFactor?.value,
-      heightFactor: setting.heightFactor?.value,
-      alignment: setting.alignment?.value,
-      child: setting.child?.value,
-    );
+    return setting?.child?.value;
   }
 }
 
@@ -127,11 +134,13 @@ class AlignSetting {
     Value<double> widthFactor,
     Value<double> heightFactor,
     Value<AlignmentGeometry> alignment,
+    Value<Widget> child,
   }) {
     return AlignSetting(
       alignment: alignment??this.alignment,
       widthFactor: widthFactor ?? this.widthFactor,
       heightFactor: heightFactor ?? this.heightFactor,
+      child: child??this.child,
     );
   }
 }

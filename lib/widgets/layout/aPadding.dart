@@ -16,7 +16,9 @@ class PaddingDemo extends StatefulWidget {
 | Key|key|传递给父类|
 |EdgeInsetsGeometry|padding| 必传的参数，内边距|
 |Widget | child | 传递给父类，需要添加内边距的子widget|
+
 > EdgeInsetsGeometry使用内置的方法添加内边距
+
 ```dart
 //1
   const EdgeInsets.symmetric({ double vertical = 0.0,
