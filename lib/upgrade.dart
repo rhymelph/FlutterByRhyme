@@ -127,7 +127,7 @@ Future<Null> showUpgradeDialog(BuildContext context, UpgradeInfo info) {
 }
 
 void startDownLoadAPK(String address) async {
-  bool isSuccess = await UpgradeByMarket();
+  bool isSuccess = await upgradeByMarket();
   if (!isSuccess) {
     if (await canLaunch(address)) {
       await launch(address,

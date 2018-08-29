@@ -20,24 +20,42 @@ class _ConstrainedBoxDemoState
   void initState() {
     setting = ConstrainedBoxSetting(
       constraints: constraintValues[0],
-      child:  Value(
-        value: SizedBox(
-          width: 35.0,
-          height: 35.0,
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-          ),
-        ),
-        label: '''SizedBox(
-          width: 35.0,
-          height: 35.0,
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-          ),
-        )''',
-      ),
+      child:  _formatValue(),
     );
     super.initState();
+  }
+
+  Widget _formatWidget(){
+    return ConstrainedBox(
+      constraints: setting?.constraints?.value??constraintValues[0].value,
+      child: SizedBox(
+        width: 35.0,
+        height: 35.0,
+        child: DecoratedBox(
+          decoration: BoxDecoration(color: Colors.blue),
+        ),
+      ),
+    );
+  }
+
+  String _formatLabel(){
+    return '''ConstrainedBox(
+      constraints: ${setting?.constraints?.label??constraintValues[0].label},
+      child: SizedBox(
+        width: 35.0,
+        height: 35.0,
+        child: DecoratedBox(
+          decoration: BoxDecoration(color: Colors.blue),
+        ),
+      ),
+    )''';
+  }
+
+  Value<Widget> _formatValue(){
+    return Value(
+      value: _formatWidget(),
+      label: _formatLabel(),
+    );
   }
 
   @override
@@ -47,19 +65,17 @@ class _ConstrainedBoxDemoState
 
   @override
   String getExampleCode() {
-    return '''ConstrainedBox(
-      constraints: ${setting.constraints?.label??''},
-      child: ${setting.child?.label??''},
-    )''';
+    return setting.child?.label;
   }
 
   @override
   List<Widget> getSetting() {
     return [
-      ValueTitleWidget('constraints'),
-      RadioListTile(value: setting.constraints, groupValue: constraintValues, onChanged: (value){
+      ValueTitleWidget(StringParams.kConstraints),
+      RadioGroupWidget(setting.constraints, constraintValues, (value) {
+        setting = setting.copyWith(constraints: value);
         setState(() {
-          setting=setting.copyWith(constraints: value);
+          setting=setting.copyWith(child: _formatValue());
         });
       }),
     ];
@@ -89,9 +105,11 @@ class ConstrainedBoxSetting {
   });
   ConstrainedBoxSetting copyWith({
     Value<BoxConstraints> constraints,
+    Value<Widget> child,
   }) {
     return ConstrainedBoxSetting(
       constraints: constraints??this.constraints,
+      child: child??this.child,
     );
   }
 }

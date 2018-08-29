@@ -140,10 +140,12 @@ class SwitchValueTitleWidget extends StatelessWidget {
 //下拉选项标题
 class DropDownValueTitleWidget<T> extends StatelessWidget {
   DropDownValueTitleWidget(
-      {@required this.selectList,
+      {Key key,
+      @required this.selectList,
       @required this.title,
       @required this.value,
-      this.onChanged});
+      this.onChanged})
+      : super(key: key);
 
   final Value<T> value;
   final String title;
@@ -196,10 +198,10 @@ class DropDownValueTitleWidget<T> extends StatelessWidget {
 //二级选择
 class ExpansionPanelTitleWidget extends StatelessWidget {
   ExpansionPanelTitleWidget({
-    this.titleWidget,
-    this.hintWidget,
+    @required this.titleWidget,
+    @required this.hintWidget,
     this.isExpanded: false,
-    this.onChanged,
+    @required this.onChanged,
   });
 
   final Widget titleWidget;
@@ -542,14 +544,18 @@ class SeekBarGroupWidget extends StatelessWidget {
       label: '$change',
     ));
   }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
     return _ParamItem(
         child: Slider(
       min: min ?? 0.0,
       max: max ?? 1.0,
       value: value.value,
+      activeColor: Theme.of(context).primaryColor,
+      inactiveColor: Theme.of(context).textTheme.title.color,
       onChanged: onChangedValue,
     ));
   }

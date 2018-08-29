@@ -171,7 +171,7 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
         ),
         body: Stack(
           children: body,
-        ));;
+        ));
   }
 
   //显示示例代码

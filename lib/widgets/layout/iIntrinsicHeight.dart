@@ -3,7 +3,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class IntrinsicHeightDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/IntrinsicHeight';
-  final String detail = '''''';
+  final String detail = '''A widget that sizes its child to the child's intrinsic height.
+This class is useful, for example, when unlimited height is available and you would like a child that would otherwise attempt to expand infinitely to instead size itself to a more reasonable height.
+This class is relatively expensive, because it adds a speculative layout pass before the final layout phase. Avoid using it where possible. In the worst case, this widget can result in a layout that is O(N²) in the depth of the tree.
+See also:
+The catalog of layout widgets.''';
 
   @override
   _IntrinsicHeightDemoState createState() =>
@@ -21,7 +25,7 @@ class _IntrinsicHeightDemoState extends ExampleState<IntrinsicHeightDemo> {
           width: 35.0,
           height: 35.0,
           child: DecoratedBox(
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+            decoration: BoxDecoration(color: Colors.blue),
           ),
         ),
         label: '''SizedBox(

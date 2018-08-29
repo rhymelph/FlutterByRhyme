@@ -26,7 +26,7 @@ class _FittedBoxDemoState extends ExampleState<FittedBoxDemo> {
           width: 35.0,
           height: 35.0,
           child: DecoratedBox(
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+            decoration: BoxDecoration(color: Colors.blue),
           ),
         ),
         label: '''SizedBox(
@@ -59,14 +59,11 @@ class _FittedBoxDemoState extends ExampleState<FittedBoxDemo> {
   List<Widget> getSetting() {
     return [
       ValueTitleWidget(StringParams.kFit),
-      RadioListTile(
-          value: setting.fit,
-          groupValue: fitValues,
-          onChanged: (value) {
-            setState(() {
-              setting = setting.copyWith(fit: value);
-            });
-          }),
+      RadioGroupWidget(setting.fit, fitValues, (value) {
+        setState(() {
+          setting = setting.copyWith(fit: value);
+        });
+      }),
       ValueTitleWidget(StringParams.kAlignment),
       RadioGroupWidget(setting.alignment, alignmentValues, (value) {
         setState(() {

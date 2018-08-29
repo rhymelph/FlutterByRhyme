@@ -15,7 +15,7 @@ const QQTalk = 'QQCallMe';
 const UpgradeApk='UpgradeApk';
 const ERCODE = 'FKX05369RYXWBANXWYFR43';
 
-Future<bool> UpgradeByMarket() async{
+Future<bool> upgradeByMarket() async{
   return await about_platform.invokeMethod(UpgradeApk);
 
 }

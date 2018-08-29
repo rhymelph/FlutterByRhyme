@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
-import 'dart:async';
 
 class CupertinoPageTransitionDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoPageTransition';

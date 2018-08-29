@@ -250,6 +250,30 @@ class StringParams {
   static final String kHeightFactor = 'HeightFactor(高度比例)';
 
   static final String kAspectRatio = 'AspectRatio(纵横比)';
+
+  static final String kStepWidth = 'StepWidth(阶梯宽度)';
+  static final String kStepHeight = 'StepHeight(阶梯高度)';
+
+  static final String kMaxHeight = 'MaxHeight(最大高度)';
+  static final String  kMinHeight = 'MinHeight(最小高度)';
+
+  static final String kMaxWidth = 'MaxWidth(最大宽度)';
+  static final String kMinWidth = 'MinWidth(最小宽度)';
+
+  static final String kWidth = 'Width(宽度)';
+
+  static final String kOffstage = 'Offstage(舞台外)';
+
+  static final String kConstraints = 'Constraints(约束条件)';
+
+  static final String kTransformHitTests = 'TransformHitTests(变换测试)';
+
+  static final String kOrigin = 'Origin(原点)';
+
+  static final String  kIndex = 'Index(索引)';
+
+  static final String  kSizing = 'Sizing(尺寸)';
+
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -2807,5 +2831,46 @@ List<Value<BoxConstraints>> constraintValues = [
     label: '''BoxConstraints.loose(
       Size(100.0, 100.0),
     )''',
+  ),
+];
+
+List<Value<Offset>> originValues=[
+  Value(
+    name: 'Offset1',
+    value: Offset(-15.0, 15.0),
+    label: '''Offset(-15.0, 15.0)''',
+  ),
+  Value(
+    name: 'Offset2',
+    value: Offset(15.0, -15.0),
+    label: '''Offset(15.0, -15.0)''',
+  ),
+  Value(
+    name: 'Offset3',
+    value: Offset(-15.0, -15.0),
+    label: '''Offset(-15.0, -15.0)''',
+  ),
+  Value(
+    name: 'Offset4',
+    value: Offset(15.0, 15.0),
+    label: '''Offset(15.0, 15.0)''',
+  ),
+];
+
+List<Value<StackFit>> stackFitValues=[
+  Value(
+    name: 'expand',
+    value: StackFit.expand,
+    label: 'StackFit.expand',
+  ),
+  Value(
+    name: 'loose',
+    value: StackFit.loose,
+    label: 'StackFit.loose',
+  ),
+  Value(
+    name: 'passthrough',
+    value: StackFit.passthrough,
+    label: 'StackFit.passthrough',
   ),
 ];

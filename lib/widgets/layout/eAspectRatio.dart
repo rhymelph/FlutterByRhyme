@@ -32,7 +32,7 @@ class _AspectRatioDemoState
           width: 35.0,
           height: 35.0,
           child: DecoratedBox(
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+            decoration: BoxDecoration(color: Colors.blue),
           ),
         ),
         label: '''SizedBox(
@@ -64,11 +64,11 @@ class _AspectRatioDemoState
   List<Widget> getSetting() {
     return [
       ValueTitleWidget(StringParams.kAspectRatio),
-      RadioListTile(value: setting.aspectRatio, groupValue: doubleAspectValue, onChanged: (value){
+      RadioGroupWidget(setting.aspectRatio, doubleAspectValue, (value) {
         setState(() {
-          setting=setting.copyWith(aspectRatio: value);
+          setting = setting.copyWith(aspectRatio: value);
         });
-      })
+      }),
     ];
   }
 
