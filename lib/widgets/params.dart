@@ -255,7 +255,7 @@ class StringParams {
   static final String kStepHeight = 'StepHeight(阶梯高度)';
 
   static final String kMaxHeight = 'MaxHeight(最大高度)';
-  static final String  kMinHeight = 'MinHeight(最小高度)';
+  static final String kMinHeight = 'MinHeight(最小高度)';
 
   static final String kMaxWidth = 'MaxWidth(最大宽度)';
   static final String kMinWidth = 'MinWidth(最小宽度)';
@@ -270,10 +270,11 @@ class StringParams {
 
   static final String kOrigin = 'Origin(原点)';
 
-  static final String  kIndex = 'Index(索引)';
+  static final String kIndex = 'Index(索引)';
 
-  static final String  kSizing = 'Sizing(尺寸)';
+  static final String kSizing = 'Sizing(尺寸)';
 
+  static final String kDefaultVerticalAlignment = 'DefaultVerticalAlignment(默认垂直对齐)';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -2834,7 +2835,7 @@ List<Value<BoxConstraints>> constraintValues = [
   ),
 ];
 
-List<Value<Offset>> originValues=[
+List<Value<Offset>> originValues = [
   Value(
     name: 'Offset1',
     value: Offset(-15.0, 15.0),
@@ -2857,7 +2858,7 @@ List<Value<Offset>> originValues=[
   ),
 ];
 
-List<Value<StackFit>> stackFitValues=[
+List<Value<StackFit>> stackFitValues = [
   Value(
     name: 'expand',
     value: StackFit.expand,
@@ -2872,5 +2873,92 @@ List<Value<StackFit>> stackFitValues=[
     name: 'passthrough',
     value: StackFit.passthrough,
     label: 'StackFit.passthrough',
+  ),
+];
+
+List<Value<TableCellVerticalAlignment>> tableCellVerticalAlignmentValues = [
+  Value(
+    name: 'middle',
+    value: TableCellVerticalAlignment.middle,
+    label: 'TableCellVerticalAlignment.middle',
+  ),
+  Value(
+    name: 'baseline',
+    value: TableCellVerticalAlignment.baseline,
+    label: 'TableCellVerticalAlignment.baseline',
+  ),
+  Value(
+    name: 'fill',
+    value: TableCellVerticalAlignment.fill,
+    label: 'TableCellVerticalAlignment.fill',
+  ),
+  Value(
+    name: 'bottom',
+    value: TableCellVerticalAlignment.bottom,
+    label: 'TableCellVerticalAlignment.bottom',
+  ),
+  Value(
+    name: 'top',
+    value: TableCellVerticalAlignment.top,
+    label: 'TableCellVerticalAlignment.top',
+  ),
+];
+
+List<Value<TableBorder>> tableBorderValues = [
+  Value(
+    name: 'all',
+    value: TableBorder.all(
+      color: Colors.black,
+      width: 1.0,
+    ),
+    label: '''TableBorder.all(
+      color: Colors.black,
+      width: 1.0,
+    )''',
+  ),
+  Value(
+    name: 'bottom',
+    value: TableBorder(
+      bottom: BorderSide(
+        color: Colors.black,
+        width: 1.0,
+      ),
+    ),
+    label: '''TableBorder(
+      bottom: BorderSide(
+        color: Colors.black,
+        width: 1.0,
+      ),
+    )''',
+  ),
+  Value(
+    name: 'outside',
+    value: TableBorder.symmetric(
+      outside: BorderSide(
+        color: Colors.black,
+        width: 1.0,
+      ),
+    ),
+    label: '''TableBorder.symmetric(
+      outside: BorderSide(
+        color: Colors.black,
+        width: 1.0,
+      ),
+    )''',
+  ),
+  Value(
+    name: 'inside',
+    value: TableBorder.symmetric(
+      inside: BorderSide(
+        color: Colors.black,
+        width: 1.0,
+      ),
+    ),
+    label: '''TableBorder.symmetric(
+      inside: BorderSide(
+        color: Colors.black,
+        width: 1.0,
+      ),
+    )''',
   ),
 ];
