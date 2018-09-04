@@ -274,7 +274,15 @@ class StringParams {
 
   static final String kSizing = 'Sizing(尺寸)';
 
-  static final String kDefaultVerticalAlignment = 'DefaultVerticalAlignment(默认垂直对齐)';
+  static final String kDefaultVerticalAlignment =
+      'DefaultVerticalAlignment(默认垂直对齐)';
+
+  static final String kDefaultColumnWidth = 'defaultColumnWidth(默认栏宽)';
+
+  static final String kDirection ='Direction(方向)';
+
+  static final String kRunAlignment ='RunAlignment(运行对准)';
+  static final String kRunSpacing = 'RunSpacing(跑道间距)';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -2960,5 +2968,111 @@ List<Value<TableBorder>> tableBorderValues = [
         width: 1.0,
       ),
     )''',
+  ),
+];
+
+List<Value<TableColumnWidth>> tableColumnWidthValues = [
+  Value(
+      name: 'IntrinsicColumn',
+      value: IntrinsicColumnWidth(flex: 70.0),
+      label: 'IntrinsicColumnWidth(flex: 70.0)'),
+  Value(
+      name: 'FractionColumn',
+      value: FractionColumnWidth(70.0),
+      label: 'FractionColumnWidth(70.0)'),
+  Value(
+    name: 'FlexColumn',
+    value: FlexColumnWidth(),
+    label: 'FlexColumnWidth()',
+  ),
+  Value(
+    name: 'FixedColumn',
+    value: FixedColumnWidth(70.0),
+    label: 'FixedColumnWidth(70.0)',
+  ),
+  Value(
+      name: 'MaxColumn',
+      value: MaxColumnWidth(
+        IntrinsicColumnWidth(flex: 110.0),
+        FractionColumnWidth(60.0),
+      ),
+      label: '''MaxColumnWidth(
+        IntrinsicColumnWidth(flex: 110.0),
+        FractionColumnWidth(60.0),
+      )'''
+  ),
+  Value(
+      name: 'MinColumn',
+      value: MinColumnWidth(
+        IntrinsicColumnWidth(flex: 110.0),
+        FractionColumnWidth(60.0),
+      ),
+      label: '''MinColumnWidth(
+        IntrinsicColumnWidth(flex: 110.0),
+        FractionColumnWidth(60.0),
+      )'''
+  ),
+];
+
+List<Value<Axis>> axisValues=[
+
+  Value(
+    name: 'horizontal',
+    value: Axis.horizontal,
+    label: 'Axis.horizontal',
+  ),
+  Value(
+    name: 'vertical',
+    value: Axis.vertical,
+    label: 'Axis.vertical',
+  ),
+];
+List<Value<WrapAlignment>> wrapAlignmentValues=[
+  Value(
+    name: 'start',
+    value: WrapAlignment.start,
+    label: 'WrapAlignment.start',
+  ),
+  Value(
+    name: 'center',
+    value: WrapAlignment.center,
+    label: 'WrapAlignment.center',
+  ),
+  Value(
+    name: 'end',
+    value: WrapAlignment.end,
+    label: 'WrapAlignment.end',
+  ),
+  Value(
+    name: 'spaceEvenly',
+    value: WrapAlignment.spaceEvenly,
+    label: 'WrapAlignment.spaceEvenly',
+  ),
+  Value(
+    name: 'spaceAround',
+    value: WrapAlignment.spaceAround,
+    label: 'WrapAlignment.spaceAround',
+  ),
+  Value(
+    name: 'spaceBetween',
+    value: WrapAlignment.spaceBetween,
+    label: 'WrapAlignment.spaceBetween',
+  ),
+];
+List<Value<WrapCrossAlignment>> wrapcrossAlignmentValues=[
+  Value(
+    name: 'start',
+    value: WrapCrossAlignment.start,
+    label: 'WrapCrossAlignment.start',
+  ),
+  Value(
+    name: 'center',
+    value: WrapCrossAlignment.center,
+    label: 'WrapCrossAlignment.center',
+  ),
+  Value(
+    name: 'end',
+    value: WrapCrossAlignment.end,
+    label: 'WrapCrossAlignment.end',
   ),
 ];
