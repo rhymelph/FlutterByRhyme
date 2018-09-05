@@ -283,6 +283,10 @@ class StringParams {
 
   static final String kRunAlignment ='RunAlignment(运行对准)';
   static final String kRunSpacing = 'RunSpacing(跑道间距)';
+  static final String kSpecing = 'Spacing(间距)';
+  static final String kMainAxis = 'MainAxis（主轴）';
+
+  static final kReverse = 'Reverse(反向)';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -3059,7 +3063,7 @@ List<Value<WrapAlignment>> wrapAlignmentValues=[
     label: 'WrapAlignment.spaceBetween',
   ),
 ];
-List<Value<WrapCrossAlignment>> wrapcrossAlignmentValues=[
+List<Value<WrapCrossAlignment>> wrapCrossAlignmentValues=[
   Value(
     name: 'start',
     value: WrapCrossAlignment.start,

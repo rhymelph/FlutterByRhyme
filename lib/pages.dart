@@ -24,7 +24,7 @@ const String finishDemo=
     'BottomNavigationBar,TabBar,TabBarView,MaterialApp,WidgetsApp,Drawer,FloatingActionButton,FlatButton,IconButton,PopupMenuButton,ButtonBar,TextField,Checkbox,Radio,Switch,Slider,Date&Time Pickers,SimpleDialog,AlertDialog,BottomSheet,ExpansionPanel,SnackBar,Chip,Tooltip,DataTable,Card,LinearProgressIndicator,ListTile,Stepper,Divider,'
     'CupertinoActivityIndicator,CupertinoAlertDialog,CupertinoButton,CupertinoDialog，CupertinoDialogAction,CupertinoSlider,CupertinoSwitch,CupertinoPageTransition,CupertinoFullscreenDialogTransition,CupertinoNavigationBar,CupertinoTabBar,CupertinoPageScaffold,CupertinoTabScaffold,CupertinoTabView'
     '聊天室,登陆页面,商品列表,'
-    'Padding,Center,Align,FittedBox,AspectRatio,ConstrainedBox,Baseline,FractionallySizedBox,IntrinsicHeight,IntrinsicWidth,LimitedBox,Offstage,OverflowBox,SizedOverflowBox,Transform,CustomSingleChildLayout,Stack,IndexedStack,Flow,Table';
+    'Padding,Center,Align,FittedBox,AspectRatio,ConstrainedBox,Baseline,FractionallySizedBox,IntrinsicHeight,IntrinsicWidth,LimitedBox,Offstage,OverflowBox,SizedOverflowBox,Transform,CustomSingleChildLayout,Stack,IndexedStack,Flow,Table,Wrap,ListBody';
 
 class BottomItem {
   final String title;
