@@ -54,6 +54,26 @@ class UpgradeInfo {
 }
 
 void checkUpdate(BuildContext context, bool haveTip) {
+  if(haveTip){
+    showDialog(context: context,
+        builder: (BuildContext context){
+          return SimpleDialog(
+            contentPadding: const EdgeInsets.all(16.0),
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: CircularProgressIndicator(),
+                  ),
+                  Text('检查更新中，请稍候...'),
+                ],
+              ),
+            ],
+          );
+        });
+  }
+
   httpManager.get(
       url: _kUpgradeAddress,
       onSend: () {},
@@ -62,6 +82,7 @@ void checkUpdate(BuildContext context, bool haveTip) {
         if (info.haveUpgrade) {
           showUpgradeDialog(context, info);
         } else if (haveTip) {
+          Navigator.pop(context);
           showNoUpgradeDialog(context);
         }
       },
