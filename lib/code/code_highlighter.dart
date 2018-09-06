@@ -143,7 +143,7 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
       }
 
       // Line comments to do
-      if (_scanner.scan('//todo')) {
+      if (_scanner.scan('//todo')||_scanner.scan('// TODO')) {
         final int startComment = _scanner.lastMatch.start;
 
         bool eof = false;
