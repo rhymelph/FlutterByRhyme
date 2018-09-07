@@ -25,7 +25,14 @@ class _DefaultTextStyleDemoState extends ExampleState<DefaultTextStyleDemo> {
 
   @override
   String getExampleCode() {
-    return '''''';
+    return '''DefaultTextStyle(
+      style: ${setting.style?.label??''},
+      softWrap: ${setting.softWrap?.label??''},
+      overflow: ${setting.overflow?.label??''},
+      textAlign: ${setting.textAlign?.label??''},
+      maxLines: ${setting.maxLines?.label??''},
+      child: ${setting.child?.label??''},
+    )''';
   }
 
   @override
@@ -38,11 +45,15 @@ class _DefaultTextStyleDemoState extends ExampleState<DefaultTextStyleDemo> {
     return 'DefaultTextStyle';
   }
 
-  @override
-  Widget getWidget() {
-    return DefaultTextStyle(
-      child: null,
-      style: null,
+    @override
+    Widget getWidget() {
+      return DefaultTextStyle(
+      style: setting.style?.value,
+      softWrap: setting.softWrap?.value,
+      overflow: setting.overflow?.value,
+      textAlign: setting.textAlign?.value,
+      maxLines: setting.maxLines?.value,
+      child: setting.child?.value,
     );
   }
 }
