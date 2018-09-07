@@ -26,6 +26,7 @@ class Shop {
   });
 
   factory Shop.formatFromJson(dynamic itemsJson){
+
     return new Shop(num_iid: itemsJson['num_iid'],
     commission_rate: itemsJson['commission_rate'],
     sign: itemsJson['sign'],
@@ -57,6 +58,8 @@ class Shop {
 
       String address=info.substring(info.indexOf('http'),info.indexOf('\');'));
       List<String> clickLogs=info.substring(info.indexOf('clicklogs(')+10,info.lastIndexOf(')')).replaceAll('\'', '').split(',');
+
+      
       String num_iid='';
       String commission_rate='';
       String sign='';

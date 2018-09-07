@@ -287,6 +287,16 @@ class StringParams {
   static final String kMainAxis = 'MainAxis（主轴）';
 
   static final kReverse = 'Reverse(反向)';
+
+  static final String kScrollDirection = 'ScrollDirection(滚动方向)';
+
+  static final String kShrinkWrap ='ShrinkWrap(收缩)';
+  static final String kAddAutomaticKeepAlives ='AddAutomaticKeepAlives(添加自动保存别名)';
+  static final String kAddRepaintBoundaries ='AddRepaintBoundaries(添加重新绘制边界)';
+
+  static final String kItemExtent = 'ItemExtent(项目范围)';
+  static final String kCacheExtent = 'CacheExtent(缓存范围)';
+
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [

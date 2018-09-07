@@ -68,7 +68,7 @@ ThemeData _buildLightTheme() {
     indicatorColor: Colors.white,
     splashColor: Colors.white24,
     splashFactory: InkRipple.splashFactory,
-    accentColor: const Color(0xFF13BFFF),
+    accentColor: const Color(0xFF002D75),
     canvasColor: Colors.white,
     scaffoldBackgroundColor: Colors.white,
     backgroundColor: Colors.white,
