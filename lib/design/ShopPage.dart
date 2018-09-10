@@ -86,7 +86,7 @@ class _ShopListBody extends StatelessWidget {
                 children: list1.map((shop){
                   return SizedBox(
                     width: width,
-                    child: _ShopItem(shop: shop,),
+                    child: _ShopItem(shop: shop,width: width,),
                   );
                 }).toList(),
               ),
@@ -94,7 +94,7 @@ class _ShopListBody extends StatelessWidget {
                 children: list2.map((shop){
                   return SizedBox(
                     width: width,
-                    child: _ShopItem(shop: shop,),
+                    child: _ShopItem(shop: shop,width: width,),
                   );
                 }).toList(),
               ),
@@ -109,7 +109,9 @@ class _ShopListBody extends StatelessWidget {
 
 class _ShopItem extends StatelessWidget {
   final Shop shop;
-  const _ShopItem({this.shop});
+  final double width;
+
+  const _ShopItem({this.shop,this.width : 120.0});
   @override
   Widget build(BuildContext context) {
     return  Card(
@@ -130,7 +132,7 @@ class _ShopItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image.network(shop.image,fit: BoxFit.cover,),
+              Image.network(shop.image,fit: BoxFit.cover,width: width,height: width,),
               Row(
                 children: <Widget>[
                   Expanded(child: Text(shop.name)),
