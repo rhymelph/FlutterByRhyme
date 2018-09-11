@@ -17,6 +17,8 @@ class _RawImageDemoState extends ExampleState<RawImageDemo> {
   RawImageSetting setting;
   final GlobalKey key=new GlobalKey();
 
+  bool isClick = false;
+
   @override
   void initState() {
     setting = new RawImageSetting(
@@ -77,8 +79,60 @@ class _RawImageDemoState extends ExampleState<RawImageDemo> {
     return [
       ValueTitleButtonWidget(title: '获取截图', onPressed: (){
         initData();
+        if(isClick==false){
+          setState(() {
+            isClick=true;
+          });
+        }
       }),
-    ];
+    ]..addAll(isClick?[
+      ValueTitleWidget(StringParams.kColor),
+      ColorGroupWidget(setting.color,  (value) {
+        setState(() {
+          setting = setting.copyWith(color: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kColorBlendMode),
+      RadioGroupWidget<BlendMode>(setting.colorBlendMode, colorBlendModeValues, (value) {
+        setState(() {
+          setting = setting.copyWith(colorBlendMode: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kFit),
+      RadioGroupWidget<BoxFit>(setting.fit, fitValues, (value) {
+        setState(() {
+          setting = setting.copyWith(fit: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kAlignment),
+      RadioGroupWidget<AlignmentGeometry>(setting.alignment, alignmentValues, (value) {
+        setState(() {
+          setting = setting.copyWith(alignment: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kRepeat),
+      RadioGroupWidget<ImageRepeat>(setting.repeat, repeatValues, (value) {
+        setState(() {
+          setting = setting.copyWith(repeat: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kCenterSlice),
+      RadioGroupWidget<Rect>(setting.centerSlice, centerSlideValues, (value) {
+        setState(() {
+          setting = setting.copyWith(centerSlice: value);
+        });
+      }),
+
+      SwitchValueTitleWidget(
+        title: StringParams.kMatchTextDirection,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(matchTextDirection: value);
+          });
+        },
+        value: setting.matchTextDirection,
+      ),
+    ]:[]);
   }
 
   @override
