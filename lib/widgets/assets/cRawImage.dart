@@ -143,10 +143,7 @@ class _RawImageDemoState extends ExampleState<RawImageDemo> {
   @override
   Widget getWidget() {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
         children: <Widget>[
           RepaintBoundary(
             key: key,

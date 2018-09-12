@@ -8,22 +8,41 @@ class DartMarkDown extends StatelessWidget {
 
   final String source;
   final String h1 = '# ';
+
+//  title.copyWith(fontWeight: FontWeight.bold, fontSize: 30.0)
   final String h2 = '## ';
+
+//  title.copyWith(fontWeight: FontWeight.bold, fontSize: 26.0)
   final String h3 = '### ';
+
+//  title.copyWith(fontWeight: FontWeight.bold, fontSize: 24.0)
   final String h4 = '#### ';
+
+//  title.copyWith(fontWeight: FontWeight.bold, fontSize: 22.0)
 
   final String codeStart = '```dart';
   final String codeEnd = '```';
 
+//  DartSyntaxHighlighter(style).format(source)
   final String grayBlank = '> ';
 
+//  subhead
   final String table = '|';
 
-  final String titleStart='![';
-  final String titleURlStart='[';
-  final String titleEnd=']';
-  final String imageEnd=')';
-  final String imageStart='(';
+//  body2
+  final String titleStart = '![';
+
+//  body2.copyWith(fontSize: 0.0)
+  final String titleURlStart = '[';
+
+//  body2.copyWith(fontSize: 1.0)
+  final String titleEnd = ']';
+  final String imageEnd = ')';
+  final String imageStart = '(';
+
+  final String listMenu = '-  ';
+
+//  body1
 
   List<TextSpan> formatSpans(BuildContext context, String source) {
     List<TextSpan> spans = [];
@@ -68,41 +87,35 @@ class DartMarkDown extends StatelessWidget {
     TextStyle style = Theme.of(context).textTheme.body1;
     if (source.startsWith(h1)) {
       source = source.substring(h1.length);
-      style = Theme
-          .of(context)
+      style = Theme.of(context)
           .textTheme
           .title
           .copyWith(fontWeight: FontWeight.bold, fontSize: 30.0);
     } else if (source.startsWith(h2)) {
       source = source.substring(h2.length);
-      style = Theme
-          .of(context)
+      style = Theme.of(context)
           .textTheme
           .title
           .copyWith(fontWeight: FontWeight.bold, fontSize: 26.0);
     } else if (source.startsWith(h3)) {
       source = source.substring(h3.length);
-      style = Theme
-          .of(context)
+      style = Theme.of(context)
           .textTheme
           .title
           .copyWith(fontWeight: FontWeight.bold, fontSize: 24.0);
     } else if (source.startsWith(h4)) {
       source = source.substring(h4.length);
-      style = Theme
-          .of(context)
+      style = Theme.of(context)
           .textTheme
           .title
           .copyWith(fontWeight: FontWeight.bold, fontSize: 20.0);
     } else if (source.startsWith(grayBlank)) {
       source = source.substring(grayBlank.length);
-      style = Theme
-          .of(context)
-          .textTheme
-          .subhead
-          .copyWith(fontStyle: FontStyle.italic);
+      style = Theme.of(context).textTheme.subhead.copyWith(fontSize: 0.0);
+    } else if (source.startsWith(listMenu)) {
+      source = source.substring(listMenu.length);
+      style = Theme.of(context).textTheme.body1.copyWith(fontSize: 0.0);
     } else if (source.startsWith(table)) {
-      //display4
       style = Theme.of(context).textTheme.body2;
     } else if (source.startsWith(codeStart)) {
       source = source.substring(codeStart.length);
@@ -112,10 +125,10 @@ class DartMarkDown extends StatelessWidget {
               ? SyntaxHighlighterStyle.darkThemeStyle()
               : SyntaxHighlighterStyle.lightThemeStyle();
       return DartSyntaxHighlighter(style).format(source);
-    }else if(source.startsWith(titleStart)&&source.endsWith(imageEnd)){
+    } else if (source.startsWith(titleStart) && source.endsWith(imageEnd)) {
       style = Theme.of(context).textTheme.body2.copyWith(fontSize: 0.0);
-    }else if(source.startsWith(titleURlStart)&&source.endsWith(imageEnd)){
-      style=Theme.of(context).textTheme.body2.copyWith(fontSize: 1.0);
+    } else if (source.startsWith(titleURlStart) && source.endsWith(imageEnd)) {
+      style = Theme.of(context).textTheme.body2.copyWith(fontSize: 1.0);
     }
     return TextSpan(
       style: style,
@@ -128,12 +141,7 @@ class DartMarkDown extends StatelessWidget {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
     for (TextSpan span in textSpans) {
       //返回标注
-      if (span.style ==
-          Theme
-              .of(context)
-              .textTheme
-              .subhead
-              .copyWith(fontStyle: FontStyle.italic)) {
+      if (span.style == Theme.of(context).textTheme.subhead.copyWith(fontSize: 0.0)) {
         widgets.add(Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.all(8.0),
@@ -145,7 +153,25 @@ class DartMarkDown extends StatelessWidget {
               width: 3.0,
             )),
           ),
-          child: RichText(text: span),
+          child: Text(span.text),
+        ));
+      } else if (span.style == Theme.of(context).textTheme.body1.copyWith(fontSize: 0.0)) {
+        widgets.add(Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Icon(
+              Icons.brightness_1,
+              size: 4.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 5.0,
+              ),
+              child: Text(span.text),
+            ),
+          ],
         ));
       } else if (span.style.fontWeight == FontWeight.bold) {
         //返回标题
@@ -156,9 +182,9 @@ class DartMarkDown extends StatelessWidget {
         ));
       } else if (span.style == Theme.of(context).textTheme.body2) {
         //返回table
-        Color normal1=isDark?Colors.black:Colors.white;
-        Color normal2=isDark?Colors.black45:Colors.grey[200];
-        Color borderColor=isDark?Colors.white30:Colors.black87;
+        Color normal1 = isDark ? Colors.black : Colors.white;
+        Color normal2 = isDark ? Colors.black45 : Colors.grey[200];
+        Color borderColor = isDark ? Colors.white30 : Colors.black87;
         List<String> tableText = span.text.split(table);
         List<Widget> childs = [];
         bool isRow = false;
@@ -167,22 +193,24 @@ class DartMarkDown extends StatelessWidget {
           String text = tableText[j];
           if (text.isEmpty && childs.length == 0) {
             isRow = true;
-            childs.add(Divider(height: 10.0,color: Colors.grey,));
+            childs.add(Divider(
+              height: 10.0,
+              color: Colors.grey,
+            ));
           } else if (text.isEmpty && childs.length != 0) {
             isRow = true;
             widgets.add(Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: j%2==0?normal2:normal1,
+                color: j % 2 == 0 ? normal2 : normal1,
                 border: Border(
                   bottom: BorderSide(
                     color: borderColor,
                     width: 1.0,
                   ),
                   top: BorderSide(
-                    color: isTableTitle?borderColor:Colors.transparent,
-                    width: 1.0
-                  ),
+                      color: isTableTitle ? borderColor : Colors.transparent,
+                      width: 1.0),
                 ),
               ),
               child: Row(
@@ -191,7 +219,6 @@ class DartMarkDown extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: childs,
               ),
-
             ));
             childs = [];
           } else if (!text.contains('-') && isRow) {
@@ -209,7 +236,7 @@ class DartMarkDown extends StatelessWidget {
               ),
             ));
           } else if (text.contains('-')) {
-            isTableTitle=false;
+            isTableTitle = false;
           }
         }
       } else if (span.style == Theme.of(context).textTheme.body1) {
@@ -218,15 +245,16 @@ class DartMarkDown extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: RichText(text: span),
         ));
-      } else if(span.style==Theme.of(context).textTheme.body2.copyWith(fontSize: 0.0)){
+      } else if (span.style ==
+          Theme.of(context).textTheme.body2.copyWith(fontSize: 0.0)) {
         //返回图片加标题
-        int tStart=span.text.indexOf(titleStart)+2;
-        int tEnd=span.text.indexOf(titleEnd);
+        int tStart = span.text.indexOf(titleStart) + 2;
+        int tEnd = span.text.indexOf(titleEnd);
 
-        int iStart=span.text.indexOf(imageStart)+1;
-        int iEnd=span.text.indexOf(imageEnd);
-        String title=span.text.substring(tStart,tEnd);
-        String imageAddress=span.text.substring(iStart,iEnd);
+        int iStart = span.text.indexOf(imageStart) + 1;
+        int iEnd = span.text.indexOf(imageEnd);
+        String title = span.text.substring(tStart, tEnd);
+        String imageAddress = span.text.substring(iStart, iEnd);
         widgets.add(Image.network(imageAddress));
         widgets.add(Container(
           alignment: Alignment.center,
@@ -235,33 +263,36 @@ class DartMarkDown extends StatelessWidget {
             color: isDark ? Colors.black45 : Colors.grey[200],
             border: BorderDirectional(
                 bottom: BorderSide(
-                  color: Colors.grey,
-                  width: 2.0,
-                )),
+              color: Colors.grey,
+              width: 2.0,
+            )),
           ),
           child: Text(title),
         ));
-      }else if(span.style==Theme.of(context).textTheme.body2.copyWith(fontSize: 1.0)){
+      } else if (span.style ==
+          Theme.of(context).textTheme.body2.copyWith(fontSize: 1.0)) {
         //返回链接
-        int tStart=span.text.indexOf(titleURlStart)+1;
-        int tEnd=span.text.indexOf(titleEnd);
+        int tStart = span.text.indexOf(titleURlStart) + 1;
+        int tEnd = span.text.indexOf(titleEnd);
 
-        int iStart=span.text.indexOf(imageStart)+1;
-        int iEnd=span.text.indexOf(imageEnd);
-        String title=span.text.substring(tStart,tEnd);
-        String address=span.text.substring(iStart,iEnd);
-        final TextStyle linkStyle =
-        Theme.of(context).textTheme.body2.copyWith(color: Theme.of(context).accentColor);
-        widgets.add(RichText(text: _LinkTextSpan(style: linkStyle,text: title,url: address)));
-      }else {
+        int iStart = span.text.indexOf(imageStart) + 1;
+        int iEnd = span.text.indexOf(imageEnd);
+        String title = span.text.substring(tStart, tEnd);
+        String address = span.text.substring(iStart, iEnd);
+        final TextStyle linkStyle = Theme.of(context)
+            .textTheme
+            .body2
+            .copyWith(color: Theme.of(context).accentColor);
+        widgets.add(RichText(
+            text: _LinkTextSpan(style: linkStyle, text: title, url: address)));
+      } else {
         //返回代码块
         widgets.add(Container(
           padding: const EdgeInsets.all(8.0),
           alignment: Alignment.centerLeft,
           color: isDark ? Colors.black45 : Colors.grey[100],
           child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: RichText(text: span)),
+              scrollDirection: Axis.horizontal, child: RichText(text: span)),
         ));
       }
     }
@@ -282,16 +313,17 @@ class DartMarkDown extends StatelessWidget {
     );
   }
 }
+
 class _LinkTextSpan extends TextSpan {
   _LinkTextSpan({TextStyle style, String url, String text})
       : super(
-      style: style,
-      text: text ?? url,
-      recognizer: TapGestureRecognizer()
-        ..onTap = () async {
-          await launch(url,
-              forceSafariVC: true,
-              forceWebView: true,
-              statusBarBrightness: Brightness.light);
-        });
+            style: style,
+            text: text ?? url,
+            recognizer: TapGestureRecognizer()
+              ..onTap = () async {
+                await launch(url,
+                    forceSafariVC: true,
+                    forceWebView: true,
+                    statusBarBrightness: Brightness.light);
+              });
 }

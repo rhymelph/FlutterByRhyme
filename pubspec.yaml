@@ -26,9 +26,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-  - images/burgers.jpg
-  - images/pazzer.jpg
-  - images/chewCrispyChicken.9.jpg
+  - images/
+  - assets/
 
   fonts:
     - family: qlYouYuan

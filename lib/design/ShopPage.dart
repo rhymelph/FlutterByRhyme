@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/design/entity/shop.dart';
 import 'package:flutterbyrhyme/http/httpManager.dart' as httpManager;
 import 'package:url_launcher/url_launcher.dart';
-const String kAddress='https://raw.githubusercontent.com/rhymelph/FlutterByRhyme/master/lib/design/entity/shop.json';
+const String kAddress='https://raw.githubusercontent.com/rhymelph/FlutterByRhyme/master/assets/shop.json';
 
 class ShopPage extends StatefulWidget {
   static const String routeName = 'design/ShopPage';
