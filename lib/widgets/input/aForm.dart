@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
 
@@ -12,11 +14,27 @@ class FormDemo extends StatefulWidget {
 
 class _FormDemoState
     extends ExampleState<FormDemo> {
+  GlobalKey<FormState> key=new GlobalKey();
+
   FormSetting setting;
 
   @override
   void initState() {
-    setting = FormSetting();
+    setting = FormSetting(
+      child: Value(),
+      autovalidate: boolValues[0],
+      onWillPop: Value(
+        value: (){
+          key.currentState.save();
+          return Future<bool>.value(true);
+        }
+      ),
+      onChanged: Value(
+        value: (){
+          print('发生改变');
+        }
+      ),
+    );
     super.initState();
   }
 
@@ -32,7 +50,13 @@ class _FormDemoState
 
   @override
   List<Widget> getSetting() {
-    return [];
+    return [
+      SwitchValueTitleWidget(title: StringParams.kAutovalidate, value: setting.autovalidate, onChanged: (value){
+        setState(() {
+          setting=setting.copyWith(autovalidate: value);
+        });
+      }),
+    ];
   }
 
   @override
@@ -44,6 +68,7 @@ class _FormDemoState
   @override
   Widget getWidget() {
     return Form(
+      key: key,
       child: setting.child?.value,
       autovalidate: setting.autovalidate?.value,
       onWillPop: setting.onWillPop?.value,

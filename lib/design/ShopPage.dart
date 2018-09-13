@@ -2,7 +2,75 @@ import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/design/entity/shop.dart';
 import 'package:flutterbyrhyme/http/httpManager.dart' as httpManager;
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:typed_data';
 const String kAddress='https://raw.githubusercontent.com/rhymelph/FlutterByRhyme/master/assets/shop.json';
+//透明图片占位
+final Uint8List kTransparentImage = new Uint8List.fromList(<int>[
+  0x89,
+  0x50,
+  0x4E,
+  0x47,
+  0x0D,
+  0x0A,
+  0x1A,
+  0x0A,
+  0x00,
+  0x00,
+  0x00,
+  0x0D,
+  0x49,
+  0x48,
+  0x44,
+  0x52,
+  0x00,
+  0x00,
+  0x00,
+  0x01,
+  0x00,
+  0x00,
+  0x00,
+  0x01,
+  0x08,
+  0x06,
+  0x00,
+  0x00,
+  0x00,
+  0x1F,
+  0x15,
+  0xC4,
+  0x89,
+  0x00,
+  0x00,
+  0x00,
+  0x0A,
+  0x49,
+  0x44,
+  0x41,
+  0x54,
+  0x78,
+  0x9C,
+  0x63,
+  0x00,
+  0x01,
+  0x00,
+  0x00,
+  0x05,
+  0x00,
+  0x01,
+  0x0D,
+  0x0A,
+  0x2D,
+  0xB4,
+  0x00,
+  0x00,
+  0x00,
+  0x00,
+  0x49,
+  0x45,
+  0x4E,
+  0x44,
+  0xAE,
+]);
 
 class ShopPage extends StatefulWidget {
   static const String routeName = 'design/ShopPage';
@@ -69,7 +137,6 @@ class _ShopListBody extends StatelessWidget {
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints){
           double width=constraints.biggest.width/2;
-
           List<Shop> list1=[];
           List<Shop> list2=[];
           for(int i=0; i<shopList.length;i++){
@@ -132,7 +199,8 @@ class _ShopItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image.network(shop.image,fit: BoxFit.cover,width: width,height: width,),
+              FadeInImage.memoryNetwork(placeholder: kTransparentImage, image: shop.image,fit: BoxFit.cover,
+              height: width,width: width,),
               Row(
                 children: <Widget>[
                   Expanded(child: Text(shop.name)),

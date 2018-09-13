@@ -297,6 +297,8 @@ class StringParams {
   static final String kItemExtent = 'ItemExtent(项目范围)';
   static final String kCacheExtent = 'CacheExtent(缓存范围)';
 
+  static final String kAutovalidate = 'Autovalidate(自动校验)';
+
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
