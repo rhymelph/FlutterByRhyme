@@ -3,10 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 import 'dart:math';
 class TableDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/Table';
-  final String detail = '''A widget that uses the table layout algorithm for its children.
-If you only have one row, the Row widget is more appropriate. If you only have one column, the SliverList or Column widgets will be more appropriate.
-Rows size vertically based on their contents. To control the column widths, use the columnWidths property.
-For more details about the table layout algorithm, see RenderTable. To control the alignment of children, see TableCell.''';
+  final String detail = '''为其子项使用表布局算法的窗口小部件。
+
+如果您只有一行，则Row小部件更合适。如果您只有一列，则SliverList或Column小部件将更合适。
+
+行的大小根据其内容垂直排列。要控制列宽，请使用columnWidths属性。
+
+有关表格布局算法的更多详细信息，请参阅RenderTable。要控制子对齐，请参阅TableCell。''';
 
   @override
   _TableDemoState createState() =>

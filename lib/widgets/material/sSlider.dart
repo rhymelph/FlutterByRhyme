@@ -3,7 +3,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class SliderDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/Slider';
-  final String detail = '';
+  final String detail = '''“材质设计”滑块。
+
+用于从一系列值中进行选择。
+
+滑块可用于从连续或离散值集中进行选择。默认设置是使用从最小值到 最大值的连续值范围。要使用离散值，请使用非空值进行分割，这表示离散间隔的数量。例如，如果min为0.0且 max为50.0且除数为5，则滑块可以采用离散值0.0,10.0,20.0,30.0,40.0和50.0。''';
 
   @override
   _SliderDemoState createState() => _SliderDemoState();

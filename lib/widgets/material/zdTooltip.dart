@@ -3,12 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class TooltipDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/Tooltip';
-  final String detail = '''A material design tooltip.
-Tooltips provide text labels that help explain the function of a button or other user interface action. Wrap the button in a Tooltip widget to show a label when the widget long pressed (or when the user takes some other appropriate action).
-Many widgets, such as IconButton, FloatingActionButton, and PopupMenuButton have a tooltip property that, when non-null, causes the widget to include a Tooltip in its build.
-Tooltips improve the accessibility of visual widgets by proving a textual representation of the widget, which, for example, can be vocalized by a screen reader.
-See also:
-material.google.com/components/tooltips.html''';
+  final String detail = '''材料设计工具提示。
+
+工具提示提供文本标签，有助于解释按钮或其他用户界面操作的功能。将工具提示小部件中的按钮换行，以便在长按小部件时（或者当用户执行其他适当的操作时）显示标签。
+
+许多小部件，例如IconButton，FloatingActionButton和 PopupMenuButton都有一个tooltip属性，当它为非null时，会使小部件在其构建中包含一个Tooltip。
+
+工具提示通过证明窗口小部件的文本表示来改进可视窗口小部件的可访问性，例如，可以由屏幕阅读器发声。''';
 
   @override
   _TooltipDemoState createState() => _TooltipDemoState();

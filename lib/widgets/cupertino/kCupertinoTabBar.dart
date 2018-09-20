@@ -3,14 +3,15 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CupertinoTabBarDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoTabBar';
-  final String detail = '''An iOS-styled bottom navigation tab bar.
-Displays multiple tabs using BottomNavigationBarItem with one tab being active, the first tab by default.
-This StatelessWidget doesn't store the active tab itself. You must listen to the onTap callbacks and call setState with a new currentIndex for the new selection to reflect.
-Tab changes typically trigger a switch between Navigators, each with its own navigation stack, per standard iOS design.
-If the given backgroundColor's opacity is not 1.0 (which is the case by default), it will produce a blurring effect to the content behind it.
-See also:
-CupertinoTabScaffold, which hosts the CupertinoTabBar at the bottom.
-BottomNavigationBarItem, an item in a CupertinoTabBar.''';
+  final String detail = '''iOS风格的底部导航标签栏。
+
+使用BottomNavigationBarItem显示多个选项卡，其中一个选项卡处于活动状态，默认情况下为第一个选项卡。
+
+此StatelessWidget不存储活动选项卡本身。您必须侦听onTap回调并setState使用新的currentIndex调用 以反映新选择。
+
+根据标准iOS设计，选项卡更改通常会触发Navigator之间的切换，每个Navigator都有自己的导航堆栈。
+
+如果给定的backgroundColor的不透明度不是1.0（默认情况下是这种情况），它将对其后面的内容产生模糊效果。''';
 
   @override
   _CupertinoTabBarDemoState createState() => _CupertinoTabBarDemoState();

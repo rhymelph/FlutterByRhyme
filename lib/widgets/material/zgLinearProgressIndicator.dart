@@ -3,10 +3,12 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class LinearProgressIndicatorDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/LinearProgressIndicator';
-  final String detail = '''A material design linear progress indicator, also known as a progress bar.
-A widget that shows progress along a line. There are two kinds of linear progress indicators:
-Determinate. Determinate progress indicators have a specific value at each point in time, and the value should increase monotonically from 0.0 to 1.0, at which time the indicator is complete. To create a determinate progress indicator, use a non-null value between 0.0 and 1.0.
-Indeterminate. Indeterminate progress indicators do not have a specific value at each point in time and instead indicate that progress is being made without indicating how much progress remains. To create an indeterminate progress indicator, use a null value.''';
+  final String detail = '''材料设计线性进度指示器，也称为进度条。
+
+一个小部件，显示沿线的进度。有两种线性进度指标：
+
+确定。确定进度指标在每个时间点都有一个特定的值，并且该值应该从0.0单调增加到1.0，此时指标就完成了。要创建确定的进度指示器，请使用介于0.0和1.0之间的非空值。
+不确定。不确定的进度指标在每个时间点都没有特定的值，而是表明正在取得进展而没有指出仍有多少进展。要创建不确定的进度指示器，请使用空值。''';
 
   @override
   _LinearProgressIndicatorDemoState createState() =>

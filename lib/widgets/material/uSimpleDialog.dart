@@ -3,11 +3,15 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class SimpleDialogDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/SimpleDialog';
-  final String detail = '''A simple material design dialog.
-A simple dialog offers the user a choice between several options. A simple dialog has an optional title that is displayed above the choices.
-Choices are normally represented using SimpleDialogOption widgets. If other widgets are used, see contentPadding for notes regarding the conventions for obtaining the spacing expected by Material Design.
-For dialogs that inform the user about a situation, consider using an AlertDialog.
-Typically passed as the child widget to showDialog, which displays the dialog.''';
+  final String detail = '''简单的材料设计对话框。
+
+简单的对话框为用户提供了多个选项之间的选择。一个简单的对话框有一个可选的标题，显示在选项上方。
+
+选择通常使用SimpleDialogOption小部件表示。如果使用其他小部件，请参阅contentsPadding以获取有关获取Material Design预期间距的约定的注释。
+
+对于通知用户情况的对话框，请考虑使用 AlertDialog。
+
+通常作为子窗口小部件传递给showDialog，后者显示对话框.''';
 
   @override
   _SimpleDialogDemoState createState() => _SimpleDialogDemoState();

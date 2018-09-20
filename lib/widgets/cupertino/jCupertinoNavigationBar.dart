@@ -3,15 +3,19 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CupertinoNavigationBarDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoNavigationBar';
-  final String detail = '''An iOS-styled navigation bar.
-The navigation bar is a toolbar that minimally consists of a widget, normally a page title, in the middle of the toolbar.
-It also supports a leading and trailing widget before and after the middle widget while keeping the middle widget centered.
-The leading widget will automatically be a back chevron icon button (or a close button in case of a fullscreen dialog) to pop the current route if none is provided and automaticallyImplyLeading is true (true by default).
-It should be placed at top of the screen and automatically accounts for the OS's status bar.
-If the given backgroundColor's opacity is not 1.0 (which is the case by default), it will produce a blurring effect to the content behind it.
-See also:
-CupertinoPageScaffold, a page layout helper typically hosting the CupertinoNavigationBar.
-CupertinoSliverNavigationBar for a navigation bar to be placed in a scrolling list and that supports iOS-11-style large titles.''';
+  final String detail = '''OS风格的导航栏。
+
+导航栏是一个工具栏，最小程度上由工具栏中间的小部件组成，通常是页面标题。
+
+它还支持中间窗口小部件之前和之后的前导和尾随窗口 小部件，同时保持中间窗口小部件居中。
+
+在领先的部件会自动为回字形图标按钮（或者在全屏对话的情况下，关闭按钮），弹出当前路由。如果没有提供，并automaticallyImplyLeading是真（默认为true）。
+
+该中间部件会自动从目前的路线的标题文字。如果没有提供，并automaticallyImplyMiddle是真（默认为true）。
+
+它应放在屏幕顶部，并自动记录操作系统的状态栏。
+
+如果给定的backgroundColor的不透明度不是1.0（默认情况下是这种情况），它将对其后面的内容产生模糊效果。''';
 
   @override
   _CupertinoNavigationBarDemoState createState() =>

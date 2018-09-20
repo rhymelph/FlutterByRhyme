@@ -3,10 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class BottomNavigationBarDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/BottomNavigationBar';
-  final String detail = '''A material widget displayed at the bottom of an app for selecting among a small number of views, typically between three and five.
-The bottom navigation bar consists of multiple items in the form of text labels, icons, or both, laid out on top of a piece of material. It provides quick navigation between the top-level views of an app. For larger screens, side navigation may be a better fit.
-A bottom navigation bar is usually used in conjunction with a Scaffold, where it is provided as the Scaffold.bottomNavigationBar argument.
-The bottom navigation bar's type changes how its items are displayed. If not specified it's automatically set to BottomNavigationBarType.fixed when there are less than four items, BottomNavigationBarType.shifting''';
+  final String detail = '''显示在应用程序底部的材料窗口小部件，用于在少量视图中进行选择，通常在3到5之间。
+
+底部导航栏由文本标签，图标或两者形式的多个项目组成，布置在一块材料的顶部。它提供了应用程序顶级视图之间的快速导航。对于较大的屏幕，侧面导航可能更适合。
+
+底部导航栏通常与Scaffold结合使用，它作为Scaffold.bottomNavigationBar参数提供。
+
+底部导航栏的类型更改其项目的显示方式。如果未指定，则 当少于四个项时，它会自动设置为BottomNavigationBarType.fixed， 否则为BottomNavigationBarType.shifting。''';
 
   @override
   _BottomNavigationBarDemoState createState() =>

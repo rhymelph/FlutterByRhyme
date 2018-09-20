@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
 class ConstrainedBoxDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/ConstrainedBox';
-  final String detail = '''A widget that imposes additional constraints on its child.
-For example, if you wanted child to have a minimum height of 50.0 logical pixels, you could use const BoxConstraints(minHeight: 50.0) as the constraints.
-Sample code
-This snippet makes the child widget (a Card with some Text) fill the parent, by applying BoxConstraints.expand constraints:''';
+  final String detail = '''一个小部件，对其子级施加其他约束。
+
+例如，如果您希望子级的最小高度为50.0逻辑像素，则可以将其const BoxConstraints(minHeight: 50.0)用作 约束。''';
 
   @override
   _ConstrainedBoxDemoState createState() =>

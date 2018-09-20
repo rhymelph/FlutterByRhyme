@@ -4,11 +4,15 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 class RowDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/Row';
   final String detail =
-      '''A widget that displays its children in a horizontal array.
-To cause a child to expand to fill the available horizontal space, wrap the child in an Expanded widget.
-The Row widget does not scroll (and in general it is considered an error to have more children in a Row than will fit in the available room). If you have a line of widgets and want them to be able to scroll if there is insufficient room, consider using a ListView.
-For a vertical variant, see Column.
-If you only have one child, then consider using Align or Center to position the child.''';
+      '''一个小部件，用于在水平数组中显示其子项。
+
+要使子项扩展以填充可用的水平空间，请将子项包装在Expanded小部件中。
+
+“ 行”窗口小部件不会滚动（并且通常将行中的子项多于可用空间中的子项被视为错误）。如果您有一系列小部件并希望它们能够在没有足够空间的情况下滚动，请考虑使用ListView。
+
+有关垂直变体，请参见列。
+
+如果您只有一个孩子，请考虑使用Align或Center来定位孩子.''';
 
   @override
   _RowDemoState createState() => _RowDemoState();

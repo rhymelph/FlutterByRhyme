@@ -4,10 +4,13 @@ import 'dart:io';
 
 class RichTextDemo extends StatefulWidget {
   static const String routeName = 'widgets/text/RichText';
-  final String detail = '''A paragraph of rich text.
-The RichText widget displays text that uses multiple different styles. The text to display is described using a tree of TextSpan objects, each of which has an associated style that is used for that subtree. The text might break across multiple lines or might all be displayed on the same line depending on the layout constraints.
-Text displayed in a RichText widget must be explicitly styled. When picking which style to use, consider using DefaultTextStyle.of the current BuildContext to provide defaults. For more details on how to style text in a RichText widget, see the documentation for TextStyle.
-Consider using the Text widget to integrate with the DefaultTextStyle automatically. When all the text uses the same style, the default constructor is less verbose. The Text.rich constructor allows you to style multiple spans with the default text style while still allowing specified styles per span.''';
+  final String detail = '''一段富文本。
+
+在富文本使用多个不同风格的小部件显示文本。要显示的文本使用TextSpan对象树来描述，每个对象都有一个用于该子树的关联样式。文本可能会跨越多行，也可能全部显示在同一行上，具体取决于布局约束。
+
+必须显式设置RichText小部件中显示的文本。选择要使用的样式时，请考虑使用当前 BuildContext的DefaultTextStyle .来提供默认值。有关如何在RichText小部件中设置文本样式的更多详细信息，请参阅TextStyle的文档。
+
+考虑使用Text小部件 自动与DefaultTextStyle集成。当所有文本使用相同的样式时，默认构造函数不那么详细。该Text.rich构造函数允许你的风格与默认的文本样式多跨度，同时还允许每个跨度指定的样式。''';
 
   @override
   _RichTextDemoState createState() => _RichTextDemoState();

@@ -3,12 +3,15 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CupertinoAlertDialogDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoAlertDialog';
-  final String detail = '''An iOS-style alert dialog.
-An alert dialog informs the user about situations that require acknowledgement. An alert dialog has an optional title and an optional list of actions. The title is displayed above the content and the actions are displayed below the content.
-Typically passed as the child widget to showDialog, which displays the dialog.
-See also:
-CupertinoDialog, which is a generic iOS-style dialog.
-developer.apple.com/ios/human-interface-guidelines/views/alerts/''';
+  final String detail = '''OS风格的警报对话框。
+
+警报对话框会通知用户需要确认的情况。警报对话框具有可选标题，可选内容和可选的操作列表。标题显示在内容上方，操作显示在内容下方。
+
+此对话框将其标题和内容（通常是消息）设置为与标准iOS标题和消息对话框文本样式匹配。这些默认的样式可以通过显式定义覆盖文字样式 S代表文本控件是标题或内容的一部分。
+
+要显示看起来像标准iOS对话框按钮的操作按钮，请为此对话框提供的操作提供CupertinoDialogAction。
+
+通常作为子窗口小部件传递给showDialog，后者显示对话框。''';
 
   @override
   _CupertinoAlertDialogDemoState createState() =>

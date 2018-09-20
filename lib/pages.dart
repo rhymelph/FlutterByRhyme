@@ -26,7 +26,7 @@ const String finishDemo=
     '聊天室,登陆页面,商品列表,'
     'Padding,Center,Align,FittedBox,AspectRatio,ConstrainedBox,Baseline,FractionallySizedBox,IntrinsicHeight,IntrinsicWidth,LimitedBox,Offstage,OverflowBox,SizedOverflowBox,Transform,CustomSingleChildLayout,Stack,IndexedStack,Flow,Table,Wrap,ListBody,ListView,CustomMultiChildLayout,LayoutBuilder,RichText,DefaultTextStyle,'
     'RawImage,AssetBundle,'
-    'Form';
+    'Form,RawKeyboardListener';
 
 class BottomItem {
   final String title;

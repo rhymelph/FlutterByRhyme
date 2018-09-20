@@ -3,9 +3,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class PopupMenuButtonDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/PopupMenuButton';
-  final String detail = '''Displays a menu when pressed and calls onSelected when the menu is dismissed because an item was selected. The value passed to onSelected is the value of the selected menu item.
-One of child or icon may be provided, but not both. If icon is provided, then PopupMenuButton behaves like an IconButton.
-If both are null, then a standard overflow icon is created (depending on the platform).''';
+  final String detail = '''按下时显示菜单，当菜单因为选择了项目而被解除时调用onSelected。传递给onSelected的值是所选菜单项的值。
+
+可以提供儿童或图标中的一个，但不是两者。如果提供了图标，则PopupMenuButton的行为类似于IconButton。
+
+如果两者都为null，则创建标准溢出图标（取决于平台）。''';
 
   @override
   _PopupMenuButtonDemoState createState() => _PopupMenuButtonDemoState();

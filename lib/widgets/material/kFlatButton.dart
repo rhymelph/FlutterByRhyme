@@ -3,12 +3,19 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class FlatButtonDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/FlatButton';
-  final String detail = '''A material design "flat button".
-A flat button is a text label displayed on a (zero elevation) Material widget that reacts to touches by filling with color.
-Use flat buttons on toolbars, in dialogs, or inline with other content but offset from that content with padding so that the button's presence is obvious. Flat buttons intentionally do not have visible borders and must therefore rely on their position relative to other content for context. In dialogs and cards, they should be grouped together in one of the bottom corners. Avoid using flat buttons where they would blend in with other content, for example in the middle of lists.
-Material design flat buttons have an all-caps label, some internal padding, and some defined dimensions. To have a part of your application be interactive, with ink splashes, without also committing to these stylistic choices, consider using InkWell instead.
-If the onPressed callback is null, then the button will be disabled, will not react to touch, and will be colored as specified by the disabledColor property instead of the color property. If you are trying to change the button's color and it is not having any effect, check that you are passing a non-null onPressed handler.
-Flat buttons have a minimum size of 88.0 by 36.0 which can be overidden with ButtonTheme.''';
+  final String detail = '''材料设计“扁平按钮”。
+
+平面按钮是显示在（零高程）材质 小部件上的文本标签，通过填充颜色对触摸作出反应。
+
+在工具栏上，在对话框中使用平面按钮，或与其他内容内联，但使用填充从该内容偏移，以便按钮的存在是显而易见的。平面按钮故意不具有可见边框，因此必须依赖于它们相对于其他内容的位置以用于上下文。在对话框和卡片中，它们应该组合在一个底角中。避免使用平面按钮，它们会与其他内容混合，例如在列表中间。
+
+材料设计平面按钮具有全帽标签，一些内部填充和一些定义的尺寸。要使应用程序的一部分具有交互式，使用墨水溅，而不是承诺这些样式选择，请考虑使用InkWell。
+
+如果onPressed回调为null，则该按钮将被禁用，不会对触摸做出反应，并且将按disabledColor属性而不是color属性指定的颜色进行着色。如果您尝试更改按钮的颜色并且没有任何效果，请检查您是否正在传递非null onPressed处理程序。
+
+平面按钮的最小尺寸为88.0×36.0，可以用ButtonTheme 覆盖。
+
+该clipBehavior参数不能为空。''';
 
   @override
   _FlatButtonDemoState createState() => _FlatButtonDemoState();

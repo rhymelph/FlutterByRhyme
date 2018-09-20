@@ -3,11 +3,7 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class FlutterLogoDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/FlutterLogo';
-  final String detail='''The Flutter logo, in widget form. This widget respects the IconTheme.
-See also:
-IconTheme, which provides ambient configuration for icons.
-Icon, for showing icons the Material design icon library.
-ImageIcon, for showing icons from AssetImages or other ImageProviders.''';
+  final String detail='''Flutter徽标，以小部件形式。这个小部件尊重IconTheme。''';
 
   @override
   _FlutterLogoDemoState createState() => _FlutterLogoDemoState();

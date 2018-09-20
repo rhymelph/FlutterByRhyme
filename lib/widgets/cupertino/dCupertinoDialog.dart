@@ -3,12 +3,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CupertinoDialogDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoDialog';
-  final String detail = '''An iOS-style dialog.
-This dialog widget does not have any opinion about the contents of the dialog. Rather than using this widget directly, consider using CupertinoAlertDialog, which implement a specific kind of dialog.
-Push with Navigator.of(..., rootNavigator: true) when using with CupertinoTabScaffold to ensure that the dialog appears above the tabs.
-See also:
-CupertinoAlertDialog, which is a dialog with title, contents, and actions.
-developer.apple.com/ios/human-interface-guidelines/views/alerts/''';
+  final String detail = '''OS风格的对话框。
+
+此对话框小部件对对话框的内容没有任何意见。不要直接使用这个小部件，而应考虑使用 CupertinoAlertDialog，它实现了一种特定的对话框。
+
+Navigator.of(..., rootNavigator: true)使用CupertinoTabScaffold时 按下以确保对话框出现在选项卡上方。''';
 
   @override
   _CupertinoDialogDemoState createState() => _CupertinoDialogDemoState();

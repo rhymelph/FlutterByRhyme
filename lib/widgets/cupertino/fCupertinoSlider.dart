@@ -3,12 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CupertinoSliderDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoSlider';
-  final String detail = '''An iOS-style slider.
-Used to select from a range of values.
-A slider can be used to select from either a continuous or a discrete set of values. The default is use a continuous range of values from min to max. To use discrete values, use a non-null value for divisions, which indicates the number of discrete intervals. For example, if min is 0.0 and max is 50.0 and divisions is 5, then the slider can take on the values discrete values 0.0, 10.0, 20.0, 30.0, 40.0, and 50.0.
-The slider itself does not maintain any state. Instead, when the state of the slider changes, the widget calls the onChanged callback. Most widgets that use a slider will listen for the onChanged callback and rebuild the slider with a new value to update the visual appearance of the slider.
-See also:
-developer.apple.com/ios/human-interface-guidelines/controls/sliders/''';
+  final String detail = '''iOS风格的滑块。
+
+用于从一系列值中进行选择。
+
+滑块可用于从连续或离散值集中进行选择。默认值是使用从最小值到最大值的连续值范围。要使用离散值，请使用非空值进行分割，这表示离散间隔的数量。例如，如果min为0.0且 max为50.0且除数为5，则滑块可以采用离散值0.0,10.0,20.0,30.0,40.0和50.0的值。
+
+滑块本身不保持任何状态。相反，当滑块状态发生变化时，窗口小部件会调用onChanged回调。大多数使用滑块的小部件将侦听onChanged回调并使用新值重建滑块以更新滑块的视觉外观。''';
 
   @override
   _CupertinoSliderDemoState createState() =>

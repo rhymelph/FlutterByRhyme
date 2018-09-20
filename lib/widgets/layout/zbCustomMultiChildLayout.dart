@@ -11,15 +11,13 @@ enum Custom {
 
 class CustomMultiChildLayoutDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/CustomMultiChildLayout';
-  final String detail = '''A widget that uses a delegate to size and position multiple children.
-The delegate can determine the layout constraints for each child and can decide where to position each child. The delegate can also determine the size of the parent, but the size of the parent cannot depend on the sizes of the children.
-CustomMultiChildLayout is appropriate when there are complex relationships between the size and positioning of a multiple widgets. To control the layout of a single child, CustomSingleChildLayout is more appropriate. For simple cases, such as aligning a widget to one or another edge, the Stack widget is more appropriate.
-Each child must be wrapped in a LayoutId widget to identify the widget for the delegate.
-See also:
-MultiChildLayoutDelegate, for details about how to control the layout of the children.
-CustomSingleChildLayout, which uses a delegate to control the layout of a single child.
-Stack, which arranges children relative to the edges of the container.
-Flow, which provides paint-time control of its children using transform matrices.''';
+  final String detail = '''一个小部件，它使用委托来调整和定位多个子节点。
+
+代表可以确定每个孩子的布局约束，并可以决定每个孩子的位置。委托还可以确定父级的大小，但父级的大小不能取决于子级的大小。
+
+当多个小部件的大小和位置之间存在复杂关系时，CustomMultiChildLayout是合适的。要控制单个子项的布局，CustomSingleChildLayout更合适。对于简单的情况，例如将小部件与一个或另一个边缘对齐，Stack 小部件更合适。
+
+必须将每个子项包装在LayoutId小部件中，以标识委托的小部件。''';
 
   @override
   _CustomMultiChildLayoutDemoState createState() =>

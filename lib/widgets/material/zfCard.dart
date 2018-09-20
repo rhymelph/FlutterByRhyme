@@ -3,8 +3,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CardDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/Card';
-  final String detail = '''A material design card. A card has slightly rounded corners and a shadow.
-A card is a sheet of Material used to represent some related information, for example an album, a geographical location, a meal, contact details, etc.''';
+  final String detail = '''材料设计卡。卡片有圆角和阴影。
+
+卡片是用于表示一些相关信息的一张材料，例如相册，地理位置，用餐，联系方式等。''';
 
   @override
   _CardDemoState createState() => _CardDemoState();

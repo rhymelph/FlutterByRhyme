@@ -3,16 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class SwitchDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/Switch';
-  final String detail = '''A material design switch.
-Used to toggle the on/off state of a single setting.
-The switch itself does not maintain any state. Instead, when the state of the switch changes, the widget calls the onChanged callback. Most widgets that use a switch will listen for the onChanged callback and rebuild the switch with a new value to update the visual appearance of the switch.
-Requires one of its ancestors to be a Material widget.
-See also:
-SwitchListTile, which combines this widget with a ListTile so that you can give the switch a label.
-Checkbox, another widget with similar semantics.
-Radio, for selecting among a set of explicit values.
-Slider, for selecting a value in a range.
-material.google.com/components/selection-controls.html#selection-controls-switch''';
+  final String detail = '''材料设计开关。
+
+用于切换单个设置的开/关状态。
+
+交换机本身不保持任何状态。相反，当交换机的状态发生变化时，小部件会调用onChanged回调。大多数使用交换机的小部件将侦听onChanged回调并使用新值重建交换机以更新交换机的可视外观。
+
+需要其中一个祖先成为Material小部件。''';
 
   @override
   _SwitchDemoState createState() => _SwitchDemoState();

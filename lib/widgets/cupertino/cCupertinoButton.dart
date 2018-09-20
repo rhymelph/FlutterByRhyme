@@ -3,10 +3,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CupertinoButtonDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoButton';
-  final String detail = '''An iOS-style button.
-Takes in a text or an icon that fades out and in on touch. May optionally have a background.
-See also:
-developer.apple.com/ios/human-interface-guidelines/controls/buttons/''';
+  final String detail = '''iOS风格的按钮。
+
+接收淡出和触摸的文本或图标。可选择有背景。''';
 
   @override
   _CupertinoButtonDemoState createState() => _CupertinoButtonDemoState();

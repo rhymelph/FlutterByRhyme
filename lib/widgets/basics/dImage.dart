@@ -3,19 +3,16 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class ImageDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/Image';
-  final String detail = '''A widget that displays an image.
-Several constructors are provided for the various ways that an image can be specified:
-new Image, for obtaining an image from an ImageProvider.
-new Image.asset, for obtaining an image from an AssetBundle using a key.
-new Image.network, for obtaining an image from a URL.
-new Image.file, for obtaining an image from a File.
-new Image.memory, for obtaining an image from a Uint8List.
-The following image formats are supported: JPEG, PNG, GIF, Animated GIF, WebP, Animated WebP, BMP, and WBMP
-To automatically perform pixel-density-aware asset resolution, specify the image using an AssetImage and make sure that a MaterialApp, WidgetsApp, or MediaQuery widget exists above the Image widget in the widget tree.
-The image is painted using paintImage, which describes the meanings of the various fields on this class in more detail.
-See also:
-Icon, which shows an image from a font.
-new Ink.image, which is the preferred way to show an image in a material application (especially if the image is in a Material and will have an InkWell on top of it).''';
+  final String detail = '''显示图像的小部件。
+提供了几种构造函数，用于指定图像的各种方式：
+new Image, ，用于从ImageProvider获取图像.
+new Image.asset, 用于 使用密钥从AssetBundle获取图像。.
+new Image.network, 用于从URL获取图像L.
+new Image.file,用于从文件中获取图像.
+new Image.memory, 用于从Uint8List获取图像.
+支持以下图像格式：JPEG，PNG，GIF，动画GIF，WebP，动画WebP，BMP和WBMP
+要自动执行像素密​​度感知资产分辨率，请使用AssetImage指定图像，并确保在窗口小部件树中的“ 图像”窗口小部件上方存在MaterialApp，WidgetsApp或MediaQuery窗口小部件。
+使用paintImage绘制图像，paintImage更详细地描述了此类中各个字段的含义。''';
 
   @override
   _ImageDemoState createState() => _ImageDemoState();

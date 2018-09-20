@@ -3,15 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
 class CupertinoActivityIndicatorDemo extends StatefulWidget {
   static const String routeName='widgets/cupertino/CupertinoActivityIndicator';
-  final String detail=''''n iOS-styled navigation bar.
-The navigation bar is a toolbar that minimally consists of a widget, normally a page title, in the middle of the toolbar.
-It also supports a leading and trailing widget before and after the middle widget while keeping the middle widget centered.
-The leading widget will automatically be a back chevron icon button (or a close button in case of a fullscreen dialog) to pop the current route if none is provided and automaticallyImplyLeading is true (true by default).
-It should be placed at top of the screen and automatically accounts for the OS's status bar.
-If the given backgroundColor's opacity is not 1.0 (which is the case by default), it will produce a blurring effect to the content behind it.
-See also:
-CupertinoPageScaffold, a page layout helper typically hosting the CupertinoNavigationBar.
-CupertinoSliverNavigationBar for a navigation bar to be placed in a scrolling list and that supports iOS-11-style large titles.''';
+  final String detail=''''iOS风格的活动指示器。''';
 
   @override
   _CupertinoActivityIndicatorDemoState createState() => _CupertinoActivityIndicatorDemoState();

@@ -3,12 +3,17 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class RaisedButtonDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/RaisedButton';
-  final String detail='''A material design "raised button".
-A raised button is based on a Material widget whose Material.elevation increases when the button is pressed.
-Use raised buttons to add dimension to otherwise mostly flat layouts, e.g. in long busy lists of content, or in wide spaces. Avoid using raised buttons on already-raised content such as dialogs or cards.
-If the onPressed callback is null, then the button will be disabled and by default will resemble a flat button in the disabledColor. If you are trying to change the button's color and it is not having any effect, check that you are passing a non-null onPressed handler.
-If you want an ink-splash effect for taps, but don't want to use a button, consider using InkWell directly.
-Raised buttons have a minimum size of 88.0 by 36.0 which can be overidden with ButtonTheme.''';
+  final String detail='''材料设计“凸起按钮”。
+
+凸起按钮基于“ 材质”窗口小部件， 按下按钮时，Material.elevation会增加。
+
+使用凸起按钮可将尺寸添加到大多数平面布局中，例如在长时间繁忙的内容列表中，或在宽阔的空间中。避免在已经提出的内容（例如对话框或卡片）上使用凸起按钮。
+
+如果onPressed回调为null，则该按钮将被禁用，默认情况下将类似于disabledColor中的平面按钮。如果您尝试更改按钮的颜色并且没有任何效果，请检查您是否正在传递非null onPressed处理程序。
+
+如果您想要水龙头的墨水效果，但又不想使用按钮，请考虑直接使用InkWell。
+
+凸起按钮的最小尺寸为88.0×36.0，可以用ButtonTheme 覆盖。''';
 
   @override
   _RaisedButtonDemoState createState() => _RaisedButtonDemoState();

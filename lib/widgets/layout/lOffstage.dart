@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
 class OffstageDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/Offstage';
-  final String detail = '''A widget that lays the child out as if it was in the tree, but without painting anything, without making the child available for hit testing, and without taking any room in the parent.
-Animations continue to run in offstage children, and therefore use battery and CPU time, regardless of whether the animations end up being visible.
-Offstage can be used to measure the dimensions of a widget without bringing it on screen (yet). To hide a widget from view while it is not needed, prefer removing the widget from the tree entirely rather than keeping it alive in an Offstage subtree.
-See also:
-Visibility, which can hide a child more efficiently (albeit less subtly).
-TickerMode, which can be used to disable animations in a subtree.
-The catalog of layout widgets.''';
+  final String detail = '''一个小部件，它将孩子放在树中，但没有绘制任何东西，没有让孩子可用于命中测试，也没有占用父母的任何空间。
+
+动画继续在舞台上的孩子中运行，因此无论动画最终是否可见，都会使用电池和CPU时间。
+
+可以使用Offstage来测量小部件的尺寸，而无需将其带到屏幕上（尚未）。要在不需要的情况下隐藏窗口小部件，请更喜欢从树中完全删除窗口小部件，而不是将其保留在Offstage子树中。''';
 
   @override
   _OffstageDemoState createState() =>

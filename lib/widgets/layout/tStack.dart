@@ -3,18 +3,17 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class StackDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/Stack';
-  final String detail = '''A widget that positions its children relative to the edges of its box.
-This class is useful if you want to overlap several children in a simple way, for example having some text and an image, overlaid with a gradient and a button attached to the bottom.
-Each child of a Stack widget is either positioned or non-positioned. Positioned children are those wrapped in a Positioned widget that has at least one non-null property. The stack sizes itself to contain all the non-positioned children, which are positioned according to alignment (which defaults to the top-left corner in left-to-right environments and the top-right corner in right-to-left environments). The positioned children are then placed relative to the stack according to their top, right, bottom, and left properties.
-The stack paints its children in order with the first child being at the bottom. If you want to change the order in which the children paint, you can rebuild the stack with the children in the new order. If you reorder the children in this way, consider giving the children non-null keys. These keys will cause the framework to move the underlying objects for the children to their new locations rather than recreate them at their new location.
-For more details about the stack layout algorithm, see RenderStack.
-If you want to lay a number of children out in a particular pattern, or if you want to make a custom layout manager, you probably want to use CustomMultiChildLayout instead. In particular, when using a Stack you can't position children relative to their size or the stack's own size.
-See also:
-Align, which sizes itself based on its child's size and positions the child according to an Alignment value.
-CustomSingleChildLayout, which uses a delegate to control the layout of a single child.
-CustomMultiChildLayout, which uses a delegate to position multiple children.
-Flow, which provides paint-time control of its children using transform matrices.
-The catalog of layout widgets.''';
+  final String detail = '''一个小部件，用于将其子级相对于其框的边缘定位。
+
+如果要以简单的方式重叠多个子项，此类很有用，例如，具有一些文本和图像，用渐变覆盖并且按钮附加到底部。
+
+Stack小部件的每个子节点都已定位或未定位。定位子项是包含在具有至少一个非null属性的定位窗口小部件中的子项。堆栈大小本身包含所有未定位的子项，这些子项根据对齐方式定位 （默认为从左到右环境中的左上角和从右到左环境中的右上角）。然后根据它们的顶部，右侧，底部和左侧属性相对于堆叠放置定位的子项。
+
+当第一个孩子在底部时，堆栈按顺序绘制其子项。如果要更改子项绘制的顺序，可以使用新顺序中的子项重建堆栈。如果以这种方式对子项重新排序，请考虑为子项指定非空键。这些键将使框架将子项的基础对象移动到新位置，而不是在新位置重新创建它们。
+
+有关堆栈布局算法的更多详细信息，请参阅RenderStack。
+
+如果要以特定模式放置多个子项，或者如果要创建自定义布局管理器，则可能需要使用 CustomMultiChildLayout。特别是，当使用堆栈时，您无法根据大小或堆栈自身大小来定位子项。''';
 
   @override
   _StackDemoState createState() => _StackDemoState();

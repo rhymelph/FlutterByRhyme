@@ -4,10 +4,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 class WrapDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/Wrap';
   final String detail =
-      '''A widget that displays its children in multiple horizontal or vertical runs.
-A Wrap lays out each child and attempts to place the child adjacent to the previous child in the main axis, given by direction, leaving spacing space in between. If there is not enough space to fit the child, Wrap creates a new run adjacent to the existing children in the cross axis.
-After all the children have been allocated to runs, the children within the runs are positioned according to the alignment in the main axis and according to the crossAxisAlignment in the cross axis.
-The runs themselves are then positioned in the cross axis according to the runSpacing and runAlignment.''';
+      '''一个小部件，以多个水平或垂直运行方式显示其子项。
+
+A Wrap布置每个孩子并尝试将孩子放在主轴上与前一个孩子相邻，由方向给定， 在两者之间留出间隔空间。如果没有足够的空间来容纳孩子，Wrap 会在横轴上的现有子项旁边创建一个新的运行。
+
+在将所有子项分配给运行后，运行中的子项将根据主轴中的对齐方式并根据横轴中的crossAxisAlignment进行定位。
+
+然后根据runSpacing和runAlignment将运行本身定位在十字轴上 。''';
 
   @override
   _WrapDemoState createState() => _WrapDemoState();

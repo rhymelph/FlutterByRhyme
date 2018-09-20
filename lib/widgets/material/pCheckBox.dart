@@ -3,17 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CheckBoxDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/CheckBox';
-  final String detail = '''A material design checkbox.
-The checkbox itself does not maintain any state. Instead, when the state of the checkbox changes, the widget calls the onChanged callback. Most widgets that use a checkbox will listen for the onChanged callback and rebuild the checkbox with a new value to update the visual appearance of the checkbox.
-The checkbox can optionally display three values - true, false, and null - if tristate is true. When value is null a dash is displayed. By default tristate is false and the checkbox's value must be true or false.
-Requires one of its ancestors to be a Material widget.
-See also:
-CheckboxListTile, which combines this widget with a ListTile so that you can give the checkbox a label.
-Switch, a widget with semantics similar to Checkbox.
-Radio, for selecting among a set of explicit values.
-Slider, for selecting a value in a range.
-material.google.com/components/selection-controls.html#selection-controls-checkbox
-material.google.com/components/lists-controls.html#lists-controls-types-of-list-controls''';
+  final String detail = '''材料设计复选框。
+
+复选框本身不保持任何状态。相反，当复选框的状态发生变化时，窗口小部件会调用onChanged回调。大多数使用复选框的小部件将侦听onChanged回调并使用新值重建复选框以更新复选框的可视外观。
+
+如果tristate为true ，则复选框可以选择显示三个值 - true，false和null 。当value为null时，将显示破折号。默认情况下， 三态为false，复选框的值必须为true或false。
+
+需要其中一个祖先成为Material小部件。''';
 
   @override
   _CheckBoxDemoState createState() => _CheckBoxDemoState();

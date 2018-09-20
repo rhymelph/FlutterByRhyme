@@ -7,7 +7,11 @@ import 'dart:ui' as ui;
 
 class RawImageDemo extends StatefulWidget {
   static const String routeName = 'widgets/assets/RawImage';
-  final String detail = '''''';
+  final String detail = '''一个直接显示dart：ui.Image的小部件。
+
+使用paintImage绘制图像，paintImage更详细地描述了此类中各个字段的含义。
+
+这个小部件很少直接使用。相反，请考虑使用Image。''';
 
   @override
   _RawImageDemoState createState() => _RawImageDemoState();

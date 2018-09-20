@@ -3,9 +3,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 class ScaffoldDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/Scaffold';
   final String detail =
-      '''Implements the basic material design visual layout structure.
-This class provides APIs for showing drawers, snack bars, and bottom sheets.
-To display a snackbar or a persistent bottom sheet, obtain the ScaffoldState for the current BuildContext via Scaffold.of and use the ScaffoldState.showSnackBar and ScaffoldState.showBottomSheet functions.''';
+      '''实现基本材料设计视觉布局结构。
+
+此类提供用于显示抽屉，小吃店和底部工作表的API。
+
+要显示小吃吧或持久底部片材，获得 ScaffoldState当前BuildContext经由Scaffold.of并使用 ScaffoldState.showSnackBar和ScaffoldState.showBottomSheet功能。''';
 
   @override
   _ScaffoldDemoState createState() => _ScaffoldDemoState();

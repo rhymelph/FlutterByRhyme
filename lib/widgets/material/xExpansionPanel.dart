@@ -3,12 +3,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class ExpansionPanelDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/ExpansionPanel';
-  final String detail = '''A material expansion panel. It has a header and a body and can be either expanded or collapsed. The body of the panel is only visible when it is expanded.
-Expansion panels are only intended to be used as children for ExpansionPanelList.
-See also:
-ExpansionPanelList
-material.google.com/components/expansion-panels.html
-''';
+  final String detail = '''材料扩展面板。它有一个标题和一个正文，可以展开或折叠。面板的主体仅在展开时可见。
+
+扩展面板仅用作 ExpansionPanelList的子级。''';
 
   @override
   _ExpansionPanelDemoState createState() => _ExpansionPanelDemoState();

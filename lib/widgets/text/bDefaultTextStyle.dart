@@ -3,7 +3,7 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class DefaultTextStyleDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/DefaultTextStyle';
-  final String detail = '''The text style to apply to descendant Text widgets without explicit style.''';
+  final String detail = '''要应用于后代Text小部件而没有显式样式的文本样式。''';
 
   @override
   _DefaultTextStyleDemoState createState() => _DefaultTextStyleDemoState();

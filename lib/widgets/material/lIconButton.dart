@@ -3,12 +3,17 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class IconButtonDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/IconButton';
-  final String detail = '''A material design icon button.
-An icon button is a picture printed on a Material widget that reacts to touches by filling with color (ink).
-Icon buttons are commonly used in the AppBar.actions field, but they can be used in many other places as well.
-If the onPressed callback is null, then the button will be disabled and will not react to touch.
-Requires one of its ancestors to be a Material widget.
-The hit region of an icon button will, if possible, be at least 48.0 pixels in size, regardless of the actual iconSize, to satisfy the touch target size requirements in the Material Design specification. The alignment controls how the icon itself is positioned within the hit region.''';
+  final String detail = '''材料设计图标按钮。
+
+图标按钮是打印在“ 材质”小部件上的图片，通过填充颜色（墨水）来对触摸作出反应。
+
+图标按钮通常在AppBar.actions字段中使用，但它们也可以在许多其他地方使用。
+
+如果onPressed回调为null，则该按钮将被禁用，并且不会对触摸作出反应。
+
+需要其中一个祖先成为Material小部件。
+
+如果可能，图标按钮的命中区域的大小至少为48.0像素，与实际的iconSize无关，以满足 Material Design规范中的触摸目标大小要求。的对准控制图标本身如何定位命中区域内。''';
 
   @override
   _IconButtonDemoState createState() => _IconButtonDemoState();

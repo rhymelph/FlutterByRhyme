@@ -3,11 +3,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CupertinoPageScaffoldDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoPageScaffold';
-  final String detail = '''Implements a single iOS application page's layout.
-The scaffold lays out the navigation bar on top and the content between or behind the navigation bar.
-See also:
-CupertinoTabScaffold, a similar widget for tabbed applications.
-CupertinoPageRoute, a modal page route that typically hosts a CupertinoPageScaffold with support for iOS-style page transitions.
+  final String detail = '''实现单个iOS应用程序页面的布局。
+
+脚手架在顶部布置导航栏，在导航栏之间或之后布置内容。
 ''';
 
   @override

@@ -3,9 +3,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class DrawerDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/Drawer';
-  final String detail = '''A material design panel that slides in horizontally from the edge of a Scaffold to show navigation links in an application.
-Drawers are typically used with the Scaffold.drawer property. The child of the drawer is usually a ListView whose first child is a DrawerHeader that displays status information about the current user. The remaining drawer children are often constructed with ListTiles, often concluding with an AboutListTile.
-An open drawer can be closed by calling Navigator.pop. For example a drawer item might close the drawer when tapped:''';
+  final String detail = '''材料设计面板，从Scaffold的边缘水平滑动， 以显示应用程序中的导航链接。
+
+抽屉通常与Scaffold.drawer属性一起使用。抽屉的子项通常是ListView，其第一个子项是DrawerHeader ，它显示有关当前用户的状态信息。其余的抽屉儿童往往与构建ListTile S，经常有结束AboutListTile。
+
+可以通过调用Navigator.pop关闭打开的抽屉.''';
 
   @override
   _DrawerDemoState createState() => _DrawerDemoState();

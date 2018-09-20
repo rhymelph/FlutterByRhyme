@@ -3,10 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class ContainerDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/Container';
-  final String detail='''A convenience widget that combines common painting, positioning, and sizing widgets.
-A container first surrounds the child with padding (inflated by any borders present in the decoration) and then applies additional constraints to the padded extent (incorporating the width and height as constraints, if either is non-null). The container is then surrounded by additional empty space described from the margin.
-During painting, the container first applies the given transform, then paints the decoration to fill the padded extent, then it paints the child, and finally paints the foregroundDecoration, also filling the padded extent.
-Containers with no children try to be as big as possible unless the incoming constraints are unbounded, in which case they try to be as small as possible. Containers with children size themselves to their children. The width, height, and constraints arguments to the constructor override this.''';
+  final String detail='''一个便利的小部件，结合了常见的绘画，定位和大小调整小部件。
+
+容器首先用填充物围绕孩子（由装饰中存在的任何边界膨胀），然后将其他约束应用于 填充范围（ 如果非空，则包含width和height作为约束）。然后容器被边缘描述的额外空的空间包围。
+
+在绘画过程中，容器首先应用给定的变换，然后绘制装饰以填充填充范围，然后绘制孩子，最后绘制foregroundDecoration，同时填充填充范围。
+
+没有孩子的容器试图尽可能大，除非传入的约束是无限制的，在这种情况下，它们尽可能地小。容纳孩子的容器。的 width，height和约束参数的构造覆盖。''';
   @override
   _ContainerDemoState createState() => _ContainerDemoState();
 }

@@ -3,15 +3,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class ButtonBarDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/ButtonBar';
-  final String detail = '''A horizontal arrangement of buttons.
-Places the buttons horizontally according to the padding in the current ButtonTheme.
-Used by Dialog to arrange the actions at the bottom of the dialog.
-See also:
-RaisedButton, a kind of button.
-FlatButton, another kind of button.
-Card, at the bottom of which it is common to place a ButtonBar.
-Dialog, which uses a ButtonBar for its actions.
-ButtonTheme, which configures the ButtonBar.''';
+  final String detail = '''按钮的水平排列。
+
+根据当前ButtonTheme中的填充水平放置按钮 。
+
+由Dialog用于排列对话框底部的操作.''';
 
   @override
   _ButtonBarDemoState createState() => _ButtonBarDemoState();

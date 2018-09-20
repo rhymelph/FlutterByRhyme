@@ -4,10 +4,7 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 class FittedBoxDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/FittedBox';
   final String detail =
-      '''Scales and positions its child within itself according to fit.
-See also:
-Transform, which applies an arbitrary transform to its child widget at paint time.
-The catalog of layout widgets.''';
+      '''秤，并根据自身内部定位其子契合。''';
 
   @override
   _FittedBoxDemoState createState() => _FittedBoxDemoState();

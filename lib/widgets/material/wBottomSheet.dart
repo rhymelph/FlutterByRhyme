@@ -3,15 +3,15 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class BottomSheetDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/BottomSheet';
-  final String detail = '''A material design bottom sheet.
-There are two kinds of bottom sheets in material design:
-Persistent. A persistent bottom sheet shows information that supplements the primary content of the app. A persistent bottom sheet remains visible even when the user interacts with other parts of the app. Persistent bottom sheets can be created and displayed with the ScaffoldState.showBottomSheet function.
-Modal. A modal bottom sheet is an alternative to a menu or a dialog and prevents the user from interacting with the rest of the app. Modal bottom sheets can be created and displayed with the showModalBottomSheet function.
-The BottomSheet widget itself is rarely used directly. Instead, prefer to create a persistent bottom sheet with ScaffoldState.showBottomSheet and a modal bottom sheet with showModalBottomSheet.
-See also:
-ScaffoldState.showBottomSheet
-showModalBottomSheet
-material.google.com/components/bottom-sheets.html''';
+  final String detail = '''材料设计底页。
+
+材料设计中有两种底板：
+
+持久性。持久性底部工作表显示补充应用程序主要内容的信息。即使用户与应用程序的其他部分进行交互，持久性底部工作表仍然可见。可以使用ScaffoldState.showBottomSheet函数或通过指定 Scaffold.bottomSheet构造函数参数来创建和显示持久性底部工作表 。
+
+莫代尔。模态底部工作表是菜单或对话框的替代方案，可防止用户与应用程序的其余部分进行交互。可以使用showModalBottomSheet 函数创建和显示模态底部工作表。
+
+该BottomSheet小部件本身很少直接使用。相反，更喜欢使用ScaffoldState.showBottomSheet或 Scaffold.bottomSheet创建持久性底部工作表，并使用showModalBottomSheet创建模式底部工作表。''';
 
   @override
   _BottomSheetDemoState createState() => _BottomSheetDemoState();

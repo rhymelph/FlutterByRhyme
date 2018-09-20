@@ -3,7 +3,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class LayoutBuilderDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/LayoutBuilder';
-  final String detail = '''''';
+  final String detail = '''构建可依赖于父窗口小部件大小的窗口小部件树。
+
+与Builder小部件类似，只是框架 在布局时调用构建器函数并提供父小部件的约束。当父约束孩子的大小而不依赖于孩子的内在大小时，这很有用。该LayoutBuilder的最终规模将匹配其孩子的大小。
+
+如果子项应小于父项，请考虑将子项包装在“ 对齐”小组件中。如果孩子可能想要变大，可以考虑将其包装在SingleChildScrollView中。''';
 
   @override
   _LayoutBuilderDemoState createState() =>

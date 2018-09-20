@@ -3,10 +3,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CupertinoPageTransitionDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoPageTransition';
-  final String detail = '''Provides an iOS-style page transition animation.
-The page slides in from the right and exits in reverse. It also shifts to the left in a parallax motion when another page enters to cover it.
-Inheritance
-Object Diagnosticable DiagnosticableTree Widget StatelessWidget CupertinoPageTransition''';
+  final String detail = '''提供iOS样式的页面过渡动画。
+
+页面从右侧滑入，然后反向退出。当另一页进入以覆盖它时，它也以视差运动向左移动。''';
 
   @override
   _CupertinoPageTransitionDemoState createState() =>

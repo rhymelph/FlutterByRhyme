@@ -3,12 +3,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CustomSingleChildLayoutDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/CustomSingleChildLayout';
-  final String detail = '''e delegate can determine the layout constraints for the child and can decide where to position the child. The delegate can also determine the size of the parent, but the size of the parent cannot depend on the size of the child.
-See also:
-SingleChildLayoutDelegate, which controls the layout of the child.
-Align, which sizes itself based on its child's size and positions the child according to an Alignment value.
-FractionallySizedBox, which sizes its child based on a fraction of its own size and positions the child according to an Alignment value.
-CustomMultiChildLayout, which uses a delegate to position multiple children.''';
+  final String detail = '''一个小部件，将其单个子级的布局推迟到委托。
+
+代表可以确定孩子的布局约束，并可以决定孩子的位置。委托还可以确定父级的大小，但父级的大小不能取决于子级的大小。''';
 
   @override
   _CustomSingleChildLayoutDemoState createState() =>

@@ -3,7 +3,25 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class ListViewDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/ListView';
-  final String detail = '';
+  final String detail = '''可线性排列的小部件可滚动列表。
+
+ListView是最常用的滚动小部件。它在滚动方向上一个接一个地显示其子项。在横轴中，子项需要填充ListView。
+
+如果为非null，则itemExtent强制子项在滚动方向上具有给定范围。指定itemExtent比让孩子确定自己的范围更有效，因为滚动机器可以利用孩子保存工作的程度的预知，例如当滚动位置急剧变化时。
+
+构造ListView有四个选项：
+
+默认构造函数采用显式List孩子的。此构造函数适用于具有少量子项的列表视图，因为构造List需要为可能在列表视图中显示的每个子项执行工作，而不仅仅是那些实际可见的子项。
+
+该ListView.builder构造函数采用IndexedWidgetBuilder，它建立在孩子的需求。此构造函数适用于具有大量（或无限）子项数的列表视图，因为仅为实际可见的子项调用构建器。
+
+该ListView.separated构造函数有两个IndexedWidgetBuilder S： itemBuilder按需建立个子项目，separatorBuilder 同样建立其出现在子项之间的分隔符的孩子。此构造函数适用于具有固定数量子项的列表视图。
+
+该ListView.custom构造需要SliverChildDelegate，它提供了自定义子模型的其他方面的能力。例如，SliverChildDelegate可以控制用于估计实际上不可见的子项大小的算法。
+
+要控制滚动视图的初始滚动偏移，请为 控制器提供其ScrollController.initialScrollOffset属性集。
+
+默认情况下，ListView将自动填充列表的可滚动末端，以避免MediaQuery填充指示的部分障碍。要避免此行为，请使用零填充属性覆盖。''';
 
   @override
   _ListViewDemoState createState() => _ListViewDemoState();

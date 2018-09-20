@@ -3,18 +3,15 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class FlowDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/Flow';
-  final String detail = '''A widget that sizes and positions children efficiently, according to the logic in a FlowDelegate.
-Flow layouts are optimized for repositioning children using transformation matrices.
-The flow container is sized independently from the children by the FlowDelegate.getSize function of the delegate. The children are then sized independently given the constraints from the FlowDelegate.getConstraintsForChild function.
-Rather than positioning the children during layout, the children are positioned using transformation matrices during the paint phase using the matrices from the FlowDelegate.paintChildren function. The children can be repositioned efficiently by simply repainting the flow, which happens without the children being laid out again (contrast this with a Stack, which does the sizing and positioning together during layout).
-The most efficient way to trigger a repaint of the flow is to supply an animation to the constructor of the FlowDelegate. The flow will listen to this animation and repaint whenever the animation ticks, avoiding both the build and layout phases of the pipeline.
-See also:
-Wrap, which provides the layout model that some other frameworks call "flow", and is otherwise unrelated to Flow.
-FlowDelegate, which controls the visual presentation of the children.
-Stack, which arranges children relative to the edges of the container.
-CustomSingleChildLayout, which uses a delegate to control the layout of a single child.
-CustomMultiChildLayout, which uses a delegate to position multiple children.
-The catalog of layout widgets.''';
+  final String detail = '''根据FlowDelegate中的逻辑，可以有效地调整和定位子项的小部件。
+
+优化流布局以使用转换矩阵重新定位子项。
+
+通过委托的FlowDelegate.getSize函数，流容器的大小独立于子容器 。然后根据FlowDelegate.getConstraintsForChild函数的约束，独立调整子项的大小 。
+
+不是在布局期间定位子项，而是使用FlowDelegate.paintChildren函数中的矩阵在绘制阶段使用变换矩阵定位子项。通过简单地重新绘制流动就可以有效地重新定位孩子，这种情况在孩子不再被布置的情况下发生（与Stack相反，在布局期间进行尺寸调整和定位）。
+
+触发重绘流的最有效方法是向FlowDelegate的构造函数提供动画。流动将监听此动画并在动画滴答时重新绘制，从而避免管道的构建和布局阶段。''';
 
   @override
   _FlowDemoState createState() =>

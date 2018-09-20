@@ -4,19 +4,19 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class TextFieldDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/TextField';
-  final String detail = '''
-  A material design text field.
-A text field lets the user enter text, either with hardware keyboard or with an onscreen keyboard.
-The text field calls the onChanged callback whenever the user changes the text in the field. If the user indicates that they are done typing in the field (e.g., by pressing a button on the soft keyboard), the text field calls the onSubmitted callback.
-To control the text that is displayed in the text field, use the controller. For example, to set the initial value of the text field, use a controller that already contains some text. The controller can also control the selection and composing region (and to observe changes to the text, selection, and composing region).
-By default, a text field has a decoration that draws a divider below the text field. You can use the decoration property to control the decoration, for example by adding a label or an icon. If you set the decoration property to null, the decoration will be removed entirely, including the extra padding introduced by the decoration to save space for the labels.
-If decoration is non-null (which is the default), the text field requires one of its ancestors to be a Material widget. When the TextField is tapped an ink splash that paints on the material is triggered, see ThemeData.splashFactory.
-To integrate the TextField into a Form with other FormField widgets, consider using TextFormField.
-See also:
-material.google.com/components/text-fields.html
-TextFormField, which integrates with the Form widget.
-InputDecorator, which shows the labels and other visual elements that surround the actual text editing widget.
-EditableText, which is the raw text editing control at the heart of a TextField. (The EditableText widget is rarely used directly unless you are implementing an entirely different design language, such as Cupertino.)''';
+  final String detail = '''材料设计文本字段。
+
+文本字段允许用户使用硬件键盘或屏幕键盘输入文本。
+
+只要用户更改字段中的文本，文本字段就会调用onChanged回调。如果用户指示他们已完成在字段中键入（例如，通过按下软键盘上的按钮），则文本字段调用onSubmitted回调。
+
+要控制文本字段中显示的文本，请使用 控制器。例如，要设置文本字段的初始值，请使用已包含某些文本的控制器。该控制器还可以控制的选择和组成区域（并观察更改文本，选择和组成区域）。
+
+默认情况下，文本字段具有在文本字段下方绘制分隔符的装饰。您可以使用decoration属性来控制装饰，例如通过添加标签或图标。如果将decoration 属性设置为null，则将完全删除装饰，包括装饰引入的额外填充以节省标签的空间。
+
+如果修饰非空（这是默认设置），则文本字段要求其祖先之一为“ 材质”窗口小部件。当的TextField被轻触的油墨飞溅，关于材料油漆被触发时，看到 ThemeData.splashFactory。
+
+要将TextField与其他FormField小部件集成到Form中，请考虑使用TextFormField。''';
 
   @override
   _TextFieldDemoState createState() => _TextFieldDemoState();

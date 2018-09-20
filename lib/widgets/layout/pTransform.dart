@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
 class TransformDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/Transform';
-  final String detail = '''A widget that applies a transformation before painting its child.''';
+  final String detail = '''在绘制其子项之前应用转换的窗口小部件。''';
 
   @override
   _TransformDemoState createState() =>

@@ -3,11 +3,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class StepperDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/Stepper';
-  final String detail = '''A material stepper widget that displays progress through a sequence of steps. Steppers are particularly useful in the case of forms where one step requires the completion of another one, or where multiple steps need to be completed in order to submit the whole form.
-The widget is a flexible wrapper. A parent class should pass currentStep to this widget based on some logic triggered by the three callbacks that it provides.
-See also:
-Step
-material.google.com/components/steppers.html''';
+  final String detail = '''一个物料步进器小部件，通过一系列步骤显示进度。对于一个步骤需要完成另一个步骤，或者需要完成多个步骤才能提交整个表单的表单，步进器特别有用。
+
+小部件是一个灵活的包装器。父类应该 根据它提供的三个回调触发的某些逻辑将currentStep传递给此窗口小部件。''';
 
   @override
   _StepperDemoState createState() => _StepperDemoState();

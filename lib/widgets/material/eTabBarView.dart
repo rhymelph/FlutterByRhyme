@@ -3,8 +3,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class TabBarViewDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/TabBarView';
-  final String detail = '''A page view that displays the widget which corresponds to the currently selected tab. Typically used in conjunction with a TabBar.
-If a TabController is not provided, then there must be a DefaultTabController ancestor.''';
+  final String detail = '''显示与当前所选选项卡对应的窗口小部件的页面视图。通常与TabBar一起使用。
+
+如果未提供TabController，则必须有DefaultTabController 祖先。''';
   @override
   _TabBarViewDemoState createState() => _TabBarViewDemoState();
 }

@@ -4,14 +4,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 class IconDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/Icon';
   final String detail =
-      '''A graphical icon widget drawn with a glyph from a font described in an IconData such as material's predefined IconDatas in Icons.
-Icons are not interactive. For an interactive icon, consider material's IconButton.
-There must be an ambient Directionality widget when using Icon. Typically this is introduced automatically by the WidgetsApp or MaterialApp.
-See also:
-IconButton, for interactive icons.
-Icons, for the list of available icons for use with this class.
-IconTheme, which provides ambient configuration for icons.
-ImageIcon, for showing icons from AssetImages or other ImageProviders.''';
+      '''图形图标插件与来自于所述的字体的字形绘制IconData如材料的预定IconData以s 图标。
+
+图标不是交互式的。对于交互式图标，请考虑材质的 IconButton。
+
+使用Icon时必须有环境Directionality小部件。通常，这是由WidgetsApp或 MaterialApp自动引入的.''';
 
   @override
   _IconDemoState createState() => _IconDemoState();

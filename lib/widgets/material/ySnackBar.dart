@@ -3,15 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class SnackBarDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/SnackBar';
-  final String detail = '''A lightweight message with an optional action which briefly displays at the bottom of the screen.
-To display a snack bar, call Scaffold.of(context).showSnackBar(), passing an instance of SnackBar that describes the message.
-To control how long the SnackBar remains visible, specify a duration.
-See also:
-Scaffold.of, to obtain the current ScaffoldState, which manages the display and animation of snack bars.
-ScaffoldState.showSnackBar, which displays a SnackBar.
-ScaffoldState.removeCurrentSnackBar, which abruptly hides the currently displayed snack bar, if any, and allows the next to be displayed.
-SnackBarAction, which is used to specify an action button to show on the snack bar.
-material.google.com/components/snackbars-toasts.html''';
+  final String detail = '''带有可选操作的轻量级消息，短暂显示在屏幕底部。
+
+要显示小吃店，请致电Scaffold.of(context).showSnackBar()，传递描述消息的SnackBar实例。
+
+要控制SnackBar保持可见的时间，请指定持续时间。
+
+启用TalkBack或VoiceOver时，带有操作的SnackBar不会超时。这由AccessibilityFeatures.accessibleNavigation控制。''';
 
   @override
   _SnackBarDemoState createState() => _SnackBarDemoState();

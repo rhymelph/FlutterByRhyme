@@ -4,12 +4,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 class BaselineDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/Baseline';
   final String detail =
-      '''A widget that positions its child according to the child's baseline.
-This widget shifts the child down such that the child's baseline (or the bottom of the child, if the child has no baseline) is baseline logical pixels below the top of this box, then sizes this box to contain the child. If baseline is less than the distance from the top of the child to the baseline of the child, then the child is top-aligned instead.
-See also:
-Align, a widget that aligns its child within itself and optionally sizes itself based on the child's size.
-Center, a widget that centers its child within itself.
-The catalog of layout widgets.''';
+      '''根据孩子的基线定位孩子的小部件。
+
+此窗口小部件将子项向下移动，使子项的基线（或子项的底部，如果子项没有基线）是 此框顶部下方的基线逻辑像素，然后调整此框的大小以包含子项。如果基线小于从孩子的顶部到孩子的基线的距离，则孩子是顶部对齐的。''';
 
   @override
   _BaselineDemoState createState() => _BaselineDemoState();

@@ -3,11 +3,7 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CupertinoDialogActionDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoDialogAction';
-  final String detail = '''A button typically used in a CupertinoAlertDialog.
-See also:
-CupertinoAlertDialog, a dialog that informs the user about situations that require acknowledgement
-Inheritance
-Object Diagnosticable DiagnosticableTree Widget StatelessWidget CupertinoDialogAction''';
+  final String detail = '''通常用于CupertinoAlertDialog的按钮。''';
 
   @override
   _CupertinoDialogActionDemoState createState() =>

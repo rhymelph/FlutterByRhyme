@@ -3,12 +3,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class IndexedStackDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/IndexedStack';
-  final String detail = '''A Stack that shows a single child from a list of children.
-The displayed child is the one with the given index. The stack is always as big as the largest child.
-If value is null, then nothing is displayed.
-See also:
-Stack, for more details about stacks.
-The catalog of layout widgets.''';
+  final String detail = '''一个堆栈，显示来自子项列表的单个子项。
+
+显示的子项是具有给定索引的子项。堆栈总是和最大的孩子一样大。
+
+如果value为null，则不显示任何内容。''';
 
   @override
   _IndexedStackDemoState createState() => _IndexedStackDemoState();

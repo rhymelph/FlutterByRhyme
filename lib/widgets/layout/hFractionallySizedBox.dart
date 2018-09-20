@@ -4,11 +4,7 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 class FractionallySizedBoxDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/FractionallySizedBox';
   final String detail =
-      '''A widget that sizes its child to a fraction of the total available space. For more details about the layout algorithm, see RenderFractionallySizedOverflowBox.
-See also:
-Align, which sizes itself based on its child's size and positions the child according to an Alignment value.
-OverflowBox, a widget that imposes different constraints on its child than it gets from its parent, possibly allowing the child to overflow the parent.
-The catalog of layout widgets.''';
+      '''一个小部件，可将其子级调整为总可用空间的一小部分。有关布局算法的更多详细信息，请参阅 RenderFractionallySizedOverflowBox。''';
 
   @override
   _FractionallySizedBoxDemoState createState() =>

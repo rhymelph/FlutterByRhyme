@@ -3,14 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class LimitedBoxDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/LimitedBox';
-  final String detail = '''A box that limits its size only when it's unconstrained.
-If this widget's maximum width is unconstrained then its child's width is limited to maxWidth. Similarly, if this widget's maximum height is unconstrained then its child's height is limited to maxHeight.
-This has the effect of giving the child a natural dimension in unbounded environments. For example, by providing a maxHeight to a widget that normally tries to be as big as possible, the widget will normally size itself to fit its parent, but when placed in a vertical list, it will take on the given height.
-This is useful when composing widgets that normally try to match their parents' size, so that they behave reasonably in lists (which are unbounded).
-See also:
-ConstrainedBox, which applies its constraints in all cases, not just when the incoming constraints are unbounded.
-SizedBox, which lets you specify tight constraints by explicitly specifying the height or width.
-The catalog of layout widgets.''';
+  final String detail = '''只有当它不受约束时才限制其大小的盒子。
+
+如果此窗口小部件的最大宽度不受约束，则其子窗口的宽度将限制为maxWidth。同样，如果此窗口小部件的最大高度不受约束，则其子窗口的高度将限制为maxHeight。
+
+这具有使儿童在无界环境中具有自然维度的效果。例如，通过向通常尝试尽可能大的窗口小部件提供maxHeight，窗口小部件通常会调整其大小以适合其父窗口，但是当放置在垂直列表中时，它将采用给定的高度。
+
+这在编写通常尝试匹配其父项大小的小部件时很有用，这样它们在列表中是合理的行为（无限制）。''';
 
   @override
   _LimitedBoxDemoState createState() =>

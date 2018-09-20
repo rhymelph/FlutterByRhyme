@@ -4,10 +4,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 class CupertinoFullscreenDialogTransitionDemo extends StatefulWidget {
   static const String routeName =
       'widgets/cupertino/CupertinoFullscreenDialogTransition';
-  final String detail = '''An iOS-style transition used for summoning fullscreen dialogs.
-For example, used when creating a new calendar event by bringing in the next screen from the bottom.
-Inheritance
-Object Diagnosticable DiagnosticableTree Widget StatelessWidget CupertinoFullscreenDialogTransition''';
+  final String detail = '''用于召唤全屏对话框的iOS风格转换。
+
+例如，通过从底部引入下一个屏幕来创建新日历事件时使用。''';
 
   @override
   _CupertinoFullscreenDialogTransitionDemoState createState() =>

@@ -3,13 +3,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class ListBodyDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/ListBody';
-  final String detail = '''A widget that arranges its children sequentially along a given axis, forcing them to the dimension of the parent in the other axis.
-This widget is rarely used directly. Instead, consider using ListView, which combines a similar layout algorithm with scrolling behavior, or Column, which gives you more flexible control over the layout of a vertical set of boxes.
-See also:
-RenderListBody, which implements this layout algorithm and the documentation for which describes some of its subtleties.
-SingleChildScrollView, which is sometimes used with ListBody to make the contents scrollable.
-Column and Row, which implement a more elaborate version of this layout algorithm (at the cost of being slightly less efficient).
-ListView, which implements an efficient scrolling version of this layout algorithm.''';
+  final String detail = '''一个小部件，它沿着给定的轴顺序排列它的子节点，强制它们到另一个轴的父节点的维度。
+
+这个小部件很少直接使用。相反，可以考虑使用ListView，它将类似的布局算法与滚动行为相结合，或者使用 Column，它可以更灵活地控制垂直方框的布局。''';
 
   @override
   _ListBodyDemoState createState() => _ListBodyDemoState();

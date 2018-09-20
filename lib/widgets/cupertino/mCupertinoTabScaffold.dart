@@ -3,7 +3,15 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class CupertinoTabScaffoldDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoTabScaffold';
-  final String detail = '';
+  final String detail = '''实现选项卡式iOS应用程序的根布局和行为结构。
+
+支架布置底部的标签栏和标签栏之间或之后的内容。
+
+需要tabBar和tabBuilder。该CupertinoTabScaffold 会自动监听提供CupertinoTabBar的自来水回调更改活动标签。
+
+选项卡的内容是使用活动选项卡索引处提供的tabBuilder构建的。该tabBuilder必须能够建立相同数量的网页，因为有tabBar.items。非活动选项卡将移至Offstage， 并禁用其动画。
+
+使用CupertinoTabView作为每个选项卡的内容，以支持具有并行导航状态和历史记录的选项卡。''';
 
   @override
   _CupertinoTabScaffoldDemoState createState() =>

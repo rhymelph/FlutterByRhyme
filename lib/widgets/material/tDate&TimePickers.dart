@@ -3,7 +3,17 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class DateTimePickersDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/DateTimePickers';
-  final String detail = '';
+  final String detail = '''显示包含材料设计日期选择器的对话框。
+
+返回的Future解析为用户关闭对话框时用户选择的日期。如果用户取消该对话框，则返回null。
+
+selectableDayPredicate可以传入可选功能以自定义启用选择的天数。如果提供，则只能selectableDayPredicate选择返回true 的天数 。
+
+可选initialDatePickerMode参数可用于最初在年或月+日选择器模式中显示日期选择器。默认为月+日，且不能为空。
+
+可选locale参数可用于设置日期选择器的区域设置。它默认为Localizations提供的环境语言环境。
+
+可选textDirection参数可用于设置日期选择器的文本方向（RTL或LTR）。它默认为Directionality提供的环境文本方向。如果两个locale和textDirection不为空，textDirection将覆盖选择的方向locale。''';
 
   @override
   _DateTimePickersDemoState createState() => _DateTimePickersDemoState();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
 class OverflowBoxDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/OverflowBox';
-  final String detail = '''''';
+  final String detail = '''一个小部件，它对子进程施加的约束不同于从其父进程获得的约束，可能允许子进程溢出父进程。''';
 
   @override
   _OverflowBoxDemoState createState() =>

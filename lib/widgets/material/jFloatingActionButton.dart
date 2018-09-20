@@ -3,11 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class FloatingActionButtonDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/FloatingActionButton';
-  final String detail = '''A material design floating action button.
-A floating action button is a circular icon button that hovers over content to promote a primary action in the application. Floating action buttons are most commonly used in the Scaffold.floatingActionButton field.
-Use at most a single floating action button per screen. Floating action buttons should be used for positive actions such as "create", "share", or "navigate".
-If the onPressed callback is null, then the button will be disabled and will not react to touch.
-If the floating action button is a descendant of a Scaffold that also has a BottomAppBar, the BottomAppBar will show a notch to accomodate the FloatingActionButton when it overlaps the BottomAppBar. The notch's shape is an arc for a circle whose radius is the floating action button's radius plus FloatingActionButton.notchMargin.''';
+  final String detail = '''材料设计浮动动作按钮。
+
+浮动操作按钮是一个圆形图标按钮，悬停在内容上以提升应用程序中的主要操作。浮动操作按钮最常用于Scaffold.floatingActionButton字段中。
+
+每个屏幕最多使用一个浮动操作按钮。浮动操作按钮应用于积极操作，例如“创建”，“共享”或“导航”。
+
+如果onPressed回调为null，则该按钮将被禁用，并且不会对触摸作出反应。''';
 
   @override
   _FloatingActionButtonDemoState createState() =>

@@ -3,15 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class RadioDemo extends StatefulWidget {
   static const String routeName='widgets/material/Radio';
-  final String detail='''A material design radio button.
-Used to select between a number of mutually exclusive values. When one radio button in a group is selected, the other radio buttons in the group cease to be selected. The values are of type T, the type parameter of the Radio class. Enums are commonly used for this purpose.
-The radio button itself does not maintain any state. Instead, when the state of the radio button changes, the widget calls the onChanged callback. Most widget that use a radio button will listen for the onChanged callback and rebuild the radio button with a new groupValue to update the visual appearance of the radio button.
-Requires one of its ancestors to be a Material widget.
-See also:
-RadioListTile, which combines this widget with a ListTile so that you can give the radio button a label.
-Slider, for selecting a value in a range.
-Checkbox and Switch, for toggling a particular value on or off.
-material.google.com/components/selection-controls.html#selection-controls-radio-button''';
+  final String detail='''材料设计单选按钮。
+
+用于在多个互斥值之间进行选择。当选择组中的一个单选按钮时，组中的其他单选按钮将不再被选中。值的类型T是Radio 类的类型参数。枚举通常用于此目的。
+
+单选按钮本身不保持任何状态。相反，当单选按钮的状态发生变化时，小部件会调用onChanged回调。大多数使用单选按钮的小部件将侦听onChanged 回调并使用新的groupValue重建单选按钮以更新单选按钮的可视外观。
+
+需要其中一个祖先成为Material小部件。''';
 
   @override
   _RadioDemoState createState() => _RadioDemoState();

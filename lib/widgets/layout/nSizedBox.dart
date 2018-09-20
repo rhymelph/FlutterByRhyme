@@ -4,10 +4,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class SizedBoxDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/SizedBox';
-  final String detail = '''A box with a specified size.
-If given a child, this widget forces its child to have a specific width and/or height (assuming values are permitted by this widget's parent). If either the width or height is null, this widget will size itself to match the child's size in that dimension.
-If not given a child, this widget will size itself to the given width and height, treating nulls as zero.
-The new SizedBox.expand constructor can be used to make a SizedBox that sizes itself to fit the parent. It is equivalent to setting width and height to double.infinity.''';
+  final String detail = '''具有指定大小的框。
+
+如果给孩子，这个小部件会强制其子项具有特定的宽度和/或高度（假设此小部件的父级允许值）。如果宽度或高度为null，则此窗口小部件将自行调整大小以匹配该维度中子项的大小。
+
+如果没有给孩子，这个小部件将自己调整到给定的宽度和高度，将空值视为零。
+
+该新SizedBox.expand构造可以用来制造SizedBox该尺寸本身，以适应父。它相当于将宽度和 高度设置为double.infinity。''';
 
   @override
   _SizedBoxDemoState createState() =>

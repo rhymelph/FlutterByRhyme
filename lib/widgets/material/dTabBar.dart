@@ -3,12 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class TabBarDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/TabBar';
-  final String detail = '''A material design widget that displays a horizontal row of tabs.
-Typically created as the AppBar.bottom part of an AppBar and in conjunction with a TabBarView.
-If a TabController is not provided, then a DefaultTabController ancestor must be provided instead. The tab controller's TabController.length must equal the length of the tabs list.
-Requires one of its ancestors to be a Material widget.
-See also:
-TabBarView, which displays page views that correspond to each tab.''';
+  final String detail = '''显示水平行标签的材质设计小部件。
+
+通常创建为AppBar的AppBar.bottom部分并与TabBarView结合使用。
+
+如果未提供TabController，则必须提供DefaultTabController祖先。选项卡控制器的TabController.length必须等于选项卡列表的长度。
+
+需要其中一个祖先成为Material小部件.''';
 
   @override
   _TabBarDemoState createState() => _TabBarDemoState();

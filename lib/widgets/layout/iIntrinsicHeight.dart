@@ -3,11 +3,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class IntrinsicHeightDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/IntrinsicHeight';
-  final String detail = '''A widget that sizes its child to the child's intrinsic height.
-This class is useful, for example, when unlimited height is available and you would like a child that would otherwise attempt to expand infinitely to instead size itself to a more reasonable height.
-This class is relatively expensive, because it adds a speculative layout pass before the final layout phase. Avoid using it where possible. In the worst case, this widget can result in a layout that is O(N²) in the depth of the tree.
-See also:
-The catalog of layout widgets.''';
+  final String detail = '''一个小部件，可以将其子级调整为子级的内在高度。
+
+这个类非常有用，例如，当无限高度可用时，你想要一个孩子，否则他们会尝试无限扩展，而不是将自己的大小调整到更合理的高度。
+
+这个类相对昂贵，因为它在最终布局阶段之前添加了一个推测布局传递。尽可能避免使用它。在最坏的情况下，这个小部件可以导致树的深度为O（N²）的布局。''';
 
   @override
   _IntrinsicHeightDemoState createState() =>

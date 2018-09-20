@@ -3,10 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class AppBarDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/AppBar';
-  final String detail='''A material design app bar.
-An app bar consists of a toolbar and potentially other widgets, such as a TabBar and a FlexibleSpaceBar. App bars typically expose one or more common actions with IconButtons which are optionally followed by a PopupMenuButton for less common operations (sometimes called the "overflow menu").
-App bars are typically used in the Scaffold.appBar property, which places the app bar as a fixed-height widget at the top of the screen. For a scrollable app bar, see SliverAppBar, which embeds an AppBar in a sliver for use in a CustomScrollView.
-The AppBar displays the toolbar widgets, leading, title, and actions, above the bottom (if any). The bottom is usually used for a TabBar. If a flexibleSpace widget is specified then it is stacked behind the toolbar and the bottom widget. The following diagram shows where each of these slots appears in the toolbar when the writing language is left-to-right (e.g. English):''';
+  final String detail='''材料设计应用栏。
+
+应用栏由工具栏和可能的其他小部件组成，例如 TabBar和FlexibleSpaceBar。应用程序栏通常会使用IconButton公开一个或多个常见操作，对于不太常见的操作（有时称为“溢出菜单”），可选地后跟 PopupMenuButton。
+
+应用栏通常用于Scaffold.appBar属性，该属性将应用栏放置在屏幕顶部的固定高度小部件中。对于可滚动的应用栏，请参阅SliverAppBar，它将AppBar嵌入到条子中以便在CustomScrollView中使用。
+
+AppBar 在底部（如果有）上方显示工具栏小部件，前导，标题和操作。所述底部通常用于一个的TabBar。如果指定了flexibleSpace窗口小部件，则它将堆叠在工具栏和底部窗口小部件后面''';
 
   @override
   _AppBarDemoState createState() => _AppBarDemoState();

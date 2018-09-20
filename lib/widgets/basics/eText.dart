@@ -3,10 +3,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class TextDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/Text';
-  final String detail = '''A run of text with a single style.
-The Text widget displays a string of text with single style. The string might break across multiple lines or might all be displayed on the same line depending on the layout constraints.
-The style argument is optional. When omitted, the text will use the style from the closest enclosing DefaultTextStyle. If the given style's TextStyle.inherit property is true, the given style will be merged with the closest enclosing DefaultTextStyle. This merging behavior is useful, for example, to make the text bold while using the default font family and size.
-Using the new TextSpan.rich constructor, the Text widget can also be created with a TextSpan to display text that use multiple styles (e.g., a paragraph with some bold words).''';
+  final String detail = '''一系列具有单一样式的文本。
+
+“ 文本”小组件显示单个样式的文本字符串。字符串可能会跨越多行，也可能全部显示在同一行上，具体取决于布局约束。
+
+该风格参数可选。省略时，文本将使用最接近的DefaultTextStyle中的样式。如果给定样式的 TextStyle.inherit属性为true（默认值），则给定样式将与最接近的DefaultTextStyle合并。例如，这种合并行为很有用，可以在使用默认字体系列和大小时使文本变为粗体.''';
 
   @override
   _TextDemoState createState() => _TextDemoState();

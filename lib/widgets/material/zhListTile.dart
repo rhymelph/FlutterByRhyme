@@ -4,11 +4,15 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 class ListTileDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/ListTitle';
 
-  final String detail = '''A single fixed-height row that typically contains some text as well as a leading or trailing icon.
-A list tile contains one to three lines of text optionally flanked by icons or other widgets, such as check boxes. The icons (or other widgets) for the tile are defined with the leading and trailing parameters. The first line of text is not optional and is specified with title. The value of subtitle, which is optional, will occupy the space allocated for an additional line of text, or two lines if isThreeLine is true. If dense is true then the overall height of this tile and the size of the DefaultTextStyles that wrap the title and subtitle widget are reduced.
-List tiles are always a fixed height (which height depends on how isThreeLine, dense, and subtitle are configured); they do not grow in height based on their contents. If you are looking for a widget that allows for arbitrary layout in a row, consider Row.
-List tiles are typically used in ListViews, or arranged in Columns in Drawers and Cards.
-Requires one of its ancestors to be a Material widget.''';
+  final String detail = '''单个固定高度的行，通常包含一些文本以及前导或尾随图标。
+
+列表磁贴包含一到三行文本，可选地两侧是图标或其他小部件，例如复选框。使用前导和尾随参数定义图块的图标（或其他小部件）。第一行文本不是可选的，并使用标题指定。的价值 字幕，这是可选的，将占据两行分配额外的文字行的空间，或者如果isThreeLine是真实的。如果密集 为真，那么此图块的整体高度和包装标题和副标题窗口小部件的DefaultTextStyle的大小 将减少。
+
+列表图块始终是固定高度（高度取决于如何配置 三个线条，密集和字幕）; 它们的高度不会根据其内容增长。如果您正在寻找允许连续任意布局的小部件，请考虑Row。
+
+列表切片通常在ListView中使用，或者安排在Drawer和Card中的Column中 。
+
+需要其中一个祖先成为Material小部件。''';
 
   @override
   _ListTileDemoState createState() => _ListTileDemoState();

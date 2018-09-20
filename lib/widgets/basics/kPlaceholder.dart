@@ -4,9 +4,11 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 class PlaceholderDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/PlaceHolder';
   final String detail =
-      '''A widget that draws a box that represents where other widgets will one day be added.
-This widget is useful during development to indicate that the interface is not yet complete.
-By default, the placeholder is sized to fit its container. If the placeholder is in an unbounded space, it will size itself according to the given fallbackWidth and fallbackHeight.''';
+      '''一个小部件，用于绘制一个框，表示有一天会添加其他小部件的位置。
+
+此小组件在开发期间非常有用，表示接口尚未完成。
+
+默认情况下，占位符的大小适合其容器。如果占位符位于无界空间中，它将根据给定的fallbackWidth和fallbackHeight自行调整大小.''';
 
   @override
   _PlaceholderDemoState createState() => _PlaceholderDemoState();

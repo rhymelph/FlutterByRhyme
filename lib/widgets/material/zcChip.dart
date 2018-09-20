@@ -3,10 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class ChipDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/Chip';
-  final String detail = '''A material design chip.
-Chips are compact elements that represent an attribute, text, entity, or action.
-Supplying a non-null onDeleted callback will cause the chip to include a button for deleting the chip.
-Requires one of its ancestors to be a Material widget. The label, deleteIcon, and border arguments must not be null.''';
+  final String detail = '''材料设计芯片。
+
+芯片是表示属性，文本，实体或动作的紧凑元素。
+
+提供非null onDeleted回调将导致芯片包含用于删除芯片的按钮。
+
+需要其中一个祖先成为Material小部件。该标签， deleteIcon和border参数不能为空.''';
 
   @override
   _ChipDemoState createState() => _ChipDemoState();

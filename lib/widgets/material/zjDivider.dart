@@ -3,14 +3,13 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class DividerDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/Divider';
-  final String detail = '''A one device pixel thick horizontal line, with padding on either side.
-In the material design language, this represents a divider.
-Dividers can be used in lists, Drawers, and elsewhere to separate content vertically. To create a one-pixel divider between items in a list, consider using ListTile.divideTiles, which is optimized for this case.
-The box's total height is controlled by height. The appropriate padding is automatically computed from the height.
-See also:
-PopupMenuDivider, which is the equivalent but for popup menus.
-ListTile.divideTiles, another approach to dividing widgets in a list.
-material.google.com/components/dividers.html''';
+  final String detail = '''一个设备像素厚的水平线，两侧有填充。
+
+在材料设计语言中，这代表一个分隔符。
+
+分隔符可以在列表，抽屉和其他地方使用，以垂直分隔内容。要在列表中的项之间创建一个像素的分隔符，请考虑使用ListTile.divideTiles，它针对此情况进行了优化。
+
+盒子的总高度由高度控制。从高度自动计算适当的填充。''';
 
   @override
   _DividerDemoState createState() => _DividerDemoState();
