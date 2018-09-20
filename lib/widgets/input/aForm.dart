@@ -14,49 +14,121 @@ class FormDemo extends StatefulWidget {
 }
 
 class _FormDemoState extends ExampleState<FormDemo> {
-  GlobalKey<FormState> key = new GlobalKey();
-
   FormSetting setting;
+  bool isClickBack = false;
+  TextEditingController controller;
+
+  String saveText = '';
 
   @override
   void initState() {
+    controller = TextEditingController();
     setting = FormSetting(
-      child: Value(value: Builder(builder: (BuildContext context) {
-        return Column(
-          children: <Widget>[
-            FormField<double>(
-              onSaved: (double value) {
-                print('$value');
-              },
-              initialValue: 10.0,
-              validator: (double value){
-                return value>50?'大於50':'小於等於50';
-              },
-              builder: (FormFieldState<double> field) {
-                return new Slider(
-                  min: 0.0,
-                  max: 100.0,
-                  divisions: 5,
-                  activeColor: Colors.orange[100 + (field.value * 5.0).round()],
-                  label: '${field.value.round()}',
-                  value: field.value,
-                  onChanged: field.didChange,
-                );
-              },
-            ),
-          ],
-        );
-      })),
+      child: Value(
+        value: Builder(
+          builder: (BuildContext context) {
+            return Column(
+              children: <Widget>[
+                TextFormField(
+                  initialValue: saveText,
+                  onSaved: (value) {
+                    saveText = value;
+                  },
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: FlatButton(
+                            onPressed: () {
+                              Form.of(context).reset();
+                              print(saveText);
+                            },
+                            child: Text('重置'))),
+                    Expanded(
+                        child: FlatButton(
+                            onPressed: () {
+                              Form.of(context).save();
+                            },
+                            child: Text('保存')))
+                  ],
+                )
+              ],
+            );
+          },
+        ),
+        label: '''Builder(
+          builder: (BuildContext context) {
+            return Column(
+              children: <Widget>[
+                TextFormField(
+                //当调用Form.of(context).reset();返回该值
+                  initialValue: saveText,
+                  onSaved: (value) {
+                //当调用Form.of(context).save();会调用该方法
+                    saveText = value;
+                  },
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: FlatButton(
+                            onPressed: () {
+                              Form.of(context).reset();
+                              print(saveText);
+                            },
+                            child: Text('重置'))),
+                    Expanded(
+                        child: FlatButton(
+                            onPressed: () {
+                              Form.of(context).save();
+                            },
+                            child: Text('保存')))
+                  ],
+                )
+              ],
+            );
+          },
+        )''',
+
+      ),
       autovalidate: boolValues[0],
-      onWillPop: Value(value: () {
-        key.currentState.save();
-        return Future<bool>.value(true);
-      }),
+      onWillPop: Value(
+          value: () {
+            if (isClickBack) {
+              return Future<bool>.value(true);
+            } else {
+              isClickBack = true;
+              exampleKey.currentState.showToast('再按一次退出');
+              return Future<bool>.value(false);
+            }
+          },
+          label: '''Value(value: () {
+        //bool isClickBack=false;
+        if (isClickBack) {
+          return Future<bool>.value(true);
+        } else {
+        //这里可以保存值
+          isClickBack = true;
+          //showToast('再按一次退出');
+          return Future<bool>.value(false);
+        }
+      }'''),
       onChanged: Value(value: () {
-        print('发生改变');
-      }),
+        //当值发生该变时调用
+//        print('发生改变');
+      },label: '''() {
+        //当值发生该变时调用
+      }'''),
     );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (controller != null) {
+      controller.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -66,7 +138,12 @@ class _FormDemoState extends ExampleState<FormDemo> {
 
   @override
   String getExampleCode() {
-    return '''''';
+    return '''Form(
+      child: ${setting.child?.label??''},
+      autovalidate: ${setting.autovalidate?.label??''},
+      onWillPop: ${setting.onWillPop?.label??''},
+      onChanged: ${setting.onChanged?.label??''},
+    )''';
   }
 
   @override
@@ -91,7 +168,6 @@ class _FormDemoState extends ExampleState<FormDemo> {
   @override
   Widget getWidget() {
     return Form(
-      key: key,
       child: setting.child?.value,
       autovalidate: setting.autovalidate?.value,
       onWillPop: setting.onWillPop?.value,

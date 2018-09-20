@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
 
 class RawKeyboardListenerDemo extends StatefulWidget {
@@ -17,33 +18,57 @@ class RawKeyboardListenerDemo extends StatefulWidget {
 class _RawKeyboardListenerDemoState
     extends ExampleState<RawKeyboardListenerDemo> {
   RawKeyboardListenerSetting setting;
-  String putDownKey='';
+  String putDownKey = '';
   FocusNode focusNode;
+
   @override
   void initState() {
-    focusNode=FocusNode()
-      ..addListener((){
-        print('hasFocus:${focusNode.hasFocus}');
-        print('consumeKeyboardToken:${focusNode.consumeKeyboardToken()}');
-        print('runtimeType:${focusNode.runtimeType.toString()}');
+    focusNode = FocusNode()
+      ..addListener(() {
+//        print('hasFocus:${focusNode.hasFocus}');
+//        print('consumeKeyboardToken:${focusNode.consumeKeyboardToken()}');
+//        print('runtimeType:${focusNode.runtimeType.toString()}');
       });
     setting = RawKeyboardListenerSetting(
       child: Value(
-          value: TextField(
-        controller: TextEditingController(),
-      )),
-      focusNode: Value(
-        value: focusNode,
-        label: 'focusNode'
-      ),
-      onKey: Value(
-        value: (key){
-          setState(() {
-            //TODO key.data获取到的键
-            putDownKey=key.data.toString();
-          });
-        }
-      ),
+          value: Builder(
+            builder: (BuildContext context) {
+              return EditableText(
+                controller: TextEditingController(),
+                cursorColor: Colors.grey,
+                style: Theme.of(context).textTheme.body1,
+                focusNode: focusNode,
+              );
+            },
+          ),
+          label: '''Builder(
+            builder: (BuildContext context) {
+              return EditableText(
+                controller: TextEditingController(),
+                cursorColor: Colors.grey,
+                style: Theme.of(context).textTheme.body1,
+                focusNode: focusNode,
+              );
+            },
+          )'''),
+      focusNode: Value(value: focusNode, label: 'focusNode'),
+      onKey: Value(value: (key) {
+        setState(() {
+          //TODO key.data获取到的键
+          RawKeyEventDataAndroid a = key.data;
+          putDownKey =
+              'flags(事件标志):${a.flags}\ncodePoint(Unicode字符):${a.codePoint}\nkeyCode(键码):${a.keyCode}\nmetaState(源键状态)${a.metaState}\nscanCode(事件源):${a.scanCode}';
+          print(key);
+        });
+      },label: '''key) {
+        setState(() {
+          RawKeyEventDataAndroid a = key.data;
+          //a.flags
+          //a.keyCode
+          //...
+          //print(key);
+        });
+      }'''),
     );
     super.initState();
   }
@@ -55,7 +80,11 @@ class _RawKeyboardListenerDemoState
 
   @override
   String getExampleCode() {
-    return '''''';
+    return '''RawKeyboardListener(
+      child: ${setting.child?.label??''},
+      focusNode: ${setting.focusNode?.label??''},
+      onKey: ${setting.onKey?.label??''},
+    )''';
   }
 
   @override
