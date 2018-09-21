@@ -90,6 +90,9 @@ class _RawKeyboardListenerDemoState
   @override
   List<Widget> getSetting() {
     return [
+      Center(
+        child: Text('该监听的是物理按键，非虚拟按键'),
+      ),
       ValueTitleWidget('当前按下的键为:'),
       Center(child: Text(putDownKey)),
     ];

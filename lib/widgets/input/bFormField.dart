@@ -20,9 +20,59 @@ class FormFieldDemo extends StatefulWidget {
 class _FormFieldDemoState extends ExampleState<FormFieldDemo> {
   FormFieldSetting setting;
 
+  double saveValue;
+
   @override
   void initState() {
-    setting = FormFieldSetting();
+    setting = FormFieldSetting(
+      initialValue: Value(
+        value: 0.0,
+        label: '0.0',
+      ),
+      autovalidate: boolValues[0],
+      validator: Value(),
+      builder: Value(
+          value: (FormFieldState<dynamic> field) {
+            return Row(
+              children: <Widget>[
+                Slider(
+                  value: field.value,
+                  min: 0.0,
+                  divisions: 100,
+                  max: 100.0,
+                  onChanged: field.didChange,
+                ),
+                Text('${field.value}%'),
+              ],
+            );
+          },
+          label: r'''(FormFieldState<dynamic> field) {
+            return Row(
+              children: <Widget>[
+                Slider(
+                  value: field.value,
+                  min: 0.0,
+                  divisions: 100,
+                  max: 100.0,
+                  onChanged: field.didChange,
+                ),
+                Text('${field.value}%'),
+              ],
+            );
+          }'''),
+      onSaved: Value(
+          value: (value) {
+            setState(() {
+              saveValue = value;
+            });
+          },
+          label: '''(value) {
+            //使用 Form.of(context).save();
+            //或者 formstate.currentState.save();
+            //该方法会被调用
+            //必须使用Form包裹
+          }'''),
+    );
     super.initState();
   }
 
@@ -34,17 +84,33 @@ class _FormFieldDemoState extends ExampleState<FormFieldDemo> {
   @override
   String getExampleCode() {
     return '''FormField(
-      builder: ${setting.builder?.label??''},
-      initiallabel??''}: ${setting.initialValue??''},
-      autovalidate: ${setting.autovalidate?.label??''},
-      validator: ${setting.validator?.label??''},
-      onSaved: ${setting.onSaved?.label??''},
+      builder: ${setting.builder?.label ?? ''},
+      initialValue: ${setting.initialValue.label ?? ''},
+      autovalidate: ${setting.autovalidate?.label ?? ''},
+      validator: ${setting.validator?.label ?? ''},
+      onSaved: ${setting.onSaved?.label ?? ''},
     )''';
   }
 
   @override
   List<Widget> getSetting() {
-    return [];
+    return [
+      SwitchValueTitleWidget(
+          title: StringParams.kAutovalidate,
+          value: setting.autovalidate,
+          onChanged: (value) {
+            setState(() {
+              setting = setting.copyWith(autovalidate: value);
+            });
+          }),
+      ValueTitleButtonWidget(
+        title: '保存',
+        onPressed: () {
+          key.currentState.save();
+        },
+      ),
+      ValueTitleStringWidget(title: '保存的值', value: '$saveValue')
+    ];
   }
 
   @override
@@ -52,14 +118,19 @@ class _FormFieldDemoState extends ExampleState<FormFieldDemo> {
     return 'FormField';
   }
 
+  GlobalKey<FormState> key=new GlobalKey();
+
   @override
   Widget getWidget() {
-    return FormField(
-      builder: setting.builder?.value,
-      initialValue: setting.initialValue?.value,
-      autovalidate: setting.autovalidate?.value,
-      validator: setting.validator?.value,
-      onSaved: setting.onSaved?.value,
+    return Form(
+      key: key,
+      child: FormField(
+        builder: setting.builder?.value,
+        initialValue: setting.initialValue?.value,
+        autovalidate: setting.autovalidate?.value,
+        validator: setting.validator?.value,
+        onSaved: setting.onSaved?.value,
+      ),
     );
   }
 }

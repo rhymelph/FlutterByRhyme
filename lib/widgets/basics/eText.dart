@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
-
+import 'package:flutter/services.dart';
 class TextDemo extends StatefulWidget {
   static const String routeName = 'widgets/basics/Text';
   final String detail = '''一系列具有单一样式的文本。

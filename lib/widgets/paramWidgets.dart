@@ -137,6 +137,35 @@ class SwitchValueTitleWidget extends StatelessWidget {
   }
 }
 
+//string 标题
+class ValueTitleStringWidget extends StatelessWidget {
+  ValueTitleStringWidget(
+      {@required this.title, @required this.value,});
+
+  final String value;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return _ParamItem(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.title,
+            ),
+          ),
+          Text(
+            value,
+            style: Theme.of(context).textTheme.body1,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 //下拉选项标题
 class DropDownValueTitleWidget<T> extends StatelessWidget {
   DropDownValueTitleWidget(
