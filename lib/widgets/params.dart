@@ -299,6 +299,13 @@ class StringParams {
 
   static final String kAutovalidate = 'Autovalidate(自动校验)';
 
+  static final String kFirstCurve = 'FirstCurve(第一个动画曲线)';
+  static final String kSecondCurve = 'SecondCurve(第二个动画曲线)';
+  static final String kSizeCurve = 'SizeCurve(尺寸动画曲线)';
+
+  static final String kCrossFadeState ='CrossFadeState(交叉状态)';
+
+
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -3090,5 +3097,18 @@ List<Value<WrapCrossAlignment>> wrapCrossAlignmentValues=[
     name: 'end',
     value: WrapCrossAlignment.end,
     label: 'WrapCrossAlignment.end',
+  ),
+];
+
+List<Value<CrossFadeState>> crossFadeStateValues=[
+  Value(
+    name: 'showFirst',
+    value: CrossFadeState.showFirst,
+    label: 'CrossFadeState.showFirst'
+  ),
+  Value(
+      name: 'showSecond',
+      value: CrossFadeState.showSecond,
+      label: 'CrossFadeState.showSecond'
   ),
 ];
