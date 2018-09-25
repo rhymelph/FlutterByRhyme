@@ -54,14 +54,21 @@ class _PositionedTransitionDemoState
 
   @override
   String getExampleCode() {
-    return '''Stack(
+    return '''//vsync: this 需要 with SingleTickerProviderStateMixin
+AnimationController _controller =
+        new AnimationController(vsync: this, duration: Duration(seconds: 1));
+        
+Stack(
       children: <Widget>[
   PositionedTransition(
       child: ${setting.child?.label ?? ''},
       rect: ${setting.rect?.label ?? ''},
     )
    ],
-  )''';
+  )
+  
+ //动画启动
+ _controller.forward();''';
   }
 
   @override

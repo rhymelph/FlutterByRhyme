@@ -208,6 +208,8 @@ class StringParams {
 
   static final String kContent = 'Content(内容)';
   static final String kBarrierDismissible = 'BarrierDismissible(点外部可取消)';
+  static final String kDismissible = 'kDismissible(可取消)';
+  static final String kBarrierSemanticsDismissible = 'BarrierSemanticsDismissible(障碍语义可容)';
   static final String kLowerBound = 'LowerBound(下限)';
   static final String kUpperBound = 'UpperBound(上限)';
   static final String kIsExpanded = 'IsExpanded(是否膨胀)';
@@ -308,6 +310,8 @@ class StringParams {
   static final String kPosition = 'Position(位置)';
 
   static final String kAlwaysIncludeSemantics = 'AlwaysIncludeSemantics(总是包含语义)';
+
+  static final String kAxis = 'Axis(轴)';
 
 
 }

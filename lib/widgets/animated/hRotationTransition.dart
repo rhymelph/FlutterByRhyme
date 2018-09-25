@@ -3,7 +3,7 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class RotationTransitionDemo extends StatefulWidget {
   static const String routeName = 'widgets/assets/RotationTransition';
-  final String detail = '''''';
+  final String detail = '''动画小部件的旋转。''';
 
   @override
   _RotationTransitionDemoState createState() => _RotationTransitionDemoState();
@@ -43,10 +43,17 @@ class _RotationTransitionDemoState extends ExampleState<RotationTransitionDemo>
 
   @override
   String getExampleCode() {
-    return '''RotationTransition(
+    return '''//vsync: this 需要 with SingleTickerProviderStateMixin
+AnimationController _controller =
+        new AnimationController(vsync: this, duration: Duration(seconds: 1));
+        
+RotationTransition(
       turns: ${setting.turns?.label ?? ''},
       child: ${setting.child?.label ?? ''},
-    )''';
+    )
+    
+//动画启动
+ _controller.forward();''';
   }
 
   @override

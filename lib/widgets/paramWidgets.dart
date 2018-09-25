@@ -803,18 +803,18 @@ class _TextStyleDemoState extends State<TextStyleDemo> {
             changeValue();
           });
         }),
-        SwitchValueTitleWidget(
-          title: StringParams.kInherit,
-          value: setting.inherit,
-          onChanged: (value) {
-            setState(() {
-              setting = setting.copyWith(
-                inherit: value,
-              );
-              changeValue();
-            });
-          },
-        ),
+//        SwitchValueTitleWidget(
+//          title: StringParams.kInherit,
+//          value: setting.inherit,
+//          onChanged: (value) {
+//            setState(() {
+//              setting = setting.copyWith(
+//                inherit: value,
+//              );
+//              changeValue();
+//            });
+//          },
+//        ),
         DropDownValueTitleWidget(
           selectList: fontSizeValues,
           title: StringParams.kFontSize,
