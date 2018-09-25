@@ -59,14 +59,18 @@ class _AnimatedBuilderDemoState extends ExampleState<AnimatedBuilderDemo>
 
   @override
   String getExampleCode() {
-    return '''AnimationController _controller =
+    return '''//vsync: this 需要 with SingleTickerProviderStateMixin
+AnimationController _controller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
         
 AnimatedBuilder(
       animation: ${setting.animation?.label??''},
       builder: ${setting.builder?.label??''},
       child: ${setting.child?.label??''},
-    )''';
+    )
+    
+ //动画启动
+ _controller.forward();''';
   }
 
   @override

@@ -305,6 +305,10 @@ class StringParams {
 
   static final String kCrossFadeState ='CrossFadeState(交叉状态)';
 
+  static final String kPosition = 'Position(位置)';
+
+  static final String kAlwaysIncludeSemantics = 'AlwaysIncludeSemantics(总是包含语义)';
+
 
 }
 
@@ -3110,5 +3114,18 @@ List<Value<CrossFadeState>> crossFadeStateValues=[
       name: 'showSecond',
       value: CrossFadeState.showSecond,
       label: 'CrossFadeState.showSecond'
+  ),
+];
+
+List<Value<DecorationPosition>> decorationPositionValues=[
+  Value(
+      name: 'background',
+      value: DecorationPosition.background,
+      label: 'DecorationPosition.background'
+  ),
+  Value(
+      name: 'foreground',
+      value: DecorationPosition.foreground,
+      label: 'DecorationPosition.foreground'
   ),
 ];

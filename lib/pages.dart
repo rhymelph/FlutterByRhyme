@@ -27,7 +27,7 @@ const String finishDemo=
     'Padding,Center,Align,FittedBox,AspectRatio,ConstrainedBox,Baseline,FractionallySizedBox,IntrinsicHeight,IntrinsicWidth,LimitedBox,Offstage,OverflowBox,SizedOverflowBox,Transform,CustomSingleChildLayout,Stack,IndexedStack,Flow,Table,Wrap,ListBody,ListView,CustomMultiChildLayout,LayoutBuilder,RichText,DefaultTextStyle,'
     'RawImage,AssetBundle,'
     'Form,FormField,RawKeyboardListener,'
-    'AnimatedContainer,AnimatedCrossFade,Hero,AnimatedBuilder';
+    'AnimatedContainer,AnimatedCrossFade,Hero,AnimatedBuilder,DecoratedBoxTransition,FadeTransition,PositionedTransition,RotationTransition';
 
 class BottomItem {
   final String title;
