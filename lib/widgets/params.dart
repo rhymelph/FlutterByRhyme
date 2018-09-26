@@ -325,6 +325,12 @@ class StringParams {
   static final String kRight = 'Right(右)';
   static final String kTop = 'Top(顶部)';
 
+  static final String  kDragAnchor = 'DragAnchor(拖拽锚)';
+
+  static final String kHapticFeedbackOnStart = 'HapticFeedbackOnStart(启动触动反馈)';
+
+  static final String kIgnoringFeedbackSemantics = 'IgnoringFeedbackSemantics(忽略反馈语义)';
+
 
 }
 
@@ -3197,5 +3203,18 @@ List<Value<Clip>> clipValues=[
     name:'antiAliasWithSaveLayer',
     value: Clip.antiAliasWithSaveLayer,
     label: 'Clip.antiAliasWithSaveLayer',
+  ),
+];
+
+List<Value<DragAnchor>> dragAnchorValues=[
+  Value(
+      name: 'child',
+    value: DragAnchor.child,
+    label: 'DragAnchor.child',
+  ),
+  Value(
+    name: 'pointer',
+    value: DragAnchor.pointer,
+    label: 'DragAnchor.pointer',
   ),
 ];

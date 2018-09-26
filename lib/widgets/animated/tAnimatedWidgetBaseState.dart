@@ -20,7 +20,17 @@ class _AnimatedWidgetBaseStateDemoState
 
   @override
   void initState() {
-    setting = AnimatedWidgetBaseStateSetting();
+    setting = AnimatedWidgetBaseStateSetting(
+      child: Value(
+        value: Center(
+          child: Text('Circle'),
+        ),
+        label: "Center(child: Text('Circle'),)",
+      ),
+      color: colorValues[0],
+      borderColor: colorValues[1],
+      width: doubleMiniValues[0],
+    );
     super.initState();
   }
 
@@ -31,12 +41,84 @@ class _AnimatedWidgetBaseStateDemoState
 
   @override
   String getExampleCode() {
-    return '''''';
+    return '''class AnimatedCircle extends ImplicitlyAnimatedWidget {
+  final Color color;
+  final Color borderColor;
+  final Widget child;
+  final double width;
+
+  AnimatedCircle({
+    @required this.width,
+    @required this.child,
+    @required this.color,
+    this.borderColor,
+    Curve curve: Curves.linear,
+    Duration duration: const Duration(seconds: 1),
+  }) : super(curve: curve, duration: duration);
+
+  @override
+  _AnimatedCircleState createState() => _AnimatedCircleState();
+}
+
+class _AnimatedCircleState extends AnimatedWidgetBaseState<AnimatedCircle> {
+  ColorTween color;
+  ColorTween borderColor;
+  Tween<double> width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100.0,
+      height: 100.0,
+      decoration: BoxDecoration(
+        color: color.evaluate(animation),
+        shape: BoxShape.circle,
+        border: Border.all(
+            color: borderColor.evaluate(animation),
+            width: width.evaluate(animation)),
+      ),
+      child: widget.child,
+    );
+  }
+
+  @override
+  void forEachTween(TweenVisitor visitor) {
+    color = visitor(
+        color, widget.color, (dynamic value) => new ColorTween(begin: value));
+    borderColor = visitor(borderColor, widget.borderColor,
+        (dynamic value) => new ColorTween(begin: value));
+    width = visitor(width, widget.width,
+        (dynamic value) => new Tween<double>(begin: value));
+  }
+}''';
   }
 
   @override
   List<Widget> getSetting() {
-    return [];
+    return [
+      ValueTitleWidget(StringParams.kColor),
+      ColorGroupWidget(setting.color, (value) {
+        setState(() {
+          setting = setting.copyWith(color: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kBorder),
+      ColorGroupWidget(setting.borderColor, (value) {
+        setState(() {
+          setting = setting.copyWith(borderColor: value);
+        });
+      }),
+      DropDownValueTitleWidget(
+        selectList: doubleMiniValues,
+        title: StringParams.kWidth,
+        value: setting.width,
+        onChanged: (value) {
+          setState(() {
+            setting = setting.copyWith(width: value);
+          });
+        },
+      )
+    ];
   }
 
   @override
@@ -44,40 +126,94 @@ class _AnimatedWidgetBaseStateDemoState
     return 'AnimatedWidgetBaseState';
   }
 
-
   @override
   Widget getWidget() {
-    return AnimatedCircle();
+    return Center(
+      child: AnimatedCircle(
+        width: setting.width?.value,
+        color: setting.color?.value,
+        borderColor: setting.borderColor?.value,
+        child: setting.child?.value,
+      ),
+    );
   }
 }
 
 class AnimatedWidgetBaseStateSetting {
+  final Value<double> width;
+  final Value<Color> color;
+  final Value<Color> borderColor;
+  final Value<Widget> child;
 
-//  AnimatedWidgetBaseStateSetting({
-//  });
-//
-//  AnimatedWidgetBaseStateSetting copyWith({
-//  }) {
-//    return AnimatedWidgetBaseStateSetting(
-//    );
-//  }
+  AnimatedWidgetBaseStateSetting({
+    this.width,
+    this.color,
+    this.borderColor,
+    this.child,
+  });
+
+  AnimatedWidgetBaseStateSetting copyWith({
+    Value<Color> color,
+    Value<Color> borderColor,
+    Value<Widget> child,
+    Value<double> width,
+  }) {
+    return AnimatedWidgetBaseStateSetting(
+      color: color ?? this.color,
+      width: width ?? this.width,
+      borderColor: borderColor ?? this.borderColor,
+      child: child ?? this.child,
+    );
+  }
 }
 
-class AnimatedCircle extends ImplicitlyAnimatedWidget{
+class AnimatedCircle extends ImplicitlyAnimatedWidget {
+  final Color color;
+  final Color borderColor;
+  final Widget child;
+  final double width;
+
+  AnimatedCircle({
+    @required this.width,
+    @required this.child,
+    @required this.color,
+    this.borderColor,
+    Curve curve: Curves.linear,
+    Duration duration: const Duration(seconds: 1),
+  }) : super(curve: curve, duration: duration);
+
   @override
-  _AnimatedCircleState createState() =>_AnimatedCircleState();
-
-
+  _AnimatedCircleState createState() => _AnimatedCircleState();
 }
 
-class _AnimatedCircleState extends AnimatedWidgetBaseState<AnimatedCircle>{
+class _AnimatedCircleState extends AnimatedWidgetBaseState<AnimatedCircle> {
+  ColorTween color;
+  ColorTween borderColor;
+  Tween<double> width;
 
   @override
   Widget build(BuildContext context) {
+    return Container(
+      width: 100.0,
+      height: 100.0,
+      decoration: BoxDecoration(
+        color: color.evaluate(animation),
+        shape: BoxShape.circle,
+        border: Border.all(
+            color: borderColor.evaluate(animation),
+            width: width.evaluate(animation)),
+      ),
+      child: widget.child,
+    );
   }
 
   @override
   void forEachTween(TweenVisitor visitor) {
+    color = visitor(
+        color, widget.color, (dynamic value) => new ColorTween(begin: value));
+    borderColor = visitor(borderColor, widget.borderColor,
+        (dynamic value) => new ColorTween(begin: value));
+    width = visitor(width, widget.width,
+        (dynamic value) => new Tween<double>(begin: value));
   }
-
 }

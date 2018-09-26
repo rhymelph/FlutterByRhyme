@@ -106,12 +106,12 @@ class _IdeaDelegate extends MultiChildLayoutDelegate {
 
     positionChild(
         _IdeaId.left,
-        Offset((size.width - leftSize.width) / 2 -spacing,
+        Offset((size.width / 2) - leftSize.width -spacing,
             (size.height - leftSize.height) / 2));
 
     positionChild(
         _IdeaId.right,
-        Offset((size.width +rightSize.width)/ 2+spacing,
+        Offset((size.width / 2 )+spacing,
             (size.height - rightSize.height) / 2));
   }
 
@@ -222,14 +222,15 @@ class _IdeaDelegate extends MultiChildLayoutDelegate {
     leftSize = layoutChild(_IdeaId.left, box);
     rightSize = layoutChild(_IdeaId.right, box);
 
+
     positionChild(
         _IdeaId.left,
-        Offset((size.width - leftSize.width) / 2 -spacing,
+        Offset((size.width / 2) - leftSize.width -spacing,
             (size.height - leftSize.height) / 2));
 
     positionChild(
         _IdeaId.right,
-        Offset((size.width +rightSize.width)/ 2+spacing,
+        Offset((size.width / 2 )+spacing,
             (size.height - rightSize.height) / 2));
   }
 
