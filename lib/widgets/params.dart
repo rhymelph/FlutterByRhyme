@@ -281,9 +281,9 @@ class StringParams {
 
   static final String kDefaultColumnWidth = 'defaultColumnWidth(默认栏宽)';
 
-  static final String kDirection ='Direction(方向)';
+  static final String kDirection = 'Direction(方向)';
 
-  static final String kRunAlignment ='RunAlignment(运行对准)';
+  static final String kRunAlignment = 'RunAlignment(运行对准)';
   static final String kRunSpacing = 'RunSpacing(跑道间距)';
   static final String kSpecing = 'Spacing(间距)';
   static final String kMainAxis = 'MainAxis（主轴）';
@@ -292,9 +292,9 @@ class StringParams {
 
   static final String kScrollDirection = 'ScrollDirection(滚动方向)';
 
-  static final String kShrinkWrap ='ShrinkWrap(收缩)';
-  static final String kAddAutomaticKeepAlives ='AddAutomaticKeepAlives(添加自动保存别名)';
-  static final String kAddRepaintBoundaries ='AddRepaintBoundaries(添加重新绘制边界)';
+  static final String kShrinkWrap = 'ShrinkWrap(收缩)';
+  static final String kAddAutomaticKeepAlives = 'AddAutomaticKeepAlives(添加自动保存别名)';
+  static final String kAddRepaintBoundaries = 'AddRepaintBoundaries(添加重新绘制边界)';
 
   static final String kItemExtent = 'ItemExtent(项目范围)';
   static final String kCacheExtent = 'CacheExtent(缓存范围)';
@@ -305,13 +305,25 @@ class StringParams {
   static final String kSecondCurve = 'SecondCurve(第二个动画曲线)';
   static final String kSizeCurve = 'SizeCurve(尺寸动画曲线)';
 
-  static final String kCrossFadeState ='CrossFadeState(交叉状态)';
+  static final String kCrossFadeState = 'CrossFadeState(交叉状态)';
 
   static final String kPosition = 'Position(位置)';
 
   static final String kAlwaysIncludeSemantics = 'AlwaysIncludeSemantics(总是包含语义)';
 
   static final String kAxis = 'Axis(轴)';
+
+  static final String kClipBehavior = 'ClipBehavior(剪切行为)';
+  static final String  kBorderRadius = 'BorderRadius(边界半径)';
+
+  static final String kShadowColor = 'ShadowColor(阴影颜色)';
+
+  static final String kAnimateColor = 'AnimateColor(颜色动画)';
+  static final String kAnimateShadowColor = 'AnimateShadowColor(阴影颜色动画)';
+
+  static final String kLeft = 'Left(左)';
+  static final String kRight = 'Right(右)';
+  static final String kTop = 'Top(顶部)';
 
 
 }
@@ -795,7 +807,7 @@ const List<Value<ImageProvider>> imageValues = [
     value: NetworkImage(
         'https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg'),
     label:
-        "NetworkImage('https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg')",
+    "NetworkImage('https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg')",
   ),
 ];
 
@@ -2309,20 +2321,21 @@ List<Value<ScrollPhysics>> physicsValues = [
 List<Value<PopupMenuItemBuilder<String>>> popupMenuItemBuilderValues = [
   Value(
     name: 'threeItem',
-    value: (BuildContext context) => <PopupMenuEntry<String>>[
-          const PopupMenuItem<String>(
-            value: 'apple',
-            child: const Text('iPhone'),
-          ),
-          const PopupMenuItem<String>(
-            value: 'HuaWei',
-            child: const Text('Honer'),
-          ),
-          const PopupMenuItem<String>(
-            value: 'XiaoMi',
-            child: const Text('Mi'),
-          ),
-        ],
+    value: (BuildContext context) =>
+    <PopupMenuEntry<String>>[
+      const PopupMenuItem<String>(
+        value: 'apple',
+        child: const Text('iPhone'),
+      ),
+      const PopupMenuItem<String>(
+        value: 'HuaWei',
+        child: const Text('Honer'),
+      ),
+      const PopupMenuItem<String>(
+        value: 'XiaoMi',
+        child: const Text('Mi'),
+      ),
+    ],
     label: '''(BuildContext context) => <PopupMenuEntry<String>>[
           const PopupMenuItem<String>(
             value: 'apple',
@@ -2340,24 +2353,25 @@ List<Value<PopupMenuItemBuilder<String>>> popupMenuItemBuilderValues = [
   ),
   Value(
     name: 'fourItem',
-    value: (BuildContext context) => <PopupMenuEntry<String>>[
-          const PopupMenuItem<String>(
-            value: 'apple',
-            child: const Text('iPhone'),
-          ),
-          const PopupMenuItem<String>(
-            value: 'HuaWei',
-            child: const Text('Honer'),
-          ),
-          const PopupMenuItem<String>(
-            value: 'XiaoMi',
-            child: const Text('Mi'),
-          ),
-          const PopupMenuItem<String>(
-            value: 'Samsung',
-            child: const Text('Galaxy'),
-          ),
-        ],
+    value: (BuildContext context) =>
+    <PopupMenuEntry<String>>[
+      const PopupMenuItem<String>(
+        value: 'apple',
+        child: const Text('iPhone'),
+      ),
+      const PopupMenuItem<String>(
+        value: 'HuaWei',
+        child: const Text('Honer'),
+      ),
+      const PopupMenuItem<String>(
+        value: 'XiaoMi',
+        child: const Text('Mi'),
+      ),
+      const PopupMenuItem<String>(
+        value: 'Samsung',
+        child: const Text('Galaxy'),
+      ),
+    ],
     label: '''(BuildContext context) => <PopupMenuEntry<String>>[
           const PopupMenuItem<String>(
             value: 'apple',
@@ -2575,12 +2589,28 @@ List<Value<DateTime>> dateTimeValues = [
   ),
   Value(
     name: '1998/12/1 0:0:0 0:0',
-    value: DateTime(1998, 12, 1, 0, 0, 0, 0, 0),
+    value: DateTime(
+        1998,
+        12,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0),
     label: 'DateTime(1998,12,1 ,0,0,0, 0,0)',
   ),
   Value(
     name: 'UTC 2028/12/1 0:0:0 0:0',
-    value: DateTime.utc(2028, 12, 1, 0, 0, 0, 0, 0),
+    value: DateTime.utc(
+        2028,
+        12,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0),
     label: 'DateTime.utc(2008,12,1 ,0,0,0, 0,0)',
   ),
   Value(
@@ -3045,7 +3075,7 @@ List<Value<TableColumnWidth>> tableColumnWidthValues = [
   ),
 ];
 
-List<Value<Axis>> axisValues=[
+List<Value<Axis>> axisValues = [
 
   Value(
     name: 'horizontal',
@@ -3058,7 +3088,7 @@ List<Value<Axis>> axisValues=[
     label: 'Axis.vertical',
   ),
 ];
-List<Value<WrapAlignment>> wrapAlignmentValues=[
+List<Value<WrapAlignment>> wrapAlignmentValues = [
   Value(
     name: 'start',
     value: WrapAlignment.start,
@@ -3090,7 +3120,7 @@ List<Value<WrapAlignment>> wrapAlignmentValues=[
     label: 'WrapAlignment.spaceBetween',
   ),
 ];
-List<Value<WrapCrossAlignment>> wrapCrossAlignmentValues=[
+List<Value<WrapCrossAlignment>> wrapCrossAlignmentValues = [
   Value(
     name: 'start',
     value: WrapCrossAlignment.start,
@@ -3108,11 +3138,11 @@ List<Value<WrapCrossAlignment>> wrapCrossAlignmentValues=[
   ),
 ];
 
-List<Value<CrossFadeState>> crossFadeStateValues=[
+List<Value<CrossFadeState>> crossFadeStateValues = [
   Value(
-    name: 'showFirst',
-    value: CrossFadeState.showFirst,
-    label: 'CrossFadeState.showFirst'
+      name: 'showFirst',
+      value: CrossFadeState.showFirst,
+      label: 'CrossFadeState.showFirst'
   ),
   Value(
       name: 'showSecond',
@@ -3121,7 +3151,7 @@ List<Value<CrossFadeState>> crossFadeStateValues=[
   ),
 ];
 
-List<Value<DecorationPosition>> decorationPositionValues=[
+List<Value<DecorationPosition>> decorationPositionValues = [
   Value(
       name: 'background',
       value: DecorationPosition.background,
@@ -3131,5 +3161,41 @@ List<Value<DecorationPosition>> decorationPositionValues=[
       name: 'foreground',
       value: DecorationPosition.foreground,
       label: 'DecorationPosition.foreground'
+  ),
+];
+
+List<Value<BoxShape>> boxShapeValues = [
+  Value(
+    name: 'circle',
+    value: BoxShape.circle,
+    label: 'BoxShape.circle',
+  ),
+  Value(
+    name: 'rectangle',
+    value: BoxShape.rectangle,
+    label: 'BoxShape.rectangle',
+  ),
+];
+
+List<Value<Clip>> clipValues=[
+  Value(
+    name:'none',
+    value: Clip.none,
+    label: 'Clip.none',
+  ),
+  Value(
+    name:'hardEdge',
+    value: Clip.hardEdge,
+    label: 'Clip.hardEdge',
+  ),
+  Value(
+    name:'antiAlias',
+    value: Clip.antiAlias,
+    label: 'Clip.antiAlias',
+  ),
+  Value(
+    name:'antiAliasWithSaveLayer',
+    value: Clip.antiAliasWithSaveLayer,
+    label: 'Clip.antiAliasWithSaveLayer',
   ),
 ];
