@@ -137,6 +137,42 @@ class SwitchValueTitleWidget extends StatelessWidget {
   }
 }
 
+class SwitchTitleWidget extends StatelessWidget {
+  SwitchTitleWidget(
+      {@required this.title, @required this.value, @required this.onChanged});
+
+  final bool value;
+  final String title;
+  final ValueChanged<bool> onChanged;
+
+  void _onChanged(bool a) {
+    onChanged(a);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    return _ParamItem(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.title,
+            ),
+          ),
+          Switch(
+            value: value??false,
+            onChanged: _onChanged,
+            activeColor: Colors.blue,
+            activeTrackColor: isDark ? Colors.white24 : Colors.black26,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 //string 标题
 class ValueTitleStringWidget extends StatelessWidget {
   ValueTitleStringWidget(

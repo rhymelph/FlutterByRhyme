@@ -331,6 +331,19 @@ class StringParams {
 
   static final String kIgnoringFeedbackSemantics = 'IgnoringFeedbackSemantics(忽略反馈语义)';
 
+  static final String kBehavior = 'Behavior(行为)';
+
+  static final String kStatus = '状态';
+
+  static final String  kCrossAxisEndOffset = 'CrossAxisEndOffset(交叉轴偏移量)';
+
+  static final String  kResizeDuration = 'ResizeDuration(调整大小持续时间)';
+
+  static final String  kMovementDuration = 'MovementDuration(移动持续时间)';
+
+  static final String  kIgnoring = 'Ignoring(忽略)';
+  static final String  kIgnoringSemantics = 'IgnoringSemantics(忽略语义)';
+
 
 }
 
@@ -3216,5 +3229,56 @@ List<Value<DragAnchor>> dragAnchorValues=[
     name: 'pointer',
     value: DragAnchor.pointer,
     label: 'DragAnchor.pointer',
+  ),
+];
+
+List<Value<HitTestBehavior>> behaviorValues=[
+  Value(
+    name: 'translucent',
+    value: HitTestBehavior.translucent,
+    label: 'HitTestBehavior.translucent',
+  ),
+  Value(
+    name: 'deferToChild',
+    value: HitTestBehavior.deferToChild,
+    label: 'HitTestBehavior.deferToChild',
+  ),
+  Value(
+    name: 'opaque',
+    value: HitTestBehavior.opaque,
+    label: 'HitTestBehavior.opaque',
+  ),
+];
+
+List<Value<DismissDirection>> directionValues=[
+  Value(
+    name: 'endToStart',
+    value: DismissDirection.endToStart,
+    label: 'DismissDirection.endToStart'
+  ),
+  Value(
+      name: 'startToEnd',
+      value: DismissDirection.startToEnd,
+      label: 'DismissDirection.startToEnd'
+  ),
+  Value(
+      name: 'horizontal',
+      value: DismissDirection.horizontal,
+      label: 'DismissDirection.horizontal'
+  ),
+  Value(
+      name: 'up',
+      value: DismissDirection.up,
+      label: 'DismissDirection.up'
+  ),
+  Value(
+      name: 'down',
+      value: DismissDirection.down,
+      label: 'DismissDirection.down'
+  ),
+  Value(
+      name: 'vertical',
+      value: DismissDirection.vertical,
+      label: 'DismissDirection.vertical'
   ),
 ];

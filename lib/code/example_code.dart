@@ -103,6 +103,7 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
       isShowToast = true;
     });
     Future.delayed(Duration(milliseconds: 1000), () {
+      if(!mounted) return;
       setState(() {
         nbColor = Colors.transparent;
         ntColor = Colors.transparent;
