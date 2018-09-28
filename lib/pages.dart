@@ -28,7 +28,8 @@ const String finishDemo=
     'RawImage,AssetBundle,'
     'Form,FormField,RawKeyboardListener,'
     'AnimatedContainer,AnimatedCrossFade,Hero,AnimatedBuilder,DecoratedBoxTransition,FadeTransition,PositionedTransition,RotationTransition,ScaleTransition,SizeTransition,SlideTransition,SlideTransition,AnimatedDefaultTextStyle,AnimatedListState,AnimatedModalBarrier,AnimatedOpacity,AnimatedPhysicalModel,AnimatedPositioned,AnimatedSize,AnimatedWidget,AnimatedWidgetBaseState,'
-    'LongPressDraggable,GestureDetector,DragTarget,Dismissible,IgnorePointer';
+    'LongPressDraggable,GestureDetector,DragTarget,Dismissible,IgnorePointer,'
+    'Theme';
 
 class BottomItem {
   final String title;

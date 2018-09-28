@@ -344,6 +344,8 @@ class StringParams {
   static final String  kIgnoring = 'Ignoring(忽略)';
   static final String  kIgnoringSemantics = 'IgnoringSemantics(忽略语义)';
 
+  static final String kIsMaterialAppTheme = 'IsMaterialAppTheme(是材质应用主题)';
+
 
 }
 

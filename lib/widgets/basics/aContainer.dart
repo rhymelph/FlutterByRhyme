@@ -135,6 +135,7 @@ class ContainerSetting {
   final Value<Color> color;
   final Value<EdgeInsetsGeometry> padding;
   final Value<Decoration> decoration;
+//  final Value<BoxConstraints> constraints;
   final Value<Decoration> foregroundDecoration;
   final Value<EdgeInsetsGeometry> margin;
   final Value<Matrix4> transform;
