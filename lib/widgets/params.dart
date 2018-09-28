@@ -344,6 +344,10 @@ class StringParams {
   static final String  kIgnoring = 'Ignoring(忽略)';
   static final String  kIgnoringSemantics = 'IgnoringSemantics(忽略语义)';
 
+  static final String kAbsorbing = 'Absorbing(吸收)';
+
+  static final String kAxisDirection ='AxisDirection(轴方向)';
+
   static final String kIsMaterialAppTheme = 'IsMaterialAppTheme(是材质应用主题)';
 
 
@@ -3283,4 +3287,28 @@ List<Value<DismissDirection>> directionValues=[
       value: DismissDirection.vertical,
       label: 'DismissDirection.vertical'
   ),
+];
+
+List<Value<AxisDirection>> axisDirectionValues=[
+  Value(
+    name: 'down',
+    value: AxisDirection.down,
+    label: 'AxisDirection.down',
+  ),
+  Value(
+    name: 'up',
+    value: AxisDirection.up,
+    label: 'AxisDirection.up',
+  ),
+  Value(
+    name: 'left',
+    value: AxisDirection.left,
+    label: 'AxisDirection.left',
+  ),
+  Value(
+    name: 'right',
+    value: AxisDirection.right,
+    label: 'AxisDirection.right',
+  ),
+
 ];

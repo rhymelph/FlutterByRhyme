@@ -44,7 +44,7 @@ class _AbsorbPointerDemoState
   List<Widget> getSetting() {
     return [
       SwitchValueTitleWidget(
-          title: StringParams.kIgnoring,
+          title: StringParams.kAbsorbing,
           value: setting.absorbing,
           onChanged: (value) {
             setState(() {
