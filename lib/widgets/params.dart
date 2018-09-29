@@ -369,6 +369,10 @@ class StringParams {
 
   static get kQuarterTurns => 'QuarterTurns(四分之一圈)';
 
+  static get kIsComplex => 'IsComplex(复杂的)';
+
+  static get kWillChange => 'WillChange(将改变的)';
+
 
 }
 

@@ -5,7 +5,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 
 class ClipRectDemo extends StatefulWidget {
   static const String routeName = 'widgets/painting/ClipRect';
-  final String detail = '''''';
+  final String detail = '''使用矩形剪辑其子项的小部件。
+
+默认情况下，ClipRect会阻止其子项在其边界外绘制，但可以使用自定义限幅器自定义剪辑rect的大小和位置。''';
 
   @override
   _ClipRectDemoState createState() =>
@@ -25,7 +27,12 @@ class _ClipRectDemoState
       value: Clip.none,
       label: 'Clip.none',
     ));
-    setting = ClipRectSetting();
+    setting = ClipRectSetting(clipBehavior: _clipValues[0],
+    clipper: Value(
+    value: IdeaCustomRectClipper(),
+    label: 'IdeaCustomClipper()',
+    ),);
+    setting=setting.copyWith(child: _formatValue());
     super.initState();
   }
   Value<Widget> _formatValue(){
@@ -77,7 +84,7 @@ class IdeaCustomRectClipper extends CustomClipper<Rect>{
 
   @override
   String getExampleCode() {
-    return '''''';
+    return setting?.child?.label;
   }
 
   @override
