@@ -17,18 +17,30 @@ class MediaQueryDemo extends StatefulWidget {
 
 class _MediaQueryDemoState extends ExampleState<MediaQueryDemo> {
   MediaQuerySetting setting;
+  MediaQueryDataSetting dataSetting;
 
   @override
   void initState() {
     setting = MediaQuerySetting(
       child: Value(
-        value: Image.asset('images/burgers.jpg'),
-        label: "Image.asset('images/burgers.jpg')",
+        value: MediaQueryWidget(),
+        label: "MediaQueryWidget()",
       ),
-      data: Value(
-        value: MediaQueryData(),
-        label: 'MediaQueryData()',
-      )
+    );
+    dataSetting=MediaQueryDataSetting(
+      size: Value(
+        name: 'zero',
+        value: Size.zero,
+        label: 'Size.zero',
+      ),
+      devicePixelRatio: doubleMiniValues[1],
+      textScaleFactor: doubleMiniValues[1],
+      padding: edgeInsetsValues[0],
+      viewInsets: edgeInsetsValues[0],
+      alwaysUse24HourFormat: boolValues[0],
+      accessibleNavigation:  boolValues[0],
+      invertColors:  boolValues[0],
+      disableAnimations:  boolValues[0],
     );
     super.initState();
   }
@@ -40,12 +52,188 @@ class _MediaQueryDemoState extends ExampleState<MediaQueryDemo> {
 
   @override
   String getExampleCode() {
-    return '''''';
+    return '''MediaQuery(
+      child: ${setting.child?.label??''},
+      data: MediaQueryData(
+        size: ${dataSetting.size?.label??''},
+        devicePixelRatio: ${dataSetting.devicePixelRatio?.label??''},
+        textScaleFactor: ${dataSetting?.textScaleFactor?.label??''},
+        padding: ${dataSetting.padding?.label??''},
+        viewInsets: ${dataSetting.viewInsets?.label??''},
+        alwaysUse24HourFormat: ${dataSetting.alwaysUse24HourFormat?.label??''},
+        accessibleNavigation: ${dataSetting.accessibleNavigation?.label??''},
+        invertColors: ${dataSetting.invertColors?.label??''},
+        disableAnimations: ${dataSetting.disableAnimations?.label??''},
+      ),
+    )
+    
+    
+'''+r'''class MediaQueryWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          Size size = constraints.biggest;
+          return Center(
+            child: Container(
+              width: size.width - 100.0,
+              alignment: Alignment.center,
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    Image.asset(
+                      'images/burgers.jpg',
+                      fit: BoxFit.cover,
+                      width: size.width - 100.0,
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                        ),
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                        ),
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                        ),
+                        Icon(
+                          Icons.star_half,
+                          color: Colors.yellow,
+                        ),
+                        Icon(
+                          Icons.star_border,
+                          color: Colors.grey,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Text(
+                      'Burgers',
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    Expanded(
+                      child: Stack(
+                        children: <Widget>[
+                          Center(
+                            child: Text(
+                              r'$9.9',
+                              style: Theme.of(context).textTheme.display2.copyWith(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: PopupMenuButton(
+                              itemBuilder: (BuildContext context) {
+                                return <PopupMenuItem>[
+                                  PopupMenuItem(child: Text('Buy')),
+                                  PopupMenuItem(child: Text('Add to Cart')),
+                                ];
+                              },
+                              icon: Icon(Icons.more_horiz),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+  }
+}''';
   }
 
   @override
   List<Widget> getSetting() {
-    return [];
+    return [
+      ValueTitleWidget(StringParams.kScreenSize),
+      Center(
+        child: Text('${MediaQuery.of(context).size}'),
+      ),
+      ValueTitleWidget(StringParams.kScreenOrientation),
+      Center(
+        child: Text('${MediaQuery.of(context).orientation==Orientation.landscape?'横屏':'竖屏'}'),
+      ),
+      ValueTitleWidget(StringParams.kPadding),
+      RadioGroupWidget(dataSetting.padding, edgeInsetsValues, (value){
+        setState(() {
+          dataSetting=dataSetting.copyWith(padding: value);
+        });
+      }),
+      ValueTitleWidget(StringParams.kViewInsets),
+      RadioGroupWidget(dataSetting.viewInsets, edgeInsetsValues, (value){
+        setState(() {
+          dataSetting=dataSetting.copyWith(viewInsets: value);
+        });
+      }),
+      SwitchValueTitleWidget(title: StringParams.kAlwaysUse24HourFormat, value: dataSetting.alwaysUse24HourFormat, onChanged: (value){
+        setState(() {
+          setState(() {
+            dataSetting=dataSetting.copyWith(alwaysUse24HourFormat: value);
+          });
+        });
+      }),
+      SwitchValueTitleWidget(title: StringParams.kAccessibleNavigation, value: dataSetting.accessibleNavigation, onChanged: (value){
+        setState(() {
+          setState(() {
+            dataSetting=dataSetting.copyWith(accessibleNavigation: value);
+          });
+        });
+      }),
+      SwitchValueTitleWidget(title: StringParams.kInvertColors, value: dataSetting.invertColors, onChanged: (value){
+        setState(() {
+          setState(() {
+            dataSetting=dataSetting.copyWith(invertColors: value);
+          });
+        });
+      }),
+      SwitchValueTitleWidget(title: StringParams.kDisableAnimations, value: dataSetting.disableAnimations, onChanged: (value){
+        setState(() {
+          setState(() {
+            dataSetting=dataSetting.copyWith(disableAnimations: value);
+          });
+        });
+      }),
+      DropDownValueTitleWidget<double>(
+        selectList: doubleMiniValues,
+        title: StringParams.kDevicePixelRatio,
+        value: dataSetting.devicePixelRatio,
+        onChanged: (value) {
+          setState(() {
+            dataSetting = dataSetting.copyWith(
+              devicePixelRatio: value,
+            );
+          });
+        },
+      ),
+      DropDownValueTitleWidget<double>(
+        selectList: doubleMiniValues,
+        title: StringParams.kTextScaleFactor,
+        value: dataSetting.textScaleFactor,
+        onChanged: (value) {
+          setState(() {
+            dataSetting = dataSetting.copyWith(
+              textScaleFactor: value,
+            );
+          });
+        },
+      ),
+    ];
   }
 
   @override
@@ -57,27 +245,169 @@ class _MediaQueryDemoState extends ExampleState<MediaQueryDemo> {
   Widget getWidget() {
     return MediaQuery(
       child: setting.child?.value,
-      data: setting.data?.value,
+      data: MediaQueryData(
+        size: dataSetting.size?.value,
+        devicePixelRatio: dataSetting.devicePixelRatio?.value,
+        textScaleFactor: dataSetting?.textScaleFactor?.value,
+        padding: dataSetting.padding?.value,
+        viewInsets: dataSetting.viewInsets?.value,
+        alwaysUse24HourFormat: dataSetting.alwaysUse24HourFormat?.value,
+        accessibleNavigation: dataSetting.accessibleNavigation?.value,
+        invertColors: dataSetting.invertColors?.value,
+        disableAnimations: dataSetting.disableAnimations?.value,
+      ),
     );
   }
 }
 
 class MediaQuerySetting {
   final Value<Widget> child;
-  final Value<MediaQueryData> data;
 
   MediaQuerySetting({
     this.child,
-    this.data,
   });
 
   MediaQuerySetting copyWith({
     Value<Widget> child,
-    Value<MediaQueryData> data,
   }) {
     return MediaQuerySetting(
       child: child ?? this.child,
-      data: data ?? this.data,
     );
+  }
+}
+
+class MediaQueryDataSetting{
+  final Value<Size> size;
+  final Value<double> devicePixelRatio;
+  final Value<double> textScaleFactor;
+  final Value<EdgeInsets> padding;
+  final Value<EdgeInsets> viewInsets;
+  final Value<bool> alwaysUse24HourFormat;
+  final Value<bool> accessibleNavigation;
+  final Value<bool> invertColors;
+  final Value<bool> disableAnimations;
+  MediaQueryDataSetting({
+    this.size,
+    this.devicePixelRatio,
+    this.textScaleFactor,
+    this.padding ,
+    this.viewInsets,
+    this.alwaysUse24HourFormat,
+    this.accessibleNavigation,
+    this.invertColors,
+    this.disableAnimations,
+});
+  
+  MediaQueryDataSetting copyWith({
+   Value<Size> size,
+   Value<double> devicePixelRatio,
+   Value<double> textScaleFactor,
+   Value<EdgeInsets> padding,
+   Value<EdgeInsets> viewInsets,
+   Value<bool> alwaysUse24HourFormat,
+   Value<bool> accessibleNavigation,
+   Value<bool> invertColors,
+   Value<bool> disableAnimations,
+}){
+    return MediaQueryDataSetting(
+      size: size??this.size,
+      devicePixelRatio: devicePixelRatio??this.devicePixelRatio,
+      textScaleFactor: textScaleFactor??this.textScaleFactor,
+      padding: padding??this.padding,
+      viewInsets: viewInsets??this.viewInsets,
+      alwaysUse24HourFormat: alwaysUse24HourFormat??this.alwaysUse24HourFormat,
+      accessibleNavigation: accessibleNavigation??this.accessibleNavigation,
+      invertColors: invertColors??this.invertColors,
+      disableAnimations: disableAnimations??this.disableAnimations,
+    );
+  }
+}
+
+class MediaQueryWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          Size size = constraints.biggest;
+          return Center(
+            child: Container(
+              width: size.width - 100.0,
+              alignment: Alignment.center,
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    Image.asset(
+                      'images/burgers.jpg',
+                      fit: BoxFit.cover,
+                      width: size.width - 100.0,
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                        ),
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                        ),
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                        ),
+                        Icon(
+                          Icons.star_half,
+                          color: Colors.yellow,
+                        ),
+                        Icon(
+                          Icons.star_border,
+                          color: Colors.grey,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Text(
+                      'Burgers',
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    Expanded(
+                      child: Stack(
+                        children: <Widget>[
+                          Center(
+                            child: Text(
+                              r'$9.9',
+                              style: Theme.of(context).textTheme.display2.copyWith(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: PopupMenuButton(
+                              itemBuilder: (BuildContext context) {
+                                return <PopupMenuItem>[
+                                  PopupMenuItem(child: Text('Buy')),
+                                  PopupMenuItem(child: Text('Add to Cart')),
+                                ];
+                              },
+                              icon: Icon(Icons.more_horiz),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 }

@@ -350,6 +350,25 @@ class StringParams {
 
   static final String kIsMaterialAppTheme = 'IsMaterialAppTheme(是材质应用主题)';
 
+  static String get kScreenSize => '屏幕大小';
+
+  static String get kScreenOrientation => '屏幕方向';
+
+  static String get kViewInsets => 'ViewInsets(视图内边距)';
+
+  static String get kDevicePixelRatio => 'DevicePixelRatio(设备像素比)';
+
+  static get kAlwaysUse24HourFormat => 'AlwaysUse24HourFormat(始终使用24小时格式)';
+  static get kAccessibleNavigation => 'AccessibleNavigation(无障碍导航)';
+
+  static get kInvertColors => 'InvertColors(反色)';
+
+  static get kDisableAnimations => 'DisableAnimations(禁用动画)';
+
+  static String get kTranslation => 'Translation(转换)';
+
+  static get kQuarterTurns => 'QuarterTurns(四分之一圈)';
+
 
 }
 
@@ -3311,4 +3330,55 @@ List<Value<AxisDirection>> axisDirectionValues=[
     label: 'AxisDirection.right',
   ),
 
+];
+
+List<Value<EdgeInsets>> edgeInsetsValues=[
+  Value(
+    name: 'zero',
+    value: EdgeInsets.zero,
+    label: 'EdgeInsets.zero',
+  ),
+  Value(
+    name: 'all',
+    value: EdgeInsets.all(8.0),
+    label: 'EdgeInsets.all(8.0)',
+  ),
+  Value(
+    name: 'symmetric',
+    value: EdgeInsets.symmetric(vertical: 4.0),
+    label: 'EdgeInsets.symmetric(vertical: 4.0)',
+  ),
+  Value(
+    name: 'fromLTRB',
+    value: EdgeInsets.fromLTRB(2.0,3.0,4.0,5.0),
+    label: 'EdgeInsets.fromLTRB(2.0,3.0,4.0,5.0)',
+  ),
+  Value(
+    name: 'only',
+    value: EdgeInsets.only(left: 4.0),
+    label: 'EdgeInsets.only(left: 4.0)',
+  ),
+];
+
+List<Value<Offset>> offsetValues=[
+  Value(
+    name: 'zero',
+    value: Offset.zero,
+    label: 'Offset.zero',
+  ),
+  Value(
+    name: '(0.1,0.1)',
+    value: Offset(0.1,0.1),
+    label: 'Offset(0.1,0.1)',
+  ),
+  Value(
+    name: '(0.1,0.0)',
+    value: Offset(0.1,0.0),
+    label: 'Offset(0.1,0.0)',
+  ),
+  Value(
+    name: '(0.0,0.1)',
+    value: Offset(0.0,0.1),
+    label: 'Offset(0.0,0.1)',
+  ),
 ];

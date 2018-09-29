@@ -29,7 +29,7 @@ const String finishDemo=
     'Form,FormField,RawKeyboardListener,'
     'AnimatedContainer,AnimatedCrossFade,Hero,AnimatedBuilder,DecoratedBoxTransition,FadeTransition,PositionedTransition,RotationTransition,ScaleTransition,SizeTransition,SlideTransition,SlideTransition,AnimatedDefaultTextStyle,AnimatedListState,AnimatedModalBarrier,AnimatedOpacity,AnimatedPhysicalModel,AnimatedPositioned,AnimatedSize,AnimatedWidget,AnimatedWidgetBaseState,'
     'LongPressDraggable,GestureDetector,DragTarget,Dismissible,IgnorePointer,AbsorbPointer,Navigator,Scrollable'
-    'Theme';
+    'Theme,MediaQuery,FractionalTranslation,RotatedBox,ClipOval,ClipPath,ClipRect';
 
 class BottomItem {
   final String title;
