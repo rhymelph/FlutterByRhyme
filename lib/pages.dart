@@ -28,8 +28,10 @@ const String finishDemo=
     'RawImage,AssetBundle,'
     'Form,FormField,RawKeyboardListener,'
     'AnimatedContainer,AnimatedCrossFade,Hero,AnimatedBuilder,DecoratedBoxTransition,FadeTransition,PositionedTransition,RotationTransition,ScaleTransition,SizeTransition,SlideTransition,SlideTransition,AnimatedDefaultTextStyle,AnimatedListState,AnimatedModalBarrier,AnimatedOpacity,AnimatedPhysicalModel,AnimatedPositioned,AnimatedSize,AnimatedWidget,AnimatedWidgetBaseState,'
-    'LongPressDraggable,GestureDetector,DragTarget,Dismissible,IgnorePointer,AbsorbPointer,Navigator,Scrollable'
-    'Theme,MediaQuery,FractionalTranslation,RotatedBox,ClipOval,ClipPath,ClipRect,CustomPaint,BackdropFilter';
+    'LongPressDraggable,GestureDetector,DragTarget,Dismissible,IgnorePointer,AbsorbPointer,Navigator,Scrollable,'
+    'Theme,MediaQuery,FractionalTranslation,RotatedBox,ClipOval,ClipPath,ClipRect,CustomPaint,BackdropFilter,'
+    'FutureBuilder,StreamBuilder,'
+    'NestedScrollView,GridView,SingleChildScrollView,Scrollbar,CustomScrollView,NotificationListener,ScrollConfiguration';
 
 class BottomItem {
   final String title;
@@ -1307,8 +1309,8 @@ List<Page> _buildPage() {
         subhead: '只能有一个子项的可滚动的部件，子项内容超过父容器时可以滚动。',
         icon: null,
         category: _kScrolling,
-        routeName: ListViewDemo.routeName,
-        buildRoute: (BuildContext context) => ListViewDemo()),
+        routeName: SingleChildScrollViewDemo.routeName,
+        buildRoute: (BuildContext context) => SingleChildScrollViewDemo()),
     Page(
         title: 'Scrollable',
         subhead: '实现了可滚动部件的交互模型，但不包含UI显示相关的逻辑。',

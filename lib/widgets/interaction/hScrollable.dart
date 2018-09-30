@@ -39,9 +39,6 @@ class _ScrollableDemoState extends ExampleState<ScrollableDemo> {
       physics: physicsValues[0],
       viewportBuilder: Value(
         value: (BuildContext context, ViewportOffset position) {
-          position.addListener((){
-            print('${position.pixels}');
-          });
           return Viewport(offset: position,cacheExtent: 0.0,
           slivers: <Widget>[
             SliverFillViewport(delegate: SliverChildListDelegate([
@@ -50,7 +47,19 @@ class _ScrollableDemoState extends ExampleState<ScrollableDemo> {
             ])),
           ],);
         },
-        label: '',
+        label: r'''Value(
+        value: (BuildContext context, ViewportOffset position) {
+          position.addListener((){
+            //position.pixels获取到滚动距离
+          });
+          return Viewport(offset: position,cacheExtent: 0.0,
+          slivers: <Widget>[
+            SliverFillViewport(delegate: SliverChildListDelegate([
+              Image.asset('images/burgers.jpg'),
+              Image.asset('images/pazzer.jpg'),
+            ])),
+          ],);
+        }''',
       ),
       excludeFromSemantics: boolValues[0],
     );

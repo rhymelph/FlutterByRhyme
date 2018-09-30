@@ -35,56 +35,26 @@ class _ListViewDemoState extends ExampleState<ListViewDemo> {
     setting = ListViewSetting(
       children: Value(
         value: <Widget>[
-          ListTile(
-            leading: CircleAvatar(
-              child: Text('F'),
-            ),
-            title: Text('Flutter'),
-          ),
-          ListTile(
-            leading: CircleAvatar(
-              child: Text('D'),
-            ),
-            title: Text('Dart'),
-          ),
-          ListTile(
-            leading: CircleAvatar(
-              child: Text('A'),
-            ),
-            title: Text('Android'),
-          ),
-          ListTile(
-            leading: CircleAvatar(
-              child: Text('I'),
-            ),
-            title: Text('IOS'),
-          ),
+          Text('I'),
+          Text('❤'),
+          Text('Love'),
+          Text('❤'),
+          Text('Flutter'),
+          Text('❤'),
+          Text('And'),
+          Text('❤'),
+          Text('Dart'),
         ],
         label: '''<Widget>[
-        ListTile(
-          leading: CircleAvatar(
-            child: Text('F'),
-          ),
-          title: Text('Flutter'),
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            child: Text('D'),
-          ),
-          title: Text('Dart'),
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            child: Text('A'),
-          ),
-          title: Text('Android'),
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            child: Text('I'),
-          ),
-          title: Text('IOS'),
-        ),
+        Text('I'),
+          Text('❤'),
+          Text('Love'),
+          Text('❤'),
+          Text('Flutter'),
+          Text('❤'),
+          Text('And'),
+          Text('❤'),
+          Text('Dart'),
       ]''',
       ),
       reverse: boolValues[0],
