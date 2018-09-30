@@ -31,7 +31,8 @@ const String finishDemo=
     'LongPressDraggable,GestureDetector,DragTarget,Dismissible,IgnorePointer,AbsorbPointer,Navigator,Scrollable,'
     'Theme,MediaQuery,FractionalTranslation,RotatedBox,ClipOval,ClipPath,ClipRect,CustomPaint,BackdropFilter,'
     'FutureBuilder,StreamBuilder,'
-    'NestedScrollView,GridView,SingleChildScrollView,Scrollbar,CustomScrollView,NotificationListener,ScrollConfiguration';
+    'NestedScrollView,GridView,SingleChildScrollView,Scrollbar,CustomScrollView,NotificationListener,ScrollConfiguration，RefreshIndicator,'
+    'Semantics';
 
 class BottomItem {
   final String title;

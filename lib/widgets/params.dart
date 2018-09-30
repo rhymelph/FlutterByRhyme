@@ -373,6 +373,8 @@ class StringParams {
 
   static get kWillChange => 'WillChange(将改变的)';
 
+  static get kDisplacement => 'Displacement(拖动位置)';
+
 
 }
 
