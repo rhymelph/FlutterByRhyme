@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterbyrhyme/options/help.dart';
 import 'theme.dart';
 import 'scales.dart';
 import 'package:flutterbyrhyme/about.dart';
@@ -156,6 +157,9 @@ class OptionsPage extends StatelessWidget {
               onOptionsChanged: onOptionsChanged,
             ),
             const _Header('关于'),
+//            _ActionItem('使用帮助', () {
+//              pushToHelp(context);
+//            }),
             _ActionItem('关于Flutter教程', () {
               showMyAboutDialog(context);
             }),
@@ -164,6 +168,11 @@ class OptionsPage extends StatelessWidget {
             }),
           ],
         ));
+  }
+
+  void pushToHelp(BuildContext context){
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) => Help()));
   }
 }
 

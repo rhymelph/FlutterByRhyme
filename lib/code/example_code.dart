@@ -96,6 +96,8 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
   List<Widget> body;
 
   void showToast(String content) {
+    if(mounted) return;
+
     setState(() {
       this.content = content;
       nbColor = this.vbColor;

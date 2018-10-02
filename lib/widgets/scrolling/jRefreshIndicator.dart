@@ -71,8 +71,7 @@ class _RefreshIndicatorDemoState
         
         //延迟一秒加载数据
         new Timer(Duration(seconds: 1), () {
-          // 添加数据
-          exampleKey.currentState.showToast('加载数据');
+          // 加载数据
           //返回值,即将指示器消失
           completer.complete(null);
         });

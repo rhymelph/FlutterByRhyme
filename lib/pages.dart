@@ -32,7 +32,7 @@ const String finishDemo=
     'Theme,MediaQuery,FractionalTranslation,RotatedBox,ClipOval,ClipPath,ClipRect,CustomPaint,BackdropFilter,'
     'FutureBuilder,StreamBuilder,'
     'NestedScrollView,GridView,SingleChildScrollView,Scrollbar,CustomScrollView,NotificationListener,ScrollConfiguration，RefreshIndicator,'
-    'Semantics';
+    'Semantics,MergeSemantics，ExcludeSemantics';
 
 class BottomItem {
   final String title;

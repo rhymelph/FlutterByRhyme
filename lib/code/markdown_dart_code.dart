@@ -189,6 +189,7 @@ class DartMarkDown extends StatelessWidget {
         List<Widget> childs = [];
         bool isRow = false;
         bool isTableTitle = true;
+        bool space=true;
         for (int j = 0; j < tableText.length; j++) {
           String text = tableText[j];
           if (text.isEmpty && childs.length == 0) {
@@ -199,10 +200,11 @@ class DartMarkDown extends StatelessWidget {
             ));
           } else if (text.isEmpty && childs.length != 0) {
             isRow = true;
+            space=!space;
             widgets.add(Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: j % 2 == 0 ? normal2 : normal1,
+                color: isTableTitle?normal1:(space ? normal2 : normal1),
                 border: Border(
                   bottom: BorderSide(
                     color: borderColor,

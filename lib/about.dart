@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
 
-const String applicationVersion = '0.0.5';
+const String applicationVersion = '0.0.6';
 const String applicationLegalese = '© 2018 the rhymelph author';
 const about_platform = const MethodChannel('samples.flutter.io/about');
 const AliPay = 'DonateToMe';
@@ -58,7 +58,7 @@ void showMyAboutDialog(BuildContext context) {
   final ThemeData data = Theme.of(context);
   final TextStyle abouleTextStyle = data.textTheme.body2;
   final TextStyle linkStyle =
-      data.textTheme.body2.copyWith(color: data.accentColor);
+      data.textTheme.body2.copyWith(color: data.accentColor,decoration: TextDecoration.underline);
 
   showDialog<void>(
       context: context,
