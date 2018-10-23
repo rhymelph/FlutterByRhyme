@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
-import 'package:flutterbyrhyme/code/markdown_dart_code.dart';
 class MergeSemanticsDemo extends StatefulWidget {
   static const String routeName='widgets/access/MergeSemantics';
   final String detail='''## 介绍
@@ -29,16 +28,19 @@ MergeSemantics(
   @override
   _MergeSemanticsDemoState createState() => _MergeSemanticsDemoState();
 }
-class _MergeSemanticsDemoState extends State<MergeSemanticsDemo> {
+class _MergeSemanticsDemoState extends MarkdownState<MergeSemanticsDemo> {
+
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('MergeSemantics'),
-      ),
-      body: DartMarkDown(widget.detail),
-    );
+  String getMarkdownSource() {
+    return widget.detail;
   }
+
+  @override
+  String getTitle() {
+    return 'MergeSemantics';
+  }
+
+
 }
 

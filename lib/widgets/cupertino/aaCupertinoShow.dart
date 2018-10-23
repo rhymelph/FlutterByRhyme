@@ -1,3 +1,5 @@
+library cupertino;
+
 export 'aCupertinoActivityIndicator.dart';
 export 'bCupertinoAlertDialog.dart';
 export 'cCupertinoButton.dart';
@@ -12,3 +14,7 @@ export 'kCupertinoTabBar.dart';
 export 'lCupertinoPageScaffold.dart';
 export 'mCupertinoTabScaffold.dart';
 export 'nCupertinoTabView.dart';
+export 'oCupertinoActionSheet.dart';
+export 'pCupertinoSegmentedControl.dart';
+export 'qCupertinoPicker.dart';
+export 'rCupertinoTimerPicker.dart';

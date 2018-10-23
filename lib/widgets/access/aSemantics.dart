@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbyrhyme/code/markdown_dart_code.dart';
+import 'package:flutterbyrhyme/code/example_code.dart';
 class SemanticsDemo extends StatefulWidget {
   static const String routeName='widgets/access/Semantics';
   final String detail='''## 简介
@@ -73,15 +73,16 @@ class SemanticsDemo extends StatefulWidget {
   _SemanticsDemoState createState() => _SemanticsDemoState();
 }
 
-class _SemanticsDemoState extends State<SemanticsDemo> {
+class _SemanticsDemoState extends MarkdownState<SemanticsDemo> {
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Semantics'),
-      ),
-      body: DartMarkDown(widget.detail),
-    );
+  String getMarkdownSource() {
+    return widget.detail;
+  }
+
+  @override
+  String getTitle() {
+    return 'Semantics';
   }
 
 }

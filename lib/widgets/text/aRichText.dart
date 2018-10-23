@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
-import 'dart:io';
 
 class RichTextDemo extends StatefulWidget {
   static const String routeName = 'widgets/text/RichText';

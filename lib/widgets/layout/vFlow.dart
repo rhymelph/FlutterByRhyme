@@ -114,7 +114,6 @@ class _MyFlowDelegate extends FlowDelegate{
     int count=context.childCount;
     for(int i=0;i<count;i++){
       //获取子Widget的宽高
-      Size size=context.getChildSize(i);
       //调用方法画子Widget，paintChild(int i, { Matrix4 transform, double opacity = 1.0 } i传入
       context.paintChild(i,transform: Matrix4.translationValues(10.0*i, 10.0*i, 0.0),opacity: i/count);
     } 

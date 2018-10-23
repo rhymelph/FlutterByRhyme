@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/code/example_code.dart';
-import 'package:flutterbyrhyme/code/markdown_dart_code.dart';
 
 class ThemeDemo extends StatefulWidget {
   static const String routeName = 'widgets/styling/Theme';
@@ -165,18 +164,16 @@ class _MyAppState extends State<MyApp> {
   _ThemeDemoState createState() => _ThemeDemoState();
 }
 
-class _ThemeDemoState extends State<ThemeDemo> {
+class _ThemeDemoState extends MarkdownState<ThemeDemo> {
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Theme'),
-      ),
-      body: SingleChildScrollView(
-        child: DartMarkDown(widget.detail),
-      ),
-    );
+  String getMarkdownSource() {
+    return widget.detail;
+  }
+
+  @override
+  String getTitle() {
+    return 'Theme';
   }
 }
 

@@ -146,7 +146,7 @@ Stepper(
       }),
       DropDownValueTitleWidget(
         selectList: intMini2Values,
-        title: 'currentStep',
+        title: StringParams.kCurrentStep,
         value: setting.currentStep,
         onChanged: (value) {
           setState(() {

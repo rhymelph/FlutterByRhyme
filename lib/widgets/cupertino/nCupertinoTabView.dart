@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbyrhyme/code/markdown_dart_code.dart';
-class CupertinoTabViewDemo extends StatelessWidget {
+import 'package:flutterbyrhyme/code/example_code.dart';
+
+
+class CupertinoTabViewDemo extends StatefulWidget {
   static const String routeName = 'widgets/cupertino/CupertinoTabView';
   static const String detail='''> 5个参数
 
@@ -126,16 +128,19 @@ new CupertinoTabScaffold(tabBar: CupertinoTabBar(items: <BottomNavigationBarItem
 ```
 
 ''';
+  @override
+  _CupertinoTabViewDemoState createState() => _CupertinoTabViewDemoState();
+}
+
+class _CupertinoTabViewDemoState extends MarkdownState<CupertinoTabViewDemo> {
+  @override
+  String getMarkdownSource() {
+    return CupertinoTabViewDemo.detail;
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('CupertinoTabView'),
-      ),
-      body: SingleChildScrollView(
-        child: DartMarkDown(CupertinoTabViewDemo.detail),
-      ),
-    );
+  String getTitle() {
+    return 'CupertinoTabView';
   }
+
 }

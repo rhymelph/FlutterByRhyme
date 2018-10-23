@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutterbyrhyme/code/markdown_dart_code.dart';
-class AssetBundleDemo extends StatelessWidget {
+import 'package:flutterbyrhyme/code/example_code.dart';
+class AssetBundleDemo extends StatefulWidget {
   static const String routeName='widgets/assets/AssetBundle';
   static const String detail='''> AssetBundle是一个抽象类，主要有以下方法
 
@@ -49,17 +48,19 @@ void evict(String key)
 ## 注意
 使用AssetBundle需要导入package:flutter/services.dart 包，rootBundle其实就是PlatformAssetBundle类的对象.
 ''';
+  @override
+  _AssetBundleDemoState createState() => _AssetBundleDemoState();
+}
+
+class _AssetBundleDemoState extends MarkdownState<AssetBundleDemo> {
+  @override
+  String getMarkdownSource() {
+    return AssetBundleDemo.detail;
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('AssetBundle'),
-      ),
-      body: SingleChildScrollView(
-        child: DartMarkDown(AssetBundleDemo.detail),
-      ),
-    );
+  String getTitle() {
+    return 'AssetBundle';
   }
 
 }

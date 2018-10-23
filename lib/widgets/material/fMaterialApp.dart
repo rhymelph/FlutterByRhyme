@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbyrhyme/code/markdown_dart_code.dart';
+import 'package:flutterbyrhyme/code/example_code.dart';
+
 class MaterialAppDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/MaterialApp';
-  static const String detail='''> 22个参数
+  static const String detail = '''> 22个参数
 
 | 字段|类型| 
 | - | - |
@@ -417,21 +418,19 @@ new MaterialApp(
 ## 22. debugShowCheckedModeBanner
 > 当为true时，在debug模式下显示右上角的debug字样的横幅，false即为不显示
 ''';
+
   @override
   _MaterialAppDemoState createState() => _MaterialAppDemoState();
 }
 
-class _MaterialAppDemoState extends State<MaterialAppDemo> {
+class _MaterialAppDemoState extends MarkdownState<MaterialAppDemo> {
+  @override
+  String getMarkdownSource() {
+    return MaterialAppDemo.detail;
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('MaterialApp'),
-      ),
-      body: SingleChildScrollView(
-        child: DartMarkDown(MaterialAppDemo.detail),
-      ),
-    );
+  String getTitle() {
+    return "MaterialApp";
   }
 }

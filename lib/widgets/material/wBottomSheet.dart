@@ -128,7 +128,7 @@ Widget getBottomSheet() {
         ),
       ),
       SwitchValueTitleWidget(
-        title: 'Use Modal',
+        title: StringParams.kIsShowModal,
         value: setting.isShowModal,
         onChanged: (value) {
           setState(() {
@@ -137,7 +137,7 @@ Widget getBottomSheet() {
         },
       ),
       SwitchValueTitleWidget(
-        title: 'enableDrag',
+        title: StringParams.kEnableDrag,
         value: setting.enableDrag,
         onChanged: (value) {
           setState(() {
@@ -166,7 +166,7 @@ Widget getBottomSheet() {
       onClosing: setting.onClosing?.value,
       builder: setting.builder?.value,
       animationController: setting.animationController?.value,
-//      enableDrag: setting.enableDrag?.value,
+      enableDrag: setting.enableDrag?.value,
     );
   }
 

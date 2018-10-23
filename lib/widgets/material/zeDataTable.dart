@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbyrhyme/code/markdown_dart_code.dart';
+import 'package:flutterbyrhyme/code/example_code.dart';
 
 class DataTableDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/DataTable';
@@ -251,62 +251,72 @@ Widget getPaginatedDataTable(){
   _DataTableDemoState createState() => _DataTableDemoState();
 }
 
-class _DataTableDemoState extends State<DataTableDemo>{
-  //默认的行数
-  int _defalutRowPageCount = PaginatedDataTable.defaultRowsPerPage;
-  int index;
-  bool b=true;
-  MyTable table = MyTable();
+class _DataTableDemoState extends MarkdownState<DataTableDemo>{
+//  //默认的行数
+//  int _defalutRowPageCount = PaginatedDataTable.defaultRowsPerPage;
+//  int index;
+//  bool b=true;
+//  MyTable table = MyTable();
+//
+//  void _sort<T>(Comparable<T> getField(Shop s),int index,bool b){
+//    table._sort(getField, b);
+//    setState(() {
+//      this.index=index;
+//      this.b=b;
+//    });
+//  }
+//
+//  List<DataColumn> getColumn() {
+//    return [
+//      DataColumn(label: Text('商品名'),onSort: (i,b){_sort<String>((Shop p) =>p.name, i, b);}),
+//      DataColumn(label: Text('价格'),onSort: (i,b){_sort<num>((Shop p) =>p.price, i, b);}),
+//      DataColumn(label: Text('库存'),onSort: (i,b){_sort<num>((Shop p) =>p.number, i, b);}),
+//      DataColumn(label: Text('类型'),onSort: (i,b){_sort<String>((Shop p) =>p.type, i, b);}),
+//    ];
+//  }
+//  @override
+//  Widget build(BuildContext context) {
+//    return Scaffold(
+//      appBar: AppBar(title: Text('DataTable'),),
+//      body: SingleChildScrollView(
+//        child: Column(
+//          children: <Widget>[
+//            PaginatedDataTable(
+//              rowsPerPage: _defalutRowPageCount,
+//              onRowsPerPageChanged: (value) {
+//                setState(() {
+//                  _defalutRowPageCount = value;
+//                });
+//              },
+//              sortColumnIndex: index,
+//              initialFirstRowIndex: 0,
+//              sortAscending: b,
+//              availableRowsPerPage: [
+//                5,10
+//              ],
+//              onPageChanged: (value){
+//                print('$value');
+//              },
+//              onSelectAll: table.selectAll,
+//              header: Text('商品库存'),
+//              columns: getColumn(),
+//              source: table,
+//            ),
+//            DartMarkDown(widget.detail),
+//          ]
+//        ),
+//      ),
+//    );
+//  }
 
-  void _sort<T>(Comparable<T> getField(Shop s),int index,bool b){
-    table._sort(getField, b);
-    setState(() {
-      this.index=index;
-      this.b=b;
-    });
-  }
-
-  List<DataColumn> getColumn() {
-    return [
-      DataColumn(label: Text('商品名'),onSort: (i,b){_sort<String>((Shop p) =>p.name, i, b);}),
-      DataColumn(label: Text('价格'),onSort: (i,b){_sort<num>((Shop p) =>p.price, i, b);}),
-      DataColumn(label: Text('库存'),onSort: (i,b){_sort<num>((Shop p) =>p.number, i, b);}),
-      DataColumn(label: Text('类型'),onSort: (i,b){_sort<String>((Shop p) =>p.type, i, b);}),
-    ];
-  }
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('DataTable'),),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            PaginatedDataTable(
-              rowsPerPage: _defalutRowPageCount,
-              onRowsPerPageChanged: (value) {
-                setState(() {
-                  _defalutRowPageCount = value;
-                });
-              },
-              sortColumnIndex: index,
-              initialFirstRowIndex: 0,
-              sortAscending: b,
-              availableRowsPerPage: [
-                5,10
-              ],
-              onPageChanged: (value){
-                print('$value');
-              },
-              onSelectAll: table.selectAll,
-              header: Text('商品库存'),
-              columns: getColumn(),
-              source: table,
-            ),
-            DartMarkDown(widget.detail),
-          ]
-        ),
-      ),
-    );
+  String getMarkdownSource() {
+    return widget.detail;
+  }
+
+  @override
+  String getTitle() {
+    return 'DataTable';
   }
 }
 

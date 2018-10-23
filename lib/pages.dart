@@ -16,7 +16,6 @@ import 'package:flutterbyrhyme/widgets/scrolling/aScrollingShow.dart';
 import 'package:flutterbyrhyme/widgets/access/aAccessShow.dart';
 import 'package:flutterbyrhyme/design/aDesignShow.dart';
 import 'package:flutterbyrhyme/network/temp.dart';
-
 import 'package:flutter/foundation.dart';
 
 const String finishDemo=
@@ -32,7 +31,8 @@ const String finishDemo=
     'Theme,MediaQuery,FractionalTranslation,RotatedBox,ClipOval,ClipPath,ClipRect,CustomPaint,BackdropFilter,'
     'FutureBuilder,StreamBuilder,'
     'NestedScrollView,GridView,SingleChildScrollView,Scrollbar,CustomScrollView,NotificationListener,ScrollConfiguration，RefreshIndicator,'
-    'Semantics,MergeSemantics，ExcludeSemantics';
+    'Semantics,MergeSemantics，ExcludeSemantics,'
+    'CupertinoActionSheet,CupertinoSegmentedControl,CupertinoPicker,CupertinoTimerPickerDemo';
 
 class BottomItem {
   final String title;
@@ -697,6 +697,34 @@ List<Page> _buildPage() {
         category: _kCupertino,
         routeName: CupertinoTabViewDemo.routeName,
         buildRoute: (BuildContext context) => CupertinoTabViewDemo()),
+    Page(
+        title: 'CupertinoActionSheet',
+        subhead: 'iOS风格的底部操作表。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoActionSheetDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoActionSheetDemo()),
+    Page(
+        title: 'CupertinoSegmentedControl',
+        subhead: 'iOS风格的分段控件。用于在水平列表中选择互斥选项。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoSegmentedControlDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoSegmentedControlDemo()),
+    Page(
+        title: 'CupertinoPicker',
+        subhead: 'iOS风格的选择器控件。用于选择短列表中的项目。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoPickerDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoPickerDemo()),
+    Page(
+        title: 'CupertinoTimerPicker',
+        subhead: 'OS风格的倒数计时器选择器。',
+        icon: null,
+        category: _kCupertino,
+        routeName: CupertinoTimerPickerDemo.routeName,
+        buildRoute: (BuildContext context) => CupertinoTimerPickerDemo()),
 
     ///Layout
     Page(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbyrhyme/code/markdown_dart_code.dart';
+import 'package:flutterbyrhyme/code/example_code.dart';
 
 class ExcludeSemanticsDemo extends StatefulWidget {
   static const String routeName = 'widgets/access/ExcludeSemantics';
@@ -25,14 +25,16 @@ ExcludeSemantics(
   _ExcludeSemanticsDemoState createState() => _ExcludeSemanticsDemoState();
 }
 
-class _ExcludeSemanticsDemoState extends State<ExcludeSemanticsDemo> {
+class _ExcludeSemanticsDemoState extends MarkdownState<ExcludeSemanticsDemo> {
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('ExcludeSemantics'),
-      ),
-      body: DartMarkDown(widget.detail),
-    );
+  String getMarkdownSource() {
+    return widget.detail;
+  }
+
+  @override
+  String getTitle() {
+    return 'ExcludeSemantics';
+
   }
 }

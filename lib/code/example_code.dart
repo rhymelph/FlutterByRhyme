@@ -2,9 +2,81 @@ import 'package:flutter/material.dart';
 export 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
+import 'markdown_dart_code.dart';
 import 'package:flutterbyrhyme/code/code_highlighter.dart';
 export 'package:flutterbyrhyme/widgets/paramWidgets.dart';
 export 'code_highlighter.dart';
+
+abstract class MarkdownState<T extends StatefulWidget> extends State<T>{
+  bool showFloatingButton=false;
+  final ScrollController _controller = new ScrollController();
+
+  @override
+  void dispose() {
+    if (_controller != null) {
+      _controller.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      body: NotificationListener<ScrollNotification>(
+        onNotification: (ScrollNotification notification) {
+          if (showFloatingButton &&
+              notification.metrics.pixels <=
+                  MediaQuery.of(context).size.height) {
+            setState(() {
+              showFloatingButton = notification.metrics.pixels >
+                  MediaQuery.of(context).size.height;
+            });
+          } else if(!showFloatingButton&&
+              notification.metrics.pixels >
+                  MediaQuery.of(context).size.height){
+            setState(() {
+              showFloatingButton = notification.metrics.pixels >
+                  MediaQuery.of(context).size.height;
+            });
+          }
+          return false;
+        },
+        child: CustomScrollView(
+          controller: _controller,
+          slivers: <Widget>[
+            SliverAppBar(
+              floating: true,
+              pinned: false,
+              title: Text(getTitle()),
+            ),
+            SliverToBoxAdapter(
+              child: DartMarkDown(getMarkdownSource()),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: showFloatingButton
+          ? IconButton(
+        onPressed: () {
+          _controller.animateTo(0.0,
+              duration: Duration(milliseconds: 500),
+              curve: Curves.linear);
+        },
+        color: Theme.of(context).textTheme.title.color,
+        icon: Icon(
+          Icons.arrow_upward,
+        ),
+      )
+          : null,
+    );
+  }
+  @protected
+  String getTitle();
+
+  @protected
+  String getMarkdownSource();
+}
 
 abstract class ExampleState<T extends StatefulWidget> extends State<T> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -96,7 +168,7 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
   List<Widget> body;
 
   void showToast(String content) {
-    if(mounted) return;
+    if(!mounted) return;
 
     setState(() {
       this.content = content;
@@ -261,3 +333,4 @@ class _FullScreenCodeDialogState extends State<FullScreenCodeDialog> {
     );
   }
 }
+

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -209,7 +210,8 @@ class StringParams {
   static final String kContent = 'Content(内容)';
   static final String kBarrierDismissible = 'BarrierDismissible(点外部可取消)';
   static final String kDismissible = 'kDismissible(可取消)';
-  static final String kBarrierSemanticsDismissible = 'BarrierSemanticsDismissible(障碍语义可容)';
+  static final String kBarrierSemanticsDismissible =
+      'BarrierSemanticsDismissible(障碍语义可容)';
   static final String kLowerBound = 'LowerBound(下限)';
   static final String kUpperBound = 'UpperBound(上限)';
   static final String kIsExpanded = 'IsExpanded(是否膨胀)';
@@ -293,7 +295,8 @@ class StringParams {
   static final String kScrollDirection = 'ScrollDirection(滚动方向)';
 
   static final String kShrinkWrap = 'ShrinkWrap(收缩)';
-  static final String kAddAutomaticKeepAlives = 'AddAutomaticKeepAlives(添加自动保存别名)';
+  static final String kAddAutomaticKeepAlives =
+      'AddAutomaticKeepAlives(添加自动保存别名)';
   static final String kAddRepaintBoundaries = 'AddRepaintBoundaries(添加重新绘制边界)';
 
   static final String kItemExtent = 'ItemExtent(项目范围)';
@@ -309,12 +312,13 @@ class StringParams {
 
   static final String kPosition = 'Position(位置)';
 
-  static final String kAlwaysIncludeSemantics = 'AlwaysIncludeSemantics(总是包含语义)';
+  static final String kAlwaysIncludeSemantics =
+      'AlwaysIncludeSemantics(总是包含语义)';
 
   static final String kAxis = 'Axis(轴)';
 
   static final String kClipBehavior = 'ClipBehavior(剪切行为)';
-  static final String  kBorderRadius = 'BorderRadius(边界半径)';
+  static final String kBorderRadius = 'BorderRadius(边界半径)';
 
   static final String kShadowColor = 'ShadowColor(阴影颜色)';
 
@@ -325,28 +329,29 @@ class StringParams {
   static final String kRight = 'Right(右)';
   static final String kTop = 'Top(顶部)';
 
-  static final String  kDragAnchor = 'DragAnchor(拖拽锚)';
+  static final String kDragAnchor = 'DragAnchor(拖拽锚)';
 
   static final String kHapticFeedbackOnStart = 'HapticFeedbackOnStart(启动触动反馈)';
 
-  static final String kIgnoringFeedbackSemantics = 'IgnoringFeedbackSemantics(忽略反馈语义)';
+  static final String kIgnoringFeedbackSemantics =
+      'IgnoringFeedbackSemantics(忽略反馈语义)';
 
   static final String kBehavior = 'Behavior(行为)';
 
   static final String kStatus = '状态';
 
-  static final String  kCrossAxisEndOffset = 'CrossAxisEndOffset(交叉轴偏移量)';
+  static final String kCrossAxisEndOffset = 'CrossAxisEndOffset(交叉轴偏移量)';
 
-  static final String  kResizeDuration = 'ResizeDuration(调整大小持续时间)';
+  static final String kResizeDuration = 'ResizeDuration(调整大小持续时间)';
 
-  static final String  kMovementDuration = 'MovementDuration(移动持续时间)';
+  static final String kMovementDuration = 'MovementDuration(移动持续时间)';
 
-  static final String  kIgnoring = 'Ignoring(忽略)';
-  static final String  kIgnoringSemantics = 'IgnoringSemantics(忽略语义)';
+  static final String kIgnoring = 'Ignoring(忽略)';
+  static final String kIgnoringSemantics = 'IgnoringSemantics(忽略语义)';
 
   static final String kAbsorbing = 'Absorbing(吸收)';
 
-  static final String kAxisDirection ='AxisDirection(轴方向)';
+  static final String kAxisDirection = 'AxisDirection(轴方向)';
 
   static final String kIsMaterialAppTheme = 'IsMaterialAppTheme(是材质应用主题)';
 
@@ -359,6 +364,7 @@ class StringParams {
   static String get kDevicePixelRatio => 'DevicePixelRatio(设备像素比)';
 
   static get kAlwaysUse24HourFormat => 'AlwaysUse24HourFormat(始终使用24小时格式)';
+
   static get kAccessibleNavigation => 'AccessibleNavigation(无障碍导航)';
 
   static get kInvertColors => 'InvertColors(反色)';
@@ -375,7 +381,36 @@ class StringParams {
 
   static get kDisplacement => 'Displacement(拖动位置)';
 
+  static get kCurrentStep => 'CurrentStep(当前步骤)';
 
+  static get kIsShowModal => 'IsShowModal(使用显示模式)';
+
+  static get kEnableDrag => 'enableDrag(启动拖动)';
+
+  static String get kUnselectedColor => 'UnselectedColor(未选中颜色)';
+
+  static String get kSelectedColor => 'SelectedColor(选中颜色)';
+
+  static String get kBorderColor => 'BorderColor(边框颜色)';
+
+  static String get kPressedColor => 'PressedColor(按下颜色)';
+
+  static get kDiameterRatio => 'DiameterRatio(直径比)';
+
+  static get kOffAxisFraction => 'OffAxisFraction(车轴偏离水平)';
+
+  static get kMagnification => 'Magnification(放大倍数)';
+
+  static get kUseMagnifier => 'UseMagnifier(使用放大镜)';
+
+  static get kLooping => 'Looping(循环)';
+
+  static String get kMode => 'Mode(模式)';
+
+  static String get kInitialTimerDuration => 'InitialTimerDuration(初始持续时间)';
+
+  static get kMinuteInterval => 'MinuteInterval(分钟间隔)';
+  static get kSecondInterval => 'SecondInterval(秒间隔)';
 }
 
 const List<Value<AlignmentGeometry>> alignmentValues = [
@@ -857,7 +892,7 @@ const List<Value<ImageProvider>> imageValues = [
     value: NetworkImage(
         'https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg'),
     label:
-    "NetworkImage('https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg')",
+        "NetworkImage('https://cdn.cnn.com/cnnnext/dam/assets/171027052520-processed-foods-exlarge-tease.jpg')",
   ),
 ];
 
@@ -1456,6 +1491,29 @@ const List<Value<double>> fontSizeValues = [
     value: 16.0,
     label: '16.0',
   )
+];
+
+const List<Value<double>> doubleOneUpValues = [
+  Value(
+    name: '1.0',
+    value: 1.0,
+    label: '1.0',
+  ),
+  Value(
+    name: '2.0',
+    value: 2.0,
+    label: '2.0',
+  ),
+  Value(
+    name: '3.0',
+    value: 3.0,
+    label: '3.0',
+  ),
+  Value(
+    name: '4.0',
+    value: 4.0,
+    label: '4.0',
+  ),
 ];
 
 const List<Value<FontWeight>> fontWeightValues = [
@@ -2371,21 +2429,20 @@ List<Value<ScrollPhysics>> physicsValues = [
 List<Value<PopupMenuItemBuilder<String>>> popupMenuItemBuilderValues = [
   Value(
     name: 'threeItem',
-    value: (BuildContext context) =>
-    <PopupMenuEntry<String>>[
-      const PopupMenuItem<String>(
-        value: 'apple',
-        child: const Text('iPhone'),
-      ),
-      const PopupMenuItem<String>(
-        value: 'HuaWei',
-        child: const Text('Honer'),
-      ),
-      const PopupMenuItem<String>(
-        value: 'XiaoMi',
-        child: const Text('Mi'),
-      ),
-    ],
+    value: (BuildContext context) => <PopupMenuEntry<String>>[
+          const PopupMenuItem<String>(
+            value: 'apple',
+            child: const Text('iPhone'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'HuaWei',
+            child: const Text('Honer'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'XiaoMi',
+            child: const Text('Mi'),
+          ),
+        ],
     label: '''(BuildContext context) => <PopupMenuEntry<String>>[
           const PopupMenuItem<String>(
             value: 'apple',
@@ -2403,25 +2460,24 @@ List<Value<PopupMenuItemBuilder<String>>> popupMenuItemBuilderValues = [
   ),
   Value(
     name: 'fourItem',
-    value: (BuildContext context) =>
-    <PopupMenuEntry<String>>[
-      const PopupMenuItem<String>(
-        value: 'apple',
-        child: const Text('iPhone'),
-      ),
-      const PopupMenuItem<String>(
-        value: 'HuaWei',
-        child: const Text('Honer'),
-      ),
-      const PopupMenuItem<String>(
-        value: 'XiaoMi',
-        child: const Text('Mi'),
-      ),
-      const PopupMenuItem<String>(
-        value: 'Samsung',
-        child: const Text('Galaxy'),
-      ),
-    ],
+    value: (BuildContext context) => <PopupMenuEntry<String>>[
+          const PopupMenuItem<String>(
+            value: 'apple',
+            child: const Text('iPhone'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'HuaWei',
+            child: const Text('Honer'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'XiaoMi',
+            child: const Text('Mi'),
+          ),
+          const PopupMenuItem<String>(
+            value: 'Samsung',
+            child: const Text('Galaxy'),
+          ),
+        ],
     label: '''(BuildContext context) => <PopupMenuEntry<String>>[
           const PopupMenuItem<String>(
             value: 'apple',
@@ -2639,28 +2695,12 @@ List<Value<DateTime>> dateTimeValues = [
   ),
   Value(
     name: '1998/12/1 0:0:0 0:0',
-    value: DateTime(
-        1998,
-        12,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0),
+    value: DateTime(1998, 12, 1, 0, 0, 0, 0, 0),
     label: 'DateTime(1998,12,1 ,0,0,0, 0,0)',
   ),
   Value(
     name: 'UTC 2028/12/1 0:0:0 0:0',
-    value: DateTime.utc(
-        2028,
-        12,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0),
+    value: DateTime.utc(2028, 12, 1, 0, 0, 0, 0, 0),
     label: 'DateTime.utc(2008,12,1 ,0,0,0, 0,0)',
   ),
   Value(
@@ -3110,8 +3150,7 @@ List<Value<TableColumnWidth>> tableColumnWidthValues = [
       label: '''MaxColumnWidth(
         IntrinsicColumnWidth(flex: 110.0),
         FractionColumnWidth(60.0),
-      )'''
-  ),
+      )'''),
   Value(
       name: 'MinColumn',
       value: MinColumnWidth(
@@ -3121,12 +3160,10 @@ List<Value<TableColumnWidth>> tableColumnWidthValues = [
       label: '''MinColumnWidth(
         IntrinsicColumnWidth(flex: 110.0),
         FractionColumnWidth(60.0),
-      )'''
-  ),
+      )'''),
 ];
 
 List<Value<Axis>> axisValues = [
-
   Value(
     name: 'horizontal',
     value: Axis.horizontal,
@@ -3192,26 +3229,22 @@ List<Value<CrossFadeState>> crossFadeStateValues = [
   Value(
       name: 'showFirst',
       value: CrossFadeState.showFirst,
-      label: 'CrossFadeState.showFirst'
-  ),
+      label: 'CrossFadeState.showFirst'),
   Value(
       name: 'showSecond',
       value: CrossFadeState.showSecond,
-      label: 'CrossFadeState.showSecond'
-  ),
+      label: 'CrossFadeState.showSecond'),
 ];
 
 List<Value<DecorationPosition>> decorationPositionValues = [
   Value(
       name: 'background',
       value: DecorationPosition.background,
-      label: 'DecorationPosition.background'
-  ),
+      label: 'DecorationPosition.background'),
   Value(
       name: 'foreground',
       value: DecorationPosition.foreground,
-      label: 'DecorationPosition.foreground'
-  ),
+      label: 'DecorationPosition.foreground'),
 ];
 
 List<Value<BoxShape>> boxShapeValues = [
@@ -3227,32 +3260,32 @@ List<Value<BoxShape>> boxShapeValues = [
   ),
 ];
 
-List<Value<Clip>> clipValues=[
+List<Value<Clip>> clipValues = [
   Value(
-    name:'none',
+    name: 'none',
     value: Clip.none,
     label: 'Clip.none',
   ),
   Value(
-    name:'hardEdge',
+    name: 'hardEdge',
     value: Clip.hardEdge,
     label: 'Clip.hardEdge',
   ),
   Value(
-    name:'antiAlias',
+    name: 'antiAlias',
     value: Clip.antiAlias,
     label: 'Clip.antiAlias',
   ),
   Value(
-    name:'antiAliasWithSaveLayer',
+    name: 'antiAliasWithSaveLayer',
     value: Clip.antiAliasWithSaveLayer,
     label: 'Clip.antiAliasWithSaveLayer',
   ),
 ];
 
-List<Value<DragAnchor>> dragAnchorValues=[
+List<Value<DragAnchor>> dragAnchorValues = [
   Value(
-      name: 'child',
+    name: 'child',
     value: DragAnchor.child,
     label: 'DragAnchor.child',
   ),
@@ -3263,7 +3296,7 @@ List<Value<DragAnchor>> dragAnchorValues=[
   ),
 ];
 
-List<Value<HitTestBehavior>> behaviorValues=[
+List<Value<HitTestBehavior>> behaviorValues = [
   Value(
     name: 'translucent',
     value: HitTestBehavior.translucent,
@@ -3281,40 +3314,31 @@ List<Value<HitTestBehavior>> behaviorValues=[
   ),
 ];
 
-List<Value<DismissDirection>> directionValues=[
+List<Value<DismissDirection>> directionValues = [
   Value(
-    name: 'endToStart',
-    value: DismissDirection.endToStart,
-    label: 'DismissDirection.endToStart'
-  ),
+      name: 'endToStart',
+      value: DismissDirection.endToStart,
+      label: 'DismissDirection.endToStart'),
   Value(
       name: 'startToEnd',
       value: DismissDirection.startToEnd,
-      label: 'DismissDirection.startToEnd'
-  ),
+      label: 'DismissDirection.startToEnd'),
   Value(
       name: 'horizontal',
       value: DismissDirection.horizontal,
-      label: 'DismissDirection.horizontal'
-  ),
-  Value(
-      name: 'up',
-      value: DismissDirection.up,
-      label: 'DismissDirection.up'
-  ),
+      label: 'DismissDirection.horizontal'),
+  Value(name: 'up', value: DismissDirection.up, label: 'DismissDirection.up'),
   Value(
       name: 'down',
       value: DismissDirection.down,
-      label: 'DismissDirection.down'
-  ),
+      label: 'DismissDirection.down'),
   Value(
       name: 'vertical',
       value: DismissDirection.vertical,
-      label: 'DismissDirection.vertical'
-  ),
+      label: 'DismissDirection.vertical'),
 ];
 
-List<Value<AxisDirection>> axisDirectionValues=[
+List<Value<AxisDirection>> axisDirectionValues = [
   Value(
     name: 'down',
     value: AxisDirection.down,
@@ -3335,10 +3359,9 @@ List<Value<AxisDirection>> axisDirectionValues=[
     value: AxisDirection.right,
     label: 'AxisDirection.right',
   ),
-
 ];
 
-List<Value<EdgeInsets>> edgeInsetsValues=[
+List<Value<EdgeInsets>> edgeInsetsValues = [
   Value(
     name: 'zero',
     value: EdgeInsets.zero,
@@ -3356,7 +3379,7 @@ List<Value<EdgeInsets>> edgeInsetsValues=[
   ),
   Value(
     name: 'fromLTRB',
-    value: EdgeInsets.fromLTRB(2.0,3.0,4.0,5.0),
+    value: EdgeInsets.fromLTRB(2.0, 3.0, 4.0, 5.0),
     label: 'EdgeInsets.fromLTRB(2.0,3.0,4.0,5.0)',
   ),
   Value(
@@ -3366,7 +3389,7 @@ List<Value<EdgeInsets>> edgeInsetsValues=[
   ),
 ];
 
-List<Value<Offset>> offsetValues=[
+List<Value<Offset>> offsetValues = [
   Value(
     name: 'zero',
     value: Offset.zero,
@@ -3374,17 +3397,35 @@ List<Value<Offset>> offsetValues=[
   ),
   Value(
     name: '(0.1,0.1)',
-    value: Offset(0.1,0.1),
+    value: Offset(0.1, 0.1),
     label: 'Offset(0.1,0.1)',
   ),
   Value(
     name: '(0.1,0.0)',
-    value: Offset(0.1,0.0),
+    value: Offset(0.1, 0.0),
     label: 'Offset(0.1,0.0)',
   ),
   Value(
     name: '(0.0,0.1)',
-    value: Offset(0.0,0.1),
+    value: Offset(0.0, 0.1),
     label: 'Offset(0.0,0.1)',
+  ),
+];
+
+List<Value<CupertinoTimerPickerMode>> timerPickerModeValues = [
+  Value(
+    name: 'hm',
+    value: CupertinoTimerPickerMode.hm,
+    label: 'CupertinoTimerPickerMode.hm',
+  ),
+  Value(
+    name: 'ms',
+    value: CupertinoTimerPickerMode.ms,
+    label: 'CupertinoTimerPickerMode.ms',
+  ),
+  Value(
+    name: 'hms',
+    value: CupertinoTimerPickerMode.hms,
+    label: 'CupertinoTimerPickerMode.hms',
   ),
 ];

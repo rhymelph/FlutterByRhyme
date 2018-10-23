@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbyrhyme/code/markdown_dart_code.dart';
+import 'package:flutterbyrhyme/code/example_code.dart';
 class PaddingDemo extends StatefulWidget {
   static const String routeName = 'widgets/layout/Padding';
   final String detail = '''> Padding的构造方法
@@ -57,16 +57,16 @@ class PaddingDemo extends StatefulWidget {
 }
 
 class _PaddingDemoState
-    extends State<PaddingDemo> {
+    extends MarkdownState<PaddingDemo> {
 
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Padding'),
-        ),
-        body: DartMarkDown(widget.detail));
+  String getMarkdownSource() {
+    return widget.detail;
+  }
+
+  @override
+  String getTitle() {
+    return 'Padding';
   }
 }
 

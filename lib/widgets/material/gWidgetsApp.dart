@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutterbyrhyme/code/markdown_dart_code.dart';
-class WidgetsAppDemo extends StatelessWidget {
+import 'package:flutterbyrhyme/code/example_code.dart';
+
+class WidgetsAppDemo extends StatefulWidget {
   static const String routeName='widgets/material/WidgetsApp';
   static const String detail='''> 未经过改装的MaterialApp,
 > 可以说MaterialApp基于WidgetsApp
@@ -163,15 +164,16 @@ final ThemeData theme = widget.theme ?? new ThemeData.fallback();
 ```
 ''';
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('WidgetsApp'),
-      ),
-      body: SingleChildScrollView(
-        child: DartMarkDown(WidgetsAppDemo.detail),
-      ),
-    );
+  _WidgetsAppDemoState createState() => _WidgetsAppDemoState();
+}
 
+class _WidgetsAppDemoState extends MarkdownState<WidgetsAppDemo> {
+  @override
+  String getMarkdownSource() {
+    return WidgetsAppDemo.detail;
+  }
+  @override
+  String getTitle() {
+    return 'WidgetsApp';
   }
 }
