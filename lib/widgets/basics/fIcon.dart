@@ -20,7 +20,7 @@ class _IconDemoState extends ExampleState<IconDemo> {
   @override
   void initState() {
     setting = IconSetting(
-      icon: Icons.android,
+      icon: Icons.arrow_back,
       semanticLabel: 'Icon Label',
     );
     super.initState();
@@ -34,7 +34,7 @@ class _IconDemoState extends ExampleState<IconDemo> {
   @override
   String getExampleCode() {
     return '''Icon(
-      Icons.android,
+      Icons.arrow_back,
       size: ${setting.size?.label??''},
       color: ${setting.color?.label??''},
       semanticLabel: 'Icon Label',

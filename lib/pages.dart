@@ -15,14 +15,14 @@ import 'package:flutterbyrhyme/widgets/async/aAsyncShow.dart';
 import 'package:flutterbyrhyme/widgets/scrolling/aScrollingShow.dart';
 import 'package:flutterbyrhyme/widgets/access/aAccessShow.dart';
 import 'package:flutterbyrhyme/design/aDesignShow.dart';
-import 'package:flutterbyrhyme/network/temp.dart';
+import 'package:flutterbyrhyme/expand//temp.dart';
+import 'package:flutterbyrhyme/expand/aExpandShow.dart';
 import 'package:flutter/foundation.dart';
 
 const String finishDemo=
     'Container,Row,Column,Image,Text.Icon,RaisedButton,Scaffold,AppBar,FlutterLogo,PlaceHolder,'
     'BottomNavigationBar,TabBar,TabBarView,MaterialApp,WidgetsApp,Drawer,FloatingActionButton,FlatButton,IconButton,PopupMenuButton,ButtonBar,TextField,Checkbox,Radio,Switch,Slider,Date&Time Pickers,SimpleDialog,AlertDialog,BottomSheet,ExpansionPanel,SnackBar,Chip,Tooltip,DataTable,Card,LinearProgressIndicator,ListTile,Stepper,Divider,'
     'CupertinoActivityIndicator,CupertinoAlertDialog,CupertinoButton,CupertinoDialog，CupertinoDialogAction,CupertinoSlider,CupertinoSwitch,CupertinoPageTransition,CupertinoFullscreenDialogTransition,CupertinoNavigationBar,CupertinoTabBar,CupertinoPageScaffold,CupertinoTabScaffold,CupertinoTabView,'
-    '聊天室,登陆页面,商品列表,'
     'Padding,Center,Align,FittedBox,AspectRatio,ConstrainedBox,Baseline,FractionallySizedBox,IntrinsicHeight,IntrinsicWidth,LimitedBox,Offstage,OverflowBox,SizedOverflowBox,Transform,CustomSingleChildLayout,Stack,IndexedStack,Flow,Table,Wrap,ListBody,ListView,CustomMultiChildLayout,LayoutBuilder,RichText,DefaultTextStyle,'
     'RawImage,AssetBundle,'
     'Form,FormField,RawKeyboardListener,'
@@ -32,7 +32,9 @@ const String finishDemo=
     'FutureBuilder,StreamBuilder,'
     'NestedScrollView,GridView,SingleChildScrollView,Scrollbar,CustomScrollView,NotificationListener,ScrollConfiguration，RefreshIndicator,'
     'Semantics,MergeSemantics，ExcludeSemantics,'
-    'CupertinoActionSheet,CupertinoSegmentedControl,CupertinoPicker,CupertinoTimerPickerDemo';
+    'CupertinoActionSheet,CupertinoSegmentedControl,CupertinoPicker,CupertinoTimerPickerDemo,'
+    '聊天室,登陆页面,商品列表,'
+    '上拉下拉';
 
 class BottomItem {
   final String title;
@@ -72,9 +74,9 @@ const BottomItem widgetDemo = const BottomItem._(
   darkColor: const Color(0xFF002D75),
 );
 
-const BottomItem networkDemo = const BottomItem._(
-  title: '网络',
-  icon: const Icon(Icons.network_wifi),
+const BottomItem expandDemo = const BottomItem._(
+  title: '拓展部件',
+  icon: const Icon(Icons.wifi_tethering),
   lightColor: Colors.green,
   darkColor: const Color(0xFF1B5E20),
 );
@@ -201,10 +203,10 @@ const PageCategory _kAccess = const PageCategory._(
   bottomItem: widgetDemo,
 );
 
-const PageCategory _kNetWork = const PageCategory._(
-  title: '网络',
-  subhead: '待添加',
-  bottomItem: networkDemo,
+const PageCategory _kExpandList = const PageCategory._(
+  title: '列表',
+  subhead: 'Flutter中的列表并不能满足我们的需求，我们需要的是什么？上拉加载下拉刷新？侧滑删除？进来，Show给你看',
+  bottomItem: expandDemo,
 );
 const PageCategory _kdesign = const PageCategory._(
   title: '设计',
@@ -1408,13 +1410,19 @@ List<Page> _buildPage() {
 
     ///network
     Page(
-        title: '网络',
-        subhead: '待添加',
+        title: '上拉下拉',
+        subhead: '上拉加载，下拉刷新',
         icon: null,
-        category: _kNetWork,
+        category: _kExpandList,
+        routeName: PullToRefreshDemo.routeName,
+        buildRoute: (BuildContext context) => PullToRefreshDemo()),
+    Page(
+        title: '侧滑删除',
+        subhead: '侧滑删除指定的项',
+        icon: null,
+        category: _kExpandList,
         routeName: Temp.routeName,
         buildRoute: (BuildContext context) => Temp()),
-
     ///design
     Page(
         title: '聊天室',

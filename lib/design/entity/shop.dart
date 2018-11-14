@@ -60,15 +60,15 @@ class Shop {
       List<String> clickLogs=info.substring(info.indexOf('clicklogs(')+10,info.lastIndexOf(')')).replaceAll('\'', '').split(',');
 
       
-      String num_iid='';
-      String commission_rate='';
+      String numIid='';
+      String commissionRate='';
       String sign='';
       if(clickLogs.length==3){
-        num_iid=clickLogs[0];
-        commission_rate=clickLogs[1];
+        numIid=clickLogs[0];
+        commissionRate=clickLogs[1];
         sign=clickLogs[2];
       }
-      shops.add(new Shop(num_iid: num_iid,commission_rate: commission_rate,sign: sign,name: name,image: image,sourcePrice: sourcePrice,nowPrice: nowPrice,sale: sale,address: address,));
+      shops.add(new Shop(num_iid: numIid,commission_rate: commissionRate,sign: sign,name: name,image: image,sourcePrice: sourcePrice,nowPrice: nowPrice,sale: sale,address: address,));
     }
     String content='';
     for(Shop shop in shops){
