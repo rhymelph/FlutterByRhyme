@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart' as cuper;
 import 'dart:math' as math;
 import 'dart:async';
 
@@ -50,7 +51,6 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
   AnimationController _positionController;
   Animation<double> _positionFactor;
 
-
   //刷新状态
   STATUE _status;
 
@@ -59,6 +59,7 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
 
   //拖动偏移
   double _dragOffSet;
+
 
   //拖动限制
   static final Animatable<double> _kDragLimitTween =
@@ -69,6 +70,7 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
     super.initState();
     _positionController = AnimationController(vsync: this);
     _positionFactor = _positionController.drive(_kDragLimitTween);
+
   }
 
   @override
@@ -93,33 +95,34 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
       return false;
     }
     //判断当前刷新是否在顶部
-    bool _atTopNow;
-    switch (notification.metrics.axisDirection) {
-      case AxisDirection.down:
-        _atTopNow = true;
-        break;
-      case AxisDirection.up:
-        _atTopNow = false;
-        break;
-      case AxisDirection.left:
-      case AxisDirection.right:
-        _atTopNow = null;
-        break;
-    }
-    if (_atTopNow != _isTop) {
-      print('改变了滑动的方向');
-      if (_status == STATUE.DRAG || _status == STATUE.ARMED)
-        _dismiss(STATUE.CANCELED);
-    }
+//    bool _atTopNow;
+//    switch (notification.metrics.axisDirection) {
+//      case AxisDirection.down:
+//        _atTopNow = true;
+//        break;
+//      case AxisDirection.up:
+//        _atTopNow = false;
+//        break;
+//      case AxisDirection.left:
+//      case AxisDirection.right:
+//        _atTopNow = null;
+//        break;
+//    }
+//    if (_atTopNow != _isTop) {
+//      print('改变了滑动的方向');
+//      if (_status == STATUE.DRAG || _status == STATUE.ARMED)
+//        _dismiss(STATUE.CANCELED);
+//    }
     else if (notification is ScrollUpdateNotification) {
       if (_status == STATUE.DRAG || _status == STATUE.ARMED) {
         //当前并没有在顶部
-        if (notification.metrics.extentBefore > 0.0) {
-          _dismiss(STATUE.CANCELED);
-        } else {
-          _dragOffSet -= notification.scrollDelta;
-          _checkDragOffset(notification.metrics.viewportDimension);
-        }
+//        if (notification.metrics.extentBefore > 0.0) {
+//          _dismiss(STATUE.CANCELED);
+//        } else {
+//
+//        }
+        _dragOffSet -= notification.scrollDelta;
+        _checkDragOffset(notification.metrics.viewportDimension);
       }
       if (_status == STATUE.ARMED && notification.dragDetails == null) {
         //拖动完成，开始刷新
@@ -211,12 +214,17 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
 
   //检查拖动偏移
   void _checkDragOffset(double viewportDimension) {
+    print('viewportDimension：$viewportDimension,_dragOffSet：$_dragOffSet');
     double newValue = _dragOffSet/(viewportDimension*defaultDragPercentage);
-    if (_status == STATUE.ARMED)
-      newValue = math.max(newValue, 1.0 / defaultDragLimit);
+//    if (_status == STATUE.ARMED)
+//      newValue = math.max(newValue, 1.0 / defaultDragLimit);
+//    print(newValue);
     _positionController.value = newValue.clamp(0.0, 1.0);
-    if (_status == STATUE.DRAG&&_dragOffSet>widget.refreshHeight) {
+    if (_status == STATUE.DRAG&&_dragOffSet>widget.refreshHeight/defaultDragLimit) {
       _status = STATUE.ARMED;
+    }else if(_dragOffSet<widget.refreshHeight/defaultDragLimit){
+      _status = STATUE.DRAG;
+
     }
   }
 
@@ -300,7 +308,7 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
       return child;
     }
     final bool showIndeterminateIndicator =
-        _status == STATUE.REFRESH || _status == STATUE.DONE;
+        _status == STATUE.REFRESH;
     return Stack(
       children: <Widget>[
         AnimatedBuilder(
@@ -308,9 +316,7 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
           builder: (BuildContext context, Widget a) {
             return Padding(
               padding: EdgeInsets.only(
-                  top: showIndeterminateIndicator
-                      ? 0.0
-                      : _dragOffSet<0?0.0:_dragOffSet),
+                  top: widget.refreshHeight*_positionFactor.value<0?0.0:widget.refreshHeight*_positionFactor.value),
               child: child,
             );
           },
@@ -325,15 +331,31 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
             child: AnimatedBuilder(
               animation: _positionController,
               builder: (BuildContext context, Widget child) {
+//                print(_positionController.value);
                 return Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(color: Colors.blue),
-                  height: showIndeterminateIndicator
-                      ? 0.0
-                      :  _dragOffSet<0?0.0:_dragOffSet,
+                  height: widget.refreshHeight*_positionFactor.value<0?0.0:widget.refreshHeight*_positionFactor.value,
                   child: SingleChildScrollView(
-                    child: Text(
-                      _handleStatus(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: 30.0,
+                          height: 30.0,
+                          child: cuper.CupertinoActivityIndicator(
+                            animating: showIndeterminateIndicator,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 15.0,
+                        ),
+                        Text(
+                          _handleStatus(),
+                          style: Theme.of(context).textTheme.body1.copyWith(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
                 );
