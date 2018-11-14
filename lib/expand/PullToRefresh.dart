@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'PullDownIndicator.dart';
 class PullToRefreshDemo extends StatefulWidget {
   static const String routeName = 'expand/PullToRefreshDemo';
 
@@ -8,14 +9,14 @@ class PullToRefreshDemo extends StatefulWidget {
 }
 
 class _PullToRefreshDemoState extends State<PullToRefreshDemo> {
-  List<Widget> bodys;
+  List<Widget> bodyList;
 
   @override
   void initState() {
     // TODO: implement initState
-    bodys = [];
+    bodyList = [];
     for (int i = 0; i < 5; i++) {
-      bodys.add(ListTile(
+      bodyList.add(ListTile(
         title: Text('This item is $i'),
       ));
     }
@@ -30,9 +31,14 @@ class _PullToRefreshDemoState extends State<PullToRefreshDemo> {
       appBar: AppBar(
         title: Text('上拉下拉'),
       ),
-      body: RefreshIndicator(
+      body: PullDownIndicator(
+        header: Container(
+          color: Colors.blue,
+          alignment: Alignment.center,
+          child: Text('刷新界面'),
+        ),
         child: ListView(
-          children: bodys,
+          children: bodyList,
         ),
         onRefresh: () {
           return Future.value(null);
