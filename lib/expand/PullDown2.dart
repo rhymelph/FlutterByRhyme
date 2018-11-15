@@ -15,7 +15,7 @@ enum STATUE_REFRESH {
   CANCELED,
   /*取消刷新*/
 }
-enum STATUE_LODING {
+enum STATUE_LOADING {
   DRAG,
   /*上拉加载*/
   ARMED,
@@ -59,9 +59,47 @@ class RhyPullToRefreshIndicator extends StatefulWidget {
       _RhyPullToRefreshIndicatorState();
 }
 
+
 class _RhyPullToRefreshIndicatorState extends State<RhyPullToRefreshIndicator> {
+  STATUE_LOADING _statusLoading;
+  STATUE_REFRESH _statusRefresh;
+
+  bool _handleScrllNotification(ScrollNotification notification) {
+    //滑动相关
+    if(notification is ScrollStartNotification){
+      print('滑动开始');
+
+    }else if(notification is ScrollUpdateNotification){
+      print('滑动更新');
+
+
+    }else if(notification is OverscrollNotification){
+      print('过渡滑动');
+
+    }else if(notification is ScrollEndNotification){
+      print('滑动结束');
+    }
+    return false;
+  }
+  bool _handleOverScrollIndicatior(OverscrollIndicatorNotification notification) {
+    print('OverscrollIndicatorNotification');
+    notification.disallowGlow();
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget child=NotificationListener<ScrollNotification>(
+      onNotification: _handleScrllNotification,
+      child: NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: _handleOverScrollIndicatior,
+        child: widget.child,
+      ),
+    );
+    if(_statusRefresh==null&&_statusLoading==null){
+      return child;
+    }
+
     return Stack(
       children: <Widget>[
         widget.child,
@@ -82,4 +120,5 @@ class _RhyPullToRefreshIndicatorState extends State<RhyPullToRefreshIndicator> {
       ],
     );
   }
+
 }
