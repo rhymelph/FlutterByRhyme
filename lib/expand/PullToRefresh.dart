@@ -60,8 +60,44 @@ class _PullToRefreshDemoState extends State<PullToRefreshDemo> {
 //  );
 
   get body => RhyPullToRefreshIndicator(
+      header: RefreshMyBody(),
+        footer: RefreshMyBody(),
         child: ListView(
           children: bodyList,
         ),
       );
+}
+
+class RefreshMyBody extends RefreshBody{
+  @override
+  Widget onArmed() {
+    return Text('下拉加载');
+  }
+  @override
+  Widget onCancel() {
+    return Text('刷新取消');
+  }
+
+  @override
+  Widget onDone() {
+    return Text('刷新完成');
+
+  }
+  @override
+  Widget onDrag() {
+    return Text('下拉刷新');
+  }
+
+  @override
+  Widget onRefresh() {
+    return Text('刷新中');
+
+  }
+
+  @override
+  Widget onSnap() {
+    return Text('松开刷新');
+
+  }
+
 }
