@@ -33,6 +33,9 @@ enum STATUE_LOADING {
 const double defaultHeight = 50.0;
 const double defaultDragPercentage = 0.25;
 const double defaultDragLimit = 1.5;
+const double defaultOverPresenter=2.0;
+
+
 
 class RhyPullToRefreshIndicator extends StatefulWidget {
   final Widget child;
@@ -149,15 +152,45 @@ class _RhyPullToRefreshIndicatorState extends State<RhyPullToRefreshIndicator> {
 
       }
     } else if (notification is OverscrollNotification) {
+      if(_statusRefresh ==STATUE_REFRESH.DRAG||_statusRefresh==STATUE_REFRESH.ARMED){
+
+        _dragOffSet-=notification.overscroll/defaultOverPresenter;
+        _checkDragOffsetRefresh(notification.metrics.viewportDimension);
+      }
+
+      if(_statusLoading ==STATUE_LOADING.DRAG||_statusLoading==STATUE_LOADING.ARMED){
+
+        _dragOffSet-=notification.overscroll/defaultOverPresenter;
+        _checkDragOffsetLoading(notification.metrics.viewportDimension);
+      }
+
       print('过渡滑动');
     } else if (notification is ScrollEndNotification) {
       print('滑动结束');
+
+      if(_statusRefresh==STATUE_REFRESH.DRAG){
+        dismissRefresh(STATUE_REFRESH.CANCELED);
+
+      }else if(_statusRefresh==STATUE_REFRESH.ARMED){
+        _showRefresh();
+      }
+
+      if(_statusLoading==STATUE_LOADING.DRAG){
+        dismissLoading(STATUE_LOADING.CANCELED);
+
+      }else if(_statusLoading==STATUE_LOADING.ARMED){
+        _showRefresh();
+      }
+
     }
     return false;
   }
 
   void _showRefresh() {}
+  void dismissRefresh(STATUE_REFRESH status) {}
+
   void _showLoading() {}
+  void dismissLoading(STATUE_LOADING status) {}
 
   void _checkDragOffsetRefresh(double viewportDimension) {}
 
@@ -260,6 +293,8 @@ class _RhyPullToRefreshIndicatorState extends State<RhyPullToRefreshIndicator> {
     }
     return Text('');
   }
+
+
 
 }
 
