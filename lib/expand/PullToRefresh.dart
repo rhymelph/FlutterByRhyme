@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'PullDownIndicator.dart';
 import 'dart:async';
-import 'PullDown2.dart';
+//import 'PullDown2.dart';
 
 class PullToRefreshDemo extends StatefulWidget {
   static const String routeName = 'expand/PullToRefreshDemo';
@@ -18,7 +18,7 @@ class _PullToRefreshDemoState extends State<PullToRefreshDemo> {
   void initState() {
     // TODO: implement initState
     bodyList = [];
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 5; i++) {
       bodyList.add(ListTile(
         title: Text('This item is $i'),
       ));
@@ -38,41 +38,39 @@ class _PullToRefreshDemoState extends State<PullToRefreshDemo> {
     );
   }
 
-//  get body =>PullDownIndicator(
-//    refreshHeight: 60.0,
-//    header: Container(
-//      color: Colors.blue,
-//      alignment: Alignment.center,
-//      child: Text('刷新界面'),
-//    ),
-//    child: ListView(
-//      children: bodyList,
-//    ),
-//    onRefresh: () {
-//      final Completer<Null> comparator
-//      =new Completer();
-//
-//      new Timer(Duration(seconds: 2),(){
-//        comparator.complete(null);
-//      });
-//      return comparator.future;
-//    },
-//  );
-
-  get body => RhyPullToRefreshIndicator(
-      header: RefreshMyBody(),
-        footer: RefreshMyBody(),
+  get body => RhyRefreshIndicator(
+        refreshHeight: 60.0,
+        header: new RefreshMyBody(),
         child: ListView(
+          physics: AlwaysScrollableScrollPhysics(),
           children: bodyList,
         ),
+        onRefresh: () {
+          final Completer<Null> comparator = new Completer();
+
+          new Timer(Duration(seconds: 2), () {
+            comparator.complete(null);
+          });
+          return comparator.future;
+        },
+        footer: new RefreshMyBody2(),
+        onLoading: () {
+          final Completer<Null> comparator = new Completer();
+
+          new Timer(Duration(seconds: 2), () {
+            comparator.complete(null);
+          });
+          return comparator.future;
+        },
       );
 }
 
-class RefreshMyBody extends RefreshBody{
+class RefreshMyBody extends RefreshBody {
   @override
   Widget onArmed() {
-    return Text('下拉加载');
+    return Text('松开刷新');
   }
+
   @override
   Widget onCancel() {
     return Text('刷新取消');
@@ -81,8 +79,8 @@ class RefreshMyBody extends RefreshBody{
   @override
   Widget onDone() {
     return Text('刷新完成');
-
   }
+
   @override
   Widget onDrag() {
     return Text('下拉刷新');
@@ -91,13 +89,43 @@ class RefreshMyBody extends RefreshBody{
   @override
   Widget onRefresh() {
     return Text('刷新中');
-
   }
 
   @override
   Widget onSnap() {
-    return Text('松开刷新');
+    return Text('松开状态');
+  }
+}
 
+
+class RefreshMyBody2 extends RefreshBody {
+  @override
+  Widget onArmed() {
+    return Text('松开加载');
   }
 
+  @override
+  Widget onCancel() {
+    return Text('加载取消');
+  }
+
+  @override
+  Widget onDone() {
+    return Text('加载完成');
+  }
+
+  @override
+  Widget onDrag() {
+    return Text('上拉加载');
+  }
+
+  @override
+  Widget onRefresh() {
+    return Text('加载中');
+  }
+
+  @override
+  Widget onSnap() {
+    return Text('松开状态');
+  }
 }

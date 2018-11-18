@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart' as cuper;
-import 'dart:math' as math;
 import 'dart:async';
 
 const double defaultRefreshHeight = 50.0;
 const double defaultDragPercentage = 0.25;
-const double defaultDragLimit = 1.5;
 
-const Duration defaultSnap=Duration(milliseconds: 150);
-
+const Duration defaultDuration = Duration(milliseconds: 250);
 enum STATUE {
   DRAG,
   /*下拉刷新*/
@@ -24,53 +20,53 @@ enum STATUE {
   /*取消刷新*/
 }
 
-class PullDownIndicator extends StatefulWidget {
+class RhyRefreshIndicator extends StatefulWidget {
   final Widget child;
   final RefreshCallback onRefresh;
-  final Widget header;
+  final RefreshCallback onLoading;
+  final RefreshBody header;
+  final RefreshBody footer;
 
   final double refreshHeight;
 
-  const PullDownIndicator({
+  const RhyRefreshIndicator({
     Key key,
     @required this.child,
+    @required this.onLoading,
     @required this.onRefresh,
     @required this.header,
+    @required this.footer,
     this.refreshHeight = defaultRefreshHeight,
   })  : assert(child != null),
         assert(onRefresh != null),
         assert(header != null);
 
   @override
-  _PullDownIndicatorState createState() => _PullDownIndicatorState();
+  _RhyRefreshIndicatorState createState() => _RhyRefreshIndicatorState();
 }
 
-class _PullDownIndicatorState extends State<PullDownIndicator>
+class _RhyRefreshIndicatorState extends State<RhyRefreshIndicator>
     with TickerProviderStateMixin {
   //位置
   AnimationController _positionController;
-  Animation<double> _positionFactor;
 
   //刷新状态
-  STATUE _status;
+  STATUE _statusRefresh;
+
+  STATUE _statusLoading;
 
   //是否在顶部
   bool _isTop;
 
+  bool _isBottom;
+
   //拖动偏移
   double _dragOffSet;
-
-
-  //拖动限制
-  static final Animatable<double> _kDragLimitTween =
-      Tween<double>(begin: 0.0, end: defaultDragLimit);
 
   @override
   void initState() {
     super.initState();
     _positionController = AnimationController(vsync: this);
-    _positionFactor = _positionController.drive(_kDragLimitTween);
-
   }
 
   @override
@@ -85,66 +81,83 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
     if (notification.depth != 0) {
       return false;
     }
-    if (notification is ScrollStartNotification &&
-        notification.metrics.extentBefore == 0.0 &&
-        _status == null &&
-        _start(notification.metrics.axisDirection)) {
+    if (notification.metrics.extentBefore == 0.0 &&
+        _statusRefresh == null &&
+        _statusLoading == null &&
+        _startRefresh(notification.metrics.axisDirection)) {
       setState(() {
-        _status = STATUE.DRAG;
+        _statusLoading = null;
+        _statusRefresh = STATUE.DRAG;
       });
       return false;
-    }
-    //判断当前刷新是否在顶部
-//    bool _atTopNow;
-//    switch (notification.metrics.axisDirection) {
-//      case AxisDirection.down:
-//        _atTopNow = true;
-//        break;
-//      case AxisDirection.up:
-//        _atTopNow = false;
-//        break;
-//      case AxisDirection.left:
-//      case AxisDirection.right:
-//        _atTopNow = null;
-//        break;
-//    }
-//    if (_atTopNow != _isTop) {
-//      print('改变了滑动的方向');
-//      if (_status == STATUE.DRAG || _status == STATUE.ARMED)
-//        _dismiss(STATUE.CANCELED);
-//    }
-    else if (notification is ScrollUpdateNotification) {
-      if (_status == STATUE.DRAG || _status == STATUE.ARMED) {
-        //当前并没有在顶部
-//        if (notification.metrics.extentBefore > 0.0) {
-//          _dismiss(STATUE.CANCELED);
-//        } else {
-//
-//        }
+    } else if (notification.metrics.extentAfter == 0.0 &&
+        _statusLoading == null &&
+        _statusRefresh == null &&
+        _startLoading(notification.metrics.axisDirection)) {
+      setState(() {
+        _statusRefresh = null;
+        _statusLoading = STATUE.DRAG;
+      });
+    } else if (notification is ScrollUpdateNotification) {
+      ///检查拖动
+      if (_statusRefresh == STATUE.DRAG || _statusRefresh == STATUE.ARMED) {
         _dragOffSet -= notification.scrollDelta;
-        _checkDragOffset(notification.metrics.viewportDimension);
+        _checkRefreshDragOffset(notification.metrics.viewportDimension);
+      } else if (_statusLoading == STATUE.DRAG ||
+          _statusLoading == STATUE.ARMED) {
+        _dragOffSet += notification.scrollDelta;
+        _checkLoadingDragOffset(notification.metrics.viewportDimension);
       }
-      if (_status == STATUE.ARMED && notification.dragDetails == null) {
+
+      ///拖动完成开始加载
+      if (_statusRefresh == STATUE.ARMED && notification.dragDetails == null) {
         //拖动完成，开始刷新
-        _show();
+        _showRefresh();
+      } else if (_statusLoading == STATUE.ARMED &&
+          notification.dragDetails == null) {
+        //拖动完成，开始加载
+        _showLoading();
       }
+//      if (_statusRefresh == STATUE.DRAG || _statusRefresh == STATUE.ARMED) {
+//        _dragOffSet -= notification.scrollDelta;
+//        _checkRefreshDragOffset(notification.metrics.viewportDimension);
+//      }
+//      if (_statusRefresh == STATUE.ARMED && notification.dragDetails == null) {
+//        //拖动完成，开始刷新
+//        _showRefresh();
+//      }
     }
     //过度滚动
     else if (notification is OverscrollNotification) {
-      if (_status == STATUE.DRAG || _status == STATUE.ARMED) {
+      if (_statusRefresh == STATUE.DRAG || _statusRefresh == STATUE.ARMED) {
         _dragOffSet -= notification.overscroll / 2.0;
-        _checkDragOffset(notification.metrics.viewportDimension);
+        _checkRefreshDragOffset(notification.metrics.viewportDimension);
+      } else if (_statusLoading == STATUE.DRAG ||
+          _statusLoading == STATUE.ARMED) {
+        _dragOffSet += notification.overscroll / 2.0;
+        _checkLoadingDragOffset(notification.metrics.viewportDimension);
       }
     }
     //滚动结束
     else if (notification is ScrollEndNotification) {
       print('滚动结束');
-      switch (_status) {
+      switch (_statusRefresh) {
         case STATUE.ARMED:
-          _show();
+          _showRefresh();
           break;
         case STATUE.DRAG:
-          _dismiss(STATUE.CANCELED);
+          _dismissRefresh(STATUE.CANCELED);
+          break;
+        default:
+          break;
+      }
+
+      switch (_statusLoading) {
+        case STATUE.ARMED:
+          _showLoading();
+          break;
+        case STATUE.DRAG:
+          _dismissLoading(STATUE.CANCELED);
           break;
         default:
           break;
@@ -154,7 +167,7 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
   }
 
   //开始刷新
-  bool _start(AxisDirection axisDirection) {
+  bool _startRefresh(AxisDirection axisDirection) {
     switch (axisDirection) {
       case AxisDirection.down:
         _isTop = true;
@@ -173,75 +186,164 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
     return true;
   }
 
+  bool _startLoading(AxisDirection axisDirection) {
+    switch (axisDirection) {
+      case AxisDirection.down:
+        _isBottom = true;
+        break;
+      case AxisDirection.up:
+        _isBottom = false;
+        break;
+      case AxisDirection.left:
+      case AxisDirection.right:
+        _isBottom = null;
+        return false;
+    }
+    //重置数值
+    _dragOffSet = 0.0;
+    _positionController.value = 0.0;
+    return true;
+  }
+
   //取消刷新
-  Future<void> _dismiss(STATUE status) async {
+  Future<void> _dismissRefresh(STATUE status) async {
     await Future<void>.value();
     setState(() {
-      _status = status;
+      _statusRefresh = status;
     });
-    switch (_status) {
+    switch (_statusRefresh) {
       case STATUE.DONE:
         //大小变为1.0
-        await _positionController.animateTo(
-          0.0,
-          duration: Duration(
-            milliseconds: 500,
-          ),
-        );
+        Future.delayed(Duration(milliseconds: 500)).then((_) async {
+          await _positionController.animateTo(
+            0.0,
+            duration: defaultDuration,
+          );
+          //取消变为null
+          if (mounted && _statusRefresh == status) {
+            _dragOffSet = null;
+            _isTop = null;
+            setState(() {
+              _statusRefresh = null;
+            });
+          }
+        });
         break;
       case STATUE.CANCELED:
         //位移变为0.0
+        double precent = _dragOffSet / widget.refreshHeight;
         await _positionController.animateTo(
           0.0,
           duration: Duration(
-            milliseconds: 500,
-          ),
+              milliseconds: (defaultDuration.inMilliseconds * precent).toInt()),
         );
+        //取消变为null
+        if (mounted && _statusRefresh == status) {
+          _dragOffSet = null;
+          _isTop = null;
+          setState(() {
+            _statusRefresh = null;
+          });
+        }
         break;
       default:
         assert(false);
         break;
     }
-    //取消变为null
-    if (mounted && _status == status) {
-      _dragOffSet = null;
-      _isTop = null;
-      setState(() {
-        _status = null;
-      });
+  }
+
+  void _dismissLoading(STATUE status) async {
+    await Future<void>.value();
+    setState(() {
+      _statusLoading = status;
+    });
+    switch (_statusLoading) {
+      case STATUE.DONE:
+        //大小变为1.0
+        Future.delayed(Duration(milliseconds: 500)).then((_) async {
+          await _positionController.animateTo(
+            0.0,
+            duration: defaultDuration,
+          );
+          //取消变为null
+          if (mounted && _statusLoading == status) {
+            _dragOffSet = null;
+            _isBottom = null;
+            setState(() {
+              _statusLoading = null;
+            });
+          }
+        });
+        break;
+      case STATUE.CANCELED:
+        //位移变为0.0
+        double precent = _dragOffSet / widget.refreshHeight;
+        await _positionController.animateTo(
+          0.0,
+          duration: Duration(
+              milliseconds: (defaultDuration.inMilliseconds * precent).toInt()),
+        );
+        //取消变为null
+        if (mounted && _statusLoading == status) {
+          _dragOffSet = null;
+          _isBottom = null;
+          setState(() {
+            _statusLoading = null;
+          });
+        }
+        break;
+      default:
+        assert(false);
+        break;
     }
   }
 
   //检查拖动偏移
-  void _checkDragOffset(double viewportDimension) {
-    print('viewportDimension：$viewportDimension,_dragOffSet：$_dragOffSet');
-    double newValue = _dragOffSet/(viewportDimension*defaultDragPercentage);
+  void _checkRefreshDragOffset(double viewportDimension) {
+    double newValue = _dragOffSet / widget.refreshHeight;
 //    if (_status == STATUE.ARMED)
 //      newValue = math.max(newValue, 1.0 / defaultDragLimit);
 //    print(newValue);
     _positionController.value = newValue.clamp(0.0, 1.0);
-    if (_status == STATUE.DRAG&&_dragOffSet>widget.refreshHeight/defaultDragLimit) {
-      _status = STATUE.ARMED;
-    }else if(_dragOffSet<widget.refreshHeight/defaultDragLimit){
-      _status = STATUE.DRAG;
+    if (_statusRefresh == STATUE.DRAG && _dragOffSet > widget.refreshHeight) {
+      _statusRefresh = STATUE.ARMED;
+    } else if (_dragOffSet < widget.refreshHeight) {
+      _statusRefresh = STATUE.DRAG;
+    }
+  }
 
+  void _checkLoadingDragOffset(double viewportDimension) {
+    double newValue = _dragOffSet / widget.refreshHeight;
+//    if (_status == STATUE.ARMED)
+//      newValue = math.max(newValue, 1.0 / defaultDragLimit);
+//    print(newValue);
+    _positionController.value = newValue.clamp(0.0, 1.0);
+    if (_statusLoading == STATUE.DRAG && _dragOffSet > widget.refreshHeight) {
+      _statusLoading = STATUE.ARMED;
+    } else if (_dragOffSet < widget.refreshHeight) {
+      _statusLoading = STATUE.DRAG;
     }
   }
 
   Future<void> _pendingRefreshFuture;
+  Future<void> _pendingLoadingFuture;
 
   //当前为松开状态
-  void _show() {
+  void _showRefresh() {
     final Completer<void> completer = Completer<void>();
     _pendingRefreshFuture = completer.future;
-    _status = STATUE.SNAP;
+    _statusRefresh = STATUE.SNAP;
+
+    double drawPresent = widget.refreshHeight / _dragOffSet;
     _positionController
-        .animateTo(1.0 / defaultDragLimit,
-            duration: defaultSnap)
+        .animateTo(
+      drawPresent,
+      duration: defaultDuration,
+    )
         .then((_) {
-      if (mounted && _status == STATUE.SNAP) {
+      if (mounted && _statusRefresh == STATUE.SNAP) {
         setState(() {
-          _status = STATUE.REFRESH;
+          _statusRefresh = STATUE.REFRESH;
         });
 
         final Future<void> refreshResult = widget.onRefresh();
@@ -250,9 +352,41 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
           return;
         }
         refreshResult.whenComplete(() {
-          if (mounted && _status == STATUE.REFRESH) {
+          if (mounted && _statusRefresh == STATUE.REFRESH) {
             completer.complete();
-            _dismiss(STATUE.DONE);
+            _dismissRefresh(STATUE.DONE);
+          }
+        });
+      }
+    });
+  }
+
+  void _showLoading() {
+    final Completer<void> completer = Completer<void>();
+    _pendingLoadingFuture = completer.future;
+    _statusLoading = STATUE.SNAP;
+
+    double drawPresent = widget.refreshHeight / _dragOffSet;
+    _positionController
+        .animateTo(
+      drawPresent,
+      duration: defaultDuration,
+    )
+        .then((_) {
+      if (mounted && _statusLoading == STATUE.SNAP) {
+        setState(() {
+          _statusLoading = STATUE.REFRESH;
+        });
+
+        final Future<void> loadingResult = widget.onLoading();
+
+        if (loadingResult == null) {
+          return;
+        }
+        loadingResult.whenComplete(() {
+          if (mounted && _statusLoading == STATUE.REFRESH) {
+            completer.complete();
+            _dismissLoading(STATUE.DONE);
           }
         });
       }
@@ -263,35 +397,11 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
       OverscrollIndicatorNotification notification) {
     if (notification.depth != 0 || !notification.leading) return false;
 
-    if (_status == STATUE.DRAG) {
+    if (_statusRefresh == STATUE.DRAG || _statusLoading == STATUE.DRAG) {
       notification.disallowGlow();
       return true;
     }
     return false;
-  }
-
-  //处理当前状态
-  String _handleStatus() {
-    switch (_status) {
-      case STATUE.DRAG:
-        //下拉
-        return '下拉刷新';
-      case STATUE.ARMED:
-        //松开刷新
-        return '松开刷新';
-      case STATUE.SNAP:
-        //松开
-        return '松开状态';
-      case STATUE.REFRESH:
-        //刷新中
-        return '刷新中';
-      case STATUE.DONE:
-        //刷新完毕
-        return '刷新完毕';
-      case STATUE.CANCELED:
-        //刷新取消
-        return '刷新取消';
-    }
   }
 
   @override
@@ -304,66 +414,173 @@ class _PullDownIndicatorState extends State<PullDownIndicator>
         child: widget.child,
       ),
     );
-    if (_status == null) {
+    if (_statusRefresh == null && _statusLoading == null) {
       return child;
     }
-    final bool showIndeterminateIndicator =
-        _status == STATUE.REFRESH;
+    final bool showIndeterminateIndicator = _statusRefresh == STATUE.REFRESH;
     return Stack(
       children: <Widget>[
         AnimatedBuilder(
           animation: _positionController,
           builder: (BuildContext context, Widget a) {
+            //                print(_positionController.value);
+            double top = 0.0;
+            double bottom = 0.0;
+
+            if (_statusRefresh == STATUE.DRAG ||
+                _statusRefresh == STATUE.ARMED) {
+              top = _dragOffSet;
+            } else if (_statusRefresh != null) {
+              top = _dragOffSet * _positionController.value;
+              print('刷新list的高度:$top');
+            }
+            top = top < 0.0 ? 0.0 : top;
+            if (_statusLoading == STATUE.DRAG ||
+                _statusLoading == STATUE.ARMED) {
+              bottom = _dragOffSet;
+            } else if (_statusLoading != null) {
+              bottom = _dragOffSet * _positionController.value;
+            }
+            bottom = bottom < 0.0 ? 0.0 : bottom;
+            print('加载list的的高度:$bottom');
+//            widget.refreshHeight*_positionFactor.value<0?0.0:widget.refreshHeight*_positionFactor.value
             return Padding(
-              padding: EdgeInsets.only(
-                  top: widget.refreshHeight*_positionFactor.value<0?0.0:widget.refreshHeight*_positionFactor.value),
+              padding: EdgeInsets.only(top: top, bottom: bottom),
               child: child,
             );
           },
         ),
-        Positioned(
-          top: _isTop ? 0.0 : null,
-          bottom: !_isTop ? 0.0 : null,
-          left: 0.0,
-          right: 0.0,
-          child: Container(
-            alignment: _isTop ? Alignment.topCenter : Alignment.bottomCenter,
-            child: AnimatedBuilder(
-              animation: _positionController,
-              builder: (BuildContext context, Widget child) {
+        _isTop != null
+            ? Positioned(
+                top: _isTop ? 0.0 : null,
+                bottom: !_isTop ? 0.0 : null,
+                left: 0.0,
+                right: 0.0,
+                child: Container(
+                  alignment:
+                      _isTop ? Alignment.topCenter : Alignment.bottomCenter,
+                  child: AnimatedBuilder(
+                    animation: _positionController,
+                    builder: (BuildContext context, Widget child) {
 //                print(_positionController.value);
-                return Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(color: Colors.blue),
-                  height: widget.refreshHeight*_positionFactor.value<0?0.0:widget.refreshHeight*_positionFactor.value,
-                  child: SingleChildScrollView(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          width: 30.0,
-                          height: 30.0,
-                          child: cuper.CupertinoActivityIndicator(
-                            animating: showIndeterminateIndicator,
-                          ),
+                      double height;
+                      if (_statusRefresh == STATUE.DRAG ||
+                          _statusRefresh == STATUE.ARMED) {
+                        height = _dragOffSet;
+                      } else if (_statusRefresh != null) {
+                        height = _dragOffSet * _positionController.value;
+                        print('头部的高度:$height');
+                      }
+
+                      height = height < 0.0 ? 0.0 : height;
+
+//                widget.refreshHeight*_positionFactor.value<0?0.0:widget.refreshHeight*_positionFactor.value
+                      return Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(color: Colors.blue),
+                        height: height,
+                        child: SingleChildScrollView(
+                          child: _getHeader(),
                         ),
-                        SizedBox(
-                          width: 15.0,
-                        ),
-                        Text(
-                          _handleStatus(),
-                          style: Theme.of(context).textTheme.body1.copyWith(color: Colors.white),
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          ),
-        ),
+                ),
+              )
+            : Text(''),
+        _isBottom != null
+            ? Positioned(
+                top: !_isBottom ? 0.0 : null,
+                bottom: _isBottom ? 0.0 : null,
+                left: 0.0,
+                right: 0.0,
+                child: Container(
+                  alignment:
+                      _isBottom ? Alignment.topCenter : Alignment.bottomCenter,
+                  child: AnimatedBuilder(
+                    animation: _positionController,
+                    builder: (BuildContext context, Widget child) {
+//                print(_positionController.value);
+                      double height = 0.0;
+                      if (_statusLoading == STATUE.DRAG ||
+                          _statusLoading == STATUE.ARMED) {
+                        height = _dragOffSet;
+                      } else if (_statusLoading != null) {
+                        height = _dragOffSet * _positionController.value;
+                      }
+                      height = height < 0.0 ? 0.0 : height;
+                      print('脚部的高度:$height');
+//                widget.refreshHeight*_positionFactor.value<0?0.0:widget.refreshHeight*_positionFactor.value
+                      return Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(color: Colors.blue),
+                        height: height,
+                        child: SingleChildScrollView(
+                          child: _getFooter(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              )
+            : Text(''),
       ],
     );
   }
+
+  Widget _getHeader() {
+    switch (_statusRefresh) {
+      case STATUE.DRAG:
+        return widget.header.onDrag();
+      case STATUE.ARMED:
+        return widget.header.onArmed();
+      case STATUE.SNAP:
+        return widget.header.onSnap();
+      case STATUE.REFRESH:
+        return widget.header.onRefresh();
+      case STATUE.DONE:
+        return widget.header.onDone();
+      case STATUE.CANCELED:
+        return widget.header.onCancel();
+    }
+    return Text('');
+  }
+
+  Widget _getFooter() {
+    switch (_statusLoading) {
+      case STATUE.DRAG:
+        return widget.footer.onDrag();
+      case STATUE.ARMED:
+        return widget.footer.onArmed();
+      case STATUE.SNAP:
+        return widget.footer.onSnap();
+      case STATUE.REFRESH:
+        return widget.footer.onRefresh();
+      case STATUE.DONE:
+        return widget.footer.onDone();
+      case STATUE.CANCELED:
+        return widget.footer.onCancel();
+    }
+    return Text('');
+  }
+}
+
+abstract class RefreshBody {
+  /*下拉刷新*/
+  Widget onDrag();
+
+  /*松开刷新*/
+  Widget onArmed();
+
+  /*松开*/
+  Widget onSnap();
+
+  /*正在加载*/
+  Widget onRefresh();
+
+  /*刷新完毕*/
+  Widget onDone();
+
+  /*取消刷新*/
+  Widget onCancel();
 }
