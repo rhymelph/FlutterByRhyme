@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'PullDownIndicator.dart';
+import 'RhyRefreshIndicator.dart';
 import 'dart:async';
 //import 'PullDown2.dart';
 
@@ -12,16 +12,14 @@ class PullToRefreshDemo extends StatefulWidget {
 }
 
 class _PullToRefreshDemoState extends State<PullToRefreshDemo> {
-  List<Widget> bodyList;
+  List<String> bodyList;
 
   @override
   void initState() {
     // TODO: implement initState
     bodyList = [];
     for (int i = 0; i < 5; i++) {
-      bodyList.add(ListTile(
-        title: Text('This item is $i'),
-      ));
+      bodyList.add('This item is $i');
     }
     print('initState');
 
@@ -41,14 +39,21 @@ class _PullToRefreshDemoState extends State<PullToRefreshDemo> {
   get body => RhyRefreshIndicator(
         refreshHeight: 60.0,
         header: new RefreshMyBody(),
-        child: ListView(
-          physics: AlwaysScrollableScrollPhysics(),
-          children: bodyList,
+        child: ListView.builder(
+          itemCount: bodyList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              title: Text(bodyList[index]),
+            );
+          },
         ),
         onRefresh: () {
           final Completer<Null> comparator = new Completer();
 
           new Timer(Duration(seconds: 2), () {
+            setState(() {
+              bodyList.insert(0, '新增');
+            });
             comparator.complete(null);
           });
           return comparator.future;
@@ -58,8 +63,12 @@ class _PullToRefreshDemoState extends State<PullToRefreshDemo> {
           final Completer<Null> comparator = new Completer();
 
           new Timer(Duration(seconds: 2), () {
+            setState(() {
+              bodyList.add('新加');
+            });
             comparator.complete(null);
           });
+
           return comparator.future;
         },
       );
@@ -96,7 +105,6 @@ class RefreshMyBody extends RefreshBody {
     return Text('松开状态');
   }
 }
-
 
 class RefreshMyBody2 extends RefreshBody {
   @override
