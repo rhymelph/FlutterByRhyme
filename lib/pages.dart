@@ -34,7 +34,7 @@ const String finishDemo=
     'Semantics,MergeSemantics，ExcludeSemantics,'
     'CupertinoActionSheet,CupertinoSegmentedControl,CupertinoPicker,CupertinoTimerPickerDemo,'
     '聊天室,登陆页面,商品列表,'
-    '上拉下拉';
+    '上拉下拉,侧滑删除';
 
 class BottomItem {
   final String title;
@@ -1421,8 +1421,8 @@ List<Page> _buildPage() {
         subhead: '侧滑删除指定的项',
         icon: null,
         category: _kExpandList,
-        routeName: Temp.routeName,
-        buildRoute: (BuildContext context) => Temp()),
+        routeName: DragItemDemo.routeName,
+        buildRoute: (BuildContext context) => DragItemDemo()),
     ///design
     Page(
         title: '聊天室',
