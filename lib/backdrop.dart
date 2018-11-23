@@ -7,7 +7,7 @@ import 'dart:math' as math;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 
-const double _kFrontHeadingEndHeight=6.0;
+const double _kFrontHeadingEndHeight = 6.0;
 const double _kFrontHeadingHeight = 12.0; // front layer beveled rectangle
 const double _kFrontClosedHeight = 92.0; // front layer height when closed
 const double _kBackAppBarHeight = 56.0; // back layer (options) appbar height
@@ -24,7 +24,8 @@ final Tween<BorderRadius> _kFrontHeadingBevelRadius = new BorderRadiusTween(
 );
 
 class _TappableWhileStatusIs extends StatefulWidget {
-  const _TappableWhileStatusIs(this.status, {
+  const _TappableWhileStatusIs(
+    this.status, {
     Key key,
     this.controller,
     this.child,
@@ -35,7 +36,8 @@ class _TappableWhileStatusIs extends StatefulWidget {
   final Widget child;
 
   @override
-  _TappableWhileStatusIsState createState() => new _TappableWhileStatusIsState();
+  _TappableWhileStatusIsState createState() =>
+      new _TappableWhileStatusIsState();
 }
 
 class _TappableWhileStatusIsState extends State<_TappableWhileStatusIs> {
@@ -68,10 +70,7 @@ class _TappableWhileStatusIsState extends State<_TappableWhileStatusIs> {
     return new AbsorbPointer(
       absorbing: !_active,
       // Redundant. TODO(xster): remove after https://github.com/flutter/flutter/issues/17179.
-      child: new IgnorePointer(
-        ignoring: !_active,
-        child: widget.child
-      ),
+      child: new IgnorePointer(ignoring: !_active, child: widget.child),
     );
   }
 }
@@ -133,11 +132,15 @@ class _BackAppBar extends StatelessWidget {
     this.leading: const SizedBox(width: 56.0),
     @required this.title,
     this.trailing,
-  }) : assert(leading != null), assert(title != null), super(key: key);
+    this.icon,
+  })  : assert(leading != null),
+        assert(title != null),
+        super(key: key);
 
   final Widget leading;
   final Widget title;
   final Widget trailing;
+  final Widget icon;
 
   @override
   Widget build(BuildContext context) {
@@ -151,6 +154,16 @@ class _BackAppBar extends StatelessWidget {
         child: title,
       ),
     ];
+
+    if (icon != null) {
+      children.add(
+        new Container(
+          alignment: Alignment.center,
+          width: 56.0,
+          child: icon,
+        ),
+      );
+    }
 
     if (trailing != null) {
       children.add(
@@ -186,6 +199,8 @@ class Backdrop extends StatefulWidget {
     this.backTitle,
     this.backLayer,
     this.valueChanged,
+    this.searchAction,
+    this.helpAction,
   });
 
   final Widget frontAction;
@@ -195,11 +210,15 @@ class Backdrop extends StatefulWidget {
   final Widget backTitle;
   final Widget backLayer;
   final ValueChanged<double> valueChanged;
+  final VoidCallback searchAction;
+  final VoidCallback helpAction;
+
   @override
   _BackdropState createState() => new _BackdropState();
 }
 
-class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin {
+class _BackdropState extends State<Backdrop>
+    with SingleTickerProviderStateMixin {
   final GlobalKey _backdropKey = new GlobalKey(debugLabel: 'Backdrop');
   AnimationController _controller;
   Animation<double> _frontOpacity;
@@ -212,18 +231,15 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
       value: 1.0,
       vsync: this,
     );
-    _controller.addListener(
-        (){
-          widget.valueChanged(_controller.value);
-        }
+    _controller.addListener(() {
+      widget.valueChanged(_controller.value);
+    });
+    _frontOpacity = new Tween<double>(begin: 0.2, end: 1.0).animate(
+      new CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.4, curve: Curves.easeInOut),
+      ),
     );
-    _frontOpacity =
-      new Tween<double>(begin: 0.2, end: 1.0).animate(
-        new CurvedAnimation(
-          parent: _controller,
-          curve: const Interval(0.0, 0.4, curve: Curves.easeInOut),
-        ),
-      );
   }
 
   @override
@@ -236,18 +252,21 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
     // Warning: this can be safely called from the event handlers but it may
     // not be called at build time.
     final RenderBox renderBox = _backdropKey.currentContext.findRenderObject();
-    return math.max(0.0, renderBox.size.height - _kBackAppBarHeight - _kFrontClosedHeight);
+    return math.max(
+        0.0, renderBox.size.height - _kBackAppBarHeight - _kFrontClosedHeight);
   }
 
   void _handleDragUpdate(DragUpdateDetails details) {
-    _controller.value -= details.primaryDelta / (_backdropHeight ?? details.primaryDelta);
+    _controller.value -=
+        details.primaryDelta / (_backdropHeight ?? details.primaryDelta);
   }
 
   void _handleDragEnd(DragEndDetails details) {
-    if (_controller.isAnimating || _controller.status == AnimationStatus.completed)
-      return;
+    if (_controller.isAnimating ||
+        _controller.status == AnimationStatus.completed) return;
 
-    final double flingVelocity = details.velocity.pixelsPerSecond.dy / _backdropHeight;
+    final double flingVelocity =
+        details.velocity.pixelsPerSecond.dy / _backdropHeight;
     if (flingVelocity < 0.0)
       _controller.fling(velocity: math.max(2.0, -flingVelocity));
     else if (flingVelocity > 0.0)
@@ -258,13 +277,15 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
 
   void _toggleFrontLayer() {
     final AnimationStatus status = _controller.status;
-    final bool isOpen = status == AnimationStatus.completed || status == AnimationStatus.forward;
+    final bool isOpen = status == AnimationStatus.completed ||
+        status == AnimationStatus.forward;
     _controller.fling(velocity: isOpen ? -2.0 : 2.0);
   }
 
   Widget _buildStack(BuildContext context, BoxConstraints constraints) {
     final Animation<RelativeRect> frontRelativeRect = new RelativeRectTween(
-      begin: new RelativeRect.fromLTRB(0.0, constraints.biggest.height - _kFrontClosedHeight, 0.0, 0.0),
+      begin: new RelativeRect.fromLTRB(
+          0.0, constraints.biggest.height - _kFrontClosedHeight, 0.0, 0.0),
       end: const RelativeRect.fromLTRB(0.0, _kBackAppBarHeight, 0.0, 0.0),
     ).animate(_controller);
 
@@ -289,6 +310,25 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
                 progress: _controller,
               ),
             ),
+            icon: AnimatedBuilder(
+              animation: _controller,
+              builder: (BuildContext context, Widget child) {
+                return Opacity(
+                  opacity: _controller.value * 2<=1.0?1.0-_controller.value*2:_controller.value*2-1.0,
+                  child: _controller.value > 0.5
+                      ? new IconButton(
+                          onPressed: widget.searchAction,
+                          tooltip: 'Search',
+                          icon: new Icon(Icons.search),
+                        )
+                      : new IconButton(
+                          icon: Icon(Icons.help),
+                          tooltip: 'Help',
+                          onPressed: widget.helpAction,
+                        ),
+                );
+              },
+            ),
           ),
           new Expanded(
             child: new _TappableWhileStatusIs(
@@ -310,7 +350,8 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
               color: Theme.of(context).canvasColor,
               clipper: new ShapeBorderClipper(
                 shape: new RoundedRectangleBorder(
-                  borderRadius: _kFrontHeadingBevelRadius.lerp(_controller.value),
+                  borderRadius:
+                      _kFrontHeadingBevelRadius.lerp(_controller.value),
                 ),
               ),
               child: child,
@@ -363,11 +404,12 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
     return new LayoutBuilder(builder: _buildStack);
   }
 }
+
 class Test extends StatelessWidget {
-  Test(Key key):super(key:key);
+  Test(Key key) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container();
   }
 }
-

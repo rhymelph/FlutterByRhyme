@@ -172,7 +172,7 @@ class OptionsPage extends StatelessWidget {
 
   void pushToHelp(BuildContext context){
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (BuildContext context) => Help()));
+        .push(MaterialPageRoute(builder: (BuildContext context) => HelpPage()));
   }
 }
 

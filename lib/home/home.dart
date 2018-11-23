@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/pages.dart';
 import 'package:flutterbyrhyme/backdrop.dart';
+import 'package:flutterbyrhyme/search.dart';
+import 'package:flutterbyrhyme/options/help.dart';
 import 'dart:developer';
 
 import 'dart:async';
@@ -15,8 +17,7 @@ class HomePage extends StatefulWidget {
   final Widget optionPage;
   final ValueChanged<BottomItem> colorChange;
 
-  const HomePage({this.optionPage,this.colorChange});
-
+  const HomePage({this.optionPage, this.colorChange});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -91,6 +92,23 @@ class _HomePageState extends State<HomePage>
     });
   }
 
+  _pageSearchOrHelpJump(Widget child) {
+    return PageRouteBuilder(
+      pageBuilder: (BuildContext context, _, __) {
+        return child;
+      },
+      opaque: true,
+      transitionDuration: Duration(milliseconds: 150),
+      transitionsBuilder: (__, Animation<double> animation, ____,
+              Widget child) =>
+          SlideTransition(
+            position:
+            Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero)
+                .animate(animation),
+            child: child,
+          )
+    );
+  }
   double bottomSize;
 
   @override
@@ -131,6 +149,13 @@ class _HomePageState extends State<HomePage>
 
               ///注册回调
               child: Backdrop(
+                helpAction: () {
+                  Navigator.of(context).push(_pageSearchOrHelpJump(HelpPage()));
+                },
+                searchAction: () {
+                  Navigator.of(context)
+                      .push(_pageSearchOrHelpJump(SearchPage()));
+                },
                 valueChanged: (index) {
                   setState(() {
                     bottomOpcity = index;
