@@ -153,8 +153,10 @@ class _HomePageState extends State<HomePage>
                   Navigator.of(context).push(_pageSearchOrHelpJump(HelpPage()));
                 },
                 searchAction: () {
-                  Navigator.of(context)
-                      .push(_pageSearchOrHelpJump(SearchPage()));
+//                  Navigator.of(context)
+//                      .push(_pageSearchOrHelpJump(SearchPage()));
+                  showSearch(context: context, delegate: SearchPage());
+
                 },
                 valueChanged: (index) {
                   setState(() {
