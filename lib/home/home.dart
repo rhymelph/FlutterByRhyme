@@ -152,11 +152,12 @@ class _HomePageState extends State<HomePage>
                 helpAction: () {
                   Navigator.of(context).push(_pageSearchOrHelpJump(HelpPage()));
                 },
-                searchAction: () {
-//                  Navigator.of(context)
-//                      .push(_pageSearchOrHelpJump(SearchPage()));
-                  showSearch(context: context, delegate: SearchPage());
-
+                searchAction: () async{
+                String routeName=await showSearch(context: context, delegate: SearchPage());
+                if(routeName.isEmpty){
+                  return;
+                }
+                  Navigator.of(context).pushNamed(routeName);
                 },
                 valueChanged: (index) {
                   setState(() {
