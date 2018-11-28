@@ -1417,13 +1417,6 @@ List<Page> _buildPage() {
         routeName: PullToRefreshDemo.routeName,
         buildRoute: (BuildContext context) => PullToRefreshDemo()),
     Page(
-        title: '群友',
-        subhead: '群友效果',
-        icon: null,
-        category: _kExpandList,
-        routeName: ScrollLayout.routeName,
-        buildRoute: (BuildContext context) => ScrollLayout()),
-    Page(
         title: '侧滑删除',
         subhead: '侧滑删除指定的项',
         icon: null,
