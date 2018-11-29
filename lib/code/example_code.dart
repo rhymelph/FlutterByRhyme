@@ -283,6 +283,7 @@ class FullScreenCodeDialog extends StatefulWidget {
 }
 
 class _FullScreenCodeDialogState extends State<FullScreenCodeDialog> {
+  double fontSize=16.0;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -308,7 +309,7 @@ class _FullScreenCodeDialogState extends State<FullScreenCodeDialog> {
             scrollDirection: Axis.horizontal,
             child: RichText(
                 text: TextSpan(
-                    style: const TextStyle(fontSize: 18.0),
+                    style: TextStyle(fontSize: fontSize),
                     children: <TextSpan>[
                   DartSyntaxHighlighter(style).format(widget.exampleCode),
                 ])),

@@ -11,6 +11,7 @@ dependencies:
   url_launcher: ^3.0.3
   shared_preferences: ^0.4.2
   html: any
+  http: ^0.12.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
