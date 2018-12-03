@@ -16,15 +16,26 @@ List<HelpItem> items = [
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text('在主界面中,点击搜索按钮图标'),
-        Image.asset('images/pazzer.jpg', width: 200.0, height: 200.0,),
-        Text('然后会跳转到一个搜索界面，在搜索框中，输入你需要搜索的部件名字，或者介绍（英文字母可忽略大小写）'),
-        Image.asset('images/pazzer.jpg', width: 200.0, height: 200.0,),
+        Image.asset(
+          'images/pazzer.jpg',
+          width: 200.0,
+          height: 200.0,
+        ),
+        Text('然后会跳转到一个搜索界面，在搜索框中，输入你需要搜索的部件名字或者介绍（英文字母可忽略大小写）'),
+        Image.asset(
+          'images/pazzer.jpg',
+          width: 200.0,
+          height: 200.0,
+        ),
         Text('输入完成后点击搜索图标按钮,就会匹配到你需要的部件'),
-        Image.asset('images/pazzer.jpg', width: 200.0, height: 200.0,),
+        Image.asset(
+          'images/pazzer.jpg',
+          width: 200.0,
+          height: 200.0,
+        ),
         Text('先这样，然后这个'),
       ],
     ),
-
   ),
   HelpItem(
     '2.如何选中部件属性？',
@@ -36,15 +47,19 @@ List<HelpItem> items = [
   ),
   HelpItem(
     '4.如何查看当前部件的代码？',
-    Text('先这样，然后这个'),
+    Text('进入到代码'),
   ),
   HelpItem(
-    '5.如何切换主题？',
-    Text('先这样，然后这个'),
-  ),
+      '5.如何切换主题？',
+      Column(
+        children: <Widget>[
+          Text('在主页面中点击右上角的菜单图标'),
+          Text('然后可以看到夜间模式的'),
+        ],
+      )),
   HelpItem(
-      '6.账号系统机制在哪里？',
-    Text('先这样，然后这个'),
+    '6.账号系统机制在哪里？',
+    Text('目前还没有账号系统机制，敬请期待!'),
   ),
 ];
 
@@ -60,7 +75,6 @@ class _HelpPageState extends State<HelpPage> {
       appBar: AppBar(
         title: Text('使用帮助'),
       ),
-      backgroundColor: Colors.grey[200],
       body: SingleChildScrollView(
         child: ExpansionPanelList(
           animationDuration: Duration(milliseconds: 300),
@@ -71,10 +85,11 @@ class _HelpPageState extends State<HelpPage> {
             });
           },
           children: items
-              .map((item) =>
-              ExpansionPanel(
+              .map((item) => ExpansionPanel(
                   headerBuilder: (BuildContext context, bool isExpansion) {
-                    return HelpTitle(title: item.title,);
+                    return HelpTitle(
+                      title: item.title,
+                    );
                   },
                   body: Container(
                     alignment: Alignment.centerLeft,
@@ -103,4 +118,3 @@ class HelpTitle extends StatelessWidget {
     );
   }
 }
-

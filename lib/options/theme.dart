@@ -69,9 +69,9 @@ ThemeData _buildLightTheme() {
     splashColor: Colors.white24,
     splashFactory: InkRipple.splashFactory,
     accentColor: const Color(0xFF002D75),
-    canvasColor: Colors.white,
-    scaffoldBackgroundColor: Colors.white,
-    backgroundColor: Colors.white,
+    canvasColor: Colors.grey[200],
+    scaffoldBackgroundColor: Colors.grey[200],
+    backgroundColor: Colors.grey[200],
     errorColor: const Color(0xFFB00020),
     buttonTheme: const ButtonThemeData(
       textTheme: ButtonTextTheme.primary,

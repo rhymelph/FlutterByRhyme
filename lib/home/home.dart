@@ -303,16 +303,22 @@ class _CategoryItem extends StatelessWidget {
           splashColor: theme.primaryColor.withOpacity(0.12),
           highlightColor: Colors.transparent,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            padding: const EdgeInsets.all(6.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                SizedBox(
+                  height: 16.0,
+                ),
                 Text(
                   pageCategory.title,
                   style: Theme.of(context).textTheme.title.copyWith(
                         color: isDark ? Colors.white : const Color(0xFF202124),
                       ),
+                ),
+                SizedBox(
+                  height: 32.0,
                 ),
                 Text(
                   pageCategory.subhead,
@@ -388,11 +394,17 @@ class _PageItem extends StatelessWidget {
     final double textScale = MediaQuery.textScaleFactorOf(context);
 
     List<Widget> children = <Widget>[
+      SizedBox(
+        height: 16.0,
+      ),
       Text(
         page.title,
         style: data.textTheme.title.copyWith(
           color: isDark ? Colors.white : const Color(0xFF202124),
         ),
+      ),
+       SizedBox(
+        height: 16.0,
       ),
       Text(
         page.subhead,
@@ -410,10 +422,11 @@ class _PageItem extends StatelessWidget {
           ));
     }
     Widget pageHome = Container(
+      padding: const EdgeInsets.all(6.0),
       alignment: Alignment.center,
       constraints: BoxConstraints(minHeight: _kPageItemHeight * textScale),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: children,
       ),
