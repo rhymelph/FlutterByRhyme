@@ -21,6 +21,10 @@ class MarkdownParse {
     int lastPosition=_scanner.position;
 
     while (!_scanner.isDone) {
+
+      _scanner.scan(new RegExp(r'\s+'));
+
+
       if (_scanner.scan(RegExp(r'^(#+)(.*)'))) {
         //标题
         Match match = _scanner.lastMatch;
@@ -28,10 +32,15 @@ class MarkdownParse {
           style: style,
           text: source.substring(match.start, match.end),
         ));
-        continue;
+        break;
       }
       if (_scanner.scan(RegExp(r'>(.*)'))) {
         //引用
+        Match match=_scanner.lastMatch;
+        widgets.add(QuoteWidget(
+          style: style,
+          text: source.substring(match.start,match.end),
+        ));
       }
       if (_scanner.scan(RegExp(r'~~(.*?)~~'))) {
         //删除线
@@ -60,12 +69,23 @@ class MarkdownParse {
         //代码块
       }
 
-      if (_scanner.scan(RegExp(r'^[\s]*[-\*\+] +(.*)'))) {
+      if (_scanner.scan(RegExp(r'^[s]*[-*+]+(.*)'))) {
         //无序列表
+        Match match=_scanner.lastMatch;
+        widgets.add(DisOrderWidget(
+          style: style,
+          text: source.substring(match.start, match.end),
+        ));
       }
       if (_scanner.scan(r'^[\s]*[0-9]+\.(.*)')) {
         //有序列表
       }
+      // Check if this loop did anything
+      if (lastPosition == _scanner.position) {
+        // Failed to parse this file, abort gracefully
+        return widgets;
+      }
+      lastPosition = _scanner.position;
     }
     return widgets;
   }

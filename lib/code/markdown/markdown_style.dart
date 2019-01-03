@@ -29,7 +29,7 @@ abstract class MarkDownStyle {
 
   TextStyle table(TableStyle style);
 
-  TextStyle recommend();
+  TextStyle quote();
 
   TextStyle content(ContentStyle style);
 
@@ -106,7 +106,7 @@ class DefaultMarkDownStyle extends MarkDownStyle {
   }
 
   @override
-  TextStyle recommend() {
+  TextStyle quote() {
     return const TextStyle();
   }
 

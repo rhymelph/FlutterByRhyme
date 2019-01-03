@@ -4,6 +4,9 @@ import 'package:flutterbyrhyme/code/example_code.dart';
 class MaterialAppDemo extends StatefulWidget {
   static const String routeName = 'widgets/material/MaterialApp';
   static const String detail = '''> 22个参数
+- ceshi 
+- cserw
+- fdsfew
 
 | 字段|类型| 
 | - | - |

@@ -37,7 +37,7 @@ class _RawKeyboardListenerDemoState
                 controller: TextEditingController(),
                 cursorColor: Colors.grey,
                 style: Theme.of(context).textTheme.body1,
-                focusNode: focusNode,
+                focusNode: focusNode, backgroundCursorColor: Colors.blue,
               );
             },
           ),
@@ -60,7 +60,7 @@ class _RawKeyboardListenerDemoState
               'flags(事件标志):${a.flags}\ncodePoint(Unicode字符):${a.codePoint}\nkeyCode(键码):${a.keyCode}\nmetaState(源键状态)${a.metaState}\nscanCode(事件源):${a.scanCode}';
           print(key);
         });
-      },label: '''key) {
+      },label: '''(key) {
         setState(() {
           RawKeyEventDataAndroid a = key.data;
           //a.flags
