@@ -6,7 +6,7 @@ import 'markdown_dart_code.dart';
 import 'package:flutterbyrhyme/code/code_highlighter.dart';
 export 'package:flutterbyrhyme/widgets/paramWidgets.dart';
 export 'code_highlighter.dart';
-import 'package:flutterbyrhyme/code/markdown_code.dart';
+import 'markdown_dart_code.dart';
 abstract class MarkdownState<T extends StatefulWidget> extends State<T>{
   bool showFloatingButton=false;
   final ScrollController _controller = new ScrollController();
@@ -51,7 +51,7 @@ abstract class MarkdownState<T extends StatefulWidget> extends State<T>{
               title: Text(getTitle()),
             ),
             SliverToBoxAdapter(
-              child: MarkDownCode(getMarkdownSource()),
+              child: DartMarkDown(getMarkdownSource()),
             ),
           ],
         ),
