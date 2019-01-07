@@ -10,6 +10,7 @@ import 'package:flutterbyrhyme/options/theme.dart';
 import 'package:flutterbyrhyme/options/scales.dart';
 
 import 'package:flutterbyrhyme/pages.dart';
+import 'options/local.dart';
 
 class DemoApp extends StatefulWidget {
   @override
@@ -112,6 +113,10 @@ class _DemoAppState extends State<DemoApp> {
           child: _applyTextScaleFactor(child),
         );
       },
+      localizationsDelegates: [
+        //设置搜索输入框提示语
+        MyLocalizationsDelegates(),
+      ],
       home: home,
     );
   }
@@ -123,3 +128,5 @@ class _DemoAppState extends State<DemoApp> {
     super.dispose();
   }
 }
+
+
