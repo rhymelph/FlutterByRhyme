@@ -104,6 +104,7 @@ class _DemoAppState extends State<DemoApp> {
     );
     return new MaterialApp(
       title: 'Flutter教程',
+      debugShowCheckedModeBanner: false,
       theme: _options.theme.data.copyWith(platform: _options.platform),
       color: _options.theme.data.primaryColor,
       routes: _buildRoutes(),
