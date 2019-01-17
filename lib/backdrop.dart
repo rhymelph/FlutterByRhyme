@@ -8,7 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 
 const double _kFrontHeadingEndHeight = 6.0;
-const double _kFrontHeadingHeight = 12.0; // front layer beveled rectangle
+const double _kFrontHeadingHeight = 6.0; // front layer beveled rectangle
 const double _kFrontClosedHeight = 92.0; // front layer height when closed
 const double _kBackAppBarHeight = 56.0; // back layer (options) appbar height
 // The size of the front layer heading's left and right beveled corners.

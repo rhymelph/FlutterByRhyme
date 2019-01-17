@@ -152,60 +152,34 @@ class _ChatRoomState extends State<ChatRoom> with TickerProviderStateMixin {
     super.initState();
   }
 
+  getHeaders() {}
+
   void login() {
-    httpManager.post(
-        url: 'http://192.168.1.101:8080/mini/login',
-        body: json.encode({
-          "username": "rhyme",
-          "password": "123456",
-        }),
-        onSend: () {
-          scaffoldKey?.currentState
-              ?.showSnackBar(new SnackBar(content: Text('发送请求，连接服务器')));
-        },
-        onSuccess: (data) {
-          WebSocket.connect('ws://192.168.1.101:8080/mini/connect')
-              .then((socket) {
-            this.socket = socket;
-            socket.listen((data) {
-              print(data);
-              Map map = json.decode(data);
-              ChatMessageData msg=ChatMessageData.formMap(map);
-              if(msg.id!=widget.user.uuid){
-                _handleGetMessage(msg);
-              }
-            });
-            socket.done.then((e){
-              scaffoldKey.currentState.showSnackBar(new SnackBar(content: Text('连接服务器中断!')));
-            });
-          });
-        },
-        onError: (error) {
-          print(error);
-          scaffoldKey.currentState.showSnackBar(
-              new SnackBar(content: Text('连接失败!${error.toString()}')));
-        });
+    httpManager.webSocket(url: 'ws://192.168.1.101:8080/mini/connect',
+    headers: getHeaders(),
+    onSend: (){
+      scaffoldKey.currentState.showSnackBar(new SnackBar(content: Text('开始连接服务器!')));
+    },
+    onSuccess: (webSocket){
+      this.socket = socket;
+      socket.listen((data) {
+        print(data);
+        Map map = json.decode(data);
+        ChatMessageData msg=ChatMessageData.formMap(map);
+        if(msg.id!=widget.user.uuid){
+          _handleGetMessage(msg);
+        }
+      });
+    },
+    onDone: (info){
+      scaffoldKey.currentState.showSnackBar(new SnackBar(content: Text('连接服务器中断!')));
+    },
+    onError: (error){
+      scaffoldKey.currentState.showSnackBar(new SnackBar(content: Text('连接失败!')));
+    });
   }
 
-  _handleGetMessage(ChatMessageData data) {
-    if (data == null) {
-      return;
-    }
-    _controller.clear();
-    RChatMessage message = RChatMessage(
-      data: data,
-      controller: AnimationController(
-        vsync: this,
-        duration: Duration(milliseconds: 500),
-      ),
-    );
-    setState(() {
-      _message.insert(0, message);
-    });
-    if (message.controller != null) {
-      message.controller.forward();
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -325,8 +299,32 @@ class _ChatRoomState extends State<ChatRoom> with TickerProviderStateMixin {
     _handSubmitted(_controller.text);
   }
 
+  _handleGetMessage(ChatMessageData data) {
+    if (data == null) {
+      return;
+    }
+    _controller.clear();
+    RChatMessage message = RChatMessage(
+      data: data,
+      controller: AnimationController(
+        vsync: this,
+        duration: Duration(milliseconds: 500),
+      ),
+    );
+    setState(() {
+      _message.insert(0, message);
+    });
+    if (message.controller != null) {
+      message.controller.forward();
+    }
+  }
   @override
   void dispose() {
+    if(socket !=null){
+      //退出当前页面后停止socket
+      socket.close();
+    }
+    //释放动画
     for (Widget message in _message) {
       if (message is ChatMessage) {
         if (message.controller != null) {

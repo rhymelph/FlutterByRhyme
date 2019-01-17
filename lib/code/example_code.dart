@@ -6,9 +6,10 @@ import 'markdown_dart_code.dart';
 import 'package:flutterbyrhyme/code/code_highlighter.dart';
 export 'package:flutterbyrhyme/widgets/paramWidgets.dart';
 export 'code_highlighter.dart';
-import 'markdown_dart_code.dart';
-abstract class MarkdownState<T extends StatefulWidget> extends State<T>{
-  bool showFloatingButton=false;
+import 'package:shared_preferences/shared_preferences.dart';
+
+abstract class MarkdownState<T extends StatefulWidget> extends State<T> {
+  bool showFloatingButton = false;
   final ScrollController _controller = new ScrollController();
 
   @override
@@ -32,9 +33,9 @@ abstract class MarkdownState<T extends StatefulWidget> extends State<T>{
               showFloatingButton = notification.metrics.pixels >
                   MediaQuery.of(context).size.height;
             });
-          } else if(!showFloatingButton&&
+          } else if (!showFloatingButton &&
               notification.metrics.pixels >
-                  MediaQuery.of(context).size.height){
+                  MediaQuery.of(context).size.height) {
             setState(() {
               showFloatingButton = notification.metrics.pixels >
                   MediaQuery.of(context).size.height;
@@ -58,19 +59,20 @@ abstract class MarkdownState<T extends StatefulWidget> extends State<T>{
       ),
       floatingActionButton: showFloatingButton
           ? IconButton(
-        onPressed: () {
-          _controller.animateTo(0.0,
-              duration: Duration(milliseconds: 500),
-              curve: Curves.linear);
-        },
-        color: Theme.of(context).textTheme.title.color,
-        icon: Icon(
-          Icons.arrow_upward,
-        ),
-      )
+              onPressed: () {
+                _controller.animateTo(0.0,
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.linear);
+              },
+              color: Theme.of(context).textTheme.title.color,
+              icon: Icon(
+                Icons.arrow_upward,
+              ),
+            )
           : null,
     );
   }
+
   @protected
   String getTitle();
 
@@ -168,7 +170,7 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
   List<Widget> body;
 
   void showToast(String content) {
-    if(!mounted) return;
+    if (!mounted) return;
 
     setState(() {
       this.content = content;
@@ -177,7 +179,7 @@ class ExampleScaffoldState extends State<ExampleScaffold> {
       isShowToast = true;
     });
     Future.delayed(Duration(milliseconds: 1000), () {
-      if(!mounted) return;
+      if (!mounted) return;
       setState(() {
         nbColor = Colors.transparent;
         ntColor = Colors.transparent;
@@ -284,10 +286,22 @@ class FullScreenCodeDialog extends StatefulWidget {
 }
 
 class _FullScreenCodeDialogState extends State<FullScreenCodeDialog> {
-  double fontSize=16.0;
+  double fontSize = 16.0;
+
+  bool isShowFontSet = false;
+
+  GlobalKey<ScaffoldState> _key = GlobalKey();
+  SharedPreferences _preferences;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initPreference();
   }
 
   @override
@@ -319,6 +333,7 @@ class _FullScreenCodeDialogState extends State<FullScreenCodeDialog> {
       );
     }
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         leading: IconButton(
             icon: Icon(
@@ -328,10 +343,79 @@ class _FullScreenCodeDialogState extends State<FullScreenCodeDialog> {
             onPressed: () {
               Navigator.pop(context);
             }),
-        title: Tooltip(message: '示例代码', child: const Text('Example Code')),
+        title: Tooltip(
+          message: '示例代码',
+          child: const Text('Example Code'),
+        ),
+        actions: <Widget>[
+          IconButton(
+            tooltip: '字体大小',
+            icon: Icon(Icons.format_size),
+            onPressed: () {
+              setState(() {
+                isShowFontSet = !isShowFontSet;
+              });
+            },
+          ),
+          IconButton(
+            tooltip: '复制代码',
+            icon: Icon(Icons.content_copy),
+            onPressed: _handleCopyCode,
+          ),
+        ],
       ),
-      body: body,
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          body,
+          Positioned(
+            bottom: 0.0,
+            right: 5.0,
+            child: isShowFontSet
+                ? Row(
+                    children: <Widget>[
+                      Text('字体大小：'),
+                      Slider(
+                        divisions: 24,
+                        min: 10,
+                        max: 34,
+                        label: '$fontSize',
+                        value: fontSize,
+                        onChanged: (value) {
+                          _preferences.setDouble('fontSize', value);
+                          setState(() {
+                            fontSize = value;
+                          });
+                        },
+                      ),
+                      Text('$fontSize'),
+                    ],
+                  )
+                : Container(),
+          ),
+        ],
+      ),
     );
   }
-}
 
+  //复制代码
+  void _handleCopyCode() async {
+    await Clipboard.setData(ClipboardData(text: widget.exampleCode));
+    _key.currentState.showSnackBar(
+      SnackBar(
+        content: Text('代码已复制到粘贴板'),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  }
+
+  void initPreference() async {
+    _preferences = await SharedPreferences.getInstance();
+    double saveSize = _preferences.getDouble('fontSize');
+    if (saveSize != null) {
+      setState(() {
+        fontSize = saveSize;
+      });
+    }
+  }
+}

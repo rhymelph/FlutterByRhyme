@@ -88,8 +88,7 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
 
   List<_HighlightSpan> _spans;
 
-  @override
-  TextSpan format(String src) {
+  static String formatCode(String src){
     List<String> srcs=src.split('\n');
     List<String> srcFormat=[];
     //格式化去掉多余的代码
@@ -98,7 +97,12 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
         srcFormat.add(s);
       }
     }
-    _src = srcFormat.join('\n');
+    return srcFormat.join('\n');
+  }
+  @override
+  TextSpan format(String src) {
+
+    _src = formatCode(src);
     _scanner = new StringScanner(_src);
 
     if (_generateSpans()) {

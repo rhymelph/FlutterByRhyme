@@ -32,16 +32,15 @@ List<HelpItem> items = [
     ),
   ),
   HelpItem(
-    '2.如何选中部件属性？',
-    Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text('打开部件后，可在视图下方选中属性'),
-        HelpImage('images/help_widget_select1.png'),
-      ],
-    )
-  ),
+      '2.如何选中部件属性？',
+      Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('打开部件后，可在视图下方选中属性'),
+          HelpImage('images/help_widget_select1.png'),
+        ],
+      )),
   HelpItem(
     '3.如何查看部件属性的代码？',
     Column(
@@ -50,21 +49,19 @@ List<HelpItem> items = [
       children: <Widget>[
         Text('长按属性即可弹出部件属性代码'),
         HelpImage('images/help_widget_select2.png'),
-
       ],
     ),
   ),
   HelpItem(
-    '4.如何查看当前部件的代码？',
-    Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text('在部件界面中，点击右上角的小图标即可查看'),
-        HelpImage('images/help_widget_select2.png'),
-      ],
-    )
-  ),
+      '4.如何查看当前部件的代码？',
+      Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('在部件界面中，点击右上角的小图标即可查看'),
+          HelpImage('images/help_widget_select3.png'),
+        ],
+      )),
   HelpItem(
       '5.如何切换主题？',
       Column(
@@ -73,7 +70,6 @@ List<HelpItem> items = [
           HelpImage('images/help_theme1.png'),
           Text('然后可以看到夜间模式,点击右边切换按钮即可切换'),
           HelpImage('images/help_theme2.png'),
-
         ],
       )),
   HelpItem(
@@ -141,16 +137,86 @@ class HelpTitle extends StatelessWidget {
 class HelpImage extends StatelessWidget {
   final String assertName;
 
-  const HelpImage(this.assertName,{Key key,}) : super(key: key);
+  const HelpImage(
+    this.assertName, {
+    Key key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(16.0),
-      width:150.0,
-      height: 200.0,
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(assertName),),
-        borderRadius: BorderRadius.circular(16.0),
+    return Hero(
+      tag: assertName,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => HelpImageWatch(
+                    assertName: assertName,
+                  ),
+            ),
+          );
+        },
+        child: Container(
+          margin: const EdgeInsets.all(16.0),
+          width: 150.0,
+          height: 200.0,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(assertName),
+            ),
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class HelpImageWatch extends StatefulWidget {
+  final String assertName;
+
+  const HelpImageWatch({Key key, this.assertName}) : super(key: key);
+
+  @override
+  _HelpImageWatchState createState() => _HelpImageWatchState();
+}
+
+class _HelpImageWatchState extends State<HelpImageWatch> {
+
+  double scale=1.0;
+  _back() {
+    Navigator.of(context).pop();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black87,
+      body: GestureDetector(
+        onTap: _back,
+        onScaleUpdate: (detail){
+          setState(() {
+            scale +=detail.scale;
+          });
+        },
+        child: Stack(
+          children: <Widget>[
+            Center(
+              child: Hero(
+                  tag: widget.assertName,
+                  child: SingleChildScrollView(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Image.asset(
+                        widget.assertName,
+                        scale: scale,
+                        gaplessPlayback: true,
+                      ),
+                    ),
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }

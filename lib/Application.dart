@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'dart:async';
 
 import 'package:flutterbyrhyme/home/home.dart';
+import 'package:flutterbyrhyme/options/local.dart';
 
 import 'package:flutterbyrhyme/options/options.dart';
 import 'package:flutterbyrhyme/options/theme.dart';
 import 'package:flutterbyrhyme/options/scales.dart';
 
 import 'package:flutterbyrhyme/pages.dart';
-import 'options/local.dart';
 
 class DemoApp extends StatefulWidget {
   @override
@@ -129,5 +129,3 @@ class _DemoAppState extends State<DemoApp> {
     super.dispose();
   }
 }
-
-
