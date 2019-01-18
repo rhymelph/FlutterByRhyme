@@ -34,7 +34,7 @@ const String finishDemo=
     'Semantics,MergeSemantics，ExcludeSemantics,'
     'CupertinoActionSheet,CupertinoSegmentedControl,CupertinoPicker,CupertinoTimerPickerDemo,'
     '聊天室,登陆页面,商品列表,'
-    '上拉下拉,侧滑删除,能量球,飘雪';
+    '上拉下拉,能量球,飘雪';
 
 class BottomItem {
   final String title;
@@ -1416,13 +1416,6 @@ List<Page> _buildPage() {
         category: _kExpandList,
         routeName: PullToRefreshDemo.routeName,
         buildRoute: (BuildContext context) => PullToRefreshDemo()),
-    Page(
-        title: '侧滑删除',
-        subhead: '侧滑删除指定的项',
-        icon: null,
-        category: _kExpandList,
-        routeName: DragItemDemo.routeName,
-        buildRoute: (BuildContext context) => DragItemDemo()),
     Page(
         title: '能量球',
         subhead: '一个能量球',

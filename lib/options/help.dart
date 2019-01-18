@@ -191,12 +191,12 @@ class _HelpImageWatchState extends State<HelpImageWatch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
+      backgroundColor: Colors.black45,
       body: GestureDetector(
         onTap: _back,
         onScaleUpdate: (detail){
           setState(() {
-            scale +=detail.scale;
+            scale =detail.scale;
           });
         },
         child: Stack(

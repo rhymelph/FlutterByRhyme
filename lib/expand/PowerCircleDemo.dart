@@ -18,7 +18,7 @@ class _PowerCircleDemoState extends State<PowerCircleDemo> {
       ),
       body: Center(
         child: PowerCircle(
-          circleColor: Colors.grey[200],
+          circleColor: Colors.white,
           progress: 0.4,
           child: Center(
             child: Text('40%'),

@@ -38,7 +38,7 @@ class _PullToRefreshDemoState extends State<PullToRefreshDemo> {
 
   get body => RhyRefreshIndicator(
         refreshHeight: 60.0,
-        header: new RefreshMyBody(),
+        header: RefreshMyBody(),
         child: ListView.builder(
           itemCount: bodyList.length,
           itemBuilder: (BuildContext context, int index) {
@@ -77,63 +77,63 @@ class _PullToRefreshDemoState extends State<PullToRefreshDemo> {
 class RefreshMyBody extends RefreshBody {
   @override
   Widget onArmed() {
-    return Text('松开刷新');
+    return Text('松开刷新',style: TextStyle(color: Colors.white),);
   }
 
   @override
   Widget onCancel() {
-    return Text('刷新取消');
+    return Text('刷新取消',style: TextStyle(color: Colors.white),);
   }
 
   @override
   Widget onDone() {
-    return Text('刷新完成');
+    return Text('刷新完成',style: TextStyle(color: Colors.white),);
   }
 
   @override
   Widget onDrag() {
-    return Text('下拉刷新');
+    return Text('下拉刷新',style: TextStyle(color: Colors.white),);
   }
 
   @override
   Widget onRefresh() {
-    return Text('刷新中');
+    return Text('刷新中',style: TextStyle(color: Colors.white),);
   }
 
   @override
   Widget onSnap() {
-    return Text('松开状态');
+    return Text('松开状态',style: TextStyle(color: Colors.white),);
   }
 }
 
 class RefreshMyBody2 extends RefreshBody {
   @override
   Widget onArmed() {
-    return Text('松开加载');
+    return Text('松开加载',style: TextStyle(color: Colors.white),);
   }
 
   @override
   Widget onCancel() {
-    return Text('加载取消');
+    return Text('加载取消',style: TextStyle(color: Colors.white),);
   }
 
   @override
   Widget onDone() {
-    return Text('加载完成');
+    return Text('加载完成',style: TextStyle(color: Colors.white),);
   }
 
   @override
   Widget onDrag() {
-    return Text('上拉加载');
+    return Text('上拉加载',style: TextStyle(color: Colors.white),);
   }
 
   @override
   Widget onRefresh() {
-    return Text('加载中');
+    return Text('加载中',style: TextStyle(color: Colors.white),);
   }
 
   @override
   Widget onSnap() {
-    return Text('松开状态');
+    return Text('松开状态',style: TextStyle(color: Colors.white),);
   }
 }
