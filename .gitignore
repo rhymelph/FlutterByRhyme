@@ -5,5 +5,5 @@
 .pub/
 
 build/
-
+*.properties
 .flutter-plugins

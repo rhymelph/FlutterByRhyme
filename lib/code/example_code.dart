@@ -400,7 +400,7 @@ class _FullScreenCodeDialogState extends State<FullScreenCodeDialog> {
 
   //复制代码
   void _handleCopyCode() async {
-    await Clipboard.setData(ClipboardData(text: widget.exampleCode));
+    await Clipboard.setData(ClipboardData(text: DartSyntaxHighlighter.formatCode(widget.exampleCode)));
     _key.currentState.showSnackBar(
       SnackBar(
         content: Text('代码已复制到粘贴板'),

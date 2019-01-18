@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
 
-const String applicationVersion = '0.0.6';
+const String applicationVersion = '0.0.7';
 const String applicationLegalese = '© 2018 the rhymelph author';
 const about_platform = const MethodChannel('samples.flutter.io/about');
 const AliPay = 'DonateToMe';
