@@ -65,6 +65,8 @@ List<HelpItem> items = [
   HelpItem(
       '5.如何切换主题？',
       Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text('在主页面中点击右上角的菜单图标'),
           HelpImage('images/help_theme1.png'),
@@ -184,6 +186,7 @@ class HelpImageWatch extends StatefulWidget {
 class _HelpImageWatchState extends State<HelpImageWatch> {
 
   double scale=1.0;
+  double nowScale;
   _back() {
     Navigator.of(context).pop();
   }
@@ -196,8 +199,18 @@ class _HelpImageWatchState extends State<HelpImageWatch> {
         onTap: _back,
         onScaleUpdate: (detail){
           setState(() {
-            scale =detail.scale;
+            if(nowScale==null){
+              nowScale=detail.scale;
+            }else{
+              double space=detail.scale-nowScale;
+              nowScale=detail.scale;
+              scale =(scale-(space/3)).clamp(0.3, 4);
+              print(scale);
+            }
           });
+        },
+        onScaleEnd: (detail){
+          nowScale=null;
         },
         child: Stack(
           children: <Widget>[

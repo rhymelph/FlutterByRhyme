@@ -79,16 +79,19 @@ void checkUpdate(BuildContext context, bool haveTip) {
       onSend: () {},
       onSuccess: (result) {
         UpgradeInfo info = UpgradeInfo.formHtml(result);
+        if(haveTip){
+          Navigator.pop(context);
+        }
         if (info.haveUpgrade) {
           showUpgradeDialog(context, info);
         } else if (haveTip) {
-          Navigator.pop(context);
           showNoUpgradeDialog(context);
         }
       },
       onError: (error) {
         print(error.toString());
         if (haveTip) {
+          Navigator.pop(context);
           showErrorDialog(context);
         }
       });

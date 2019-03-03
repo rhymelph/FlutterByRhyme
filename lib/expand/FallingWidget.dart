@@ -32,12 +32,14 @@ class _FallingWidgetState extends State<FallingWidget>
         List<_FallingObject>.generate(widget.count, (_) => _FallingObject())
             .toList();
     PlatformAssetBundle().load(widget.imagePath).then((i) {
-      Uint8List uint8list = Uint8List.view(i.buffer, 0, i.lengthInBytes);
-      ui.decodeImageFromList(uint8list, (image) {
-        setState(() {
-          this.image = image;
+      if(i!=null){
+        Uint8List uint8list = Uint8List.view(i.buffer, 0, i.lengthInBytes);
+        ui.decodeImageFromList(uint8list, (image) {
+          setState(() {
+            this.image = image;
+          });
         });
-      });
+      }
     });
     _controller = AnimationController(vsync: this, duration: _kDuration);
     _controller.repeat();
