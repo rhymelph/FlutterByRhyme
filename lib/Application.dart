@@ -11,7 +11,6 @@ import 'package:flutterbyrhyme/options/theme.dart';
 import 'package:flutterbyrhyme/options/scales.dart';
 
 import 'package:flutterbyrhyme/pages.dart';
-
 class DemoApp extends StatefulWidget {
   @override
   _DemoAppState createState() => _DemoAppState();
@@ -25,11 +24,13 @@ class _DemoAppState extends State<DemoApp> {
   void initState() {
     // TODO: 初始化配置
     super.initState();
+    //默认的配置
     _options = MyOptions(
       theme: kLightTheme,
       textScale: kAllMyTextValue[0],
       timeDilation: timeDilation,
       platform: defaultTargetPlatform,
+      listStyle: kAllListStyleValue[0],
     );
     MyOptions.initOption().then((value) {
       if (mounted) {
@@ -43,8 +44,8 @@ class _DemoAppState extends State<DemoApp> {
     return Builder(builder: (BuildContext context) {
       return MediaQuery(
           data: MediaQuery.of(context).copyWith(
-                textScaleFactor: _options.textScale.scale,
-              ),
+            textScaleFactor: _options.textScale.scale,
+          ),
           child: child);
     });
   }
@@ -90,13 +91,21 @@ class _DemoAppState extends State<DemoApp> {
     );
     Widget home = new HomePage(
       optionPage: optionPage,
-      colorChange: (item){
+      colorChange: (item) {
         setState(() {
-          kDarkTheme=kDarkTheme.copyWith(data: kDarkTheme.data.copyWith(primaryColor: item.darkColor,buttonColor: item.darkColor,accentColor:item.lightColor));
-          kLightTheme=kLightTheme.copyWith(data: kLightTheme.data.copyWith(primaryColor: item.lightColor,buttonColor: item.lightColor,accentColor:item.darkColor));
-          if(_options.theme.name==kDarkTheme.name){
+          kDarkTheme = kDarkTheme.copyWith(
+              data: kDarkTheme.data.copyWith(
+                  primaryColor: item.darkColor,
+                  buttonColor: item.darkColor,
+                  accentColor: item.lightColor));
+          kLightTheme = kLightTheme.copyWith(
+              data: kLightTheme.data.copyWith(
+                  primaryColor: item.lightColor,
+                  buttonColor: item.lightColor,
+                  accentColor: item.darkColor));
+          if (_options.theme.name == kDarkTheme.name) {
             _handleOptionChanged(_options.copyWith(theme: kDarkTheme));
-          }else{
+          } else {
             _handleOptionChanged(_options.copyWith(theme: kLightTheme));
           }
         });
@@ -118,7 +127,10 @@ class _DemoAppState extends State<DemoApp> {
         //设置搜索输入框提示语
         MyLocalizationsDelegates(),
       ],
-      home: home,
+      home: OptionContext(
+        child: home,
+        options: _options,
+      ),
     );
   }
 

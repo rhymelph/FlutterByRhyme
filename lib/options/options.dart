@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'package:flutterbyrhyme/upgrade.dart';
+
 ///主题设置相关
 class MyOptions {
   final MyTheme theme; //主题
@@ -15,16 +16,19 @@ class MyOptions {
   final TextDirection textDirection; //文本方向
   final double timeDilation; //时间速率
   final TargetPlatform platform; //设备信息
+  final ListStyleValue listStyle;
+
   MyOptions({
     this.theme,
     this.textScale,
     this.textDirection: TextDirection.ltr,
     this.timeDilation: 1.0,
     this.platform,
+    this.listStyle,
   });
 
-  static Future<MyOptions> initOption() async{
-    SharedPreferences shareP= await _shareF;
+  static Future<MyOptions> initOption() async {
+    SharedPreferences shareP = await _shareF;
     String modeBl = shareP.getString(_kMode);
     MyTheme theme = kLightTheme;
     if (modeBl == 'true') {
@@ -45,12 +49,21 @@ class MyOptions {
         textValueScale = value;
       }
     });
+
+    int listStyle = shareP.getInt(_kListStyle);
+    ListStyleValue listStyleValueScale = kAllListStyleValue[0];
+    kAllListStyleValue.forEach((value) {
+      if (value.listStyle == listStyle) {
+        listStyleValueScale = value;
+      }
+    });
     return MyOptions(
         theme: theme,
         textDirection: textDirection,
         platform: targetPlatform,
         textScale: textValueScale,
-        timeDilation: 1.0);
+        timeDilation: 1.0,
+        listStyle: listStyleValueScale);
   }
 
   static TargetPlatform getTargetPlatFrom(String value) {
@@ -71,6 +84,7 @@ class MyOptions {
     TextDirection textDirection,
     double timeDilation,
     TargetPlatform platform,
+    ListStyleValue listStyle,
   }) {
     return new MyOptions(
       theme: theme ?? this.theme,
@@ -78,6 +92,7 @@ class MyOptions {
       textDirection: textDirection ?? this.textDirection,
       timeDilation: timeDilation ?? this.timeDilation,
       platform: platform ?? this.platform,
+      listStyle: listStyle ?? this.listStyle,
     );
   }
 
@@ -110,6 +125,7 @@ const String _kMode = 'mode';
 const String _kTextDirection = 'textDirection';
 const String _kMyTextValueScale = 'myTextValueScale';
 const String _kTargetPlatform = 'TargetPlatform';
+const String _kListStyle = 'ListStyle';
 final Future<SharedPreferences> _shareF = SharedPreferences.getInstance();
 
 void _saveValue(String key, String value) async {
@@ -117,6 +133,10 @@ void _saveValue(String key, String value) async {
   await prefs.setString(key, value);
 }
 
+void _saveIntValue(String key, int value) async {
+  final SharedPreferences prefs = await _shareF;
+  await prefs.setInt(key, value);
+}
 
 ///配置页面
 class OptionsPage extends StatelessWidget {
@@ -150,6 +170,10 @@ class OptionsPage extends StatelessWidget {
               options: options,
               onOptionsChanged: onOptionsChanged,
             ),
+            _ListStyleItem(
+              options: options,
+              onOptionsChanged: onOptionsChanged,
+            ),
             const Divider(),
             const _Header('设备'),
             _PlatformItem(
@@ -164,13 +188,13 @@ class OptionsPage extends StatelessWidget {
               showMyAboutDialog(context);
             }),
             _ActionItem('检查更新', () {
-              checkUpdate(context,true);
+              checkUpdate(context, true);
             }),
           ],
         ));
   }
 
-  void pushToHelp(BuildContext context){
+  void pushToHelp(BuildContext context) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (BuildContext context) => HelpPage()));
   }
@@ -281,6 +305,52 @@ class _TextDirectionItem extends StatelessWidget {
           textDirection: value ? TextDirection.rtl : TextDirection.ltr,
         ));
       },
+    );
+  }
+}
+
+///列表切换
+class _ListStyleItem extends StatelessWidget {
+  const _ListStyleItem({this.options, this.onOptionsChanged});
+
+  final MyOptions options;
+  final ValueChanged<MyOptions> onOptionsChanged;
+
+  _listStyleLabel(ListStyleValue listStyle) {
+    if (listStyle == null || listStyle == 1) {
+      return 'Grid';
+    } else {
+      return 'List';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _OptionsItem(
+      child: Row(
+        children: <Widget>[
+          Expanded(child: Text('列表形式')),
+          Text(options.listStyle.label),
+          PopupMenuButton<ListStyleValue>(
+            padding: const EdgeInsets.only(right: 16.0),
+            icon: const Icon(Icons.keyboard_arrow_down),
+            itemBuilder: (BuildContext context) {
+              return kAllListStyleValue.map((ListStyleValue listStyle) {
+                return PopupMenuItem<ListStyleValue>(
+                  value: listStyle,
+                  child: Text(listStyle.label),
+                );
+              }).toList();
+            },
+            onSelected: (ListStyleValue listStyle) {
+              _saveIntValue(_kListStyle, listStyle.listStyle);
+              onOptionsChanged(options.copyWith(
+                listStyle: listStyle,
+              ));
+            },
+          ),
+        ],
+      ),
     );
   }
 }
@@ -430,5 +500,29 @@ class _BooleanItem extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+///全局配置
+class OptionContext extends InheritedWidget {
+  final MyOptions options;
+
+  OptionContext(
+    { Key key,
+    @required Widget child,
+    @required this.options,
+  }) : super(
+          key: key,
+          child: child,
+        );
+
+  static OptionContext of(BuildContext context){
+    return context.inheritFromWidgetOfExactType(OptionContext);
+  }
+
+
+  @override
+  bool updateShouldNotify(OptionContext oldWidget) {
+    return options != oldWidget.options;
   }
 }

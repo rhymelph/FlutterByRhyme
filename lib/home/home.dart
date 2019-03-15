@@ -4,7 +4,7 @@ import 'package:flutterbyrhyme/backdrop.dart';
 import 'package:flutterbyrhyme/search.dart';
 import 'package:flutterbyrhyme/options/help.dart';
 import 'dart:developer';
-
+import 'package:flutterbyrhyme/options/options.dart';
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutterbyrhyme/upgrade.dart';
@@ -94,21 +94,21 @@ class _HomePageState extends State<HomePage>
 
   _pageSearchOrHelpJump(Widget child) {
     return PageRouteBuilder(
-      pageBuilder: (BuildContext context, _, __) {
-        return child;
-      },
-      opaque: true,
-      transitionDuration: Duration(milliseconds: 150),
-      transitionsBuilder: (__, Animation<double> animation, ____,
-              Widget child) =>
-          SlideTransition(
-            position:
-            Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero)
-                .animate(animation),
-            child: child,
-          )
-    );
+        pageBuilder: (BuildContext context, _, __) {
+          return child;
+        },
+        opaque: true,
+        transitionDuration: Duration(milliseconds: 150),
+        transitionsBuilder: (__, Animation<double> animation, ____,
+                Widget child) =>
+            SlideTransition(
+              position:
+                  Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero)
+                      .animate(animation),
+              child: child,
+            ));
   }
+
   double bottomSize;
 
   @override
@@ -152,11 +152,12 @@ class _HomePageState extends State<HomePage>
                 helpAction: () {
                   Navigator.of(context).push(_pageSearchOrHelpJump(HelpPage()));
                 },
-                searchAction: () async{
-                String routeName=await showSearch(context: context, delegate: SearchPage());
-                if(routeName.isEmpty){
-                  return;
-                }
+                searchAction: () async {
+                  String routeName = await showSearch(
+                      context: context, delegate: SearchPage());
+                  if (routeName.isEmpty) {
+                    return;
+                  }
                   Navigator.of(context).pushNamed(routeName);
                 },
                 valueChanged: (index) {
@@ -246,50 +247,76 @@ class _CategoryList extends StatelessWidget {
         key: const PageStorageKey<String>('categories'),
         child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-          final double columnWidth =
-              constraints.biggest.width / columnCount.toDouble();
-          final double rowHeight = math.min(225.0, columnWidth * aspectRatio);
-          final int rowCount =
-              (pageCategoryList.length + columnCount - 1) ~/ columnCount;
+          OptionContext optionContext = OptionContext.of(context);
+          int listStyle = optionContext.options.listStyle.listStyle;
+          if (listStyle == 1) {
+            final double columnWidth =
+                constraints.biggest.width / columnCount.toDouble();
+            final double rowHeight = math.min(225.0, columnWidth * aspectRatio);
+            final int rowCount =
+                (pageCategoryList.length + columnCount - 1) ~/ columnCount;
 
-          return RepaintBoundary(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: new List<Widget>.generate(rowCount, (int rowIndex) {
-                final int columnCountForRow = rowIndex == rowCount - 1
-                    ? pageCategoryList.length -
-                        columnCount * math.max(0, rowCount - 1)
-                    : columnCount;
+            return RepaintBoundary(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: new List<Widget>.generate(rowCount, (int rowIndex) {
+                  final int columnCountForRow = rowIndex == rowCount - 1
+                      ? pageCategoryList.length -
+                          columnCount * math.max(0, rowCount - 1)
+                      : columnCount;
 
-                return new Row(
-                  children: new List<Widget>.generate(columnCountForRow,
-                      (int columnIndex) {
-                    final int index = rowIndex * columnCount + columnIndex;
-                    final PageCategory indexCategory = pageCategoryList[index];
-                    return SizedBox(
-                      width: columnWidth,
-                      height: rowHeight,
-                      child: _CategoryItem(indexCategory, () {
-                        onCategoryTap(indexCategory);
-                      }),
-                    );
-                  }),
-                );
-              }),
-            ),
-          );
+                  return new Row(
+                    children: new List<Widget>.generate(columnCountForRow,
+                        (int columnIndex) {
+                      final int index = rowIndex * columnCount + columnIndex;
+                      final PageCategory indexCategory =
+                          pageCategoryList[index];
+                      return SizedBox(
+                        width: columnWidth,
+                        height: rowHeight,
+                        child: _CategoryGridItem(indexCategory, () {
+                          onCategoryTap(indexCategory);
+                        }),
+                      );
+                    }),
+                  );
+                }),
+              ),
+            );
+          } else {
+            return Column(
+              children: ListTile.divideTiles(
+                color: Colors.grey,
+                tiles: pageCategoryList.map((pageCategory) {
+                  return ListTile(
+                    onTap: () {
+                      onCategoryTap(pageCategory);
+                    },
+                    title: Text(
+                      pageCategory.title,
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    subtitle: Text(
+                      pageCategory.subhead,
+                      style: Theme.of(context).textTheme.subtitle,
+                    ),
+                  );
+                }).toList(),
+              ).toList(),
+            );
+          }
         }),
       ),
     );
   }
 }
 
-class _CategoryItem extends StatelessWidget {
+class _CategoryGridItem extends StatelessWidget {
   final PageCategory pageCategory;
   final VoidCallback onTap;
 
-  _CategoryItem(this.pageCategory, this.onTap);
+  _CategoryGridItem(this.pageCategory, this.onTap);
 
   @override
   Widget build(BuildContext context) {
@@ -344,12 +371,35 @@ class _PageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> pageList =
-        kAllCategorysToPages[pageCategory].map<Widget>((Page page) {
-      return _PageItem(
-        page: page,
+    Widget child;
+    var optionContext = OptionContext.of(context);
+    if (optionContext.options.listStyle.listStyle == 1) {
+      List<Widget> pageList =
+          kAllCategorysToPages[pageCategory].map<Widget>((Page page) {
+        return _PageGridItem(
+          page: page,
+        );
+      }).toList();
+      child = GridView.count(
+        crossAxisCount: 2,
+        crossAxisSpacing: 6.0,
+        mainAxisSpacing: 6.0,
+        key: PageStorageKey<String>(pageCategory.title),
+        padding: const EdgeInsets.only(top: 8.0),
+        children: pageList,
       );
-    }).toList();
+    } else {
+      child = ListView(
+        children: ListTile.divideTiles(
+          color: Colors.grey,
+          tiles: kAllCategorysToPages[pageCategory].map((page) {
+            return _PageListItem(
+              page: page,
+            );
+          }).toList(),
+        ).toList(),
+      );
+    }
     return new KeyedSubtree(
         key: const ValueKey('PageDemoList'),
         child: Semantics(
@@ -357,22 +407,47 @@ class _PageList extends StatelessWidget {
           namesRoute: true,
           label: pageCategory.title,
           explicitChildNodes: true,
-          child: GridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: 6.0,
-            mainAxisSpacing: 6.0,
-            key: PageStorageKey<String>(pageCategory.title),
-            padding: const EdgeInsets.only(top: 8.0),
-            children: pageList,
-          ),
+          child: child,
         ));
+  }
+}
+
+class _PageListItem extends StatelessWidget {
+  const _PageListItem({Key key, this.page}) : super(key: key);
+  final Page page;
+
+  void _launchPage(BuildContext context) {
+    if (page.routeName != null) {
+      Timeline.instantSync('Start Transition', arguments: <String, String>{
+        'form': '/',
+        'to': page.routeName,
+      });
+    }
+    Navigator.pushNamed(context, page.routeName);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: () {
+        _launchPage(context);
+      },
+      title: Text(
+        page.title,
+        style: Theme.of(context).textTheme.title,
+      ),
+      subtitle: Text(
+        page.subhead,
+        style: Theme.of(context).textTheme.subtitle,
+      ),
+    );
   }
 }
 
 const double _kPageItemHeight = 64.0;
 
-class _PageItem extends StatelessWidget {
-  const _PageItem({Key key, this.page}) : super(key: key);
+class _PageGridItem extends StatelessWidget {
+  const _PageGridItem({Key key, this.page}) : super(key: key);
   final Page page;
 
   //点击后跳转到对应的demo
@@ -403,7 +478,7 @@ class _PageItem extends StatelessWidget {
           color: isDark ? Colors.white : const Color(0xFF202124),
         ),
       ),
-       SizedBox(
+      SizedBox(
         height: 16.0,
       ),
       Text(
