@@ -6,5 +6,5 @@ void main() {
     statusBarIconBrightness: Brightness.light,
     systemNavigationBarColor: Colors.black,
   ));
-  runApp(new DemoApp());
+  runApp(new Application());
 }

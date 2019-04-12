@@ -142,16 +142,15 @@ void _saveIntValue(String key, int value) async {
 class OptionsPage extends StatelessWidget {
   const OptionsPage({
     Key key,
-    this.options,
     this.onOptionsChanged,
   }) : super(key: key);
 
-  final MyOptions options;
   final ValueChanged<MyOptions> onOptionsChanged;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final MyOptions options=OptionContext.of(context).options;
     return DefaultTextStyle(
         style: theme.primaryTextTheme.subhead,
         child: ListView(

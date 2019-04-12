@@ -9,7 +9,6 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutterbyrhyme/upgrade.dart';
 
-//const Color _kBlue = const Color(0xFF002D75);
 const _kSwitchDuration = const Duration(milliseconds: 300);
 
 ///主页
@@ -25,6 +24,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  Map<int, PageCategory> categoryMap;
+
+  int _position = 0;
+
+  double bottomOpcity = 1.0;
+
+  bool haveMore = true;
+
   //全局唯一key
   static final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>();
@@ -44,36 +51,13 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  //动画控制器
-  AnimationController _controller;
-
-  Map<int, PageCategory> categoryMap;
-
-  int _position = 0;
-
-  double bottomOpcity = 1.0;
-
-  bool haveMore = true;
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     categoryMap = Map();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 600),
-      debugLabel: 'preview banner',
-      vsync: this,
-    )..forward();
-
     //check to upgrade
     checkUpdate(context, false);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   _bottomBarTap(int index) {
@@ -237,7 +221,6 @@ class _CategoryList extends StatelessWidget {
     const double aspectRatio = 160.0 / 180.0;
     final int columnCount =
         (MediaQuery.of(context).orientation == Orientation.portrait) ? 2 : 3;
-
     return Semantics(
       scopesRoute: true,
       namesRoute: true,
@@ -286,10 +269,14 @@ class _CategoryList extends StatelessWidget {
             );
           } else {
             return Column(
-              children: ListTile.divideTiles(
-                color: Colors.grey,
-                tiles: pageCategoryList.map((pageCategory) {
-                  return ListTile(
+              children: pageCategoryList.map((pageCategory) {
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border(
+                        bottom: BorderSide(color: Colors.grey[200], width: 5.0),
+                      )),
+                  child: ListTile(
                     onTap: () {
                       onCategoryTap(pageCategory);
                     },
@@ -301,9 +288,9 @@ class _CategoryList extends StatelessWidget {
                       pageCategory.subhead,
                       style: Theme.of(context).textTheme.subtitle,
                     ),
-                  );
-                }).toList(),
-              ).toList(),
+                  ),
+                );
+              }).toList(),
             );
           }
         }),
@@ -412,6 +399,105 @@ class _PageList extends StatelessWidget {
   }
 }
 
+class _ListItem extends StatelessWidget {
+  final String title;
+  final String subTitle;
+  final VoidCallback onTap;
+
+  const _ListItem({Key key, this.title, this.subTitle, this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border(
+            bottom: BorderSide(color: Colors.grey[200], width: 5.0),
+          )),
+      child: ListTile(
+        onTap: onTap,
+        title: Text(
+          title,
+          style: Theme.of(context).textTheme.title,
+        ),
+        subtitle: Text(
+          subTitle,
+          style: Theme.of(context).textTheme.subtitle,
+        ),
+      ),
+    );
+  }
+}
+
+class _GridItem extends StatelessWidget {
+  final VoidCallback onTap;
+  final String title;
+  final String subTitle;
+  final bool showLock;
+
+  const _GridItem(
+      {Key key, this.onTap, this.title, this.subTitle, this.showLock})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData data = Theme.of(context);
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final double textScale = MediaQuery.textScaleFactorOf(context);
+    return Card(
+      child: RawMaterialButton(
+          padding: EdgeInsets.zero,
+          splashColor: data.primaryColor.withOpacity(0.12),
+          highlightColor: Colors.transparent,
+          onPressed: onTap,
+          child: Stack(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(6.0),
+                alignment: Alignment.center,
+                constraints:
+                    BoxConstraints(minHeight: _kPageItemHeight * textScale),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    Text(
+                      title,
+                      style: data.textTheme.title.copyWith(
+                        color: isDark ? Colors.white : const Color(0xFF202124),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    Text(
+                      subTitle,
+                      style: data.textTheme.subhead.copyWith(
+                        color: Colors.grey,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ]..add(
+                showLock
+                    ? Positioned(
+                        top: 10.0,
+                        right: 10.0,
+                        child: Icon(
+                          Icons.lock,
+                          color: isDark ? Colors.white : Colors.black,
+                        ))
+                    : Container(),
+              ),
+          )),
+    );
+  }
+}
+
 class _PageListItem extends StatelessWidget {
   const _PageListItem({Key key, this.page}) : super(key: key);
   final Page page;
@@ -428,17 +514,24 @@ class _PageListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () {
-        _launchPage(context);
-      },
-      title: Text(
-        page.title,
-        style: Theme.of(context).textTheme.title,
-      ),
-      subtitle: Text(
-        page.subhead,
-        style: Theme.of(context).textTheme.subtitle,
+    return DecoratedBox(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border(
+            bottom: BorderSide(color: Colors.grey[200], width: 5.0),
+          )),
+      child: ListTile(
+        onTap: () {
+          _launchPage(context);
+        },
+        title: Text(
+          page.title,
+          style: Theme.of(context).textTheme.title,
+        ),
+        subtitle: Text(
+          page.subhead,
+          style: Theme.of(context).textTheme.subtitle,
+        ),
       ),
     );
   }
