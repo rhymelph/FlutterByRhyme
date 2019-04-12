@@ -33,7 +33,7 @@ const String finishDemo=
     'NestedScrollView,GridView,SingleChildScrollView,Scrollbar,CustomScrollView,NotificationListener,ScrollConfiguration，RefreshIndicator,'
     'Semantics,MergeSemantics，ExcludeSemantics,'
     'CupertinoActionSheet,CupertinoSegmentedControl,CupertinoPicker,CupertinoTimerPickerDemo,'
-    '聊天室,登陆页面,商品列表,'
+    '聊天室,商品列表,'
     '上拉下拉,能量球,飘雪';
 
 class BottomItem {
@@ -1438,13 +1438,6 @@ List<Page> _buildPage() {
         category: _kdesign,
         routeName: ChatRoom.routeName,
         buildRoute: (BuildContext context) => ChatRoom()),
-    Page(
-        title: '登陆页面',
-        subhead: '一个简单的登陆页面，后续会以此为登陆页',
-        icon: null,
-        category: _kdesign,
-        routeName: LoginPage.routeName,
-        buildRoute: (BuildContext context) => LoginPage()),
     Page(
         title: '商品列表',
         subhead: '一个跟淘宝类似的商品列表',

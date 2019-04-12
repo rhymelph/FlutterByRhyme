@@ -401,15 +401,7 @@ class _BackdropState extends State<Backdrop>
 
   @override
   Widget build(BuildContext context) {
-    return new LayoutBuilder(builder: _buildStack);
+    return LayoutBuilder(builder: _buildStack);
   }
 }
 
-class Test extends StatelessWidget {
-  Test(Key key) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
