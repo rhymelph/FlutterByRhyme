@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterbyrhyme/common/Constant.dart';
 import 'package:flutterbyrhyme/options/help.dart';
 import 'theme.dart';
 import 'scales.dart';
@@ -156,7 +157,7 @@ class OptionsPage extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.only(bottom: 124.0),
           children: <Widget>[
-            const _Header('显示'),
+            _Header(constant.show),
             _ThemeItem(
               options: options,
               onOptionsChanged: onOptionsChanged,

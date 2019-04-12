@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
+import 'package:flutterbyrhyme/common/Constant.dart';
 import 'dart:async';
 
 import 'package:flutterbyrhyme/home/home.dart';
@@ -30,7 +31,7 @@ class _ApplicationState extends State<Application> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter教程',
+      title: constant.app_name,
       debugShowCheckedModeBanner: false,
       theme: _options.theme.data.copyWith(platform: _options.platform),
       color: _options.theme.data.primaryColor,
@@ -98,6 +99,7 @@ class _ApplicationState extends State<Application> {
     });
   }
 
+  //更改颜色
   void _changeColor(BottomItem item) {
     setState(() {
       kDarkTheme = kDarkTheme.copyWith(

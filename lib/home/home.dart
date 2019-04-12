@@ -24,17 +24,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  Map<int, PageCategory> categoryMap;
-
-  int _position = 0;
-
-  double bottomOpcity = 1.0;
-
-  bool haveMore = true;
-
   //全局唯一key
   static final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState>();
+
+  Map<int, PageCategory> categoryMap;
+  int _position = 0;
+  double bottomOpcity = 1.0;
+  bool haveMore = true;
+
+  //点击帮助
+  void _onHelp() {
+    Navigator.of(context).push(_pageSearchOrHelpJump(HelpPage()));
+  }
+
 
   static const AnimatedSwitcherLayoutBuilder _centerHomeLayout =
       AnimatedSwitcher.defaultLayoutBuilder;
@@ -93,7 +96,6 @@ class _HomePageState extends State<HomePage>
             ));
   }
 
-  double bottomSize;
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +104,7 @@ class _HomePageState extends State<HomePage>
     final MediaQueryData media = MediaQuery.of(context);
     //是否竖屏并且高度小于800
     final bool centerHome =
-        media.orientation == Orientation.portrait && media.size.height < 800.0;
+        media.orientation == Orientation.portrait;
 
     const Curve switchOutCurve =
         const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn);
@@ -130,12 +132,8 @@ class _HomePageState extends State<HomePage>
       body: SafeArea(
           bottom: false,
           child: WillPopScope(
-
-              ///注册回调
               child: Backdrop(
-                helpAction: () {
-                  Navigator.of(context).push(_pageSearchOrHelpJump(HelpPage()));
-                },
+                helpAction: _onHelp,
                 searchAction: () async {
                   String routeName = await showSearch(
                       context: context, delegate: SearchPage());
@@ -208,6 +206,8 @@ class _HomePageState extends State<HomePage>
     );
     return home;
   }
+
+
 }
 
 class _CategoryList extends StatelessWidget {
