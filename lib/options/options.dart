@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbyrhyme/common/Constant.dart';
 import 'package:flutterbyrhyme/options/help.dart';
+import 'scales.dart';
+import 'scales.dart';
+import 'scales.dart';
 import 'theme.dart';
 import 'scales.dart';
 import 'package:flutterbyrhyme/about.dart';
@@ -17,10 +20,11 @@ class MyOptions {
   final TextDirection textDirection; //文本方向
   final double timeDilation; //时间速率
   final TargetPlatform platform; //设备信息
+  final MyThemeMode themeMode;//暗黑模式和明亮模式
   final ListStyleValue listStyle;
-
   MyOptions({
     this.theme,
+    this.themeMode,
     this.textScale,
     this.textDirection: TextDirection.ltr,
     this.timeDilation: 1.0,
@@ -58,12 +62,22 @@ class MyOptions {
         listStyleValueScale = value;
       }
     });
+
+    int themeModelStyle = shareP.getInt(_kThemeModel);
+    MyThemeMode  themeModeValue = kAllThemeModeValue[0];
+    kAllThemeModeValue.forEach((value) {
+      if (value.themeMode == themeModelStyle) {
+        themeModeValue = value;
+      }
+    });
+
     return MyOptions(
         theme: theme,
         textDirection: textDirection,
         platform: targetPlatform,
         textScale: textValueScale,
         timeDilation: 1.0,
+        themeMode: themeModeValue,
         listStyle: listStyleValueScale);
   }
 
@@ -85,6 +99,7 @@ class MyOptions {
     TextDirection textDirection,
     double timeDilation,
     TargetPlatform platform,
+    MyThemeMode myThemeMode,
     ListStyleValue listStyle,
   }) {
     return new MyOptions(
@@ -94,6 +109,7 @@ class MyOptions {
       timeDilation: timeDilation ?? this.timeDilation,
       platform: platform ?? this.platform,
       listStyle: listStyle ?? this.listStyle,
+      themeMode:  myThemeMode ?? this.themeMode,
     );
   }
 
@@ -104,7 +120,8 @@ class MyOptions {
     return theme == typedOther.theme &&
         textScale == typedOther.textScale &&
         textDirection == typedOther.textDirection &&
-        platform == typedOther.platform;
+        platform == typedOther.platform&&
+        themeMode == typedOther.themeMode;
   }
 
   @override
@@ -114,6 +131,7 @@ class MyOptions {
         textDirection,
         timeDilation,
         platform,
+        themeMode,
       );
 
   @override
@@ -127,6 +145,7 @@ const String _kTextDirection = 'textDirection';
 const String _kMyTextValueScale = 'myTextValueScale';
 const String _kTargetPlatform = 'TargetPlatform';
 const String _kListStyle = 'ListStyle';
+const String _kThemeModel = 'ThemeModel';
 final Future<SharedPreferences> _shareF = SharedPreferences.getInstance();
 
 void _saveValue(String key, String value) async {

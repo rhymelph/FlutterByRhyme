@@ -51,3 +51,36 @@ const List<ListStyleValue> kAllListStyleValue=const <ListStyleValue>[
   const ListStyleValue(1, 'Grid'),
   const ListStyleValue(2, 'List'),
 ];
+
+
+class MyThemeMode{
+  final int themeMode;
+  final String label;
+
+  const MyThemeMode(this.themeMode, this.label);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is MyThemeMode &&
+              runtimeType == other.runtimeType &&
+              themeMode == other.themeMode &&
+              label == other.label;
+
+  @override
+  int get hashCode =>
+      themeMode.hashCode ^
+      label.hashCode;
+
+  @override
+  String toString() {
+    return 'MyThemeMode{themeMode: $themeMode, label: $label}';
+  }
+
+
+}
+const List<MyThemeMode> kAllThemeModeValue = const <MyThemeMode>[
+  MyThemeMode(0, '跟随系统'),
+  MyThemeMode(1, '明亮模式'),
+  MyThemeMode(2, '黑暗模式'),
+];
