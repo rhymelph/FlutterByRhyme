@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+import 'package:flutterbyrhyme/pages.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
@@ -73,6 +74,10 @@ void showMyAboutDialog(BuildContext context) {
               child: RichText(
                 text: TextSpan(
                   children: <TextSpan>[
+                    TextSpan(
+                      style: abouleTextStyle,
+                      text: '目前已收录：${kAllPages.length}个Widget\n\n',
+                    ),
                     TextSpan(
                       style: abouleTextStyle,
                       text: 'Flutter 教程是学习Flutter的一个软件，'

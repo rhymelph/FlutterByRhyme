@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Page;
 
 import 'package:flutterbyrhyme/widgets/basics/aBasicesShow.dart';
 import 'package:flutterbyrhyme/widgets/material/aMaterialShow.dart';
@@ -603,7 +603,6 @@ List<Page> _buildPage() {
     Page(
         title: 'CupertinoAlertDialog',
         subhead: '一个iOS风格的会中断用户操作的对话框',
-        icon: null,
         category: _kCupertino,
         routeName: CupertinoAlertDialogDemo.routeName,
         buildRoute: (BuildContext context) => CupertinoAlertDialogDemo()),

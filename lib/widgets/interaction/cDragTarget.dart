@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Page;
 import 'package:flutterbyrhyme/code/example_code.dart';
 
 class DragTargetDemo extends StatefulWidget {
@@ -190,7 +190,7 @@ class _DragTargetDemoState extends ExampleState<DragTargetDemo> {
                 status = '接收:$value';
               });
             },
-            onLeave: (double value) {
+            onLeave: (value) {
               setState(() {
                 status = '离开:$value';
               });

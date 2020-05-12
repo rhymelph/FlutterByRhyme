@@ -20,15 +20,23 @@ class _CupertinoFullscreenDialogTransitionDemoState
   @override
   void initState() {
     setting = CupertinoFullscreenDialogTransitionSetting(
-      animation: Value(
-        value: kAlwaysCompleteAnimation,
-        label: 'kAlwaysCompleteAnimation',
-      ),
-      child: Value(
-        value: Text('FullscreenDialog'),
-        label: "Text('FullscreenDialog')",
-      )
-    );
+        primaryRouteAnimation: Value(
+          value: kAlwaysCompleteAnimation,
+          label: 'kAlwaysCompleteAnimation',
+        ),
+        secondaryRouteAnimation: Value(
+          value: kAlwaysCompleteAnimation,
+          label: 'kAlwaysCompleteAnimation',
+        ),
+        linearTransition: Value<bool>(
+          name: 'true',
+          value: true,
+          label: 'true',
+        ),
+        child: Value(
+          value: Text('FullscreenDialog'),
+          label: "Text('FullscreenDialog')",
+        ));
     super.initState();
   }
 
@@ -40,8 +48,10 @@ class _CupertinoFullscreenDialogTransitionDemoState
   @override
   String getExampleCode() {
     return '''CupertinoFullscreenDialogTransition(
-        animation: ${setting.animation?.label??''},
-        child: ${setting.child?.label??''},
+        secondaryRouteAnimation: ${setting.secondaryRouteAnimation?.label ?? ''},
+        primaryRouteAnimation: ${setting.primaryRouteAnimation?.label ?? ''},
+        linearTransition: ${setting.linearTransition?.label ?? ''},
+        child: ${setting.child?.label ?? ''},
       )''';
   }
 
@@ -59,7 +69,9 @@ class _CupertinoFullscreenDialogTransitionDemoState
   Widget getWidget() {
     return Center(
       child: CupertinoFullscreenDialogTransition(
-        animation: setting.animation?.value,
+        secondaryRouteAnimation: setting.secondaryRouteAnimation?.value,
+        primaryRouteAnimation: setting.primaryRouteAnimation?.value,
+        linearTransition: setting.linearTransition?.value,
         child: setting.child?.value,
       ),
     );
@@ -67,21 +79,30 @@ class _CupertinoFullscreenDialogTransitionDemoState
 }
 
 class CupertinoFullscreenDialogTransitionSetting {
-  final Value<Animation<double>> animation;
+  final Value<Animation<double>> secondaryRouteAnimation;
+  final Value<Animation<double>> primaryRouteAnimation;
+  final Value<bool> linearTransition;
   final Value<Widget> child;
 
-  CupertinoFullscreenDialogTransitionSetting({
-    this.animation,
-    this.child,
-  });
+  CupertinoFullscreenDialogTransitionSetting(
+      {this.secondaryRouteAnimation,
+      this.primaryRouteAnimation,
+      this.linearTransition,
+      this.child});
 
   CupertinoFullscreenDialogTransitionSetting copyWith({
-    Value<Animation<double>> animation,
+    Value<Animation<double>> secondaryRouteAnimation,
+    Value<Animation<double>> primaryRouteAnimation,
+    bool linearTransition,
     Value<Widget> child,
   }) {
     return CupertinoFullscreenDialogTransitionSetting(
-      animation: animation??this.animation,
-      child: child??this.child,
+      secondaryRouteAnimation:
+          secondaryRouteAnimation ?? this.secondaryRouteAnimation,
+      primaryRouteAnimation:
+          primaryRouteAnimation ?? this.primaryRouteAnimation,
+      linearTransition: linearTransition ?? this.linearTransition,
+      child: child ?? this.child,
     );
   }
 }
